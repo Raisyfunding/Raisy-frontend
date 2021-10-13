@@ -12,14 +12,15 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { Image } from "@chakra-ui/image";
-import { FaTwitter, FaDiscord, FaYoutube } from "react-icons/fa";
+import { FaTwitter, FaDiscord, FaYoutube, FaMedium } from "react-icons/fa";
 import { BiMailSend } from "react-icons/bi";
-import logo from "../../images/Raisy1.png";
+import logo from "../../images/logot.png";
 
 const SocialButton = ({ children, label, href }) => {
   return (
     <chakra.button
-      bg={useColorModeValue("var(--lightblue)", "var(--grey)")}
+      bg={useColorModeValue("var(--cyan)", "whiteAlpha.300")}
+      color="var(--white)"
       rounded={"full"}
       w={8}
       h={8}
@@ -31,7 +32,7 @@ const SocialButton = ({ children, label, href }) => {
       justifyContent={"center"}
       transition={"background 0.3s ease"}
       _hover={{
-        bg: useColorModeValue("var(--cyan)", "var(--black)"),
+        bg: useColorModeValue("var(--blue)", "var(--cyan)"),
       }}
     >
       <VisuallyHidden>{label}</VisuallyHidden>
@@ -61,7 +62,7 @@ export default function Footer() {
         >
           <Stack spacing={6} margin="auto">
             <Box>
-              <Image src={logo} width={{ base: "65px", lg: "70px" }} />
+              <Image src={logo} width={{ base: "80px", lg: "100px" }} />
             </Box>
             <Text fontSize={"sm"}>© 2020 BG Labs. All rights reserved</Text>
             <Stack direction={"row"} spacing={6}>
@@ -74,6 +75,9 @@ export default function Footer() {
               <SocialButton label={"Discord"} href={"#"}>
                 <FaDiscord />
               </SocialButton>
+              <SocialButton label={"Medium"} href={"#"}>
+                <FaMedium />
+              </SocialButton>
             </Stack>
           </Stack>
           <Stack align={"flex-start"}>
@@ -82,7 +86,7 @@ export default function Footer() {
             <Link href={"#"}>Blog</Link>
             <Link href={"#"}>Contact us</Link>
             <Link href={"#"}>Pricing</Link>
-            <Link href={"#"}>Testimonials</Link>
+            <Link href={"#"}>Whitepaper</Link>
           </Stack>
           <Stack align={"flex-start"}>
             <ListHeader>Support</ListHeader>
@@ -92,22 +96,22 @@ export default function Footer() {
             <Link href={"#"}>Privacy Policy</Link>
             <Link href={"#"}>Satus</Link>
           </Stack>
-          <Stack align={"flex-start"}>
+          <Stack align={"flex-start"} margin="auto" marginLeft="0">
             <ListHeader>Stay up to date</ListHeader>
             <Stack direction={"row"}>
               <Input
                 placeholder={"Your email address"}
-                bg={useColorModeValue("blackAlpha.100", "whiteAlpha.100")}
+                bg={useColorModeValue("var(--white)", "whiteAlpha.300")}
                 border={0}
                 _focus={{
                   bg: "whiteAlpha.300",
                 }}
               />
               <IconButton
-                bg={useColorModeValue("green.400", "green.800")}
-                color={useColorModeValue("white", "gray.800")}
+                bg={useColorModeValue("var(--cyan)", "whiteAlpha.300")}
+                color={useColorModeValue("white", "var(--white)")}
                 _hover={{
-                  bg: "green.600",
+                  bg: useColorModeValue("var(--blue)", "var(--cyan)"),
                 }}
                 aria-label="Subscribe"
                 icon={<BiMailSend />}

@@ -22,7 +22,7 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from "@chakra-ui/icons";
-import logo from "../../images/Raisy1.png";
+import logo from "../../images/logot.png";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 
 export default function WithSubnavigation() {
