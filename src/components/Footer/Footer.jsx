@@ -14,12 +14,12 @@ import {
 import { Image } from "@chakra-ui/image";
 import { FaTwitter, FaDiscord, FaYoutube } from "react-icons/fa";
 import { BiMailSend } from "react-icons/bi";
-import logo from "../../images/Raisy.png";
+import logo from "../../images/Raisy1.png";
 
 const SocialButton = ({ children, label, href }) => {
   return (
     <chakra.button
-      bg={useColorModeValue("blackAlpha.100", "whiteAlpha.100")}
+      bg={useColorModeValue("var(--lightblue)", "var(--grey)")}
       rounded={"full"}
       w={8}
       h={8}
@@ -31,7 +31,7 @@ const SocialButton = ({ children, label, href }) => {
       justifyContent={"center"}
       transition={"background 0.3s ease"}
       _hover={{
-        bg: useColorModeValue("blackAlpha.200", "whiteAlpha.200"),
+        bg: useColorModeValue("var(--cyan)", "var(--black)"),
       }}
     >
       <VisuallyHidden>{label}</VisuallyHidden>
@@ -51,17 +51,17 @@ const ListHeader = ({ children }) => {
 export default function Footer() {
   return (
     <Box
-      bg={useColorModeValue("gray.50", "gray.900")}
-      color={useColorModeValue("gray.700", "gray.200")}
+      bg={useColorModeValue("var(--lightblue)", "var(--grey)")}
+      color={useColorModeValue("var(--black)", "var(--white)")}
     >
       <Container as={Stack} maxW={"6xl"} py={10}>
         <SimpleGrid
           templateColumns={{ sm: "1fr 1fr", md: "2fr 1fr 1fr 2fr" }}
           spacing={8}
         >
-          <Stack spacing={6}>
+          <Stack spacing={6} margin="auto">
             <Box>
-              <Image src={logo} />
+              <Image src={logo} width={{ base: "65px", lg: "70px" }} />
             </Box>
             <Text fontSize={"sm"}>© 2020 BG Labs. All rights reserved</Text>
             <Stack direction={"row"} spacing={6}>

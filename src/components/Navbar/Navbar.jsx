@@ -22,7 +22,7 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from "@chakra-ui/icons";
-import logo from "../../images/Raisy.png";
+import logo from "../../images/Raisy1.png";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 
 export default function WithSubnavigation() {
@@ -32,14 +32,14 @@ export default function WithSubnavigation() {
   return (
     <Box>
       <Flex
-        bg={useColorModeValue("var(--white)", "var(--grey)")}
+        bg={useColorModeValue("var(--lightblue)", "var(--grey)")}
         color={useColorModeValue("var(--grey)", "var(--white)")}
         minH={"60px"}
         py={{ base: 2 }}
         px={{ base: 4 }}
         borderBottom={1}
         borderStyle={"solid"}
-        borderColor={useColorModeValue("gray.200", "gray.900")}
+        borderColor={useColorModeValue("var(--white)", "var(--grey)")}
         align={"center"}
       >
         <Flex
@@ -57,11 +57,7 @@ export default function WithSubnavigation() {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-          <Image
-            src={logo}
-            width={{ base: "120px", lg: "130px" }}
-            translateY="10px"
-          />
+          <Image src={logo} height={{ base: "45px", lg: "50px" }} />
 
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
             <DesktopNav />
@@ -90,11 +86,11 @@ export default function WithSubnavigation() {
             display={{ base: "none", md: "inline-flex" }}
             fontSize={"sm"}
             fontWeight={600}
-            color={"white"}
-            bg={"pink.400"}
+            color={"var(--white)"}
+            bg={"var(--red)"}
             href={"#"}
             _hover={{
-              bg: "pink.300",
+              bg: "var(--red)",
             }}
           >
             Sign Up
@@ -110,9 +106,12 @@ export default function WithSubnavigation() {
 }
 
 const DesktopNav = () => {
-  const linkColor = useColorModeValue("gray.600", "gray.200");
-  const linkHoverColor = useColorModeValue("gray.800", "white");
-  const popoverContentBgColor = useColorModeValue("white", "gray.800");
+  const linkColor = useColorModeValue("var(--black)", "var(--white)");
+  const linkHoverColor = useColorModeValue("var(--grey)", "var(--white)");
+  const popoverContentBgColor = useColorModeValue(
+    "var(--white)",
+    "var(--grey)"
+  );
 
   return (
     <Stack direction={"row"} spacing={4} margin="auto">
@@ -166,13 +165,13 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
       display={"block"}
       p={2}
       rounded={"md"}
-      _hover={{ bg: useColorModeValue("pink.50", "gray.900") }}
+      _hover={{ bg: useColorModeValue("var(--red)", "var(--black)") }}
     >
       <Stack direction={"row"} align={"center"}>
         <Box>
           <Text
             transition={"all .3s ease"}
-            _groupHover={{ color: "pink.400" }}
+            _groupHover={{ color: "var(--red)" }}
             fontWeight={500}
           >
             {label}
@@ -188,7 +187,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
           align={"center"}
           flex={1}
         >
-          <Icon color={"pink.400"} w={5} h={5} as={ChevronRightIcon} />
+          <Icon color={"var(--red)"} w={5} h={5} as={ChevronRightIcon} />
         </Flex>
       </Stack>
     </Link>
@@ -198,7 +197,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
 const MobileNav = () => {
   return (
     <Stack
-      bg={useColorModeValue("white", "gray.800")}
+      bg={useColorModeValue("var(--white)", "var(--grey)")}
       p={4}
       display={{ md: "none" }}
     >
@@ -226,7 +225,7 @@ const MobileNavItem = ({ label, children, href }) => {
       >
         <Text
           fontWeight={600}
-          color={useColorModeValue("gray.600", "gray.200")}
+          color={useColorModeValue("var(--grey)", "var(--black)")}
         >
           {label}
         </Text>
@@ -247,7 +246,7 @@ const MobileNavItem = ({ label, children, href }) => {
           pl={4}
           borderLeft={1}
           borderStyle={"solid"}
-          borderColor={useColorModeValue("gray.200", "gray.700")}
+          borderColor={useColorModeValue("var(--grey)", "var(--black)")}
           align={"start"}
         >
           {children &&
