@@ -19,8 +19,8 @@ import logo from "../../images/logot.png";
 const SocialButton = ({ children, label, href }) => {
   return (
     <chakra.button
-      bg={useColorModeValue("var(--cyan)", "whiteAlpha.300")}
-      color="var(--white)"
+      bg={useColorModeValue("var(--white)", "var(--black)")}
+      color={useColorModeValue("var(--black)", "var(--white)")}
       rounded={"full"}
       w={8}
       h={8}
@@ -32,7 +32,8 @@ const SocialButton = ({ children, label, href }) => {
       justifyContent={"center"}
       transition={"background 0.3s ease"}
       _hover={{
-        bg: useColorModeValue("var(--blue)", "var(--cyan)"),
+        bg: useColorModeValue("var(--black)", "var(--white)"),
+        color: useColorModeValue("var(--white)", "var(--black)"),
       }}
     >
       <VisuallyHidden>{label}</VisuallyHidden>
@@ -52,8 +53,9 @@ const ListHeader = ({ children }) => {
 export default function Footer() {
   return (
     <Box
-      bg={useColorModeValue("var(--lightblue)", "var(--grey)")}
+      bg={useColorModeValue("var(--white)", "var(--black)")}
       color={useColorModeValue("var(--black)", "var(--white)")}
+      fontFamily="sans-serif"
     >
       <Container as={Stack} maxW={"6xl"} py={10}>
         <SimpleGrid
@@ -82,36 +84,62 @@ export default function Footer() {
           </Stack>
           <Stack align={"flex-start"}>
             <ListHeader>Company</ListHeader>
-            <Link href={"#"}>About us</Link>
-            <Link href={"#"}>Blog</Link>
-            <Link href={"#"}>Contact us</Link>
-            <Link href={"#"}>Pricing</Link>
-            <Link href={"#"}>Whitepaper</Link>
+            <Link href={"#"} _focus={{ outline: "none !important" }}>
+              About us
+            </Link>
+            <Link href={"#"} _focus={{ outline: "none !important" }}>
+              Blog
+            </Link>
+            <Link href={"#"} _focus={{ outline: "none !important" }}>
+              Contact us
+            </Link>
+            <Link href={"#"} _focus={{ outline: "none !important" }}>
+              Pricing
+            </Link>
+            <Link href={"#"} _focus={{ outline: "none !important" }}>
+              Whitepaper
+            </Link>
           </Stack>
           <Stack align={"flex-start"}>
             <ListHeader>Support</ListHeader>
-            <Link href={"#"}>Help Center</Link>
-            <Link href={"#"}>Terms of Service</Link>
-            <Link href={"#"}>Legal</Link>
-            <Link href={"#"}>Privacy Policy</Link>
-            <Link href={"#"}>Satus</Link>
+            <Link href={"#"} _focus={{ outline: "none !important" }}>
+              Help Center
+            </Link>
+            <Link href={"#"} _focus={{ outline: "none !important" }}>
+              Terms of Service
+            </Link>
+            <Link href={"#"} _focus={{ outline: "none !important" }}>
+              Legal
+            </Link>
+            <Link href={"#"} _focus={{ outline: "none !important" }}>
+              Privacy Policy
+            </Link>
+            <Link href={"#"} _focus={{ outline: "none !important" }}>
+              Satus
+            </Link>
           </Stack>
           <Stack align={"flex-start"} margin="auto" marginLeft="0">
             <ListHeader>Stay up to date</ListHeader>
             <Stack direction={"row"}>
               <Input
                 placeholder={"Your email address"}
-                bg={useColorModeValue("var(--white)", "whiteAlpha.300")}
-                border={0}
+                border="solid 1px"
+                borderColor={useColorModeValue("var(--black)", "var(--white)")}
                 _focus={{
-                  bg: "whiteAlpha.300",
+                  border: "solid 2px",
+                  borderColor: useColorModeValue(
+                    "var(--black)",
+                    "var(--white)"
+                  ),
                 }}
               />
               <IconButton
-                bg={useColorModeValue("var(--cyan)", "whiteAlpha.300")}
-                color={useColorModeValue("white", "var(--white)")}
+                _focus={{ outline: "none !important" }}
+                bg={useColorModeValue("var(--white)", "var(--black)")}
+                color={useColorModeValue("var(--black)", "var(--white)")}
                 _hover={{
-                  bg: useColorModeValue("var(--blue)", "var(--cyan)"),
+                  bg: useColorModeValue("var(--black)", "var(--white)"),
+                  color: useColorModeValue("var(--white)", "var(--black)"),
                 }}
                 aria-label="Subscribe"
                 icon={<BiMailSend />}

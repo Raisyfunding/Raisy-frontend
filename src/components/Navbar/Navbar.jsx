@@ -25,21 +25,21 @@ import {
 import logo from "../../images/logot.png";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 
-export default function WithSubnavigation() {
+export default function Navbar() {
   const { isOpen, onToggle } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <Box>
+    <Box fontFamily="sans-serif">
       <Flex
-        bg={useColorModeValue("var(--lightblue)", "var(--grey)")}
-        color={useColorModeValue("var(--grey)", "var(--white)")}
+        bg={useColorModeValue("var(--white)", "var(--black)")}
+        color={useColorModeValue("var(--black)", "var(--white)")}
         minH={"60px"}
         py={{ base: 2 }}
         px={{ base: 4 }}
         borderBottom={1}
         borderStyle={"solid"}
-        borderColor={useColorModeValue("var(--white)", "var(--grey)")}
+        borderColor={useColorModeValue("var(--white)", "var(--black)")}
         align={"center"}
       >
         <Flex
@@ -58,8 +58,11 @@ export default function WithSubnavigation() {
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
           <Image src={logo} height={{ base: "45px", lg: "50px" }} />
-
-          <Flex display={{ base: "none", md: "flex" }} ml={10}>
+          <Flex
+            display={{ base: "none", md: "flex" }}
+            ml={10}
+            margin={{ base: "none", md: "auto" }}
+          >
             <DesktopNav />
           </Flex>
         </Flex>
@@ -68,36 +71,38 @@ export default function WithSubnavigation() {
           flex={{ base: 1, md: 0 }}
           justify={"flex-end"}
           direction={"row"}
-          spacing={6}
+          spacing={{ base: 2, md: 6 }}
         >
-          <Button onClick={toggleColorMode}>
+          <Button
+            onClick={toggleColorMode}
+            bg={useColorModeValue("var(--white)", "var(--black)")}
+            color={useColorModeValue("var(--black)", "var(--white)")}
+            _focus={{ outline: "none !important" }}
+            _hover={{
+              bg: useColorModeValue("var(--black)", "var(--white)"),
+              color: useColorModeValue("var(--white)", "var(--black)"),
+            }}
+          >
             {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
           </Button>
           <Button
             as={"a"}
-            fontSize={"sm"}
-            fontWeight={400}
-            variant={"link"}
-            href={"#"}
-          >
-            Sign In
-          </Button>
-          <Button
-            display={{ base: "none", md: "inline-flex" }}
-            fontSize={"sm"}
+            fontSize={{ base: "sm", md: "md" }}
             fontWeight={600}
-            color={"var(--white)"}
-            bg={"var(--red)"}
+            variant={"link"}
+            color={useColorModeValue("var(--black)", "var(--white)")}
             href={"#"}
+            padding={{ base: "5px", md: "10px" }}
+            _focus={{ outline: "none !important" }}
             _hover={{
-              bg: "var(--red)",
+              bg: useColorModeValue("var(--black)", "var(--white)"),
+              color: useColorModeValue("var(--white)", "var(--black)"),
             }}
           >
-            Sign Up
+            Connect
           </Button>
         </Stack>
       </Flex>
-
       <Collapse in={isOpen} animateOpacity>
         <MobileNav />
       </Collapse>
@@ -107,14 +112,15 @@ export default function WithSubnavigation() {
 
 const DesktopNav = () => {
   const linkColor = useColorModeValue("var(--black)", "var(--white)");
-  const linkHoverColor = useColorModeValue("var(--grey)", "var(--white)");
+  const linkHoverColor = useColorModeValue("var(--white)", "var(--black)");
+  const linkHoverBg = useColorModeValue("var(--black)", "var(--white)");
   const popoverContentBgColor = useColorModeValue(
     "var(--white)",
-    "var(--grey)"
+    "var(--black)"
   );
 
   return (
-    <Stack direction={"row"} spacing={4} margin="auto">
+    <Stack direction={"row"} spacing={4}>
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
           <Popover trigger={"hover"} placement={"bottom-start"}>
@@ -122,12 +128,15 @@ const DesktopNav = () => {
               <Link
                 p={2}
                 href={navItem.href ?? "#"}
-                fontSize={"sm"}
-                fontWeight={500}
+                fontSize={"lg"}
+                borderRadius="5px"
+                fontWeight={600}
                 color={linkColor}
+                _focus={{ outline: "none !important" }}
                 _hover={{
                   textDecoration: "none",
                   color: linkHoverColor,
+                  bg: linkHoverBg,
                 }}
               >
                 {navItem.label}
@@ -197,7 +206,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
 const MobileNav = () => {
   return (
     <Stack
-      bg={useColorModeValue("var(--white)", "var(--grey)")}
+      bg={useColorModeValue("var(--white)", "var(--black)")}
       p={4}
       display={{ md: "none" }}
     >
@@ -225,7 +234,7 @@ const MobileNavItem = ({ label, children, href }) => {
       >
         <Text
           fontWeight={600}
-          color={useColorModeValue("var(--grey)", "var(--black)")}
+          color={useColorModeValue("var(--black)", "var(--white)")}
         >
           {label}
         </Text>
@@ -246,7 +255,7 @@ const MobileNavItem = ({ label, children, href }) => {
           pl={4}
           borderLeft={1}
           borderStyle={"solid"}
-          borderColor={useColorModeValue("var(--grey)", "var(--black)")}
+          borderColor={useColorModeValue("var(--black)", "var(--black)")}
           align={"start"}
         >
           {children &&

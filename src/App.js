@@ -1,17 +1,18 @@
 import './App.css';
-import WithSubnavigation from './components/Navbar/Navbar';
+import {Navbar,Footer} from './components/index';
+import { Landingpage } from './pages/index';
 import { ChakraProvider } from '@chakra-ui/react';
-import Footer from './components/Footer/Footer';
 import "./styles/theme.css"
+import { Screen } from './styles/globalStyles';
 
 function App() {
   return (
     <ChakraProvider>
-    <div className="App">
-      <WithSubnavigation/>
+      <Screen>
+      <Navbar/>
+      <Landingpage/>
       <Footer/>
-    
-    </div>
+      </Screen>
     </ChakraProvider>
   );
 }
