@@ -71,7 +71,7 @@ export default function Navbar() {
           flex={{ base: 1, md: 0 }}
           justify={"flex-end"}
           direction={"row"}
-          spacing={{ base: 2, md: 6 }}
+          spacing={{ base: 2, md: 4 }}
         >
           <Button
             onClick={toggleColorMode}
