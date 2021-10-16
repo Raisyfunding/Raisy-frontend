@@ -57,7 +57,9 @@ export default function Navbar() {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-          <Image src={logo} height={{ base: "45px", lg: "50px" }} />
+          <Link href="/">
+            <Image src={logo} height={{ base: "45px", lg: "50px" }} />
+          </Link>
           <Flex
             display={{ base: "none", md: "flex" }}
             ml={10}

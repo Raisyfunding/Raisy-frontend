@@ -69,58 +69,6 @@ export const Container = styled.div`
 	margin: auto;
 `;
 
-export const TextTitle = styled.p`
-	color: var(--white);
-	font-size: 20px;
-	font-weight: 500;
-`;
-export const Titleteam = styled.p`
-	font-size: 80px;
-	margin: 0;
-	font-style: normal
-	text-transform: uppercase;
-    font-weight: bold;
-    text-rendering: geometricPrecision;
-	text-align: center;
-	color: var(--white);
-	letter-spacing: 3px;
-`;
-
-export const TextTitleteam = styled.p`
-	color: var(--white);
-	font-size: 2rem;
-	font-weight: 500;
-	content-font: "bicyclette", sans-serif;
-	text-align: center;
-`;
-
-export const TextSubTitle = styled.p`
-	color: var(--white);
-	font-size: 1rem;
-	font-weight: 500;
-`;
-
-export const TextDescription = styled.p`
-	color: var(--white);
-	font-size: 14px;
-	font-weight: 600;
-`;
-
-export const TextDescription1 = styled.p`
-	color: var(--black);
-	font-size: 20px;
-	font-weight: 600;
-	text-align: justify;
-	line-height: 1.7;
-`;
-
-export const TextDescriptionteam = styled.p`
-	color: var(--white);
-	font-size: 15px;
-	font-weight: 600;
-	text-align: center;
-`;
-
 export const StyledClickable = styled.div`
 	:active {
 		opacity: 0.6;
