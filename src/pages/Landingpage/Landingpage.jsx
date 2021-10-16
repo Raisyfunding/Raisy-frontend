@@ -1,5 +1,4 @@
 import React from "react";
-import * as f from "./Landing";
 import { Screen, SpacerLarge } from "../../styles/globalStyles";
 import { Text, useColorModeValue, Flex, Image } from "@chakra-ui/react";
 import logo from "../../images/logot.png";
@@ -11,14 +10,17 @@ function Landingpage() {
         backgroundColor: useColorModeValue("var(--white)", "var(--black)"),
       }}
     >
-      <SpacerLarge />
       <Flex
         width="90%"
+        height="100%"
         margin="auto"
         textAlign="center"
         flexDirection="column"
         gridGap="60px"
+        paddingBottom="60px"
+        id="page1"
       >
+        <SpacerLarge />
         <Image
           margin="auto"
           src={logo}
