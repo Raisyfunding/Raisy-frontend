@@ -7,6 +7,7 @@ import decentralizedwhite from "../../../images/decentralizedwhite.png";
 import decentralizedblack from "../../../images/decentralizedblack.png";
 import togetherblack from "../../../images/togetherblack.png";
 import togetherwhite from "../../../images/togetherwhite.png";
+import { SpacerXSmall, SpacerSmall } from "../../../styles/globalStyles";
 
 function WhyRaisy() {
   return (
@@ -19,32 +20,31 @@ function WhyRaisy() {
       </Text>
       <Box height="50px" />
       <VStack>
-        <HStack>
-          <Flex direction="column" width="220px" height="200px">
+        <HStack spacing="8em">
+          <Flex direction="column">
             <Image
               src={useColorModeValue(decentralizedblack, decentralizedwhite)}
               margin="auto"
             />
+            <SpacerXSmall />
             <Text
-              fontSize="2xl"
+              fontSize="1xl"
               style={{ textAlign: "center" }}
               fontWeight="bold"
-              marginRight="15px"
             >
               Decentralized
             </Text>
           </Flex>
-          <Flex direction="column" width="220px" height="200px">
+          <Flex direction="column">
             <Image
               src={useColorModeValue(togetherblack, togetherwhite)}
-              marginTop="20px"
+              width="128px"
             />
+            <SpacerXSmall />
             <Text
-              fontSize="2xl"
+              fontSize="1xl"
               style={{ textAlign: "center" }}
               fontWeight="bold"
-              marginTop="13px"
-              marginLeft="7px"
             >
               Community-driven
             </Text>
