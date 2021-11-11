@@ -15,6 +15,7 @@ import {
   useColorMode,
   useDisclosure,
   Image,
+  Divider,
 } from "@chakra-ui/react";
 import {
   HamburgerIcon,
@@ -30,7 +31,7 @@ export default function Navbar() {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <Box fontFamily="sans-serif">
+    <Box>
       <Flex
         bg={useColorModeValue("var(--white)", "var(--black)")}
         color={useColorModeValue("var(--black)", "var(--white)")}
@@ -63,7 +64,8 @@ export default function Navbar() {
           <Flex
             display={{ base: "none", md: "flex" }}
             ml={10}
-            margin={{ base: "none", md: "auto" }}
+            marginTop={"auto"}
+            marginBottom={"auto"}
           >
             <DesktopNav />
           </Flex>
@@ -92,6 +94,7 @@ export default function Navbar() {
             fontSize={{ base: "sm", md: "md" }}
             fontWeight={600}
             variant={"link"}
+            border={"solid var(--blue) 2px"}
             color={useColorModeValue("var(--black)", "var(--white)")}
             href={"#"}
             padding={{ base: "5px", md: "10px" }}
@@ -101,7 +104,23 @@ export default function Navbar() {
               color: useColorModeValue("var(--white)", "var(--black)"),
             }}
           >
-            Connect
+            Start a campaign
+          </Button>
+          <Button
+            as={"a"}
+            fontSize={{ base: "sm", md: "md" }}
+            fontWeight={600}
+            variant={"link"}
+            color={useColorModeValue("var(--black)", "var(--white)")}
+            href={"#"}
+            padding={{ base: "5px", md: "10px" }}
+            _focus={{ outline: "none !important" }}
+            _hover={{
+              bg: useColorModeValue("var(--black)", "var(--white)"),
+              color: useColorModeValue("var(--white)", "var(--black)"),
+            }}
+          >
+            Login
           </Button>
         </Stack>
       </Flex>
@@ -123,46 +142,51 @@ const DesktopNav = () => {
 
   return (
     <Stack direction={"row"} spacing={4}>
-      {NAV_ITEMS.map((navItem) => (
-        <Box key={navItem.label}>
-          <Popover trigger={"hover"} placement={"bottom-start"}>
-            <PopoverTrigger>
-              <Link
-                p={2}
-                href={navItem.href ?? "#"}
-                fontSize={"lg"}
-                borderRadius="5px"
-                fontWeight={600}
-                color={linkColor}
-                _focus={{ outline: "none !important" }}
-                _hover={{
-                  textDecoration: "none",
-                  color: linkHoverColor,
-                  bg: linkHoverBg,
-                }}
-              >
-                {navItem.label}
-              </Link>
-            </PopoverTrigger>
+      {NAV_ITEMS.map((navItem, index) => (
+        <>
+          <Box key={navItem.label}>
+            <Popover trigger={"hover"} placement={"bottom-start"}>
+              <PopoverTrigger>
+                <Link
+                  p={2}
+                  href={navItem.href ?? "#"}
+                  fontSize={"lg"}
+                  borderRadius="5px"
+                  fontWeight={600}
+                  color={linkColor}
+                  _focus={{ outline: "none !important" }}
+                  _hover={{
+                    textDecoration: "none",
+                    color: linkHoverColor,
+                    bg: linkHoverBg,
+                  }}
+                >
+                  {navItem.label}
+                </Link>
+              </PopoverTrigger>
 
-            {navItem.children && (
-              <PopoverContent
-                border={0}
-                boxShadow={"xl"}
-                bg={popoverContentBgColor}
-                p={4}
-                rounded={"xl"}
-                minW={"sm"}
-              >
-                <Stack>
-                  {navItem.children.map((child) => (
-                    <DesktopSubNav key={child.label} {...child} />
-                  ))}
-                </Stack>
-              </PopoverContent>
-            )}
-          </Popover>
-        </Box>
+              {navItem.children && (
+                <PopoverContent
+                  border={0}
+                  boxShadow={"xl"}
+                  bg={popoverContentBgColor}
+                  p={4}
+                  rounded={"xl"}
+                  minW={"sm"}
+                >
+                  <Stack>
+                    {navItem.children.map((child) => (
+                      <DesktopSubNav key={child.label} {...child} />
+                    ))}
+                  </Stack>
+                </PopoverContent>
+              )}
+            </Popover>
+          </Box>
+          {index === 1 ? (
+            <Divider orientation="vertical" borderColor={linkColor} />
+          ) : null}
+        </>
       ))}
     </Stack>
   );
@@ -274,41 +298,15 @@ const MobileNavItem = ({ label, children, href }) => {
 
 const NAV_ITEMS = [
   {
-    label: "Inspiration",
-    children: [
-      {
-        label: "Explore Design Work",
-        subLabel: "Trending Design to inspire you",
-        href: "#",
-      },
-      {
-        label: "New & Noteworthy",
-        subLabel: "Up-and-coming Designers",
-        href: "#",
-      },
-    ],
-  },
-  {
-    label: "Find Work",
-    children: [
-      {
-        label: "Job Board",
-        subLabel: "Find your dream design job",
-        href: "#",
-      },
-      {
-        label: "Freelance Projects",
-        subLabel: "An exclusive list for contract work",
-        href: "#",
-      },
-    ],
-  },
-  {
-    label: "Learn Design",
+    label: "Explore",
     href: "#",
   },
   {
-    label: "Hire Designers",
+    label: "How it Works",
+    href: "#",
+  },
+  {
+    label: "Search",
     href: "#",
   },
 ];

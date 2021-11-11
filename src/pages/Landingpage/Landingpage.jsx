@@ -3,8 +3,8 @@ import { Screen } from "../../styles/globalStyles";
 import { useColorModeValue } from "@chakra-ui/react";
 import fullpage from "../../components/Fullpage/fullpage";
 import Landing from "./components/Landing";
-import Principe from "./components/Principe";
-import WhyRaisy from "./components/WhyRaisy";
+import Popular from "./components/Popular/Popular";
+
 function Landingpage() {
   useEffect(() => {
     new fullpage("#fullpage", {
@@ -23,13 +23,7 @@ function Landingpage() {
           <Landing />
         </div>
         <div class="section">
-          <Principe />
-        </div>
-        <div class="section">
-          <Principe />
-        </div>
-        <div class="section">
-          <WhyRaisy />
+          <Popular />
         </div>
       </div>
     </Screen>
