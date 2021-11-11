@@ -12,7 +12,6 @@ function Principe() {
         width="90%"
         height="100%"
         margin="auto"
-        fontFamily="sans-serif"
         justifyContent="center"
         flexDirection="column"
       >
