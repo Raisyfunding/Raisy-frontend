@@ -6,27 +6,28 @@ import Landing from "./components/Landing";
 import Popular from "./components/Popular/Popular";
 
 function Landingpage() {
+	
+  
   useEffect(() => {
-    new fullpage("#fullpage", {
-      licenseKey: "ED0D5DA5-596F41E0-B51F15B6-293EC91D",
-    });
-  }, []);
+		new fullpage("#fullpage", {
+			licenseKey: "ED0D5DA5-596F41E0-B51F15B6-293EC91D",
+		});
+	}, []);
 
-  return (
-    <Screen
-      style={{
-        backgroundColor: useColorModeValue("var(--white)", "var(--black)"),
-      }}
-    >
-      <div id="fullpage">
-        <div class="section">
-          <Landing />
-        </div>
-        <div class="section">
-          <Popular />
-        </div>
-      </div>
-    </Screen>
-  );
+	return (
+		<Screen
+			style={{
+				backgroundColor: useColorModeValue("var(--white)", "var(--black)"),
+			}}>
+			<div id='fullpage'>
+				<div className='section'>
+					<Landing />
+				</div>
+				<div className='section'>
+					<Popular />
+				</div>
+			</div>
+		</Screen>
+	);
 }
 export default Landingpage;
