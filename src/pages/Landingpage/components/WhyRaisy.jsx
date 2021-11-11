@@ -7,6 +7,8 @@ import decentralizedwhite from "../../../images/decentralizedwhite.png";
 import decentralizedblack from "../../../images/decentralizedblack.png";
 import togetherblack from "../../../images/togetherblack.png";
 import togetherwhite from "../../../images/togetherwhite.png";
+import shieldblack from "../../../images/shieldblack.png";
+import shieldwhite from "../../../images/shieldwhite.png";
 import { SpacerXSmall, SpacerSmall } from "../../../styles/globalStyles";
 
 function WhyRaisy() {
@@ -47,6 +49,20 @@ function WhyRaisy() {
               fontWeight="bold"
             >
               Community-driven
+            </Text>
+          </Flex>
+          <Flex direction="column">
+            <Image
+              src={useColorModeValue(shieldblack, shieldwhite)}
+              width="128px"
+            />
+            <SpacerXSmall />
+            <Text
+              fontSize="1xl"
+              style={{ textAlign: "center" }}
+              fontWeight="bold"
+            >
+              Secured
             </Text>
           </Flex>
         </HStack>
