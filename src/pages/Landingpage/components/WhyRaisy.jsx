@@ -9,7 +9,9 @@ import togetherblack from "../../../images/togetherblack.png";
 import togetherwhite from "../../../images/togetherwhite.png";
 import shieldblack from "../../../images/shieldblack.png";
 import shieldwhite from "../../../images/shieldwhite.png";
-import { SpacerXSmall, SpacerSmall } from "../../../styles/globalStyles";
+import rewardBlack from "../../../images/rewardblack.png";
+import rewardWhite from "../../../images/rewardwhite.png";
+import { SpacerXSmall } from "../../../styles/globalStyles";
 
 function WhyRaisy() {
   return (
@@ -63,6 +65,20 @@ function WhyRaisy() {
               fontWeight="bold"
             >
               Secured
+            </Text>
+          </Flex>
+          <Flex direction="column">
+            <Image
+              src={useColorModeValue(rewardBlack, rewardWhite)}
+              width="128px"
+            />
+            <SpacerXSmall />
+            <Text
+              fontSize="1xl"
+              style={{ textAlign: "center" }}
+              fontWeight="bold"
+            >
+              Reward-based
             </Text>
           </Flex>
         </HStack>
