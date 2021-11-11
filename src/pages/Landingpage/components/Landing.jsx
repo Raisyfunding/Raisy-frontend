@@ -1,9 +1,6 @@
 import { Image } from "@chakra-ui/image";
-import { Button, ButtonGroup, useColorModeValue } from "@chakra-ui/react";
+import { Button, useColorModeValue } from "@chakra-ui/react";
 import { Flex, Text, Box } from "@chakra-ui/layout";
-import { SpacerLarge } from "../../../styles/globalStyles";
-import image from "../../../images/Raisybg.jpeg";
-
 import React from "react";
 
 function Landing() {

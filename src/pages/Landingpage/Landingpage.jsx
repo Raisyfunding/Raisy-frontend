@@ -4,6 +4,8 @@ import { useColorModeValue } from "@chakra-ui/react";
 import fullpage from "../../components/Fullpage/fullpage";
 import Landing from "./components/Landing";
 import Popular from "./components/Popular/Popular";
+import Testimonials from "./Testimonials/Testimonials";
+import Footer from "../Footer";
 
 function Landingpage() {
   useEffect(() => {
@@ -24,6 +26,9 @@ function Landingpage() {
         </div>
         <div class="section">
           <Popular />
+        </div>
+        <div class="section">
+          <Footer />
         </div>
       </div>
     </Screen>

@@ -1,16 +1,9 @@
 import React from "react";
 import ProjectCard from "./ProjectCard";
-import {
-  CarouselProvider,
-  Slider,
-  Slide,
-  ButtonNext,
-  ButtonBack,
-} from "pure-react-carousel";
+import { CarouselProvider, Slider, Slide } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import { Center, Flex, Text } from "@chakra-ui/react";
 import "./styles.css";
-import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { SUCCESS_CAMP } from "./successCamp";
 
 export default class Popular extends React.Component {
@@ -38,10 +31,12 @@ export default class Popular extends React.Component {
       window.innerWidth || 0
     );
 
-    if (width < 1300) {
+    if (width < 800) {
       return 1; // show 1 slides
+    } else if (width > 1150) {
+      return 3; // show 1 slides
     } else {
-      return 3;
+      return 2;
     }
   }
 

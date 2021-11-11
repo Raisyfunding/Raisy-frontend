@@ -8,10 +8,9 @@ const ProjectCard = ({ campaign }) => {
         flexDirection={"column"}
         width={"300px"}
         height={"700px"}
-        marginLeft={"50px"}
-        marginRight={"50px"}
+        margin="auto"
       >
-        <Image Width={"300px"} height={"300px"} src={campaign.image} />
+        <Image Width={"400px"} height={"300px"} src={campaign.image} />
         <Text paddingTop={"15px"} textAlign={"justify"}>
           {campaign.title}
         </Text>
