@@ -10,7 +10,8 @@ function App() {
     <ChakraProvider>
       <Screen>
       <Navbar/>
-      <Landingpage/>
+        <Landingpage />
+
       <Footer/>
       </Screen>
     </ChakraProvider>
