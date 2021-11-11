@@ -27,9 +27,6 @@ function Landingpage() {
         <div class="section">
           <Popular />
         </div>
-        <div class="section">
-          <Footer />
-        </div>
       </div>
     </Screen>
   );
