@@ -2,8 +2,6 @@ import { Image } from "@chakra-ui/image";
 import { Button, ButtonGroup, useColorModeValue } from "@chakra-ui/react";
 import { Flex, Text, Box } from "@chakra-ui/layout";
 import { SpacerLarge } from "../../../styles/globalStyles";
-import logowhite from "../../../images/logotext.png";
-import logodark from "../../../images/logotextdark.png";
 import image from "../../../images/Raisybg.jpeg";
 
 import React from "react";
