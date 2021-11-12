@@ -1,5 +1,5 @@
 import { HStack, VStack } from "@chakra-ui/react";
-import { Flex, Text, Box } from "@chakra-ui/layout";
+import { Flex, Text } from "@chakra-ui/layout";
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import { Image } from "@chakra-ui/image";
 import React from "react";
@@ -11,20 +11,22 @@ import shieldblack from "../../../images/shieldblack.png";
 import shieldwhite from "../../../images/shieldwhite.png";
 import rewardBlack from "../../../images/rewardblack.png";
 import rewardWhite from "../../../images/rewardwhite.png";
-import { SpacerXSmall } from "../../../styles/globalStyles";
+import { SpacerXSmall, SpacerLarge } from "../../../styles/globalStyles";
+import Footer from "../../../components/Footer/Footer";
 
 function WhyRaisy() {
   return (
     <div>
       <Text
-        fontSize={{ base: "5xl", md: "6xl", lg: "7xl" }}
+        fontSize={{ base: "4xl", md: "5xl", lg: "6xl" }}
         style={{ textAlign: "center" }}
       >
         Why <span style={{ color: "var(--blue)" }}>Raisy</span> ?
       </Text>
-      <Box height="50px" />
+      <SpacerLarge />
+      <SpacerLarge />
       <VStack>
-        <HStack spacing="8em">
+        <HStack spacing="10em">
           <Flex direction="column">
             <Image
               src={useColorModeValue(decentralizedblack, decentralizedwhite)}
