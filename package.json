@@ -7,9 +7,12 @@
     "@chakra-ui/react": "^1.6.9",
     "@emotion/react": "11",
     "@emotion/styled": "11",
+    "@sushiswap/sdk": "^5.0.0-canary.100",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "@usedapp/core": "^0.5.4",
+    "firebase": "^9.4.1",
     "framer-motion": "4",
     "pure-react-carousel": "^1.27.6",
     "react": "^17.0.2",
@@ -18,7 +21,8 @@
     "react-scripts": "4.0.3",
     "styled-components": "^5.3.1",
     "vanillajs": "^1.0.1",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "web3-react": "^5.0.5"
   },
   "scripts": {
     "start": "react-scripts start",
