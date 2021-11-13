@@ -3,12 +3,7 @@ import React from "react";
 
 const ProjectCard = ({ campaign }) => {
   return (
-    <Flex
-      flexDirection={"column"}
-      width={"300px"}
-      height={"700px"}
-      margin="auto"
-    >
+    <Flex flexDirection={"column"} width={"300px"} height={"700px"}>
       <Image width={"300px"} height={"300px"} src={campaign.image} />
       <Text paddingTop={"15px"} textAlign={"justify"}>
         {campaign.title}
