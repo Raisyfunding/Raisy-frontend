@@ -299,11 +299,11 @@ const MobileNavItem = ({ label, children, href }) => {
 const NAV_ITEMS = [
   {
     label: "Explore",
-    href: "#",
+    href: "/",
   },
   {
     label: "How it Works",
-    href: "#",
+    href: "help",
   },
   {
     label: "Search",
