@@ -5,6 +5,8 @@ import fullpage from "../../components/Fullpage/fullpage";
 import Landing from "./components/Landing";
 import Popular from "./components/Popular/Popular";
 import WhyRaisy from "./components/WhyRaisy";
+import Testimonials from "./Testimonials/Testimonials";
+import Footer from "../Footer";
 
 function Landingpage() {
   useEffect(() => {
