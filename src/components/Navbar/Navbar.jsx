@@ -112,7 +112,7 @@ export default function Navbar() {
             fontWeight={600}
             variant={"link"}
             color={useColorModeValue("var(--black)", "var(--white)")}
-            href={"#"}
+            href={"/connect"}
             padding={{ base: "5px", md: "10px" }}
             _focus={{ outline: "none !important" }}
             _hover={{
