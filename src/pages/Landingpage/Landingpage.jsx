@@ -6,7 +6,8 @@ import Landing from "./components/Landing";
 import Popular from "./components/Popular/Popular";
 import WhyRaisy from "./components/WhyRaisy";
 import Testimonials from "./Testimonials/Testimonials";
-import Footer from "../Footer";
+import Footer from "./FooterPage";
+import FooterPage from "./FooterPage";
 
 function Landingpage() {
   useEffect(() => {
@@ -30,6 +31,9 @@ function Landingpage() {
         </div>
         <div class="section">
           <WhyRaisy />
+        </div>
+        <div class="section">
+          <FooterPage />
         </div>
       </div>
     </Screen>

@@ -82,7 +82,7 @@ export default function Footer() {
             </Stack>
           </Stack>
           <Stack align={"flex-start"}>
-            <ListHeader>Company</ListHeader>
+            <ListHeader>Protocol</ListHeader>
             <Link href={"#"} _focus={{ outline: "none !important" }}>
               About us
             </Link>

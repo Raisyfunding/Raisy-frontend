@@ -12,7 +12,6 @@ import shieldwhite from "../../../images/shieldwhite.png";
 import rewardBlack from "../../../images/rewardblack.png";
 import rewardWhite from "../../../images/rewardwhite.png";
 import { SpacerXSmall, SpacerLarge } from "../../../styles/globalStyles";
-import Footer from "../../../components/Footer/Footer";
 
 function WhyRaisy() {
   return (
