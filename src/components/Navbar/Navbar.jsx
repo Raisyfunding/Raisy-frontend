@@ -96,7 +96,7 @@ export default function Navbar() {
             variant={"link"}
             border={"solid var(--blue) 2px"}
             color={useColorModeValue("var(--black)", "var(--white)")}
-            href={"#"}
+            href={"#submit"}
             padding={{ base: "5px", md: "10px" }}
             _focus={{ outline: "none !important" }}
             _hover={{

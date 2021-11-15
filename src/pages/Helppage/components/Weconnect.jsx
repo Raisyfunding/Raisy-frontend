@@ -1,6 +1,5 @@
 import { Image } from "@chakra-ui/image";
-import { Flex, Text, Box, Center, Spac } from "@chakra-ui/layout";
-import { SpacerLarge, SpacerXSmall } from "../../../styles/globalStyles";
+import { Flex, Text, Box } from "@chakra-ui/layout";
 import React from "react";
 import ConnectBlack from "../../../images/Weconnectblack.JPG";
 import ConnectWhite from "../../../images/Weconnectwhite.png";

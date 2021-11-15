@@ -1,10 +1,11 @@
-import { Navbar, Footer } from "./components/index";
+import { Navbar } from "./components/index";
 import { Landingpage, Helppage } from "./pages/index";
 import { ChakraProvider } from "@chakra-ui/react";
 import "./styles/theme.css";
 import { Screen } from "./styles/globalStyles";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Connection from "./pages/Connection/Connection";
+import Submit from "./pages/Submit/Submit";
 
 function App() {
   return (
@@ -21,6 +22,9 @@ function App() {
             </Route>
             <Route exact path="/connect">
               <Connection />
+            </Route>
+            <Route exact path="/submit">
+              <Submit />
             </Route>
           </Switch>
         </Screen>

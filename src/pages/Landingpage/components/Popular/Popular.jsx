@@ -2,7 +2,7 @@ import React from "react";
 import ProjectCard from "./ProjectCard";
 import { CarouselProvider, Slider, Slide } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
-import { Center, Flex, Text, Box } from "@chakra-ui/react";
+import { Flex, Text, Box } from "@chakra-ui/react";
 import "./styles.css";
 
 import { SUCCESS_CAMP } from "./successCamp";

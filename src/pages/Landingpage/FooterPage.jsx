@@ -1,6 +1,6 @@
 import React from "react";
 import Footer from "../../components/Footer/Footer";
-import { Center, Text, Image, Flex } from "@chakra-ui/react";
+import { Text, Image, Flex } from "@chakra-ui/react";
 import { SpacerLarge } from "../../styles/globalStyles";
 
 const FooterPage = () => {

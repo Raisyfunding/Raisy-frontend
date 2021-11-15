@@ -2,12 +2,9 @@ import React, { useEffect } from "react";
 import { Screen } from "../../styles/globalStyles";
 import { useColorModeValue } from "@chakra-ui/react";
 import fullpage from "../../components/Fullpage/fullpage";
-import Landing from "./components/Landing";
-import Popular from "./components/Popular/Popular";
-import WhyRaisy from "./components/WhyRaisy";
-import FooterPage from "./FooterPage";
+import FooterPage from "../Landingpage/FooterPage";
 
-function Landingpage() {
+function Submit() {
   useEffect(() => {
     new fullpage("#fullpage", {
       licenseKey: "ED0D5DA5-596F41E0-B51F15B6-293EC91D",
@@ -21,20 +18,9 @@ function Landingpage() {
       }}
     >
       <div id="fullpage">
-        <div class="section">
-          <Landing />
-        </div>
-        <div class="section">
-          <Popular />
-        </div>
-        <div class="section">
-          <WhyRaisy />
-        </div>
-        <div class="section">
-          <FooterPage />
-        </div>
+        <div class="section"></div>
       </div>
     </Screen>
   );
 }
-export default Landingpage;
+export default Submit;
