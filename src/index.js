@@ -13,8 +13,8 @@ const Web3ProviderNetwork = createWeb3ReactRoot(NetworkContextName);
 
 ReactDOM.render(
 	<Provider store={store}>
-		<Web3ReactProvider getLibrary={getLibrary(Web3ProviderNetwork)}>
-			<Web3ProviderNetwork getLibrary={getLibrary(Web3ProviderNetwork)}>
+		<Web3ReactProvider getLibrary={getLibrary}>
+			<Web3ProviderNetwork getLibrary={getLibrary}>
 				<Web3ReactManager>
 					<App fullscreen />
 				</Web3ReactManager>
