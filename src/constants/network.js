@@ -47,3 +47,10 @@ export const EXPLORER_URL = {
 	[ChainId.MATIC]: "https://polygonscan.com/",
 	[ChainId.MATIC_TESTNET]: "https://mumbai.polygonscan.com/",
 };
+
+export const RPC_URL = {
+	[ChainId.MATIC]:
+		"https://polygon-mainnet.g.alchemy.com/v2/aPcjgj5fHH3dxdhQFiqsm4ROAKa8oTIt",
+	[ChainId.MATIC_TESTNET]:
+		"https://polygon-mumbai.g.alchemy.com/v2/inzj9DkLzLHU_ufVjmpOgjRamnhKGuTL",
+};
