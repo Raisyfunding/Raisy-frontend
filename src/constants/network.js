@@ -42,3 +42,8 @@ export const Contracts = {
 		raisyAddressRegistry: "",
 	},
 };
+
+export const EXPLORER_URL = {
+	[ChainId.MATIC]: "https://polygonscan.com/",
+	[ChainId.MATIC_TESTNET]: "https://mumbai.polygonscan.com/",
+};

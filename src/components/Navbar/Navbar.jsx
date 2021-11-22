@@ -32,6 +32,9 @@ import { useSelector } from "react-redux";
 import { useWeb3React } from "@web3-react/core";
 import { useEffect, useState } from "react";
 import { shortenAddress } from "../../utils";
+import { useApi } from "../../api";
+import WalletConnectActions from "../../redux/actions/walletconnect.actions";
+import AuthActions from "../../redux/actions/auth.actions";
 
 export default function Navbar() {
 	const { isOpen, onToggle } = useDisclosure();
@@ -47,42 +50,50 @@ export default function Navbar() {
 	const blackModeValue = useColorModeValue("var(--black)", "var(--white)");
 	const whiteModeValue = useColorModeValue("var(--white)", "var(--black)");
 
-	// const { getAuthToken } = useApi();
+	const { getAuthToken, getAccountDetails } = useApi();
 
-	// const login = async () => {
-	// 	try {
-	// 		setLoading(true);
-	// 		const token = await getAuthToken(account);
-	// 		const isModerator = await getIsModerator(account);
+	const login = async () => {
+		try {
+			setLoading(true);
+			const token = await getAuthToken(account);
+			// const isModerator = await getIsModerator(account);
+			const isModerator = false;
 
-	// 		dispatch(WalletConnectActions.connectWallet(token, isModerator));
-	// 		dispatch(AuthActions.fetchStart());
-	// 		try {
-	// 			const { data } = await getAccountDetails(token);
-	// 			dispatch(AuthActions.fetchSuccess(data));
-	// 		} catch {
-	// 			dispatch(AuthActions.fetchFailed());
-	// 		}
-	// 		setLoading(false);
-	// 	} catch {
-	// 		setLoading(false);
-	// 	}
-	// };
+			dispatch(WalletConnectActions.connectWallet(token, isModerator));
+			dispatch(AuthActions.fetchStart());
+			try {
+				const { data } = await getAccountDetails(token);
+				dispatch(AuthActions.fetchSuccess(data));
+			} catch {
+				dispatch(AuthActions.fetchFailed());
+			}
+			setLoading(false);
+		} catch {
+			setLoading(false);
+		}
+	};
 
 	const init = () => {
-		// login();
+		login();
 	};
 
 	useEffect(() => {
 		if (account) {
 			init();
 		} else {
-			// handleSignOut();
+			handleSignOut();
 		}
 	}, [account, chainId]);
 
 	const handleConnectWallet = () => {
 		dispatch(ModalActions.showConnectWalletModal());
+	};
+
+	const handleSignOut = () => {
+		deactivate();
+		dispatch(WalletConnectActions.disconnectWallet());
+		dispatch(AuthActions.signOut());
+		// handleMenuClose();
 	};
 
 	return (
