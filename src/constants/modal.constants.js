@@ -1,0 +1,6 @@
+const ModalConstants = {
+	SHOW_CONNECT_WALLET_MODAL: "SHOW_CONNECT_WALLET_MODAL",
+	HIDE_CONNECT_WALLET_MODAL: "HIDE_CONNECT_WALLET_MODAL",
+};
+
+export default ModalConstants;
