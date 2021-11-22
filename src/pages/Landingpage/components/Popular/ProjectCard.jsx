@@ -6,31 +6,31 @@ const ProjectCard = ({ campaign }) => {
     <div>
       <Flex
         flexDirection={"column"}
-        width={"300px"}
-        height={"700px"}
+        width={"250px"}
+        height={"450px"}
         marginLeft={"50px"}
         marginRight={"50px"}
       >
-        <Image Width={"300px"} height={"300px"} src={campaign.image} />
-        <Text paddingTop={"15px"} textAlign={"justify"}>
+        <Image Width={"250px"} height={"250px"} src={campaign.image} alignSelf="center" />
+        <Text paddingTop={"10px"} textAlign={"justify"} fontSize="25px" fontWeight="bold" >
           {campaign.title}
         </Text>
-        <Text paddingTop={"15px"} textAlign={"justify"}>
+        <Text  textAlign="justify" fontSize="12px" alignSelf="center">
           {campaign.description}
         </Text>
-        <Text paddingTop={"15px"} textAlign={"justify"}>
-          {campaign.category}
+        <Text paddingTop={"1px"} textAlign={"justify"} fontSize="15px">
+          category : {campaign.category}
         </Text>
-        <Text paddingTop={"15px"} paddingBottom={"15px"} textAlign={"justify"}>
+        <Text paddingTop={"10px"} paddingBottom={"2px"}  fontSize="12px" color="var(--blue)">
           Last donation {campaign.lastdonation} min ago
         </Text>
         <Progress
-          colorScheme="blue"
+          colorScheme="gray"
           value={campaign.progress}
           borderRadius={"10px"}
           height={"4px"}
         />
-        <Text paddingTop={"15px"} textAlign={"justify"}>
+        <Text paddingTop={"15px"} textAlign={"center"} >
           {(campaign.amounttoraise * 80) / 100}$ Raised out of{" "}
           {campaign.amounttoraise} $
         </Text>

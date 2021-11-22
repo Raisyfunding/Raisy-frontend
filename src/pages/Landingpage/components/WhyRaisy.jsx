@@ -1,10 +1,14 @@
-import { HStack, VStack } from "@chakra-ui/react";
-import { Flex, Text } from "@chakra-ui/layout";
+import { HStack, VStack, Divider } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/layout";
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import { Image } from "@chakra-ui/image";
 import React from "react";
 import decentralizedwhite from "../../../images/decentralizedwhite.png";
 import decentralizedblack from "../../../images/decentralizedblack.png";
+import inspirationblack from "../../../images/inspirationblack.png";
+import inspirationwhite from "../../../images/inspirationwhite.png";
+import searchwhite from "../../../images/searchwhite.png";
+import searchblack from "../../../images/searchblack.png";
 import togetherblack from "../../../images/togetherblack.png";
 import togetherwhite from "../../../images/togetherwhite.png";
 import shieldblack from "../../../images/shieldblack.png";
@@ -24,9 +28,9 @@ function WhyRaisy() {
         Why <span style={{ color: "var(--blue)" }}>Raisy</span> ?
       </Text>
       <SpacerLarge />
-      <SpacerLarge />
-      <VStack>
-        <HStack spacing="10em">
+
+      <VStack spacing="5em">
+        <HStack spacing="8em">
           <Flex direction="column">
             <Image
               src={useColorModeValue(decentralizedblack, decentralizedwhite)}
@@ -42,7 +46,7 @@ function WhyRaisy() {
               Decentralized
             </Text>
           </Flex>
-          <Flex direction="column">
+          <Flex direction="column" alignItems="center">
             <Image
               src={useColorModeValue(togetherblack, togetherwhite)}
               width="64px"
@@ -70,7 +74,7 @@ function WhyRaisy() {
               Secured
             </Text>
           </Flex>
-          <Flex direction="column">
+          <Flex direction="column" alignItems="center">
             <Image
               src={useColorModeValue(rewardBlack, rewardWhite)}
               width="64px"
@@ -85,7 +89,43 @@ function WhyRaisy() {
             </Text>
           </Flex>
         </HStack>
-        <HStack></HStack>
+        <HStack spacing="8em">
+        <Flex direction="column">
+            <Image
+              src={useColorModeValue(searchblack, searchwhite)}
+              margin="auto"
+              width='160px'
+              alignSelf="center"
+            />
+            <SpacerXSmall />
+            <Text
+              fontSize="2xl"
+              style={{ textAlign: "center" }}
+              fontWeight="bold"
+              marginTop="10px"
+            >
+              Ready? Explore !
+            </Text>
+          </Flex>
+          <Box width="1px" height="150px" bg="var(--blue)">
+            </Box>
+          <Flex direction="column" >
+            <Image
+              src={useColorModeValue(inspirationblack, inspirationwhite)}
+              width="160px"
+              alignSelf="center"
+            />
+            <SpacerXSmall />
+            <Text
+              fontSize="2xl"
+              style={{ textAlign: "center" }}
+              fontWeight="bold"
+              marginTop="10px"
+            >
+              inspired? Let's go !
+            </Text>
+          </Flex>
+        </HStack>
       </VStack>
     </div>
   );

@@ -32,7 +32,7 @@ export default class Popular extends React.Component {
       window.innerWidth || 0
     );
 
-    if (width < 1300) {
+    if (width < 900) {
       return 1; // show 1 slides
     } else {
       return 3;
@@ -51,9 +51,11 @@ export default class Popular extends React.Component {
   render() {
     return (
       <div>
-        <Text fontSize={"2em"} marginLeft={"100px"} marginBottom={"30px"}>
+        <Center>
+        <Text fontSize={"2em"}  marginBottom={"30px"}>
           Popular projects
         </Text>
+        </Center>
         <Center>
           <CarouselProvider
             totalSlides={SUCCESS_CAMP.length}
@@ -62,7 +64,7 @@ export default class Popular extends React.Component {
             isPlaying={true}
             interval={4000}
           >
-            <Flex maxWidth={"50vw"}>
+            <Flex maxWidth={"100vw"}>
               <Slider classNameTray="slider-tray">
                 {SUCCESS_CAMP.map((campaign, n) => (
                   <Slide index={n}>
