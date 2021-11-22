@@ -9,8 +9,9 @@ function App() {
   return (
     <Router>
     <ChakraProvider>
-        
+    
           <Navbar />
+          <Screen>
       <Switch>
             <Route exact path='/'>
               <Landingpage />
@@ -25,6 +26,7 @@ function App() {
               <Helpcreator />
           </Route>
           </Switch>
+          </Screen>
        
       </ChakraProvider>
       </Router>

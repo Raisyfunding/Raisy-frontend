@@ -2,7 +2,7 @@ import React from "react";
 import ProjectCard from "./ProjectCard";
 import { CarouselProvider, Slider, Slide } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
-import { Center, Flex, Text } from "@chakra-ui/react";
+import { Center, Flex, Text, Box } from "@chakra-ui/react";
 import "./styles.css";
 
 import { SUCCESS_CAMP } from "./successCamp";
@@ -50,11 +50,16 @@ export default class Popular extends React.Component {
   }
   render() {
     return (
-      <div>
+      <Box height="100vh">
         <Center>
-        <Text fontSize={"2em"}  marginBottom={"30px"}>
-          Popular projects
-        </Text>
+        <Text
+        fontSize={{ base: "4xl", md: "5xl", lg: "6xl" }}
+        style={{ textAlign: "center" }}
+        marginBottom="10vh"
+      >
+        Popular <span style={{ color: "var(--blue)" }}>projects</span> 
+      </Text>
+    
         </Center>
         <Center>
           <CarouselProvider
@@ -75,7 +80,7 @@ export default class Popular extends React.Component {
             </Flex>
           </CarouselProvider>
         </Center>
-      </div>
+      </Box>
     );
   }
 }

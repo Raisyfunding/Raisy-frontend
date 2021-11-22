@@ -5,7 +5,7 @@ import { HStack, VStack } from "@chakra-ui/react";
 
 function Choose() {
   return (
-    <Flex direction="column" alignSelf="center">
+    <Flex direction="column" alignSelf="center" height="100%">
       <Text
         fontSize={{ base: "4xl", md: "5xl", lg: "6xl" }}
         style={{ textAlign: "center" }}

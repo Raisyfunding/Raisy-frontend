@@ -6,12 +6,12 @@ const ProjectCard = ({ campaign }) => {
     <div>
       <Flex
         flexDirection={"column"}
-        width={"250px"}
+        width={"300px"}
         height={"450px"}
         marginLeft={"50px"}
         marginRight={"50px"}
       >
-        <Image Width={"250px"} height={"250px"} src={campaign.image} alignSelf="center" />
+        <Image Width={"300px"} height={"250px"} src={campaign.image} alignSelf="center" />
         <Text paddingTop={"10px"} textAlign={"justify"} fontSize="25px" fontWeight="bold" >
           {campaign.title}
         </Text>

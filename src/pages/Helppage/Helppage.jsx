@@ -1,37 +1,31 @@
-import React, { useEffect } from "react";
-import { Screen } from "../../styles/globalStyles";
-import { useColorModeValue } from "@chakra-ui/react";
-import fullpage from "../../components/Fullpage/fullpage";
-import Help from "./components/Help";
 import Choose from "./components/Choose";
-import Weconnect from "./components/Weconnect";
+import Help from "./components/Help";
+import React from 'react';
+import ReactFullpage from '@fullpage/react-fullpage';
 
-const Helppage = () => {
-  useEffect(() => {
-    new fullpage("#fullpage", {
-      licenseKey: "ED0D5DA5-596F41E0-B51F15B6-293EC91D",
-    });
-  }, []);
+const Helppage = () => (
+  <ReactFullpage
+    //fullpage options
+    licenseKey = {'ED0D5DA5-596F41E0-B51F15B6-293EC91D'}
+    scrollingSpeed = {1000} /* Options here */
 
-  return (
-    <Screen
-      style={{
-        backgroundColor: useColorModeValue("var(--white)", "var(--black)"),
-      }}
-    >
-      <div id="fullpage">
-        <div class="section">
+    render={({ state, fullpageApi }) => {
+      return (
+          <div>
+            {/* <Screen> */}
+          <div className="section">
+
           <Help />
-        </div>
-        <div class="section">
+     
+          </div>
+          <div className="section">
           <Choose />
-        </div>
-        <div class="section">
-          <Weconnect />
-        </div>
-      </div>
-    </Screen>
-  );
-};
-
+          </div>
+          {/* </Screen> */}
+          </div>
+      );
+    }}
+    
+  />
+);
 export default Helppage;

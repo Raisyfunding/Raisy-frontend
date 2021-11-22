@@ -8,7 +8,7 @@ import React from "react";
 
 function Landing() {
   return (
-    <Box height="100vh">
+    <Box height="100vh" >
       <Flex
         width="90vw"
         height="87%"

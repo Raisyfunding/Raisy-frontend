@@ -20,7 +20,7 @@ import Footer from "../../../components/Footer/Footer";
 
 function WhyRaisy() {
   return (
-    <div>
+    <Box height="100vh">
       <Text
         fontSize={{ base: "4xl", md: "5xl", lg: "6xl" }}
         style={{ textAlign: "center" }}
@@ -127,7 +127,7 @@ function WhyRaisy() {
           </Flex>
         </HStack>
       </VStack>
-    </div>
+    </Box>
   );
 }
 
