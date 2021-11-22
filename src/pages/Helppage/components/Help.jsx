@@ -12,9 +12,9 @@ function Help() {
       >
         How <span style={{ color: "var(--blue)" }}>Raisy</span> works ?
       </Text>
-      <Box height="30px"></Box>
+      <Box height="20px"></Box>
       <Center>
-        <Flex width="30%">
+        <Flex width="50%">
           <Text
             fontSize={{ base: "1xl", md: "1xl", lg: "1xl" }}
             style={{ textAlign: "center" }}
@@ -32,7 +32,7 @@ function Help() {
         <Image
           src="https://via.placeholder.com/628x438"
           alt="Video"
-          width="35%"
+          width="30%"
           height="auto"
         />
       </Center>

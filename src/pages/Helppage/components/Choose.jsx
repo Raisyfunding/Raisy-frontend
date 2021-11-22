@@ -1,4 +1,4 @@
-import { Flex, Text, Box, Center, Spacer } from "@chakra-ui/layout";
+import { Flex, Text, Box, Center, Spacer, Link } from "@chakra-ui/layout";
 import { SpacerLarge, SpacerXSmall } from "../../../styles/globalStyles";
 import React from "react";
 import { HStack, VStack } from "@chakra-ui/react";
@@ -27,7 +27,10 @@ function Choose() {
           alignItems="center"
           justifyContent={"center"}
         >
-          <Box bg="gray.300" width="40%" borderRadius="3xl">
+          <Link href="/creator"  style={{ textDecoration: "none" }}>
+         
+          
+          <Box bg="gray.300" width="100%" borderRadius="3xl">
             <VStack margin="3em" justifyItems="center">
               <Text
                 fontSize={{ base: "4xl", md: "5xl", lg: "6xl" }}
@@ -41,8 +44,9 @@ function Choose() {
               </Text>
             </VStack>
           </Box>
-
-          <Box bg="gray.300" width="40%" borderRadius="3xl">
+          </Link>
+          <Link href="/donor"  style={{ textDecoration: "none" }}>
+          <Box bg="gray.300" width="100%" borderRadius="3xl">
             <VStack margin="3em">
               <Text
                 fontSize={{ base: "4xl", md: "5xl", lg: "6xl" }}
@@ -56,6 +60,7 @@ function Choose() {
               </Text>
             </VStack>
           </Box>
+          </Link>
         </Flex>
       </Center>
     </Flex>

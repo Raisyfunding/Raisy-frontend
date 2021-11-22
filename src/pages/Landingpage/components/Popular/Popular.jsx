@@ -62,7 +62,7 @@ export default class Popular extends React.Component {
             isPlaying={true}
             interval={4000}
           >
-            <Flex maxWidth={"95vw"}>
+            <Flex maxWidth={"50vw"}>
               <Slider classNameTray="slider-tray">
                 {SUCCESS_CAMP.map((campaign, n) => (
                   <Slide index={n}>

@@ -1,5 +1,5 @@
 import { Navbar, Footer } from "./components/index";
-import { Landingpage, Helppage } from "./pages/index";
+import { Landingpage, Helppage, Helpcreator, Helpdonor } from "./pages/index";
 import { ChakraProvider } from "@chakra-ui/react";
 import "./styles/theme.css";
 import { Screen } from "./styles/globalStyles";
@@ -17,6 +17,12 @@ function App() {
           </Route>
             <Route exact path='/help'>
               <Helppage />
+          </Route>
+          <Route exact path='/donor'>
+              <Helpdonor />
+          </Route>
+          <Route exact path='/creator'>
+              <Helpcreator />
           </Route>
           </Switch>
         </Screen>

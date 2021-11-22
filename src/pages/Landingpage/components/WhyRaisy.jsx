@@ -31,6 +31,7 @@ function WhyRaisy() {
             <Image
               src={useColorModeValue(decentralizedblack, decentralizedwhite)}
               margin="auto"
+              width='64px'
             />
             <SpacerXSmall />
             <Text
@@ -44,7 +45,7 @@ function WhyRaisy() {
           <Flex direction="column">
             <Image
               src={useColorModeValue(togetherblack, togetherwhite)}
-              width="128px"
+              width="64px"
             />
             <SpacerXSmall />
             <Text
@@ -58,7 +59,7 @@ function WhyRaisy() {
           <Flex direction="column">
             <Image
               src={useColorModeValue(shieldblack, shieldwhite)}
-              width="128px"
+              width="64px"
             />
             <SpacerXSmall />
             <Text
@@ -72,7 +73,7 @@ function WhyRaisy() {
           <Flex direction="column">
             <Image
               src={useColorModeValue(rewardBlack, rewardWhite)}
-              width="128px"
+              width="64px"
             />
             <SpacerXSmall />
             <Text
