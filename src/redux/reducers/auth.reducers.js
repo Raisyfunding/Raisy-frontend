@@ -1,4 +1,4 @@
-import { AuthConstants } from '../constants/auth.constants';
+import { AuthConstants } from '../../constants/auth.constants';
 
 export function Auth(
   state = {
