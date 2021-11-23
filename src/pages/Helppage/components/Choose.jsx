@@ -30,7 +30,7 @@ function Choose() {
           <Link href="/creator"  style={{ textDecoration: "none" }}>
          
           
-          <Box bg="gray.300" width="100%" borderRadius="3xl">
+          <Box bg="gray.500" width="100%" borderRadius="3xl">
             <VStack margin="3em" justifyItems="center">
               <Text
                 fontSize={{ base: "4xl", md: "5xl", lg: "6xl" }}
@@ -46,7 +46,7 @@ function Choose() {
           </Box>
           </Link>
           <Link href="/donor"  style={{ textDecoration: "none" }}>
-          <Box bg="gray.300" width="100%" borderRadius="3xl">
+          <Box bg="gray.500" width="100%" borderRadius="3xl">
             <VStack margin="3em">
               <Text
                 fontSize={{ base: "4xl", md: "5xl", lg: "6xl" }}

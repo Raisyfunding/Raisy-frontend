@@ -1,12 +1,11 @@
-import Landing from "./components/Landing";
-import Popular from "./components/Popular/Popular";
-import WhyRaisy from "./components/WhyRaisy";
+import Preview from "./components/Preview";
+
 import React from "react";
 import ReactFullpage from "@fullpage/react-fullpage";
 import { Screen } from "../../styles/globalStyles";
 import { useColorModeValue } from "@chakra-ui/color-mode";
 
-const Landingpage = () => (
+const Projectpage = () => (
   <Screen style={{
 backgroundColor: useColorModeValue("var(--white)", "var(--black)"),
 }}>
@@ -18,13 +17,7 @@ backgroundColor: useColorModeValue("var(--white)", "var(--black)"),
       return (
         <>
           <div className="section fp-auto-height">
-            <Landing />
-          </div>
-          <div className="section fp-auto-height">
-            <Popular />
-          </div>
-          <div className="section fp-auto-height">
-            <WhyRaisy />
+            <Preview />
           </div>
         </>
       );
@@ -32,4 +25,4 @@ backgroundColor: useColorModeValue("var(--white)", "var(--black)"),
     />
     </Screen>
 );
-export default Landingpage;
+export default Projectpage;
