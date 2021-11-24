@@ -1,7 +1,7 @@
-import { Flex, Text, Box, Center, Spacer, Link } from "@chakra-ui/layout";
-import { SpacerLarge, SpacerXSmall } from "../../../styles/globalStyles";
+import { Flex, Text, Box, Center, Link } from "@chakra-ui/layout";
+import { SpacerLarge } from "../../../styles/globalStyles";
 import React from "react";
-import { HStack, VStack } from "@chakra-ui/react";
+import { VStack } from "@chakra-ui/react";
 
 function Choose() {
   return (

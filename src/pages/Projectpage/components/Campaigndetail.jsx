@@ -1,12 +1,9 @@
 import { Image } from "@chakra-ui/image";
-import { Flex, Text, Box, Center, Spacer } from "@chakra-ui/layout";
+import { Flex, Text, Box, Spacer } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/react";
 import { SpacerLarge } from "../../../styles/globalStyles";
 import Campaigninfo from "./Campaigninfo";
 import React from "react";
-import security from "../../../images/security.png"
-import moneybag from "../../../images/moneybag.png"
-import handshake from "../../../images/handshake.png"
 import projectimage from "../../../images/Mixwarepic.png"
 
 

@@ -1,6 +1,6 @@
 import { Image } from "@chakra-ui/image";
 import { Flex, Text, Box, Center } from "@chakra-ui/layout";
-import { SpacerLarge, SpacerXSmall } from "../../../styles/globalStyles";
+import { SpacerLarge } from "../../../styles/globalStyles";
 import React from "react";
 
 function Explore() {
@@ -32,6 +32,8 @@ function Explore() {
           height="auto"
         />
       </Center>
+      <SpacerLarge />
+      
     </Flex>
   );
 }

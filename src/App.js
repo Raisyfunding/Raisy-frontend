@@ -2,7 +2,6 @@ import { Navbar, Footer } from "./components/index";
 import { Landingpage, Helppage, Helpcreator, Helpdonor, Explorepage, Projectpage } from "./pages/index";
 import { ChakraProvider } from "@chakra-ui/react";
 import "./styles/theme.css";
-import { Screen } from "./styles/globalStyles";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { PROJECTS } from "./Projects"
 

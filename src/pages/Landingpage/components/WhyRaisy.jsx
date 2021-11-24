@@ -1,4 +1,4 @@
-import { HStack, VStack, Divider } from "@chakra-ui/react";
+import { HStack, VStack } from "@chakra-ui/react";
 import { Box, Flex, Text } from "@chakra-ui/layout";
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import { Image } from "@chakra-ui/image";
@@ -16,7 +16,6 @@ import shieldwhite from "../../../images/shieldwhite.png";
 import rewardBlack from "../../../images/rewardblack.png";
 import rewardWhite from "../../../images/rewardwhite.png";
 import { SpacerXSmall, SpacerLarge } from "../../../styles/globalStyles";
-import Footer from "../../../components/Footer/Footer";
 
 function WhyRaisy() {
   return (
