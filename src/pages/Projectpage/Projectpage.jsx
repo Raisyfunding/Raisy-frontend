@@ -5,7 +5,7 @@ import ReactFullpage from "@fullpage/react-fullpage";
 import { Screen } from "../../styles/globalStyles";
 import { useColorModeValue } from "@chakra-ui/color-mode";
 
-const Projectpage = () => (
+const Projectpage = ({ currentProject }) => (
   <Screen style={{
 backgroundColor: useColorModeValue("var(--white)", "var(--black)"),
 }}>
@@ -16,8 +16,9 @@ backgroundColor: useColorModeValue("var(--white)", "var(--black)"),
     render={({ state, fullpageApi }) => {
       return (
         <>
+        {console.log(currentProject)}
           <div className="section fp-auto-height">
-            <Preview />
+            <Preview currentProject={currentProject}/>
           </div>
         </>
       );

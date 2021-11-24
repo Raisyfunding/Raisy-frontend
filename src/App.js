@@ -1,9 +1,10 @@
 import { Navbar, Footer } from "./components/index";
-import { Landingpage, Helppage, Helpcreator, Helpdonor, Explorepage } from "./pages/index";
+import { Landingpage, Helppage, Helpcreator, Helpdonor, Explorepage, Projectpage } from "./pages/index";
 import { ChakraProvider } from "@chakra-ui/react";
 import "./styles/theme.css";
 import { Screen } from "./styles/globalStyles";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { PROJECTS } from "./Projects"
 
 function App() {
   return (
@@ -28,6 +29,11 @@ function App() {
           <Route exact path='/explore'>
               <Explorepage />
           </Route>
+          {PROJECTS.map((project) => (
+            <Route exact path={project.url} key={project}>
+              <Projectpage currentProject={project} />
+            </Route>
+          ))}
           </Switch>
         
        
