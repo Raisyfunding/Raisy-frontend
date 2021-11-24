@@ -10,7 +10,7 @@ export const PROJECTS = [
       facebook: "https://crodrakesnft.com/",
       website: "https://crodrakesnft.com/",
       totaldonors: "8",
-      endtime: "Fri, November 19 2021 9:20 PM UTC +05:30.",
+      endtime: "Fri, November 19 2021 9:20 PM UTC +05:30",
       dayleft: "12",
       remainingtime: "15",
       url: "/mixtare",

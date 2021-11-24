@@ -82,7 +82,7 @@ function Campaigninfo({ currentProject }) {
     </Box>
     <SpacerSmall />
     <Text fontSize="12px" textAlign="justify">
-    This project will only be funded if it reaches its minimum Target by Fri, November 19 2021 9:20 PM UTC +05:30.
+    This project will only be funded if it reaches its minimum Target by {currentProject.endtime}.
     </Text>
     </Flex>
     );
