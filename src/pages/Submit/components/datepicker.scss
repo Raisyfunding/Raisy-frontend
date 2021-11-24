@@ -1,1 +1,12 @@
-
+.react-datepicker__triangle {
+  justify-content: center;
+}
+.react-datepicker__day--selected {
+  background-color: var(--blue);
+}
+.react-datepicker__day--selected:hover {
+  background-color: var(--blue);
+}
+.react-datepicker__day--keyboard-selected {
+  background-color: var(--blue);
+}

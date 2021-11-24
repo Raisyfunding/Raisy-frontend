@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, forwardRef } from "react";
+import React, { useEffect, useState, forwardRef } from "react";
 import MDEditor from "@uiw/react-md-editor";
 import { useDropzone } from "react-dropzone";
 import { Screen, SpacerSmall } from "../../styles/globalStyles";
@@ -15,13 +15,12 @@ import {
   Radio,
   RadioGroup,
   Stack,
-  useNumberInput,
   Link,
   useToast,
 } from "@chakra-ui/react";
 import Footer from "../../components/Footer/Footer.jsx";
 import DatePicker from "react-datepicker";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import "react-datepicker/dist/react-datepicker.css";
 import "./components/datepicker.scss";
 
@@ -37,7 +36,7 @@ function Submit() {
   const [staggered, setStaggered] = React.useState(false);
   const [adding, setAdding] = React.useState(false);
   const [description, setDescription] = React.useState(0);
-  const [pctMilestone, setPctMilestone] = useState([20, 10]);
+  const [pctMilestone, setPctMilestone] = useState(["20", ""]);
   const [titleError, setTitleError] = useState(null);
   const [amountError, setAmountError] = useState(null);
   const [milestoneError, setMilestoneError] = useState(null);
@@ -51,6 +50,8 @@ function Submit() {
   const { account } = useWeb3React();
   const { authToken } = useSelector((state) => state.ConnectWallet);
   const { addCampaign } = useCampaignsContract();
+
+  const currentColor = useColorModeValue("var(--black)", "var(--white)");
 
   const toast = useToast();
 
@@ -108,8 +109,11 @@ function Submit() {
   const validateMilestone = () => {
     if (pctMilestone.some((val) => val <= 0)) {
       setMilestoneError("No percent can be null");
-    } else if (pctMilestone.reduce((acc, cur) => acc + cur, 0) !== 100) {
-      setMilestoneError("Sum of each percent must be 100%");
+    } else if (
+      pctMilestone.reduce((acc, cur) => parseInt(acc) + parseInt(cur), 0) !==
+      100
+    ) {
+      setMilestoneError("Sum must be 100%");
     } else {
       setMilestoneError(null);
     }
@@ -136,14 +140,14 @@ function Submit() {
   const thumbs = files.map((file) => (
     <div style={thumb} key={file.name}>
       <div style={thumbInner}>
-        <img src={file.preview} style={img} />
+        <img alt="" src={file.preview} style={img} />
       </div>
     </div>
   ));
 
   const handleAddMilestone = () => {
     if (pctMilestone.length === 5) return;
-    setPctMilestone([...pctMilestone, 0]);
+    setPctMilestone([...pctMilestone, ""]);
   };
 
   const handleRemoveMilestone = () => {
@@ -166,6 +170,7 @@ function Submit() {
     <Input
       textAlign={"center"}
       isRequired={"true"}
+      borderColor={useColorModeValue("var(--black)", "var(--white)")}
       onClick={onClick}
       ref={ref}
       readOnly
@@ -468,12 +473,14 @@ function Submit() {
         </Text>
         <InputGroup>
           <InputLeftElement
+            zIndex={"1"}
             pointerEvents="none"
             fontSize="1.2em"
             children="$"
           />
           <Input
             colorScheme={"red"}
+            type={"number"}
             placeholder="Amount to raise"
             isRequired={"true"}
             isInvalid={amountError}
@@ -488,12 +495,6 @@ function Submit() {
         </InputGroup>
         <Flex flexDirection={"row"} paddingBottom={"50px"}>
           <Text color={"red"}>{amountError}</Text>
-          <Text
-            color={useColorModeValue("var(--black)", "var(--white)")}
-            marginLeft={"auto"}
-          >
-            {title.length}/10
-          </Text>
         </Flex>
         <Text
           color={useColorModeValue("var(--black)", "var(--white)")}
@@ -576,6 +577,7 @@ function Submit() {
                 display={"flex"}
                 textAlign={"center"}
                 width={"80px"}
+                variant={"filled"}
               />
               <Button onClick={handleAddMilestone}>+</Button>
             </HStack>
@@ -595,6 +597,7 @@ function Submit() {
               <>
                 <Text paddingBottom={"10px"}>Milestone {idx + 1}</Text>
                 <Input
+                  readOnly={idx === 0 ? true : false}
                   type={"number"}
                   key={idx}
                   placeholder={`Milestone ${idx + 1}`}
@@ -611,6 +614,7 @@ function Submit() {
                   value={x}
                   variant={x > 0 ? "filled" : "outline"}
                   border={x > 0 ? "none" : "solid 1px"}
+                  borderColor={currentColor}
                 ></Input>
                 <SpacerSmall />
               </>
