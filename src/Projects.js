@@ -14,6 +14,7 @@ export const PROJECTS = [
       dayleft: "12",
       remainingtime: "15",
       url: "/mixware",
+
     }
   ];
   

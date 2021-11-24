@@ -2,7 +2,7 @@ import Preview from "./components/Preview";
 import { Footer } from "../../components/index";
 import React from "react";
 import ReactFullpage from "@fullpage/react-fullpage";
-import { Screen } from "../../styles/globalStyles";
+import { Screen, SpacerMedium } from "../../styles/globalStyles";
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import Campaigndetail from "./components/Campaigndetail";
 
@@ -23,7 +23,11 @@ backgroundColor: useColorModeValue("var(--white)", "var(--black)"),
           </div>
           <div  className="section fp-auto-height" >
           <Campaigndetail currentProject={currentProject}/>
+          <SpacerMedium />
           <Footer />
+          <SpacerMedium />
+          <SpacerMedium />
+          <SpacerMedium />
           </div>
          
         </>

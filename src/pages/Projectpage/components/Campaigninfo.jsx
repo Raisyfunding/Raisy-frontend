@@ -1,10 +1,8 @@
-import { Flex, Text, Progress, Box, Spacer, Button, useColorModeValue, Image, Center } from "@chakra-ui/react";
+import { Flex, Text, Progress, Box, Spacer, Button, useColorModeValue, Image, Center, HStack } from "@chakra-ui/react";
 import ArchiveBox from "../../../images/ArchiveBox.png"
 import { SpacerLarge, SpacerXSmall, SpacerSmall } from "../../../styles/globalStyles";
-import facebook from "../../../images/facebook.png"
-import instagram from "../../../images/instagram.png"
-import twitter from "../../../images/twitter.png"
-import mail from "../../../images/mail.png"
+
+import { FiMail, FiTwitter, FiFacebook, FiInstagram  } from 'react-icons/fi';
 
 function Campaigninfo({ currentProject }) {
     return (
@@ -68,15 +66,19 @@ function Campaigninfo({ currentProject }) {
         </Center>
         </Box>
         <Spacer />
-        <Flex direction="row" alignItems="center">
-        <Image src={twitter} height="25px"/>
+        <HStack direction="row" alignItems="center">
+
         <Spacer />
-        <Image src={facebook} />
+        <FiMail />
         <Spacer />
-        <Image src={instagram}/>
+        <FiTwitter />
         <Spacer />
-        <Image src={mail} />
-        </Flex>
+        <FiInstagram />
+        <Spacer />
+        <FiFacebook />
+        <Spacer />
+
+        </HStack>
         </Flex>
     </Flex>
     </Box>
