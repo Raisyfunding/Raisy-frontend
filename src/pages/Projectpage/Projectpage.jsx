@@ -11,9 +11,9 @@ const Projectpage = ({ currentProject }) => (
 backgroundColor: useColorModeValue("var(--white)", "var(--black)"),
 }}>
   <ReactFullpage
-    //fullpage options
     licenseKey={"ED0D5DA5-596F41E0-B51F15B6-293EC91D"}
     scrollingSpeed={1000} /* Options here */
+    scrollOverflow={"true"} 
     render={({ state, fullpageApi }) => {
       return (
         <>
@@ -21,12 +21,11 @@ backgroundColor: useColorModeValue("var(--white)", "var(--black)"),
           <div className="section fp-auto-height">
             <Preview currentProject={currentProject}/>
           </div>
-          <div  className="section fp-auto-height">
+          <div  className="section fp-auto-height" >
           <Campaigndetail currentProject={currentProject}/>
-          </div>
-          <div  className="section fp-auto-height">
           <Footer />
           </div>
+         
         </>
       );
     }}

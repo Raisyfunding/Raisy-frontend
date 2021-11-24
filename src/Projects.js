@@ -13,7 +13,7 @@ export const PROJECTS = [
       endtime: "Fri, November 19 2021 9:20 PM UTC +05:30",
       dayleft: "12",
       remainingtime: "15",
-      url: "/mixtare",
+      url: "/mixware",
     }
   ];
   
