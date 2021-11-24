@@ -3,14 +3,14 @@ import { Flex, Text, Box, Center } from "@chakra-ui/layout";
 import { SpacerLarge } from "../../../styles/globalStyles";
 import React from "react";
 
-function Help() {
+function Explore() {
   return (
     <Flex direction="column" alignSelf="center" height="100vh">
       <Text
         fontSize={{ base: "4xl", md: "5xl", lg: "6xl" }}
         style={{ textAlign: "center" }}
       >
-        How <span style={{ color: "var(--blue)" }}>Raisy</span> works ?
+        Choose your <span style={{ color: "var(--blue)" }}>Category</span> 
       </Text>
       <Box height="20px"></Box>
       <Center>
@@ -19,11 +19,7 @@ function Help() {
             fontSize={{ base: "1xl", md: "1xl", lg: "1xl" }}
             style={{ textAlign: "center" }}
           >
-            Raisy is a decentralised crowfunding platform focusses on donation
-            crowdfunding. Anyone, anywhere in the world can fund your project.
-            With both live crowdfunding campaigns and receiving fastest fundings
-            now, there’s no better place to start the hunt for cool and clever
-            innovations that surprise and delight.{" "}
+            Raisy provdes wide range of categories of projects to choosefrom. You will find innovative ideas, support groups, research and devlopments team, art and culture enthusiasts. Their briliant minds deserves encouragement and support. Here are some top categories, dive in to find your perfect match to donate {" "}
           </Text>
         </Flex>
       </Center>
@@ -36,8 +32,10 @@ function Help() {
           height="auto"
         />
       </Center>
+      <SpacerLarge />
+      
     </Flex>
   );
 }
 
-export default Help;
+export default Explore;

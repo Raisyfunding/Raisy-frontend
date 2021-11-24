@@ -1,11 +1,12 @@
 import { Image } from "@chakra-ui/image";
 import { Button, useColorModeValue } from "@chakra-ui/react";
 import { Flex, Text, Box } from "@chakra-ui/layout";
+
 import React from "react";
 
 function Landing() {
   return (
-    <Box height="100vh">
+    <Box height="100vh" >
       <Flex
         width="90vw"
         height="87%"

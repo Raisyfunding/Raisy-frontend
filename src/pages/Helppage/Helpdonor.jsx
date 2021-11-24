@@ -1,11 +1,10 @@
-import Choose from "./components/Choose";
-import Help from "./components/Help";
+import Donor from "./components/Donor";
 import React from 'react';
-import ReactFullpage from '@fullpage/react-fullpage';
 import { Screen } from "../../styles/globalStyles";
 import { useColorModeValue } from "@chakra-ui/color-mode";
+import ReactFullpage from '@fullpage/react-fullpage';
 
-const Helppage = () => (
+const Helpdonor = () => (
   <Screen style={{
     backgroundColor: useColorModeValue("var(--white)", "var(--black)"),
     }}>
@@ -17,16 +16,17 @@ const Helppage = () => (
     render={({ state, fullpageApi }) => {
       return (
           <div>
-            {/* <Screen> */}
           <div className="section">
 
-          <Help />
+          <Donor />
      
           </div>
-          <div className="section">
-          <Choose />
+          {/* <div className="section">
+          <Popular />
           </div>
-          {/* </Screen> */}
+          <div className="section">
+          <WhyRaisy />
+          </div> */}
           </div>
       );
     }}
@@ -34,4 +34,4 @@ const Helppage = () => (
   />
   </Screen>
 );
-export default Helppage;
+export default Helpdonor;

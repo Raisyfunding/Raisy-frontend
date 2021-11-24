@@ -10,7 +10,7 @@ function Help() {
         fontSize={{ base: "4xl", md: "5xl", lg: "6xl" }}
         style={{ textAlign: "center" }}
       >
-        How <span style={{ color: "var(--blue)" }}>Raisy</span> works ?
+        <span style={{ color: "var(--blue)" }}>Donor's</span> guide 
       </Text>
       <Box height="20px"></Box>
       <Center>
@@ -32,7 +32,7 @@ function Help() {
         <Image
           src="https://via.placeholder.com/628x438"
           alt="Video"
-          width="40%"
+          width="30%"
           height="auto"
         />
       </Center>
