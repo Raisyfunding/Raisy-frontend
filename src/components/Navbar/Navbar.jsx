@@ -41,6 +41,7 @@ export default function Navbar() {
   const { colorMode, toggleColorMode } = useColorMode();
   const dispatch = useDispatch();
 
+  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(false);
 
   const { connectWalletModalVisible } = useSelector((state) => state.Modal);
@@ -83,6 +84,7 @@ export default function Navbar() {
     } else {
       handleSignOut();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [account, chainId]);
 
   const handleConnectWallet = () => {

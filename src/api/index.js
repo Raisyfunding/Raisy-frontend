@@ -6,6 +6,7 @@ import { EXPLORER_URL } from "../constants/network";
 const isMainnet = process.env.REACT_APP_ENV === "MAINNET";
 
 export const useApi = () => {
+	// eslint-disable-next-line no-unused-vars
 	const explorerUrl =
 		EXPLORER_URL[isMainnet ? ChainId.MATIC : ChainId.MATIC_TESTNET];
 
@@ -31,7 +32,7 @@ export const useApi = () => {
 			data: JSON.stringify({ address: address }),
 			headers: { "Content-Type": "application/json" },
 		});
-		if (result.data.status == "success") {
+		if (result.data.status === "success") {
 			let token = result.data.token;
 			return token;
 		}

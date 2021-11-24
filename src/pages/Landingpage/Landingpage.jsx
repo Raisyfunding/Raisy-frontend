@@ -7,7 +7,6 @@ import WhyRaisy from "./components/WhyRaisy";
 import { useApi } from "./../../api";
 import { useSelector } from "react-redux";
 import ReactFullpage from "@fullpage/react-fullpage";
-import { Footer } from "../../components";
 import FooterPage from "./FooterPage";
 
 function Landingpage() {
@@ -22,6 +21,7 @@ function Landingpage() {
 				setAllCampaigns(campaigns.data);
 			});
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [authToken]);
 
 	return (

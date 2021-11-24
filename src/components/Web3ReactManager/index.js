@@ -30,6 +30,7 @@ export default function Web3ReactManager({ children }) {
   useInactiveListener(!triedEager);
 
   // handle delayed loader state
+  // eslint-disable-next-line no-unused-vars
   const [showLoader, setShowLoader] = useState(false);
   useEffect(() => {
     const timeout = setTimeout(() => {
