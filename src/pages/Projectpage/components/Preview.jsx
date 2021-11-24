@@ -39,8 +39,9 @@ function Preview({ currentProject }) {
       </Box>
     </Flex>
     </Box>
-    
-    <Box bg="#504D4D" width="100%" position="absolute" bottom="60px" height="100px">
+    <SpacerLarge />
+    <SpacerLarge />
+    <Box bg="#504D4D" width="100%" height="100px">
     <Flex direction="row" alignContent="center" textAlign="center" marginTop="15px">
     <Spacer />
     <Box maxWidth="200px">
