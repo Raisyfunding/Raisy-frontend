@@ -50,5 +50,5 @@ export const useApi = () => {
 		return res.data;
 	};
 
-	return { getNonce, getAuthToken, getAccountDetails };
+	return { apiUrl, getNonce, getAuthToken, getAccountDetails };
 };

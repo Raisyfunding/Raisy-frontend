@@ -42,6 +42,7 @@ function Submit() {
 	const [description, setDescription] = React.useState("");
 	const [titleError, setTitleError] = useState(null);
 	const [amountError, setAmountError] = useState(null);
+	const [coverImage, setCoverImage] = useState(null);
 	const [date, setDate] = useState(new Date());
 	const [nbMilestones, setNbMilestones] = useState(2);
 	const [pctReleasePerMilestone, setPctReleasePerMilestone] = useState([
@@ -171,6 +172,20 @@ function Submit() {
 	useEffect(() => {
 		// Make sure to revoke the data uris to avoid memory leaks
 		files.forEach((file) => URL.revokeObjectURL(file.preview));
+
+		if (files.length > 0) {
+			const file = files.find((f) => f);
+
+			let reader = new FileReader();
+			reader.readAsDataURL(file);
+			reader.onload = () => {
+				setCoverImage(reader.result);
+				console.log({
+					src: file.preview,
+					data: reader.result,
+				});
+			};
+		}
 	}, [files]);
 
 	const clipImage = (image, clipX, clipY, clipWidth, clipHeight, cb) => {
@@ -221,7 +236,7 @@ function Submit() {
 					} catch (error) {
 						toast({
 							title: "Error during message signature",
-							description: `${error}`,
+							description: `${error.message}`,
 							status: "error",
 							duration: 9000,
 							isClosable: true,
@@ -244,13 +259,13 @@ function Submit() {
 						},
 					});
 
-					const coverImagehash = result.data.data;
+					const coverImageHash = result.data.data;
 
 					let data = {
 						campaignId: 0,
 						title,
 						description,
-						coverImagehash,
+						coverImageHash,
 						amountToRaise: amount,
 						endAt: date,
 						signature,
@@ -292,6 +307,8 @@ function Submit() {
 				}
 			});
 		};
+
+		img.src = coverImage;
 	};
 
 	return (
