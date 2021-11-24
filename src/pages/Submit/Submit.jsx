@@ -92,6 +92,18 @@ function Submit() {
     }
   };
 
+  const givesArray = () => {
+    if (nbMilestones === 2) {
+      setPctReleasePerMilestone([20, 60]);
+    } else if (nbMilestones === 3) {
+      setPctReleasePerMilestone([20, 60, 80]);
+    } else if (nbMilestones === 4) {
+      setPctReleasePerMilestone([20, 60, 70, 80]);
+    } else {
+      setPctReleasePerMilestone([20, 60, 70, 80, 100]);
+    }
+  };
+
   const [files, setFiles] = useState([]);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: "image/*",
@@ -125,10 +137,16 @@ function Submit() {
     max: 5,
     precision: 0,
     onChange: (_, _val) => {
-      setPctReleasePerMilestone([0, ...pctReleasePerMilestone]);
+      // setPctReleasePerMilestone([0, ...pctReleasePerMilestone]);
       setNbMilestones(_val);
+      givesArray();
     },
   });
+
+  useEffect(() => {
+    givesArray();
+    console.log(nbMilestones);
+  }, [nbMilestones]);
 
   const inc = getIncrementButtonProps();
   const dec = getDecrementButtonProps();
@@ -393,15 +411,15 @@ function Submit() {
               <Button {...inc}>+</Button>
             </HStack>
             <RangeSlider
-              onChange={(_values) => setPctReleasePerMilestone(_values)}
-              value={pctReleasePerMilestone}
+              aria-label={["min", "max"]}
+              onChange={this.handleChange}
+              defaultValue={pctReleasePerMilestone}
             >
               <RangeSliderTrack>
                 <RangeSliderFilledTrack />
               </RangeSliderTrack>
               {pctReleasePerMilestone.map((_, idx) => (
-                // {console.log(idx, nbMilestones, pctReleasePerMilestone)}
-                <RangeSliderThumb index={idx} key={idx} />
+                <RangeSliderThumb index={idx} />
               ))}
             </RangeSlider>
           </>
