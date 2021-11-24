@@ -50,5 +50,28 @@ export const useApi = () => {
 		return res.data;
 	};
 
-	return { apiUrl, getNonce, getAuthToken, getAccountDetails };
+	const fetchAllCampaigns = async (authToken) => {
+		const res = await axios({
+			method: "get",
+			url: `${apiUrl}/campaign/fetchAllCampaigns`,
+			headers: {
+				Authorization: `Bearer ${authToken}`,
+			},
+		});
+		return res.data;
+	};
+
+	const fetchCampaignById = async (_id) => {
+		const res = await axios.get(`${apiUrl}/campaign/getCampaign/${_id}`);
+		return res.data;
+	};
+
+	return {
+		apiUrl,
+		getNonce,
+		getAuthToken,
+		getAccountDetails,
+		fetchAllCampaigns,
+		fetchCampaignById,
+	};
 };
