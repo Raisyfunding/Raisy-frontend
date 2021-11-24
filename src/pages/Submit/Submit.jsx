@@ -29,6 +29,7 @@ import { useApi } from "../../api";
 import { useWeb3React } from "@web3-react/core";
 import { getSigner } from "./../../contracts";
 import axios from "axios";
+import { useCampaignsContract } from "./../../contracts/raisyCampaigns";
 
 function Submit() {
   const [title, setTitle] = React.useState("");
@@ -49,6 +50,7 @@ function Submit() {
   const { apiUrl, getNonce } = useApi();
   const { account } = useWeb3React();
   const { authToken } = useSelector((state) => state.ConnectWallet);
+  const { addCampaign } = useCampaignsContract();
 
   const toast = useToast();
 
@@ -212,105 +214,120 @@ function Submit() {
 
   const handleAddCampaign = async () => {
     if (adding) return;
-
     setAdding(true);
 
-    const img = new Image();
-    img.onload = function () {
-      const w = this.width;
-      const h = this.height;
-      const size = Math.min(w, h);
-      const x = (w - size) / 2;
-      const y = (h - size) / 2;
-      clipImage(img, x, y, size, size, async (imgData) => {
-        try {
-          const { data: nonce } = await getNonce(account, authToken);
+    try {
+      // // Triggers on-chain campaign creation
+      // const tx = await addCampaign(500, amount, account);
 
-          let signature;
-          let signatureAddress;
+      // const res = await tx.wait();
 
+      const img = new Image();
+      img.onload = function () {
+        const w = this.width;
+        const h = this.height;
+        const size = Math.min(w, h);
+        const x = (w - size) / 2;
+        const y = (h - size) / 2;
+        clipImage(img, x, y, size, size, async (imgData) => {
           try {
-            const signer = await getSigner();
-            const msg = `Approve Signature on Raisy with nonce ${nonce}`;
+            const { data: nonce } = await getNonce(account, authToken);
 
-            signature = await signer.signMessage(msg);
-            signatureAddress = ethers.utils.verifyMessage(msg, signature);
+            let signature;
+            let signatureAddress;
+
+            try {
+              const signer = await getSigner();
+              const msg = `Approve Signature on Raisy with nonce ${nonce}`;
+
+              signature = await signer.signMessage(msg);
+              signatureAddress = ethers.utils.verifyMessage(msg, signature);
+            } catch (error) {
+              toast({
+                title: "Error during message signature",
+                description: `${error.message}`,
+                status: "error",
+                duration: 9000,
+                isClosable: true,
+              });
+              setAdding(false);
+              return;
+            }
+
+            const formData = new FormData();
+            formData.append("title", title);
+            formData.append("imgData", imgData);
+
+            const result = await axios({
+              method: "post",
+              url: `${apiUrl}/ipfs/uploadCampaignImage2Server`,
+              data: formData,
+              headers: {
+                "Content-Type": "multipart/form-data",
+                Authorization: `Bearer ${authToken}`,
+              },
+            });
+
+            const coverImageHash = result.data.data;
+
+            let data = {
+              campaignId: 0,
+              title,
+              description,
+              coverImageHash,
+              amountToRaise: amount,
+              endAt: date,
+              signature,
+              signatureAddress,
+            };
+
+            if (staggered) {
+              data = { ...data, nbMilestones };
+            }
+
+            await axios({
+              method: "post",
+              url: `${apiUrl}/campaign/campaigndetails`,
+              data: JSON.stringify(data),
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${authToken}`,
+              },
+            });
+
+            toast({
+              title: "Campaign created!",
+              description: `Your campaign has successfully been created. Just wait for people to donate now 💲`,
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
+
+            setAdding(false);
           } catch (error) {
             toast({
-              title: "Error during message signature",
-              description: `${error.message}`,
+              title: "Error during campaign creation",
+              description: `${error}`,
               status: "error",
               duration: 9000,
               isClosable: true,
             });
             setAdding(false);
-            return;
           }
+        });
+      };
 
-          const formData = new FormData();
-          formData.append("title", title);
-          formData.append("imgData", imgData);
-
-          const result = await axios({
-            method: "post",
-            url: `${apiUrl}/ipfs/uploadCampaignImage2Server`,
-            data: formData,
-            headers: {
-              "Content-Type": "multipart/form-data",
-              Authorization: `Bearer ${authToken}`,
-            },
-          });
-
-          const coverImageHash = result.data.data;
-
-          let data = {
-            campaignId: 0,
-            title,
-            description,
-            coverImageHash,
-            amountToRaise: amount,
-            endAt: date,
-            signature,
-            signatureAddress,
-          };
-
-          if (staggered) {
-            data = { ...data, nbMilestones };
-          }
-
-          await axios({
-            method: "post",
-            url: `${apiUrl}/campaign/campaigndetails`,
-            data: JSON.stringify(data),
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${authToken}`,
-            },
-          });
-
-          toast({
-            title: "Campaign created!",
-            description: `Your campaign has successfully been created. Just wait for people to donate now 💲`,
-            status: "success",
-            duration: 9000,
-            isClosable: true,
-          });
-
-          setAdding(false);
-        } catch (error) {
-          toast({
-            title: "Error during campaign creation",
-            description: `${error}`,
-            status: "error",
-            duration: 9000,
-            isClosable: true,
-          });
-          setAdding(false);
-        }
+      img.src = coverImage;
+    } catch (err) {
+      toast({
+        title: "Error during campaign creation on-chain",
+        description: `${err}`,
+        status: "error",
+        duration: 9000,
+        isClosable: true,
       });
-    };
-
-    img.src = coverImage;
+      setAdding(false);
+    }
   };
 
   return (
