@@ -11,7 +11,6 @@ import { ChakraProvider } from "@chakra-ui/react";
 import "./styles/theme.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Submit from "./pages/Submit/Submit";
-import { PROJECTS } from "./Projects";
 
 function App() {
 	return (
@@ -38,11 +37,9 @@ function App() {
 					<Route exact path='/explore'>
 						<Explorepage />
 					</Route>
-					{PROJECTS.map((project) => (
-						<Route exact path={project.url} key={project}>
-							<Projectpage currentProject={project} />
-						</Route>
-					))}
+					<Route exact path='/campaign/:campaignId'>
+						<Projectpage/>
+					</Route>
 				</Switch>
 				{/* <Footer /> */}
 			</ChakraProvider>

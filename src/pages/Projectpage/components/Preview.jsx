@@ -19,9 +19,9 @@ function Preview({ currentProject }) {
           <Text fontWeight="bold" fontSize="80px" marginTop="-20px">
           {currentProject.title}
           </Text>
-          <Text textTransform="uppercase" textDecoration="underline" fontSize="13px" marginTop="-20px" marginLeft="5px">
+          {/* <Text textTransform="uppercase" textDecoration="underline" fontSize="13px" marginTop="-20px" marginLeft="5px">
               {currentProject.category}
-          </Text>
+          </Text> */}
           <Text fontSize="10px" marginLeft="5px">
           Help us out! Don't delay give today!
           </Text>
