@@ -6,7 +6,9 @@ import Popular from "./components/Popular/Popular";
 import WhyRaisy from "./components/WhyRaisy";
 import { useApi } from "./../../api";
 import { useSelector } from "react-redux";
-import { ReactFullpage } from "@fullpage/react-fullpage";
+import ReactFullpage from "@fullpage/react-fullpage";
+import { Footer } from "../../components";
+import FooterPage from "./FooterPage";
 
 function Landingpage() {
 	const { fetchAllCampaigns } = useApi();
@@ -30,7 +32,8 @@ function Landingpage() {
 			<ReactFullpage
 				//fullpage options
 				licenseKey={"ED0D5DA5-596F41E0-B51F15B6-293EC91D"}
-				scrollingSpeed={1000} /* Options here */
+				scrollingSpeed={1000}
+				scrollOverflow={"true"}
 				render={({ state, fullpageApi }) => {
 					return (
 						<>
@@ -42,6 +45,10 @@ function Landingpage() {
 							</div>
 							<div className='section fp-auto-height'>
 								<WhyRaisy />
+							</div>
+							<div className='section fp-auto-height'>
+								<FooterPage />
+								{/* <Footer /> */}
 							</div>
 						</>
 					);

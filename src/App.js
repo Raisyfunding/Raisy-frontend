@@ -44,7 +44,7 @@ function App() {
 						</Route>
 					))}
 				</Switch>
-				<Footer />
+				{/* <Footer /> */}
 			</ChakraProvider>
 		</Router>
 	);
