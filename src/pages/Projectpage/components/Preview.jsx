@@ -24,7 +24,7 @@ const renderMedia = (image, contentType) => {
       />
     )
   } else if (contentType === 'embed') {
-    return <iframe className={styles.content} src={image} />
+    return <iframe title="cover-video" className={styles.content} src={image} />
   } else if (contentType === 'image' || contentType === 'gif') {
     return (
       <Suspense
