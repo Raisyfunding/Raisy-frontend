@@ -38,7 +38,10 @@ const renderMedia = (image, contentType) => {
           />
         }
       >
-        <SuspenseImg className={styles.content} src={image} />
+        <SuspenseImg
+          className={styles.content}
+          src={`https://cloudflare-ipfs.com/ipfs/${image}`}
+        />
       </Suspense>
     )
   }
@@ -61,10 +64,7 @@ function Preview({ currentProject }) {
             </Text>
             <SpacerLarge />
             <Box height="350px">
-              {renderMedia(
-                'https://www.youtube.com/watch?v=9mJlZlldA84',
-                'video'
-              )}
+              {renderMedia(currentProject.coverImageHash, 'image')}
             </Box>
           </Flex>
           <Spacer />
