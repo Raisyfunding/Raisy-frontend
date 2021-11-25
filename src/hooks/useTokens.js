@@ -41,6 +41,13 @@ const Tokens = {
       icon: iconWMATIC,
     },
     {
+      address: '0x528e3E530343fCD2f2c50D0858bb67282C8bfdF7',
+      name: 'Raisy',
+      symbol: 'RSY',
+      decimals: 18,
+      icon: iconWMATIC,
+    },
+    {
       address: '0x3c68ce8504087f89c640d02d133646d98e64ddd9',
       name: 'Wrapped Ether',
       symbol: 'WETH',

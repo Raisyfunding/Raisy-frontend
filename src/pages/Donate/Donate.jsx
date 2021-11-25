@@ -9,6 +9,7 @@ import {
   InputRightElement,
   Image,
   Link,
+  useToast,
 } from '@chakra-ui/react';
 import { Screen } from '../../styles/globalStyles';
 import { useColorModeValue } from '@chakra-ui/color-mode';
@@ -24,6 +25,8 @@ import { useTokenContract } from './../../contracts/token';
 const Donate = () => {
   const { campaignId } = useParams();
 
+  const toast = useToast();
+
   const { fetchCampaignById } = useApi();
 
   const [campaign, setCampaign] = useState({});
@@ -35,7 +38,7 @@ const Donate = () => {
 
   const [options, setOptions] = useState([]);
 
-  const { getCampaignsContract } = useCampaignsContract();
+  const { getCampaignsContract, donateERC20 } = useCampaignsContract();
 
   const { account } = useWeb3React();
 
@@ -46,10 +49,11 @@ const Donate = () => {
   }, [campaignId]);
 
   const [currency, setCurrency] = React.useState({});
-  const [amount, setAmount] = React.useState('');
+  const [amount, setAmount] = React.useState(0);
   const [amountError, setAmountError] = useState(null);
-  const [maximum, setMaximum] = useState(null);
   const [balance, setBalance] = useState(0);
+
+  const [sending, setSending] = useState(false);
 
   const { getERC20Contract } = useTokenContract();
 
@@ -57,15 +61,15 @@ const Donate = () => {
     setCurrency(options.find((opt) => opt.address === event.target.value));
   const handleChangeAmount = (event) => setAmount(event.target.value);
 
-  const validAmount = (amount) => /^\d+$/.test(amount);
+  // const validAmount = (amount) => /^\d+$/.test(amount);
 
   const validateAmount = () => {
-    if (amount.length === 0) {
-      setAmountError("This field can't be blank");
-    } else if (validAmount(amount)) {
-      setAmountError(null);
+    if (Number(amount) === 0) {
+      setAmountError("Amount can't be null");
+    } else if (amount > balance) {
+      setAmountError('Not enough funds');
     } else {
-      setAmountError('Invalid amount.');
+      setAmountError(null);
     }
   };
 
@@ -96,13 +100,85 @@ const Donate = () => {
     const updateBalance = async () => {
       const erc20 = await getERC20Contract(currency.address);
       const balance = await erc20.balanceOf(account);
-      setBalance(Number(balance));
+      setBalance(balance);
     };
 
     if (account && currency?.address) {
       updateBalance();
     }
   }, [account, currency]);
+
+  useEffect(() => {
+    if (!currency?.address) return;
+
+    getTokenPrice();
+  }, [currency]);
+
+  const handleSendDonation = async () => {
+    if (sending) return;
+
+    try {
+      setSending(true);
+
+      const donationAmount = ethers.utils.parseUnits(amount, currency.decimals);
+
+      // Error out if user balance is unsufficient
+      if (balance.lt(donationAmount)) {
+        toast({
+          title: `Insufficient ${currency.symbol} balance !`,
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+        });
+        setSending(false);
+        return;
+      }
+
+      const erc20 = await getERC20Contract(currency.address);
+      const campaignsContract = await getCampaignsContract();
+      const allowance = await erc20.allowance(
+        account,
+        campaignsContract.address
+      );
+
+      // Check if users approves the contract to spend their ERC20 tokens
+      if (allowance.lt(donationAmount)) {
+        const tx = await erc20.approve(
+          campaignsContract.address,
+          donationAmount
+        );
+        await tx.wait();
+      }
+
+      // Triggers the donation TX
+      const tx = await donateERC20(
+        campaignId,
+        donationAmount,
+        currency.address,
+        account
+      );
+
+      await tx.wait();
+
+      toast({
+        title: 'Thank you for your donation ❤',
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+      });
+
+      setSending(false);
+    } catch (err) {
+      toast({
+        title: 'Error during donation on-chain',
+        description: `${err}`,
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+      setSending(false);
+    }
+  };
 
   return (
     <Screen
@@ -127,9 +203,9 @@ const Donate = () => {
         <Flex
           width={'40vw'}
           flexDirection={'column'}
-          style={{ border: 'solid 1px', padding: '30px', margin: 'auto ' }}
-          borderColor={useColorModeValue('var(--white)', 'var(--black)')}
-          borderRadius={'7px'}
+          style={{ padding: '30px', margin: 'auto ' }}
+          // borderColor={useColorModeValue('var(--white)', 'var(--black)')}
+          // borderRadius={'7px'}
         >
           <Text textAlign={'center'} fontSize={'4xl'} paddingTop={'10px'}>
             The donation
@@ -178,27 +254,35 @@ const Donate = () => {
               marginLeft={'auto'}
               marginTop={'auto'}
             >
-              Available: {balance} {currency?.symbol}
+              Available: {ethers.utils.formatUnits(balance, currency?.decimals)}{' '}
+              {currency?.symbol} ({tokenPrice})
             </Text>
           </Flex>
           <InputGroup>
             <Input
               colorScheme={'red'}
-              type={'number'}
+              type="number"
               placeholder="Amount"
               isRequired={'true'}
               isDisabled={!currency}
               isInvalid={amountError}
               onBlur={validateAmount}
-              maxLength={10}
               onChange={handleChangeAmount}
               value={amount}
               borderColor={useColorModeValue('var(--black)', 'var(--white)')}
-              variant={amount.length > 0 ? 'filled' : 'outline'}
-              border={amount.length > 0 ? 'none' : 'solid 1px'}
+              variant={amount > 0 ? 'filled' : 'outline'}
+              border={amount > 0 ? 'none' : 'solid 1px'}
             />
             <InputRightElement width="4.5rem">
-              <Button h="1.75rem" size="sm" onClick={setMaximum}>
+              <Button
+                h="1.75rem"
+                size="sm"
+                onClick={() =>
+                  setAmount(
+                    ethers.utils.formatUnits(balance, currency?.decimals)
+                  )
+                }
+              >
                 Max
               </Button>
             </InputRightElement>
@@ -206,7 +290,12 @@ const Donate = () => {
           <Flex flexDirection={'row'} paddingBottom={'50px'}>
             <Text color={'red'}>{amountError}</Text>
           </Flex>
-          <Button>Send the donation</Button>
+          <Button
+            disabled={amountError || !amount}
+            onClick={handleSendDonation}
+          >
+            Send the donation
+          </Button>
         </Flex>
         <Flex
           width={'40vw'}
