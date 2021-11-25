@@ -51,7 +51,7 @@ export const useApi = () => {
     return res.data
   }
 
-  const fetchAllCampaigns = async (authToken) => {
+  const fetchAllCampaigns = async () => {
     const res = await axios({
       method: 'get',
       url: `${apiUrl}/campaign/fetchAllCampaigns`,
