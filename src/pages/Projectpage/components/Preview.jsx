@@ -47,7 +47,7 @@ const renderMedia = (image, contentType) => {
   }
 }
 
-function Preview({ currentProject }) {
+function Preview({ currentProject, fundingover }) {
   return (
     <Flex direction="column" height="100vh">
       <Box marginLeft="10%" marginRight="10%" marginTop="2%">
@@ -69,7 +69,7 @@ function Preview({ currentProject }) {
           </Flex>
           <Spacer />
           <Box width="400px">
-            <Campaigninfo currentProject={currentProject} />
+            <Campaigninfo currentProject={currentProject} fundingover={fundingover}/>
           </Box>
         </Flex>
       </Box>
