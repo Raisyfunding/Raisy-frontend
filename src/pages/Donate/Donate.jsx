@@ -21,6 +21,7 @@ import { useCampaignsContract } from './../../contracts/raisyCampaigns';
 import useTokens from './../../hooks/useTokens';
 import { useWeb3React } from '@web3-react/core';
 import { useTokenContract } from './../../contracts/token';
+import { formatError } from '../../utils';
 
 const Donate = () => {
   const { campaignId } = useParams();
@@ -171,7 +172,7 @@ const Donate = () => {
     } catch (err) {
       toast({
         title: 'Error during donation on-chain',
-        description: `${err}`,
+        description: formatError(err),
         status: 'error',
         duration: 9000,
         isClosable: true,

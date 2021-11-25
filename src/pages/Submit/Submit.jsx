@@ -31,6 +31,7 @@ import axios from 'axios';
 import { useCampaignsContract } from './../../contracts/raisyCampaigns';
 import { AVERAGE_BLOCK_TIME } from './../../constants/network';
 import { ChainId } from '@sushiswap/sdk';
+import { formatError } from '../../utils';
 
 function Submit() {
   const [title, setTitle] = React.useState('');
@@ -246,7 +247,7 @@ function Submit() {
             } catch (error) {
               toast({
                 title: 'Error during message signature',
-                description: `${error.message}`,
+                description: formatError(error),
                 status: 'error',
                 duration: 9000,
                 isClosable: true,
@@ -360,7 +361,7 @@ function Submit() {
           } catch (error) {
             toast({
               title: 'Error during campaign creation',
-              description: `${error}`,
+              description: formatError(error),
               status: 'error',
               duration: 9000,
               isClosable: true,
@@ -374,7 +375,7 @@ function Submit() {
     } catch (err) {
       toast({
         title: 'Error during campaign creation on-chain',
-        description: `${err}`,
+        description: formatError(err),
         status: 'error',
         duration: 9000,
         isClosable: true,
