@@ -2,7 +2,7 @@ import Preview from './components/Preview'
 import { Footer } from '../../components/index'
 import React, { useEffect, useState } from 'react'
 import ReactFullpage from '@fullpage/react-fullpage'
-import { Screen } from '../../styles/globalStyles'
+import { Screen, SpacerMedium } from '../../styles/globalStyles'
 import { useColorModeValue } from '@chakra-ui/color-mode'
 import Campaigndetail from './components/Campaigndetail'
 import { useParams, Link, useHistory } from 'react-router-dom'
@@ -39,7 +39,11 @@ const Projectpage = () => {
               </div>
               <div className="section fp-auto-height">
                 <Campaigndetail currentProject={campaign} />
+                <SpacerMedium />
                 <Footer />
+                <SpacerMedium />
+                <SpacerMedium />
+                <SpacerMedium />
               </div>
             </>
           )
