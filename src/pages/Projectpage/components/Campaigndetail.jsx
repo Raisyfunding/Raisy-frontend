@@ -71,6 +71,7 @@ function Campaigndetail({ currentProject, fundingover }) {
                 <TabPanel>
                   {fundingover ? <Fundsreleaseover /> : <Fundsrelease />}
                 </TabPanel>
+
               </TabPanels>
             </Tabs>
           </Flex>
