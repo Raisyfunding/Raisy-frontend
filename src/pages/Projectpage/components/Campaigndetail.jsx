@@ -4,6 +4,8 @@ import { SpacerLarge, SpacerSmall } from '../../../styles/globalStyles'
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import Campaigninfo from './Campaigninfo'
 import React from 'react'
+import Fundsrelease from './Fundsrelease'
+import Fundsreleaseover from './Fundsreleaseover'
 
 function Campaigndetail({ currentProject, fundingover }) {
   return (
@@ -66,6 +68,10 @@ function Campaigndetail({ currentProject, fundingover }) {
                 <TabPanel>
                   <p>three!</p>
                 </TabPanel>
+                <TabPanel>
+                  {fundingover ? <Fundsreleaseover /> : <Fundsrelease />}
+                </TabPanel>
+
               </TabPanels>
             </Tabs>
           </Flex>
