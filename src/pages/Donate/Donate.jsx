@@ -12,8 +12,23 @@ import {
 } from '@chakra-ui/react'
 import { Screen } from '../../styles/globalStyles'
 import { useColorModeValue } from '@chakra-ui/color-mode'
+import { useEffect } from 'react'
+import { useParams } from 'react-router'
+import { useApi } from '../../api'
 
-const Donate = (campaign) => {
+const Donate = () => {
+  const { campaignId } = useParams()
+
+  const { fetchCampaignById } = useApi()
+
+  const [campaign, setCampaign] = useState({})
+
+  useEffect(() => {
+    fetchCampaignById(campaignId).then((_campaign) => {
+      setCampaign(_campaign.data)
+    })
+  }, [campaignId])
+
   const [currency, setCurrency] = React.useState('')
   const [amount, setAmount] = React.useState('')
   const [amountError, setAmountError] = useState(null)
@@ -153,7 +168,10 @@ const Donate = (campaign) => {
           >
             The project
           </Text>
-          <Image src={campaign.image} />
+          <Image
+            boxSize="200px"
+            src={`https://cloudflare-ipfs.com/ipfs/${campaign.coverImageHash}`}
+          />
           <Text>{campaign.title}</Text>
           <Text>{campaign.description}</Text>
         </Flex>

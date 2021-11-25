@@ -15,9 +15,11 @@ import {
   Image,
   Center,
   HStack,
+  Link,
 } from '@chakra-ui/react'
 
 import { FiMail, FiTwitter, FiFacebook, FiInstagram } from 'react-icons/fi'
+import { Link as RouterLink } from 'react-router-dom'
 
 function Campaigninfo({ currentProject }) {
   return (
@@ -61,19 +63,28 @@ function Campaigninfo({ currentProject }) {
               <Spacer />
               <Flex direction="column" textAlign="center">
                 <Text fontWeight="bold">
-                  {(
-                    new Date(currentProject.endAt).getDay() -
-                    new Date().getDay()
-                  ).toLocaleString()}
+                  {Math.floor(
+                    (new Date(currentProject.endAt).getTime() -
+                      new Date().getTime()) /
+                      (1000 * 3600 * 24)
+                  )}
                 </Text>
                 <Text>Days left</Text>
               </Flex>
               <Spacer />
             </Flex>
             <SpacerLarge />
-            <Button bg={useColorModeValue('var(--white)', 'var(--black)')}>
-              Donate
-            </Button>
+            <Link
+              as={RouterLink}
+              to={`/campaign/${currentProject.campaignId}/donate`}
+            >
+              <Button
+                bg={useColorModeValue('var(--white)', 'var(--black)')}
+                width="100%"
+              >
+                Donate
+              </Button>
+            </Link>
             <SpacerSmall />
             <Flex direction="row">
               <Box bg="#C4C4C4" width="40%">
@@ -101,8 +112,8 @@ function Campaigninfo({ currentProject }) {
         </Box>
         <SpacerSmall />
         <Text fontSize="12px" textAlign="justify">
-          This project will only be funded if it reaches its minimum Target by{' '}
-          {new Date(currentProject.endAt).toLocaleDateString()}.
+          This project will only be funded if it reaches its minimum Target by
+          <br /> {new Date(currentProject.endAt).toString()}.
         </Text>
 
         <Spacer />
