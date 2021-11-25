@@ -20,6 +20,7 @@ function Campaigndetail({ currentProject, fundingover }) {
                   <Tab>Funds release</Tab>
                   <Tab>FAQs</Tab>
                   <Tab>Timeline</Tab>
+                  <Tab display={fundingover ? 'flex' : 'none'}>Claim POD</Tab>
                 </TabList>
               </Center>
               <TabPanels>
