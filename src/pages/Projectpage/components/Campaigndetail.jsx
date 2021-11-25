@@ -69,9 +69,11 @@ function Campaigndetail({ currentProject, fundingover }) {
                   <p>three!</p>
                 </TabPanel>
                 <TabPanel>
-                  {fundingover ? <Fundsreleaseover /> : <Fundsrelease />}
+                  <Fundsrelease
+                    fundingover={fundingover}
+                    currentProject={currentProject}
+                  />
                 </TabPanel>
-
               </TabPanels>
             </Tabs>
           </Flex>
