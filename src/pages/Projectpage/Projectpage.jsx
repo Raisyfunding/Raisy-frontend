@@ -15,11 +15,33 @@ const Projectpage = () => {
 
   const [campaign, setCampaign] = useState({})
 
+  const [fundingover, setFundingover] = useState(false)
+
+  function fundingOver() {
+    let endtime = new Date(campaign.endAt)
+
+    let now = new Date()
+    let dure = endtime - now
+    if (dure > 0) {
+      setFundingover(true)
+    } else {
+      setFundingover(true)
+    }
+  }
+
   useEffect(() => {
     fetchCampaignById(campaignId).then((_campaign) => {
       setCampaign(_campaign.data)
+      console.log(campaign)
     })
+    // fundingOver()
+    // react-hooks exhaustive-deps
   }, [campaignId])
+  useEffect(() => {
+    fundingOver()
+    // fundingOver()
+    // react-hooks exhaustive-deps
+  }, [campaign])
 
   return (
     <Screen
@@ -35,10 +57,13 @@ const Projectpage = () => {
           return (
             <>
               <div className="section fp-auto-height">
-                <Preview currentProject={campaign} />
+                <Preview currentProject={campaign} fundingover={fundingover} />
               </div>
               <div className="section fp-auto-height">
-                <Campaigndetail currentProject={campaign} />
+                <Campaigndetail
+                  currentProject={campaign}
+                  fundingover={fundingover}
+                />
                 <SpacerMedium />
                 <Footer />
                 <SpacerMedium />

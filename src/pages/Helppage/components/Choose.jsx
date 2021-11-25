@@ -20,8 +20,8 @@ function Choose() {
         <Flex
           direction={{ base: "column", md: "row" }}
           gridGap="60px"
-          width="90vw"
-          height="87%"
+          width="100vw"
+          height="100%"
           margin="auto"
           textAlign="center"
           alignItems="center"
@@ -30,35 +30,37 @@ function Choose() {
           <Link href="/creator"  style={{ textDecoration: "none" }}>
          
           
-          <Box bg="gray.500" width="100%" borderRadius="3xl">
-            <VStack margin="3em" justifyItems="center">
+          <Box bg="#C4C4C4" width="500px" height="400px" borderRadius="3xl">
+            <Box>
               <Text
                 fontSize={{ base: "4xl", md: "5xl", lg: "6xl" }}
                 style={{ textAlign: "center" }}
               >
-                Creator
+                Creat
               </Text>
               <Text fontSize={{ base: "1xl" }} style={{ textAlign: "center" }}>
                 The person or team behind the project idea, working to bring it
                 to life.
               </Text>
-            </VStack>
+            </Box>
           </Box>
           </Link>
+
           <Link href="/donor"  style={{ textDecoration: "none" }}>
-          <Box bg="gray.500" width="100%" borderRadius="3xl">
-            <VStack margin="3em">
+          <Box bg="#C4C4C4" width="500px" height="400px" borderRadius="3xl">
+            <Box>
+              
               <Text
                 fontSize={{ base: "4xl", md: "5xl", lg: "6xl" }}
                 style={{ textAlign: "center" }}
               >
                 Donor
               </Text>
-              <Text fontSize={{ base: "1xl" }} style={{ textAlign: "center" }}>
+              <Text fontSize={{ base: "1xl" }}  width="300px" textAlign="center">
                 The person or folks who pledge money to join creators in
                 bringing projects to life
               </Text>
-            </VStack>
+              </Box>
           </Box>
           </Link>
         </Flex>

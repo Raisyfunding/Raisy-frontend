@@ -8,6 +8,7 @@ import { useApi } from './../../api'
 import { useSelector } from 'react-redux'
 import ReactFullpage from '@fullpage/react-fullpage'
 import FooterPage from './FooterPage'
+import StakingStats from './components/StakingStats'
 
 function Landingpage() {
   const { fetchAllCampaigns } = useApi()
@@ -16,7 +17,7 @@ function Landingpage() {
   // const { authToken } = useSelector(state => state.ConnectWallet)
 
   useEffect(() => {
-    fetchAllCampaigns().then(campaigns => {
+    fetchAllCampaigns().then((campaigns) => {
       setAllCampaigns(campaigns.data)
     })
   }, [])
@@ -24,7 +25,7 @@ function Landingpage() {
   return (
     <Screen
       style={{
-        backgroundColor: useColorModeValue('var(--white)', 'var(--black)')
+        backgroundColor: useColorModeValue('var(--white)', 'var(--black)'),
       }}
     >
       <ReactFullpage
@@ -40,6 +41,9 @@ function Landingpage() {
               </div>
               <div className="section fp-auto-height">
                 <Popular popularCampaigns={allCampaigns} />
+              </div>
+              <div className="section fp-auto-height">
+                <StakingStats />
               </div>
               <div className="section fp-auto-height">
                 <WhyRaisy />
