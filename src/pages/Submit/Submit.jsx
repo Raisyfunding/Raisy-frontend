@@ -331,7 +331,11 @@ function Submit() {
                 parseInt(pct)
               );
               const _nbMilestones = _pctMilestoneArray.length;
-              data = { ...data, _nbMilestones, _pctMilestoneArray };
+              data = {
+                ...data,
+                nbMilestones: _nbMilestones,
+                pctReleasePerMilestone: _pctMilestoneArray,
+              };
             }
 
             await axios({

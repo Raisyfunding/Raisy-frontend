@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import {
   Flex,
   Select,
@@ -9,44 +9,101 @@ import {
   InputRightElement,
   Image,
   Link,
-} from '@chakra-ui/react'
-import { Screen } from '../../styles/globalStyles'
-import { useColorModeValue } from '@chakra-ui/color-mode'
-import { useEffect } from 'react'
-import { useParams } from 'react-router'
-import { useApi } from '../../api'
+} from '@chakra-ui/react';
+import { Screen } from '../../styles/globalStyles';
+import { useColorModeValue } from '@chakra-ui/color-mode';
+import { useEffect, useRef } from 'react';
+import { useParams } from 'react-router';
+import { useApi } from '../../api';
+import { ethers } from 'ethers';
+import { useCampaignsContract } from './../../contracts/raisyCampaigns';
+import useTokens from './../../hooks/useTokens';
+import { useWeb3React } from '@web3-react/core';
+import { useTokenContract } from './../../contracts/token';
 
 const Donate = () => {
-  const { campaignId } = useParams()
+  const { campaignId } = useParams();
 
-  const { fetchCampaignById } = useApi()
+  const { fetchCampaignById } = useApi();
 
-  const [campaign, setCampaign] = useState({})
+  const [campaign, setCampaign] = useState({});
+
+  const { tokens: payTokens } = useTokens();
+
+  const [tokenPriceInterval, setTokenPriceInterval] = useState();
+  const [tokenPrice, setTokenPrice] = useState();
+
+  const [options, setOptions] = useState([]);
+
+  const { getCampaignsContract } = useCampaignsContract();
+
+  const { account } = useWeb3React();
 
   useEffect(() => {
     fetchCampaignById(campaignId).then((_campaign) => {
-      setCampaign(_campaign.data)
-    })
-  }, [campaignId])
+      setCampaign(_campaign.data);
+    });
+  }, [campaignId]);
 
-  const [currency, setCurrency] = React.useState('')
-  const [amount, setAmount] = React.useState('')
-  const [amountError, setAmountError] = useState(null)
-  const [maximum, setMaximum] = useState(null)
-  const handleChangeCurrency = (event) => setCurrency(event.target.value)
-  const handleChangeAmount = (event) => setAmount(event.target.value)
+  const [currency, setCurrency] = React.useState({});
+  const [amount, setAmount] = React.useState('');
+  const [amountError, setAmountError] = useState(null);
+  const [maximum, setMaximum] = useState(null);
+  const [balance, setBalance] = useState(0);
 
-  const validAmount = (amount) => /^\d+$/.test(amount)
+  const { getERC20Contract } = useTokenContract();
+
+  const handleChangeCurrency = (event) =>
+    setCurrency(options.find((opt) => opt.address === event.target.value));
+  const handleChangeAmount = (event) => setAmount(event.target.value);
+
+  const validAmount = (amount) => /^\d+$/.test(amount);
 
   const validateAmount = () => {
     if (amount.length === 0) {
-      setAmountError("This field can't be blank")
+      setAmountError("This field can't be blank");
     } else if (validAmount(amount)) {
-      setAmountError(null)
+      setAmountError(null);
     } else {
-      setAmountError('Invalid amount.')
+      setAmountError('Invalid amount.');
     }
-  }
+  };
+
+  const getTokenPrice = () => {
+    if (tokenPriceInterval) clearInterval(tokenPriceInterval);
+    const func = async () => {
+      const tk = currency || ethers.constants.AddressZero;
+      try {
+        const campaignsContract = await getCampaignsContract();
+        const price = await campaignsContract.getPrice(tk);
+        setTokenPrice(parseFloat(ethers.utils.formatUnits(price, 18)));
+      } catch {
+        setTokenPrice(null);
+      }
+    };
+    func();
+    setTokenPriceInterval(setInterval(func, 60 * 1000));
+  };
+
+  useEffect(() => {
+    if (payTokens?.length) {
+      setCurrency(payTokens[0]);
+      setOptions(payTokens);
+    }
+  }, [payTokens]);
+
+  useEffect(() => {
+    const updateBalance = async () => {
+      const erc20 = await getERC20Contract(currency.address);
+      const balance = await erc20.balanceOf(account);
+      setBalance(Number(balance));
+    };
+
+    if (account && currency?.address) {
+      updateBalance();
+    }
+  }, [account, currency]);
+
   return (
     <Screen
       style={{
@@ -99,11 +156,11 @@ const Donate = () => {
             placeholder="Select currency"
             borderColor={useColorModeValue('var(--black)', 'var(--white)')}
             onChange={handleChangeCurrency}
-            value={currency}
+            value={currency?.address}
           >
-            <option value="RSY">Raisy</option>
-            <option value="BTC">Bitcoin</option>
-            <option value="ETH">Ether</option>
+            {options.map((opt) => {
+              return <option value={opt?.address}>{opt?.symbol}</option>;
+            })}
           </Select>
           <Flex flexDirection={'row'} gridGap={'auto'}>
             <Text
@@ -121,7 +178,7 @@ const Donate = () => {
               marginLeft={'auto'}
               marginTop={'auto'}
             >
-              Available: {currency}
+              Available: {balance} {currency?.symbol}
             </Text>
           </Flex>
           <InputGroup>
@@ -130,7 +187,7 @@ const Donate = () => {
               type={'number'}
               placeholder="Amount"
               isRequired={'true'}
-              isDisabled={currency.length === 0 ? true : false}
+              isDisabled={!currency}
               isInvalid={amountError}
               onBlur={validateAmount}
               maxLength={10}
@@ -177,7 +234,7 @@ const Donate = () => {
         </Flex>
       </Flex>
     </Screen>
-  )
-}
+  );
+};
 
-export default Donate
+export default Donate;

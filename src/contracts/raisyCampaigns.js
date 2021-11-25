@@ -51,7 +51,10 @@ export const useCampaignsContract = () => {
     ](...args, options);
     options.gasLimit = calculateGasMargin(gasEstimate);
 
-    return await contract['addCampaign(uint256,uint256,uint256,uint256[])'](...args, options);
+    return await contract['addCampaign(uint256,uint256,uint256,uint256[])'](
+      ...args,
+      options
+    );
   };
 
   const donateERC20 = async (campaignId, amount, payToken, from) => {
@@ -71,6 +74,7 @@ export const useCampaignsContract = () => {
   };
 
   return {
+    getCampaignsContract,
     addCampaign,
     addCampaignReleaseSchedule,
     donateERC20,
