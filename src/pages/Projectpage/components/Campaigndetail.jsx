@@ -4,6 +4,7 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import Campaigninfo from './Campaigninfo'
 import React from 'react'
 import Fundsrelease from './Fundsrelease'
+import DonationStats from './DonationStats'
 
 function Campaigndetail({ currentProject, fundingover }) {
   return (
@@ -62,10 +63,10 @@ function Campaigndetail({ currentProject, fundingover }) {
                   </Flex>
                 </TabPanel>
                 <TabPanel>
-                  <p>two!</p>
+                  <DonationStats />
                 </TabPanel>
                 <TabPanel>
-                  <p>three!</p>
+                  <p>two!</p>
                 </TabPanel>
                 <TabPanel>
                   <Fundsrelease
