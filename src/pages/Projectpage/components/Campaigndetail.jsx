@@ -6,6 +6,7 @@ import Campaigninfo from './Campaigninfo'
 import React from 'react'
 import Fundsrelease from './Fundsrelease'
 import Fundsreleaseover from './Fundsreleaseover'
+import ClaimPOD from './ClaimPOD'
 
 function Campaigndetail({ currentProject, fundingover }) {
   return (
@@ -22,6 +23,7 @@ function Campaigndetail({ currentProject, fundingover }) {
                   <Tab>Funds release</Tab>
                   <Tab>FAQs</Tab>
                   <Tab>Timeline</Tab>
+                  <Tab display={fundingover ? 'flex' : 'none'}>Claim POD</Tab>
                 </TabList>
               </Center>
               <TabPanels>
@@ -71,7 +73,11 @@ function Campaigndetail({ currentProject, fundingover }) {
                 <TabPanel>
                   {fundingover ? <Fundsreleaseover /> : <Fundsrelease />}
                 </TabPanel>
-
+                <TabPanel></TabPanel>
+                <TabPanel></TabPanel>
+                <TabPanel>
+                  <ClaimPOD />
+                </TabPanel>
               </TabPanels>
             </Tabs>
           </Flex>
