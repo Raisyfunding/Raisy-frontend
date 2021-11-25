@@ -1,11 +1,9 @@
 import { Flex, Text, Box, Spacer, Center } from '@chakra-ui/layout'
-import { Button } from '@chakra-ui/react'
 import { SpacerLarge, SpacerSmall } from '../../../styles/globalStyles'
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import Campaigninfo from './Campaigninfo'
 import React from 'react'
 import Fundsrelease from './Fundsrelease'
-import Fundsreleaseover from './Fundsreleaseover'
 
 function Campaigndetail({ currentProject, fundingover }) {
   return (
@@ -70,8 +68,8 @@ function Campaigndetail({ currentProject, fundingover }) {
                 </TabPanel>
                 <TabPanel>
                   <Fundsrelease
-                    fundingover={fundingover}
                     currentProject={currentProject}
+                    fundingover={fundingover}
                   />
                 </TabPanel>
               </TabPanels>
@@ -80,6 +78,7 @@ function Campaigndetail({ currentProject, fundingover }) {
           <Spacer />
 
           <Box width="400px">
+            {console.log(currentProject)}
             <Campaigninfo
               currentProject={currentProject}
               fundingover={fundingover}

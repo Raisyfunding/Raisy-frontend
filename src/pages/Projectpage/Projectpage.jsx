@@ -33,7 +33,6 @@ const Projectpage = () => {
     fetchCampaignById(campaignId).then((_campaign) => {
       setCampaign(_campaign.data)
       console.log(campaign)
-      console.log(campaign)
     })
     // fundingOver()
     // react-hooks exhaustive-deps
