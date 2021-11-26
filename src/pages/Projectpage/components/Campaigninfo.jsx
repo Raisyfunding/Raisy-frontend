@@ -1,9 +1,9 @@
-import ArchiveBox from '../../../images/ArchiveBox.png'
+import ArchiveBox from '../../../images/ArchiveBox.png';
 import {
   SpacerLarge,
   SpacerXSmall,
   SpacerSmall,
-} from '../../../styles/globalStyles'
+} from '../../../styles/globalStyles';
 import {
   Flex,
   Text,
@@ -15,30 +15,24 @@ import {
   Image,
   Center,
   HStack,
-} from '@chakra-ui/react'
+  Link,
+} from '@chakra-ui/react';
 
-import { FiMail, FiTwitter, FiFacebook, FiInstagram } from 'react-icons/fi'
-import { GrValidate } from 'react-icons/gr'
+import { Link as RouterLink } from 'react-router-dom';
+import { FiMail, FiTwitter, FiFacebook, FiInstagram } from 'react-icons/fi';
+// import { GrValidate } from 'react-icons/gr';
+// import { useState, useEffect } from 'react';
+// import { useApi } from '../../../api';
 
-function Campaigninfo({ currentProject, fundingover }) {
-  const color = useColorModeValue('var(--white)', 'var(--black)')
-
-  // function currentFundsrelease() {
-  //   let result=0;
-  //   for (let pas = 0; pas < currentProject.nbMilestones; pas++) {
-  //     result += currentProject.pctReleasePerMilestone*currentProject.amountRaised
-  //   }
-  //   return(
-  // result
-  //   )
-  // }
+function Campaigninfo({ currentProject, fundingover, schedule }) {
+  const color = useColorModeValue('var(--white)', 'var(--black)');
 
   return (
     <>
       {fundingover ? (
         currentProject.amountToRaise - currentProject.amountRaised > 0 ? (
           <Flex direction="column">
-            <Box bg="#504D4D">
+            <Box bg="#27292b" borderRadius="15px">
               <Flex direction="column" height="100%" padding="15px">
                 <Text textAlign="center" fontSize="26px" fontWeight="bold">
                   {' '}
@@ -53,8 +47,6 @@ function Campaigninfo({ currentProject, fundingover }) {
                 </Text>
 
                 <SpacerXSmall />
-                {/* nbMilestones: 0
-pctReleasePerMilestone: [] */}
 
                 <SpacerLarge />
 
@@ -88,7 +80,7 @@ pctReleasePerMilestone: [] */}
           </Flex>
         ) : (
           <Flex direction="column">
-            <Box bg="#504D4D">
+            <Box bg="#27292b" borderRadius="15px">
               <Flex direction="column" height="100%" padding="15px">
                 <Text textAlign="center" fontSize="26px" fontWeight="bold">
                   {' '}
@@ -105,14 +97,12 @@ pctReleasePerMilestone: [] */}
                 </Text>
 
                 <SpacerXSmall />
-                {/* nbMilestones: 0
-pctReleasePerMilestone: [] */}
 
                 <Flex direction="row" fontSize="20px">
                   <Spacer />
                   <Flex direction="column" textAlign="center">
                     <Text fontWeight="bold">{currentProject.nbDonations}</Text>
-                    <Text>Donors</Text>
+                    <Text>Donations</Text>
                   </Flex>
                   <Spacer />
                   <Flex direction="column" textAlign="center">
@@ -122,12 +112,24 @@ pctReleasePerMilestone: [] */}
                     <Text>Raised</Text>
                   </Flex>
                   <Spacer />
-                  <Flex direction="column" textAlign="center">
-                    <Text fontWeight="bold">${537222}</Text>
-                    <Text>Relesead</Text>
-                  </Flex>
-                  <Spacer />
                 </Flex>
+                {currentProject.nbMilestones && schedule && (
+                  <>
+                    <Text pb={2} mt={5}>
+                      Funds Released
+                    </Text>
+                    <Progress
+                      value={currentProject.pctReleasePerMilestone.reduce(
+                        (acc, cur, idx) =>
+                          idx < schedule.currentMilestone ? acc + cur : acc,
+                        0
+                      )}
+                      borderRadius={'10px'}
+                      height={'4px'}
+                      colorScheme="green"
+                    />
+                  </>
+                )}
 
                 <SpacerLarge />
 
@@ -162,7 +164,7 @@ pctReleasePerMilestone: [] */}
         )
       ) : (
         <Flex direction="column">
-          <Box bg="#504D4D">
+          <Box bg="#27292b" borderRadius="15px">
             <Flex direction="column" height="100%" padding="15px">
               <Text textAlign={'justify'} fontSize="15px">
                 <span style={{ fontWeight: 'bold', fontSize: '20px' }}>
@@ -188,7 +190,7 @@ pctReleasePerMilestone: [] */}
                 <Spacer />
                 <Flex direction="column" textAlign="center">
                   <Text fontWeight="bold">{currentProject.nbDonations}</Text>
-                  <Text>Donors</Text>
+                  <Text>Donations</Text>
                 </Flex>
                 <Spacer />
                 <Flex direction="column" textAlign="center">
@@ -211,14 +213,21 @@ pctReleasePerMilestone: [] */}
                 <Spacer />
               </Flex>
               <SpacerLarge />
-              <Button bg={color}>Donate</Button>
+              <Link
+                as={RouterLink}
+                to={`/campaign/${currentProject.campaignId}/donate`}
+              >
+                <Button bg={color} width="100%">
+                  Donate
+                </Button>
+              </Link>
               <SpacerSmall />
               <Flex direction="row">
                 <Box bg="#C4C4C4" width="40%">
                   <Center>
                     <Flex direction="row" alignItems="center" margin="3px">
                       <Image src={ArchiveBox} height="30px" />
-                      <Text color="#504D4D">SaveFALLsLSE</Text>
+                      <Text color="#504D4D">Save</Text>
                     </Flex>
                   </Center>
                 </Box>
@@ -239,15 +248,15 @@ pctReleasePerMilestone: [] */}
           </Box>
           <SpacerSmall />
           <Text fontSize="12px" textAlign="justify">
-            This project will only be funded if it reaches its minimum Target by{' '}
-            {new Date(currentProject.endAt).toLocaleDateString()}.
+            This project will only be funded if it reaches its minimum Target by
+            <br /> {new Date(currentProject.endAt).toString()}.
           </Text>
 
           <Spacer />
         </Flex>
       )}
     </>
-  )
+  );
 }
 
-export default Campaigninfo
+export default Campaigninfo;

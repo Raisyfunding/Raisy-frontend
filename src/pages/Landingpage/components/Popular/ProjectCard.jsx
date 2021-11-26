@@ -1,8 +1,11 @@
-import { Flex, Image, Text, Progress } from '@chakra-ui/react'
-import React from 'react'
-import { useColorModeValue } from '@chakra-ui/color-mode'
+import { Flex, Image, Text, Progress } from '@chakra-ui/react';
+import React from 'react';
+import { useColorModeValue } from '@chakra-ui/color-mode';
+import { useHistory } from 'react-router-dom';
 
 const ProjectCard = ({ campaign }) => {
+  const history = useHistory();
+
   return (
     <Flex
       width={'300px'}
@@ -25,6 +28,8 @@ const ProjectCard = ({ campaign }) => {
         height={'300px'}
         borderRadius={'50px'}
         src={`https://cloudflare-ipfs.com/ipfs/${campaign.coverImageHash}`}
+        onClick={() => history.push(`/campaign/${campaign.campaignId}`)}
+        _hover={{ cursor: 'pointer' }}
       />
       <Text paddingTop={'15px'} textAlign={'justify'}>
         {campaign.title}
@@ -48,7 +53,7 @@ const ProjectCard = ({ campaign }) => {
         {campaign.amountRaised} $ Raised out of {campaign.amountToRaise} $
       </Text>
     </Flex>
-  )
-}
+  );
+};
 
-export default ProjectCard
+export default ProjectCard;

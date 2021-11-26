@@ -1,16 +1,20 @@
-import { Image } from '@chakra-ui/image'
-import { Flex, Text, Box, Center, Spacer } from '@chakra-ui/layout'
-import { SpacerLarge } from '../../../styles/globalStyles'
-import Campaigninfo from './Campaigninfo'
-import React, { Suspense } from 'react'
-import ReactPlayer from 'react-player'
-import styles from './styles.module.scss'
-import Loader from 'react-loader-spinner'
-import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
-import SuspenseImg from '../../../components/suspense'
-import security from '../../../images/security.png'
-import moneybag from '../../../images/moneybag.png'
-import handshake from '../../../images/handshake.png'
+import { Image } from '@chakra-ui/image';
+import { Flex, Text, Box, Center, Spacer } from '@chakra-ui/layout';
+import { Vstack, Button, Link, useToast } from '@chakra-ui/react';
+import { SpacerLarge } from '../../../styles/globalStyles';
+import Campaigninfo from './Campaigninfo';
+import React, { Suspense, useState } from 'react';
+import ReactPlayer from 'react-player';
+import styles from './styles.module.scss';
+import Loader from 'react-loader-spinner';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+import SuspenseImg from '../../../components/suspense';
+import security from '../../../images/security.png';
+import moneybag from '../../../images/moneybag.png';
+import handshake from '../../../images/handshake.png';
+import { useWeb3React } from '@web3-react/core';
+import { useCampaignsContract } from './../../../contracts/raisyCampaigns';
+import { formatError } from '../../../utils';
 
 const renderMedia = (image, contentType) => {
   if (contentType === 'video' || image?.includes('youtube')) {
@@ -22,9 +26,11 @@ const renderMedia = (image, contentType) => {
         width="100%"
         height="100%"
       />
-    )
+    );
   } else if (contentType === 'embed') {
-    return <iframe title="cover-video" className={styles.content} src={image} />
+    return (
+      <iframe title="cover-video" className={styles.content} src={image} />
+    );
   } else if (contentType === 'image' || contentType === 'gif') {
     return (
       <Suspense
@@ -43,11 +49,50 @@ const renderMedia = (image, contentType) => {
           src={`https://cloudflare-ipfs.com/ipfs/${image}`}
         />
       </Suspense>
-    )
+    );
   }
-}
+};
 
-function Preview({ currentProject, fundingover }) {
+function Preview({ currentProject, fundingover, schedule }) {
+  const { account } = useWeb3React();
+
+  const { claimInitialFunds, claimNextFunds } = useCampaignsContract();
+  const toast = useToast();
+
+  const [claiming, setClaiming] = useState(false);
+
+  const handleClaimFunds = async () => {
+    if (claiming) return;
+
+    setClaiming(true);
+
+    try {
+      const tx =
+        schedule.currentMilestone === 0
+          ? await claimInitialFunds(currentProject.campaignId, account)
+          : await claimNextFunds(currentProject.campaignId, account);
+
+      await tx.wait();
+
+      toast({
+        title: 'You have successfully claimed your funds 🤝',
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+      });
+      setClaiming(false);
+    } catch (err) {
+      toast({
+        title: 'Error during funds claim on-chain',
+        description: formatError(err),
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+      setClaiming(false);
+    }
+  };
+
   return (
     <Flex direction="column" height="100vh">
       <Box marginLeft="10%" marginRight="10%" marginTop="2%">
@@ -68,17 +113,82 @@ function Preview({ currentProject, fundingover }) {
             </Box>
           </Flex>
           <Spacer />
+
           <Box width="400px">
-            <Campaigninfo currentProject={currentProject} fundingover={fundingover}/>
+            <Campaigninfo
+              currentProject={currentProject}
+              fundingover={fundingover}
+              schedule={schedule}
+            />
+            <SpacerLarge />
+            {fundingover ? (
+              <div>
+                {currentProject.creator === account.toLowerCase() ? (
+                  <div>
+                    {currentProject.amountToRaise -
+                      currentProject.amountRaised <
+                    0 ? (
+                      <div>
+                        <Text
+                          padding={'20px'}
+                          marginLeft={'auto'}
+                          marginRight={'auto'}
+                        >
+                          The campaign has been a success ! Claim your funds now
+                          !
+                        </Text>
+                        <Button
+                          width={'100%'}
+                          onClick={handleClaimFunds}
+                          disabled={claiming}
+                        >
+                          Claim your funds
+                        </Button>
+                      </div>
+                    ) : (
+                      <div></div>
+                    )}
+                  </div>
+                ) : (
+                  <div>
+                    {currentProject.amountToRaise -
+                      currentProject.amountRaised <
+                    0 ? (
+                      <div></div>
+                    ) : (
+                      <Flex>
+                        {/* display={account ? 'flex' : 'none'} */}
+                        <Flex flexDirection={'column'} width={'100%'}>
+                          <Text
+                            padding={'20px'}
+                            marginLeft={'auto'}
+                            marginRight={'auto'}
+                          >
+                            The campaign is unsuccessful, or participants voted
+                            in majority for a refund.
+                          </Text>
+                          <Button width={'100%'}>Withdraw your donation</Button>
+                        </Flex>
+                      </Flex>
+                    )}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Center>
+                <div></div>
+              </Center>
+            )}
           </Box>
         </Flex>
       </Box>
       <Box
-        bg="#504D4D"
         width="100%"
         height="100px"
-        position="relative"
-        bottom="-58px"
+        position="fixed"
+        top="100vh"
+        marginTop="-167px"
+        bg="#27292b"
       >
         <Flex
           direction="row"
@@ -138,7 +248,7 @@ function Preview({ currentProject, fundingover }) {
         </Flex>
       </Box>
     </Flex>
-  )
+  );
 }
 
-export default Preview
+export default Preview;

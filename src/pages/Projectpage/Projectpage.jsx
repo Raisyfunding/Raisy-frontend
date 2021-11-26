@@ -1,47 +1,53 @@
-import Preview from './components/Preview'
-import { Footer } from '../../components/index'
-import React, { useEffect, useState } from 'react'
-import ReactFullpage from '@fullpage/react-fullpage'
-import { Screen, SpacerMedium } from '../../styles/globalStyles'
-import { useColorModeValue } from '@chakra-ui/color-mode'
-import Campaigndetail from './components/Campaigndetail'
-import { useParams, Link, useHistory } from 'react-router-dom'
-import { useApi } from './../../api/index'
+import Preview from './components/Preview';
+import { Footer } from '../../components/index';
+import React, { useEffect, useState } from 'react';
+import ReactFullpage from '@fullpage/react-fullpage';
+import { Screen, SpacerMedium } from '../../styles/globalStyles';
+import { useColorModeValue } from '@chakra-ui/color-mode';
+import Campaigndetail from './components/Campaigndetail';
+import { useParams, Link, useHistory } from 'react-router-dom';
+import { useApi } from './../../api/index';
+import Space from './components/space';
 
 const Projectpage = () => {
-  const { campaignId } = useParams()
+  const { campaignId } = useParams();
 
-  const { fetchCampaignById } = useApi()
+  const { fetchCampaignById, fetchScheduleByCampaignId } = useApi();
 
-  const [campaign, setCampaign] = useState({})
+  const [campaign, setCampaign] = useState({});
+  const [schedule, setSchedule] = useState({ currentMilestone: 0 });
 
-  const [fundingover, setFundingover] = useState(false)
+  const [fundingover, setFundingover] = useState(false);
 
-  function fundingOver() {
-    let endtime = new Date(campaign.endAt)
-
-    let now = new Date()
-    let dure = endtime - now
-    if (dure > 0) {
-      setFundingover(true)
+  const fundingOver = () => {
+    const remainingTime =
+      new Date(campaign.endAt).getTime() - new Date().getTime();
+    if (remainingTime > 0) {
+      setFundingover(false);
     } else {
-      setFundingover(true)
+      setFundingover(true);
     }
-  }
+  };
 
   useEffect(() => {
     fetchCampaignById(campaignId).then((_campaign) => {
-      setCampaign(_campaign.data)
-      console.log(campaign)
-    })
-    // fundingOver()
+      setCampaign(_campaign.data);
+    });
     // react-hooks exhaustive-deps
-  }, [campaignId])
+  }, [campaignId]);
+
   useEffect(() => {
-    fundingOver()
-    // fundingOver()
+    if (campaign.campaignId && campaign.nbMilestones) {
+      fetchScheduleByCampaignId(campaign.campaignId).then((_schedule) =>
+        _schedule && _schedule.data ? setSchedule(_schedule) : null
+      );
+    }
+  }, [campaign]);
+
+  useEffect(() => {
+    fundingOver();
     // react-hooks exhaustive-deps
-  }, [campaign])
+  }, [campaign]);
 
   return (
     <Screen
@@ -57,24 +63,26 @@ const Projectpage = () => {
           return (
             <>
               <div className="section fp-auto-height">
-                <Preview currentProject={campaign} fundingover={fundingover} />
+                <Preview
+                  currentProject={campaign}
+                  fundingover={fundingover}
+                  schedule={schedule}
+                />
               </div>
               <div className="section fp-auto-height">
                 <Campaigndetail
                   currentProject={campaign}
+                  schedule={schedule}
                   fundingover={fundingover}
                 />
-                <SpacerMedium />
+                <Space />
                 <Footer />
-                <SpacerMedium />
-                <SpacerMedium />
-                <SpacerMedium />
               </div>
             </>
-          )
+          );
         }}
       />
     </Screen>
-  )
-}
-export default Projectpage
+  );
+};
+export default Projectpage;

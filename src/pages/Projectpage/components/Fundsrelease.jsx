@@ -1,23 +1,24 @@
-import React from 'react'
-import { Text } from '@chakra-ui/react'
-import { Table, Thead, Tbody, Tr, Th, Td, TableCaption } from '@chakra-ui/react'
-import { useWeb3React } from '@web3-react/core'
+import React from 'react';
+import {
+  Text,
+  Box,
+  Center,
+  HStack,
+  VStack,
+  useColorModeValue,
+} from '@chakra-ui/react';
+import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
+import { useWeb3React } from '@web3-react/core';
+import Countdown from 'react-countdown';
 
 const Fundsrelease = ({ currentProject, fundingover }) => {
-  const { account } = useWeb3React()
+  const { account } = useWeb3React();
 
   return (
     <div>
-      <Text textAlign={'center'} fontSize={'3xl'}>
-        Funds release plan
-      </Text>
-      {console.log(currentProject)}
       {currentProject.nbMilestones ? (
         <div>
-          {console.log('dzeffz')}
           <Table variant="simple">
-            <TableCaption>Funding release for the creator</TableCaption>
-
             <Thead>
               <Tr>
                 <Th>Milestone</Th>
@@ -38,35 +39,21 @@ const Fundsrelease = ({ currentProject, fundingover }) => {
         </div>
       ) : (
         <div>
-          <Text textAlign="center">
-            There isn't stagger release for this project, 100% of the collected
-            funds have been released !
-          </Text>
-        </div>
-      )}
-
-      {account ? (
-        <div>
-          {account === currentProject.creator ? (
-            <div></div>
+          {fundingover ? (
+            <Text textAlign="center">
+              There isn't staggered release for this project, 100% of the
+              collected funds have been released !
+            </Text>
           ) : (
-            <div>connected i'm user</div>
+            <Text textAlign="center">
+              There isn't staggered release for this project, 100% of the
+              collected funds will be directly released !
+            </Text>
           )}
         </div>
-      ) : (
-        <div></div>
       )}
     </div>
-  )
-}
+  );
+};
 
-{
-  /* <div>
-<Text textAlign="center">
-  There isn't stagger release for this project, 100% of the collected
-  funds have been released !
-</Text>
-</div> */
-}
-
-export default Fundsrelease
+export default Fundsrelease;

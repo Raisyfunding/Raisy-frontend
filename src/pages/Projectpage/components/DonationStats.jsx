@@ -1,14 +1,58 @@
-import React from 'react'
-import { Button, Flex, Link, Text } from '@chakra-ui/react'
-import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react'
-import { useState } from 'react'
+import React from 'react';
+import { Button, Flex, Link, Text } from '@chakra-ui/react';
+import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
+import { useState, useEffect } from 'react';
+import useTokens from './../../../hooks/useTokens';
+import { useWeb3React } from '@web3-react/core';
+import { useCampaignsContract } from '../../../contracts';
+import { ethers } from 'ethers';
 
-const DonationStats = () => {
-  const currencies = ['Ether', 'Raisy', 'Bitcoin']
-  const [connected, setConnected] = useState(true)
-  const [endCampaign, setEndCampaign] = useState(false)
-  const [enableWithdrawing, setEnableWithdrawing] = useState(true)
-  const [amount, setAmount] = useState(100)
+const DonationStats = ({ campaignId }) => {
+  const { tokens: currencies } = useTokens();
+
+  const { account } = useWeb3React();
+
+  const [endCampaign, setEndCampaign] = useState(false);
+  const [enableWithdrawing, setEnableWithdrawing] = useState(true);
+  const [amount, setAmount] = useState(100);
+
+  const [payTokens, setPayTokens] = useState(
+    currencies.map((c) => {
+      return { ...c, amountDonated: 0 };
+    })
+  );
+
+  const { getAmountDonated } = useCampaignsContract();
+
+  const updateAmountDonated = async (curr) => {
+    if (curr.address) {
+      let amountDonated = await getAmountDonated(
+        account,
+        campaignId,
+        curr.address
+      );
+      amountDonated = ethers.utils.formatUnits(amountDonated, curr.decimals);
+      return { ...curr, amountDonated };
+    }
+  };
+
+  const updateAllTokens = async () => {
+    const newCurrencies = await Promise.all(
+      currencies.map(async (_curr) => {
+        const newCurrency = await updateAmountDonated(_curr);
+        return newCurrency;
+      })
+    );
+
+    setPayTokens(newCurrencies);
+  };
+
+  useEffect(() => {
+    if (campaignId && account) {
+      updateAllTokens();
+    }
+  }, [currencies, campaignId, account]);
+
   return (
     <div>
       <Flex
@@ -18,9 +62,6 @@ const DonationStats = () => {
         marginRight={'auto'}
         marginLeft={'auto'}
       >
-        <Text textAlign={'center'} fontSize={'3xl'} paddingBottom={'10px'}>
-          Your Stats
-        </Text>
         <Table variant="simple">
           <Thead>
             <Tr>
@@ -29,10 +70,10 @@ const DonationStats = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {currencies.map((curr) => (
+            {payTokens.map((token) => (
               <Tr>
-                <Td>{curr}</Td>
-                <Td isNumeric>25.4</Td>
+                <Td>{token.symbol}</Td>
+                <Td isNumeric>{token.amountDonated}</Td>
               </Tr>
             ))}
           </Tbody>
@@ -43,10 +84,12 @@ const DonationStats = () => {
           paddingBottom={'10px'}
           paddingTop={'20px'}
         >
-          Unlocking & Withdrawing
+          Get your $RSY rewards !
         </Text>
-        <Button display={!connected ? 'flex' : 'none'}>Connect</Button>
-        <Flex display={connected ? 'flex' : 'none'}>
+        <Button display={!account ? 'flex' : 'none'} bg="#27292b">
+          Connect
+        </Button>
+        <Flex display={account ? 'flex' : 'none'}>
           <Flex
             display={!endCampaign && !enableWithdrawing ? 'flex' : 'none'}
             width={'100%'}
@@ -66,21 +109,10 @@ const DonationStats = () => {
             </Text>
             <Button width={'100%'}>Unlock</Button>
           </Flex>
-          <Flex
-            flexDirection={'column'}
-            display={enableWithdrawing ? 'flex' : 'none'}
-            width={'100%'}
-          >
-            <Text padding={'20px'} marginLeft={'auto'} marginRight={'auto'}>
-              The campaign is unsuccessful, or participants voted in majority
-              for a refund.
-            </Text>
-            <Button width={'100%'}>Withdraw your donation</Button>
-          </Flex>
         </Flex>
       </Flex>
     </div>
-  )
-}
+  );
+};
 
-export default DonationStats
+export default DonationStats;
