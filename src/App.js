@@ -11,6 +11,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import "./styles/theme.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Submit from "./pages/Submit/Submit";
+import Donate from './pages/Donate/Donate';
 
 function App() {
 	return (
@@ -39,6 +40,9 @@ function App() {
 					</Route>
 					<Route exact path='/campaign/:campaignId'>
 						<Projectpage/>
+					</Route>
+					<Route exact path='/campaign/:campaignId/donate'>
+						<Donate />
 					</Route>
 				</Switch>
 				{/* <Footer /> */}

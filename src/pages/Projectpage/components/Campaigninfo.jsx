@@ -1,9 +1,9 @@
-import ArchiveBox from '../../../images/ArchiveBox.png'
+import ArchiveBox from '../../../images/ArchiveBox.png';
 import {
   SpacerLarge,
   SpacerXSmall,
   SpacerSmall,
-} from '../../../styles/globalStyles'
+} from '../../../styles/globalStyles';
 import {
   Flex,
   Text,
@@ -15,23 +15,15 @@ import {
   Image,
   Center,
   HStack,
-} from '@chakra-ui/react'
+  Link,
+} from '@chakra-ui/react';
 
-import { FiMail, FiTwitter, FiFacebook, FiInstagram } from 'react-icons/fi'
-import { GrValidate } from 'react-icons/gr'
+import { Link as RouterLink } from 'react-router-dom';
+import { FiMail, FiTwitter, FiFacebook, FiInstagram } from 'react-icons/fi';
+import { GrValidate } from 'react-icons/gr';
 
 function Campaigninfo({ currentProject, fundingover }) {
-  const color = useColorModeValue('var(--white)', 'var(--black)')
-
-  // function currentFundsrelease() {
-  //   let result=0;
-  //   for (let pas = 0; pas < currentProject.nbMilestones; pas++) {
-  //     result += currentProject.pctReleasePerMilestone*currentProject.amountRaised
-  //   }
-  //   return(
-  // result
-  //   )
-  // }
+  const color = useColorModeValue('var(--white)', 'var(--black)');
 
   return (
     <>
@@ -53,8 +45,6 @@ function Campaigninfo({ currentProject, fundingover }) {
                 </Text>
 
                 <SpacerXSmall />
-                {/* nbMilestones: 0
-pctReleasePerMilestone: [] */}
 
                 <SpacerLarge />
 
@@ -211,14 +201,21 @@ pctReleasePerMilestone: [] */}
                 <Spacer />
               </Flex>
               <SpacerLarge />
-              <Button bg={color}>Donate</Button>
+              <Link
+                as={RouterLink}
+                to={`/campaign/${currentProject.campaignId}/donate`}
+              >
+                <Button bg={color} width="100%">
+                  Donate
+                </Button>
+              </Link>
               <SpacerSmall />
               <Flex direction="row">
                 <Box bg="#C4C4C4" width="40%">
                   <Center>
                     <Flex direction="row" alignItems="center" margin="3px">
                       <Image src={ArchiveBox} height="30px" />
-                      <Text color="#504D4D">SaveFALLsLSE</Text>
+                      <Text color="#504D4D">Save</Text>
                     </Flex>
                   </Center>
                 </Box>
@@ -239,15 +236,15 @@ pctReleasePerMilestone: [] */}
           </Box>
           <SpacerSmall />
           <Text fontSize="12px" textAlign="justify">
-            This project will only be funded if it reaches its minimum Target by{' '}
-            {new Date(currentProject.endAt).toLocaleDateString()}.
+            This project will only be funded if it reaches its minimum Target by
+            <br /> {new Date(currentProject.endAt).toString()}.
           </Text>
 
           <Spacer />
         </Flex>
       )}
     </>
-  )
+  );
 }
 
-export default Campaigninfo
+export default Campaigninfo;
