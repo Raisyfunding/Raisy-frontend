@@ -1,7 +1,13 @@
 import React from 'react'
 import Footer from '../../../../components/Footer/Footer'
-import { Text, Image, Flex, Box } from '@chakra-ui/react'
-import './Carousel.scss'
+import { Text, Image, useColorModeValue, Box } from '@chakra-ui/react'
+import Marquee from 'react-fast-marquee'
+import chainlink from '../../../../images/chainlink.png'
+import avalanche from '../../../../images/avalanche.png'
+import chainlinkwhite from '../../../../images/chainlinkwhite.png'
+import avalanchewhite from '../../../../images/avalanchewhite.png'
+import alchemy from '../../../../images/alchemy-logo-black.png'
+import alchemywhite from '../../../../images/alchemy-logo-white.png'
 
 const FooterPage = () => {
   return (
@@ -17,25 +23,34 @@ const FooterPage = () => {
         }}
         fontWeight={'900'}
       >
-        TRUSTED BY
+        RAISY USES
       </Text>
       <Text
         fontSize={{ base: '1xl', md: '2xl', lg: '2xl' }}
         style={{ textAlign: 'center' }}
         fontWeight={'400'}
         paddingTop={'30px'}
-        paddingBottom={'30px'}
+        paddingBottom={'50px'}
       >
-        Join the Raisy experience. Raise funds, help people around the world
-        without registration. <br /> Any idea or need can be funded, join us
-        now.
+        Raisy uses the best protocols out there. Discover them here.
       </Text>
-      <div className="container">
-        <div className="marquee-container">
-          <Image src="/images/chainlink.png" width={'200px'} />
-          <Image src="/images/avalanche.png" width={'200px'} />
-        </div>
-      </div>
+      <Marquee gradientColor={useColorModeValue([255, 255, 255], [0, 0, 0])}>
+        <Image
+          src={useColorModeValue(chainlink, chainlinkwhite)}
+          height={'200px'}
+          padding={'50px'}
+        />
+        <Image
+          src={useColorModeValue(avalanche, avalanchewhite)}
+          height={'200px'}
+          padding={'50px'}
+        />
+        <Image
+          src={useColorModeValue(alchemy, alchemywhite)}
+          height={'200px'}
+          padding={'50px'}
+        />
+      </Marquee>
       <Footer />
     </Box>
   )

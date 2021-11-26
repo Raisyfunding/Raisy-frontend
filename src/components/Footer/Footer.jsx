@@ -57,7 +57,7 @@ export default function Footer() {
       color={useColorModeValue('var(--black)', 'var(--white)')}
       justifyContent={'center'}
       position={'absolute'}
-      bottom={'0'}
+      bottom={'50px'}
       width={'100vw'}
     >
       <Container as={Stack} maxW={'6xl'} py={10}>
