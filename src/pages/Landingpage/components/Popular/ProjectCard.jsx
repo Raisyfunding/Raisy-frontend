@@ -1,37 +1,54 @@
-import { Flex, Image, Text, Progress } from "@chakra-ui/react";
-import React from "react";
+import { Flex, Image, Text, Progress } from '@chakra-ui/react'
+import React from 'react'
+import { useColorModeValue } from '@chakra-ui/color-mode'
 
 const ProjectCard = ({ campaign }) => {
-	return (
-		<Flex flexDirection={"column"} width={"300px"} height={"700px"}>
-			<Image
-				width={"300px"}
-				height={"300px"}
-				src={`https://cloudflare-ipfs.com/ipfs/${campaign.coverImageHash}`}
-			/>
-			<Text paddingTop={"15px"} textAlign={"justify"}>
-				{campaign.title}
-			</Text>
-			{/* <Text paddingTop={"15px"} textAlign={"justify"}>
+  return (
+    <Flex
+      width={'300px'}
+      height={'450px'}
+      backgroundColor={useColorModeValue(
+        'rgba(255,255,255,1)',
+        'rgba(21,21,21,.64)'
+      )}
+      borderRadius={'50px'}
+      border={'1px solid'}
+      borderColor={useColorModeValue(
+        'rgba(235, 235, 235, 1)',
+        'rgba(25,25,25,1)'
+      )}
+      padding={'20px'}
+      flexDirection={'column'}
+    >
+      <Image
+        width={'300px'}
+        height={'300px'}
+        borderRadius={'50px'}
+        src={`https://cloudflare-ipfs.com/ipfs/${campaign.coverImageHash}`}
+      />
+      <Text paddingTop={'15px'} textAlign={'justify'}>
+        {campaign.title}
+      </Text>
+      {/* <Text paddingTop={"15px"} textAlign={"justify"}>
 				{campaign.description}
 			</Text> */}
-			{/* <Text paddingTop={"15px"} textAlign={"justify"}>
+      {/* <Text paddingTop={"15px"} textAlign={"justify"}>
         {campaign.category}
       </Text> */}
-			<Text paddingTop={"15px"} paddingBottom={"15px"} textAlign={"justify"}>
-				{campaign.nbDonations} donations
-			</Text>
-			<Progress
-				colorScheme='blue'
-				value={campaign.amountRaised / campaign.amountToRaise}
-				borderRadius={"10px"}
-				height={"4px"}
-			/>
-			<Text paddingTop={"15px"} textAlign={"justify"}>
-				{campaign.amountRaised} $ Raised out of {campaign.amountToRaise} $
-			</Text>
-		</Flex>
-	);
-};
+      <Text paddingTop={'15px'} paddingBottom={'15px'} textAlign={'justify'}>
+        {campaign.nbDonations} donations
+      </Text>
+      <Progress
+        value={(campaign.amountRaised / campaign.amountToRaise) * 100}
+        borderRadius={'10px'}
+        height={'4px'}
+        colorScheme="green"
+      />
+      <Text paddingTop={'15px'} textAlign={'justify'}>
+        {campaign.amountRaised} $ Raised out of {campaign.amountToRaise} $
+      </Text>
+    </Flex>
+  )
+}
 
-export default ProjectCard;
+export default ProjectCard
