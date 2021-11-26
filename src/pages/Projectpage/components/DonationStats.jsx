@@ -22,9 +22,6 @@ const DonationStats = () => {
         marginRight={'auto'}
         marginLeft={'auto'}
       >
-        <Text textAlign={'center'} fontSize={'3xl'} paddingBottom={'10px'}>
-          Your Stats
-        </Text>
         <Table variant="simple">
           <Thead>
             <Tr>
@@ -47,7 +44,7 @@ const DonationStats = () => {
           paddingBottom={'10px'}
           paddingTop={'20px'}
         >
-          Unlocking & Withdrawing
+          Get your $RSY rewards !
         </Text>
         <Button display={!account ? 'flex' : 'none'}>Connect</Button>
         <Flex display={account ? 'flex' : 'none'}>
@@ -69,17 +66,6 @@ const DonationStats = () => {
               You can unlock {amount} $RSY out of {amount} $RSY.
             </Text>
             <Button width={'100%'}>Unlock</Button>
-          </Flex>
-          <Flex
-            flexDirection={'column'}
-            display={enableWithdrawing ? 'flex' : 'none'}
-            width={'100%'}
-          >
-            <Text padding={'20px'} marginLeft={'auto'} marginRight={'auto'}>
-              The campaign is unsuccessful, or participants voted in majority
-              for a refund.
-            </Text>
-            <Button width={'100%'}>Withdraw your donation</Button>
           </Flex>
         </Flex>
       </Flex>

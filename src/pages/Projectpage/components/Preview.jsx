@@ -1,18 +1,18 @@
-import { Image } from '@chakra-ui/image'
-import { Flex, Text, Box, Center, Spacer } from '@chakra-ui/layout'
-import { Vstack } from '@chakra-ui/react'
-import { SpacerLarge } from '../../../styles/globalStyles'
-import Campaigninfo from './Campaigninfo'
-import React, { Suspense } from 'react'
-import ReactPlayer from 'react-player'
-import styles from './styles.module.scss'
-import Loader from 'react-loader-spinner'
-import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
-import SuspenseImg from '../../../components/suspense'
-import security from '../../../images/security.png'
-import moneybag from '../../../images/moneybag.png'
-import handshake from '../../../images/handshake.png'
-import { useWeb3React } from '@web3-react/core'
+import { Image } from '@chakra-ui/image';
+import { Flex, Text, Box, Center, Spacer } from '@chakra-ui/layout';
+import { Vstack, Button, Link } from '@chakra-ui/react';
+import { SpacerLarge } from '../../../styles/globalStyles';
+import Campaigninfo from './Campaigninfo';
+import React, { Suspense } from 'react';
+import ReactPlayer from 'react-player';
+import styles from './styles.module.scss';
+import Loader from 'react-loader-spinner';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+import SuspenseImg from '../../../components/suspense';
+import security from '../../../images/security.png';
+import moneybag from '../../../images/moneybag.png';
+import handshake from '../../../images/handshake.png';
+import { useWeb3React } from '@web3-react/core';
 
 const renderMedia = (image, contentType) => {
   if (contentType === 'video' || image?.includes('youtube')) {
@@ -24,9 +24,11 @@ const renderMedia = (image, contentType) => {
         width="100%"
         height="100%"
       />
-    )
+    );
   } else if (contentType === 'embed') {
-    return <iframe title="cover-video" className={styles.content} src={image} />
+    return (
+      <iframe title="cover-video" className={styles.content} src={image} />
+    );
   } else if (contentType === 'image' || contentType === 'gif') {
     return (
       <Suspense
@@ -45,12 +47,12 @@ const renderMedia = (image, contentType) => {
           src={`https://cloudflare-ipfs.com/ipfs/${image}`}
         />
       </Suspense>
-    )
+    );
   }
-}
+};
 
 function Preview({ currentProject, fundingover }) {
-  const { account } = useWeb3React()
+  const { account } = useWeb3React();
   return (
     <Flex direction="column" height="100vh">
       <Box marginLeft="10%" marginRight="10%" marginTop="2%">
@@ -78,11 +80,58 @@ function Preview({ currentProject, fundingover }) {
               fundingover={fundingover}
             />
             <SpacerLarge />
-            {
+            {fundingover ? (
+              <div>
+                {currentProject.creator === account ? (
+                  <div>
+                    {currentProject.amountToRaise -
+                      currentProject.amountRaised <
+                    0 ? (
+                      <div>
+                        <Text
+                          padding={'20px'}
+                          marginLeft={'auto'}
+                          marginRight={'auto'}
+                        >
+                          The fundrelease has been as success ! Claim you funds
+                          now !
+                        </Text>
+                        <Button width={'100%'}>Claim your funds</Button>
+                      </div>
+                    ) : (
+                      <div></div>
+                    )}
+                  </div>
+                ) : (
+                  <div>
+                    {currentProject.amountToRaise -
+                      currentProject.amountRaised <
+                    0 ? (
+                      <div></div>
+                    ) : (
+                      <Flex>
+                        {/* display={account ? 'flex' : 'none'} */}
+                        <Flex flexDirection={'column'} width={'100%'}>
+                          <Text
+                            padding={'20px'}
+                            marginLeft={'auto'}
+                            marginRight={'auto'}
+                          >
+                            The campaign is unsuccessful, or participants voted
+                            in majority for a refund.
+                          </Text>
+                          <Button width={'100%'}>Withdraw your donation</Button>
+                        </Flex>
+                      </Flex>
+                    )}
+                  </div>
+                )}
+              </div>
+            ) : (
               <Center>
-                <div>I'm creator</div>
+                <div></div>
               </Center>
-            }
+            )}
           </Box>
         </Flex>
       </Box>
@@ -151,7 +200,7 @@ function Preview({ currentProject, fundingover }) {
         </Flex>
       </Box>
     </Flex>
-  )
+  );
 }
 
-export default Preview
+export default Preview;
