@@ -1,48 +1,45 @@
-import Preview from './components/Preview'
-import { Footer } from '../../components/index'
-import React, { useEffect, useState } from 'react'
-import ReactFullpage from '@fullpage/react-fullpage'
-import { Screen, SpacerMedium } from '../../styles/globalStyles'
-import { useColorModeValue } from '@chakra-ui/color-mode'
-import Campaigndetail from './components/Campaigndetail'
-import { useParams, Link, useHistory } from 'react-router-dom'
-import { useApi } from './../../api/index'
-import Space from './components/space'
+import Preview from './components/Preview';
+import { Footer } from '../../components/index';
+import React, { useEffect, useState } from 'react';
+import ReactFullpage from '@fullpage/react-fullpage';
+import { Screen, SpacerMedium } from '../../styles/globalStyles';
+import { useColorModeValue } from '@chakra-ui/color-mode';
+import Campaigndetail from './components/Campaigndetail';
+import { useParams, Link, useHistory } from 'react-router-dom';
+import { useApi } from './../../api/index';
+import Space from './components/space';
 
 const Projectpage = () => {
-  const { campaignId } = useParams()
+  const { campaignId } = useParams();
 
-  const { fetchCampaignById } = useApi()
+  const { fetchCampaignById } = useApi();
 
-  const [campaign, setCampaign] = useState({})
+  const [campaign, setCampaign] = useState({});
 
-  const [fundingover, setFundingover] = useState(false)
+  const [fundingover, setFundingover] = useState(false);
 
-  function fundingOver() {
-    let endtime = new Date(campaign.endAt)
-
-    let now = new Date()
-    let dure = endtime - now
-    if (dure > 0) {
-      setFundingover(true)
+  const fundingOver = () => {
+    const remainingTime =
+      new Date(campaign.endAt).getTime() - new Date().getTime();
+    if (remainingTime > 0) {
+      setFundingover(false);
     } else {
-      setFundingover(false)
+      setFundingover(true);
     }
-  }
+  };
 
   useEffect(() => {
     fetchCampaignById(campaignId).then((_campaign) => {
-      setCampaign(_campaign.data)
-      console.log(campaign)
-    })
-    // fundingOver()
+      setCampaign(_campaign.data);
+      console.log(campaign);
+    });
     // react-hooks exhaustive-deps
-  }, [campaignId])
+  }, [campaignId]);
+  
   useEffect(() => {
-    fundingOver()
-    // fundingOver()
+    fundingOver();
     // react-hooks exhaustive-deps
-  }, [campaign])
+  }, [campaign]);
 
   return (
     <Screen
@@ -69,10 +66,10 @@ const Projectpage = () => {
                 <Footer />
               </div>
             </>
-          )
+          );
         }}
       />
     </Screen>
-  )
-}
-export default Projectpage
+  );
+};
+export default Projectpage;
