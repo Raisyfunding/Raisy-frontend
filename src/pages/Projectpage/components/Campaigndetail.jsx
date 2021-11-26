@@ -31,7 +31,9 @@ function Campaigndetail({ currentProject, fundingover }) {
                     <div></div>
                   )}
 
-                  <Tab display={fundingover ? 'flex' : 'none'}>Claim POD</Tab>
+                  {fundingover && (
+                    <Tab display={fundingover ? 'flex' : 'none'}>Claim POD</Tab>
+                  )}
                 </TabList>
               </Center>
               <TabPanels>
@@ -69,7 +71,7 @@ function Campaigndetail({ currentProject, fundingover }) {
                   <DonationStats campaignId={currentProject.campaignId} />
                 </TabPanel>
                 <TabPanel>
-                  <ClaimPOD />
+                  <ClaimPOD campaignId={currentProject.campaignId} />
                 </TabPanel>
                 <TabPanel>
                   <VoteSession
@@ -83,7 +85,6 @@ function Campaigndetail({ currentProject, fundingover }) {
           <Spacer />
 
           <Box width="400px" height="2000px">
-            {console.log(currentProject)}
             <Campaigninfo
               currentProject={currentProject}
               fundingover={fundingover}

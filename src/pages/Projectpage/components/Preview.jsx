@@ -137,7 +137,11 @@ function Preview({ currentProject, fundingover, schedule }) {
                           The campaign has been a success ! Claim your funds now
                           !
                         </Text>
-                        <Button width={'100%'} onClick={handleClaimFunds}>
+                        <Button
+                          width={'100%'}
+                          onClick={handleClaimFunds}
+                          disabled={claiming}
+                        >
                           Claim your funds
                         </Button>
                       </div>
