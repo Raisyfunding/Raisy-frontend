@@ -1,14 +1,18 @@
-import React from 'react'
-import { Button, Flex, Link, Text } from '@chakra-ui/react'
-import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react'
-import { useState } from 'react'
+import React from 'react';
+import { Button, Flex, Link, Text } from '@chakra-ui/react';
+import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
+import { useState } from 'react';
+import useTokens from './../../../hooks/useTokens';
+import { useWeb3React } from '@web3-react/core';
 
 const DonationStats = () => {
-  const currencies = ['Ether', 'Raisy', 'Bitcoin']
-  const [connected, setConnected] = useState(true)
-  const [endCampaign, setEndCampaign] = useState(false)
-  const [enableWithdrawing, setEnableWithdrawing] = useState(true)
-  const [amount, setAmount] = useState(100)
+  const { tokens: currencies } = useTokens();
+
+  const { account } = useWeb3React();
+
+  const [endCampaign, setEndCampaign] = useState(false);
+  const [enableWithdrawing, setEnableWithdrawing] = useState(true);
+  const [amount, setAmount] = useState(100);
   return (
     <div>
       <Flex
@@ -31,7 +35,7 @@ const DonationStats = () => {
           <Tbody>
             {currencies.map((curr) => (
               <Tr>
-                <Td>{curr}</Td>
+                <Td>{curr.symbol}</Td>
                 <Td isNumeric>25.4</Td>
               </Tr>
             ))}
@@ -45,8 +49,8 @@ const DonationStats = () => {
         >
           Unlocking & Withdrawing
         </Text>
-        <Button display={!connected ? 'flex' : 'none'}>Connect</Button>
-        <Flex display={connected ? 'flex' : 'none'}>
+        <Button display={!account ? 'flex' : 'none'}>Connect</Button>
+        <Flex display={account ? 'flex' : 'none'}>
           <Flex
             display={!endCampaign && !enableWithdrawing ? 'flex' : 'none'}
             width={'100%'}
@@ -80,7 +84,7 @@ const DonationStats = () => {
         </Flex>
       </Flex>
     </div>
-  )
-}
+  );
+};
 
-export default DonationStats
+export default DonationStats;

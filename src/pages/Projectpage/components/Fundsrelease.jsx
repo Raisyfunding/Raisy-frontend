@@ -1,10 +1,18 @@
-import React from 'react'
-import { Text } from '@chakra-ui/react'
-import { Table, Thead, Tbody, Tr, Th, Td, TableCaption } from '@chakra-ui/react'
-import { useWeb3React } from '@web3-react/core'
+import React from 'react';
+import { Text } from '@chakra-ui/react';
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+} from '@chakra-ui/react';
+import { useWeb3React } from '@web3-react/core';
 
 const Fundsrelease = ({ currentProject, fundingover }) => {
-  const { account } = useWeb3React()
+  const { account } = useWeb3React();
 
   return (
     <div>
@@ -57,16 +65,7 @@ const Fundsrelease = ({ currentProject, fundingover }) => {
         <div></div>
       )}
     </div>
-  )
-}
+  );
+};
 
-{
-  /* <div>
-<Text textAlign="center">
-  There isn't stagger release for this project, 100% of the collected
-  funds have been released !
-</Text>
-</div> */
-}
-
-export default Fundsrelease
+export default Fundsrelease;
