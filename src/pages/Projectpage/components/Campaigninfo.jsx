@@ -21,9 +21,26 @@ import {
 import { Link as RouterLink } from 'react-router-dom';
 import { FiMail, FiTwitter, FiFacebook, FiInstagram } from 'react-icons/fi';
 import { GrValidate } from 'react-icons/gr';
+import { useState, useEffect } from 'react';
+import { useApi } from '../../../api';
 
 function Campaigninfo({ currentProject, fundingover }) {
   const color = useColorModeValue('var(--white)', 'var(--black)');
+
+  const [schedule, setSchedule] = useState({ currentMilestone: 0 });
+
+  const { fetchScheduleByCampaignId } = useApi();
+
+  useEffect(() => {
+    const fetchSchedule = async (_id) => {
+      const _schedule = await fetchScheduleByCampaignId(_id);
+      setSchedule(_schedule);
+    };
+
+    if (currentProject.campaignId && currentProject.nbMilestones) {
+      fetchSchedule(currentProject.campaignId);
+    }
+  }, [currentProject]);
 
   return (
     <>
@@ -95,8 +112,6 @@ function Campaigninfo({ currentProject, fundingover }) {
                 </Text>
 
                 <SpacerXSmall />
-                {/* nbMilestones: 0
-pctReleasePerMilestone: [] */}
 
                 <Flex direction="row" fontSize="20px">
                   <Spacer />
@@ -112,12 +127,24 @@ pctReleasePerMilestone: [] */}
                     <Text>Raised</Text>
                   </Flex>
                   <Spacer />
-                  <Flex direction="column" textAlign="center">
-                    <Text fontWeight="bold">${537222}</Text>
-                    <Text>Relesead</Text>
-                  </Flex>
-                  <Spacer />
                 </Flex>
+                {currentProject.nbMilestones && (
+                  <>
+                    <Text pb={2} mt={5}>
+                      Funds Released
+                    </Text>
+                    <Progress
+                      value={currentProject.pctReleasePerMilestone.reduce(
+                        (acc, cur, idx) =>
+                          idx < schedule.currentMilestone ? acc + cur : acc,
+                        0
+                      )}
+                      borderRadius={'10px'}
+                      height={'4px'}
+                      colorScheme="green"
+                    />
+                  </>
+                )}
 
                 <SpacerLarge />
 

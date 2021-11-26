@@ -80,7 +80,34 @@ export const useCampaignsContract = () => {
     return await contract.getAmountDonated(donor, campaignId, payToken);
   };
 
+  const claimInitialFunds = async (campaignId, from) => {
+    const contract = await getCampaignsContract();
+
+    const options = { from, gasPrice: getHigherGWEI() };
+
+    return await contract.claimInitialFunds(campaignId, options);
+  };
+
+  const claimNextFunds = async (campaignId, from) => {
+    const contract = await getCampaignsContract();
+
+    const options = { from, gasPrice: getHigherGWEI() };
+
+    return await contract.endVoteSession(campaignId, options);
+  };
+
+  const askMoreFunds = async (campaignId, from) => {
+    const contract = await getCampaignsContract();
+
+    const options = { from, gasPrice: getHigherGWEI() };
+
+    return await contract.askMoreFunds(campaignId, options);
+  };
+
   return {
+    askMoreFunds,
+    claimInitialFunds,
+    claimNextFunds,
     getAmountDonated,
     getCampaignsContract,
     addCampaign,

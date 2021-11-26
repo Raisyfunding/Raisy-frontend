@@ -82,7 +82,7 @@ function Preview({ currentProject, fundingover }) {
             <SpacerLarge />
             {fundingover ? (
               <div>
-                {currentProject.creator === account ? (
+                {currentProject.creator === account.toLowerCase() ? (
                   <div>
                     {currentProject.amountToRaise -
                       currentProject.amountRaised <
@@ -93,8 +93,8 @@ function Preview({ currentProject, fundingover }) {
                           marginLeft={'auto'}
                           marginRight={'auto'}
                         >
-                          The fundrelease has been as success ! Claim you funds
-                          now !
+                          The campaign has been a success ! Claim your funds now
+                          !
                         </Text>
                         <Button width={'100%'}>Claim your funds</Button>
                       </div>
