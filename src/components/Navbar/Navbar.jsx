@@ -16,87 +16,87 @@ import {
   useDisclosure,
   Image,
   Divider,
-} from '@chakra-ui/react'
+} from '@chakra-ui/react';
 import {
   HamburgerIcon,
   CloseIcon,
   ChevronDownIcon,
   ChevronRightIcon,
-} from '@chakra-ui/icons'
-import logo from '../../images/logot.png'
-import { MoonIcon, SunIcon } from '@chakra-ui/icons'
-import ModalActions from '../../redux/actions/modal.actions'
-import { useDispatch } from 'react-redux'
-import ConnectWalletModal from '../ConnectWalletModal'
-import { useSelector } from 'react-redux'
-import { useWeb3React } from '@web3-react/core'
-import { useEffect, useState } from 'react'
-import { shortenAddress } from '../../utils'
-import { useApi } from '../../api'
-import WalletConnectActions from '../../redux/actions/walletconnect.actions'
-import AuthActions from '../../redux/actions/auth.actions'
+} from '@chakra-ui/icons';
+import logo from '../../images/logot.png';
+import { MoonIcon, SunIcon } from '@chakra-ui/icons';
+import ModalActions from '../../redux/actions/modal.actions';
+import { useDispatch } from 'react-redux';
+import ConnectWalletModal from '../ConnectWalletModal';
+import { useSelector } from 'react-redux';
+import { useWeb3React } from '@web3-react/core';
+import { useEffect, useState } from 'react';
+import { shortenAddress } from '../../utils';
+import { useApi } from '../../api';
+import WalletConnectActions from '../../redux/actions/walletconnect.actions';
+import AuthActions from '../../redux/actions/auth.actions';
 
 export default function Navbar() {
-  const { isOpen, onToggle } = useDisclosure()
-  const { colorMode, toggleColorMode } = useColorMode()
-  const dispatch = useDispatch()
+  const { isOpen, onToggle } = useDisclosure();
+  const { colorMode, toggleColorMode } = useColorMode();
+  const dispatch = useDispatch();
 
   // eslint-disable-next-line no-unused-vars
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
-  const { connectWalletModalVisible } = useSelector((state) => state.Modal)
+  const { connectWalletModalVisible } = useSelector((state) => state.Modal);
 
-  const { account, chainId, deactivate } = useWeb3React()
+  const { account, chainId, deactivate } = useWeb3React();
 
-  const blackModeValue = useColorModeValue('var(--black)', 'var(--white)')
-  const whiteModeValue = useColorModeValue('var(--white)', 'var(--black)')
+  const blackModeValue = useColorModeValue('var(--black)', 'var(--white)');
+  const whiteModeValue = useColorModeValue('var(--white)', 'var(--black)');
 
-  const { getAuthToken, getAccountDetails } = useApi()
+  const { getAuthToken, getAccountDetails } = useApi();
 
   const login = async () => {
     try {
-      setLoading(true)
-      const token = await getAuthToken(account)
+      setLoading(true);
+      const token = await getAuthToken(account);
       // const isModerator = await getIsModerator(account);
-      const isModerator = false
+      const isModerator = false;
 
-      dispatch(WalletConnectActions.connectWallet(token, isModerator))
-      dispatch(AuthActions.fetchStart())
+      dispatch(WalletConnectActions.connectWallet(token, isModerator));
+      dispatch(AuthActions.fetchStart());
       try {
-        const { data } = await getAccountDetails(token)
-        dispatch(AuthActions.fetchSuccess(data))
+        const { data } = await getAccountDetails(token);
+        dispatch(AuthActions.fetchSuccess(data));
       } catch {
-        dispatch(AuthActions.fetchFailed())
+        dispatch(AuthActions.fetchFailed());
       }
-      setLoading(false)
+      setLoading(false);
     } catch {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   const init = () => {
-    login()
-  }
+    login();
+  };
 
   useEffect(() => {
     if (account) {
-      init()
+      init();
     } else {
-      handleSignOut()
+      handleSignOut();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [account, chainId])
+  }, [account, chainId]);
 
   const handleConnectWallet = () => {
-    dispatch(ModalActions.showConnectWalletModal())
-  }
+    dispatch(ModalActions.showConnectWalletModal());
+  };
 
   const handleSignOut = () => {
-    deactivate()
-    dispatch(WalletConnectActions.disconnectWallet())
-    dispatch(AuthActions.signOut())
+    deactivate();
+    dispatch(WalletConnectActions.disconnectWallet());
+    dispatch(AuthActions.signOut());
     // handleMenuClose();
-  }
+  };
 
   return (
     <Box>
@@ -217,17 +217,17 @@ export default function Navbar() {
         onClose={() => dispatch(ModalActions.hideConnectWalletModal())}
       />
     </Box>
-  )
+  );
 }
 
 const DesktopNav = () => {
-  const linkColor = useColorModeValue('var(--black)', 'var(--white)')
-  const linkHoverColor = useColorModeValue('var(--white)', 'var(--black)')
-  const linkHoverBg = useColorModeValue('var(--black)', 'var(--white)')
+  const linkColor = useColorModeValue('var(--black)', 'var(--white)');
+  const linkHoverColor = useColorModeValue('var(--white)', 'var(--black)');
+  const linkHoverBg = useColorModeValue('var(--black)', 'var(--white)');
   const popoverContentBgColor = useColorModeValue(
     'var(--white)',
     'var(--black)'
-  )
+  );
 
   return (
     <Stack direction={'row'} spacing={4}>
@@ -278,8 +278,8 @@ const DesktopNav = () => {
         </>
       ))}
     </Stack>
-  )
-}
+  );
+};
 
 const DesktopSubNav = ({ label, href, subLabel }) => {
   return (
@@ -315,8 +315,8 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
         </Flex>
       </Stack>
     </Link>
-  )
-}
+  );
+};
 
 const MobileNav = () => {
   return (
@@ -329,11 +329,11 @@ const MobileNav = () => {
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
     </Stack>
-  )
-}
+  );
+};
 
 const MobileNavItem = ({ label, children, href }) => {
-  const { isOpen, onToggle } = useDisclosure()
+  const { isOpen, onToggle } = useDisclosure();
 
   return (
     <Stack spacing={4} onClick={children && onToggle}>
@@ -382,8 +382,8 @@ const MobileNavItem = ({ label, children, href }) => {
         </Stack>
       </Collapse>
     </Stack>
-  )
-}
+  );
+};
 
 const NAV_ITEMS = [
   {
@@ -398,4 +398,4 @@ const NAV_ITEMS = [
     label: 'Search',
     href: '#',
   },
-]
+];
