@@ -1,9 +1,9 @@
 import { Image } from '@chakra-ui/image';
 import { Flex, Text, Box, Center, Spacer } from '@chakra-ui/layout';
-import { Vstack, Button, Link } from '@chakra-ui/react';
+import { Vstack, Button, Link, useToast } from '@chakra-ui/react';
 import { SpacerLarge } from '../../../styles/globalStyles';
 import Campaigninfo from './Campaigninfo';
-import React, { Suspense } from 'react';
+import React, { Suspense, useState } from 'react';
 import ReactPlayer from 'react-player';
 import styles from './styles.module.scss';
 import Loader from 'react-loader-spinner';
@@ -13,6 +13,8 @@ import security from '../../../images/security.png';
 import moneybag from '../../../images/moneybag.png';
 import handshake from '../../../images/handshake.png';
 import { useWeb3React } from '@web3-react/core';
+import { useCampaignsContract } from './../../../contracts/raisyCampaigns';
+import { formatError } from '../../../utils';
 
 const renderMedia = (image, contentType) => {
   if (contentType === 'video' || image?.includes('youtube')) {
@@ -51,8 +53,46 @@ const renderMedia = (image, contentType) => {
   }
 };
 
-function Preview({ currentProject, fundingover }) {
+function Preview({ currentProject, fundingover, schedule }) {
   const { account } = useWeb3React();
+
+  const { claimInitialFunds, claimNextFunds } = useCampaignsContract();
+  const toast = useToast();
+
+  const [claiming, setClaiming] = useState(false);
+
+  const handleClaimFunds = async () => {
+    if (claiming) return;
+
+    setClaiming(true);
+
+    try {
+      const tx =
+        schedule.currentMilestone === 0
+          ? await claimInitialFunds(currentProject.campaignId, account)
+          : await claimNextFunds(currentProject.campaignId, account);
+
+      await tx.wait();
+
+      toast({
+        title: 'You have successfully claimed your funds 🤝',
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+      });
+      setClaiming(false);
+    } catch (err) {
+      toast({
+        title: 'Error during funds claim on-chain',
+        description: formatError(err),
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+      setClaiming(false);
+    }
+  };
+
   return (
     <Flex direction="column" height="100vh">
       <Box marginLeft="10%" marginRight="10%" marginTop="2%">
@@ -78,6 +118,7 @@ function Preview({ currentProject, fundingover }) {
             <Campaigninfo
               currentProject={currentProject}
               fundingover={fundingover}
+              schedule={schedule}
             />
             <SpacerLarge />
             {fundingover ? (
@@ -96,7 +137,9 @@ function Preview({ currentProject, fundingover }) {
                           The campaign has been a success ! Claim your funds now
                           !
                         </Text>
-                        <Button width={'100%'}>Claim your funds</Button>
+                        <Button width={'100%'} onClick={handleClaimFunds}>
+                          Claim your funds
+                        </Button>
                       </div>
                     ) : (
                       <div></div>

@@ -12,9 +12,10 @@ import Space from './components/space';
 const Projectpage = () => {
   const { campaignId } = useParams();
 
-  const { fetchCampaignById } = useApi();
+  const { fetchCampaignById, fetchScheduleByCampaignId } = useApi();
 
   const [campaign, setCampaign] = useState({});
+  const [schedule, setSchedule] = useState({ currentMilestone: 0 });
 
   const [fundingover, setFundingover] = useState(false);
 
@@ -31,11 +32,18 @@ const Projectpage = () => {
   useEffect(() => {
     fetchCampaignById(campaignId).then((_campaign) => {
       setCampaign(_campaign.data);
-      console.log(campaign);
     });
     // react-hooks exhaustive-deps
   }, [campaignId]);
-  
+
+  useEffect(() => {
+    if (campaign.campaignId && campaign.nbMilestones) {
+      fetchScheduleByCampaignId(campaign.campaignId).then((_schedule) =>
+        _schedule && _schedule.data ? setSchedule(_schedule) : null
+      );
+    }
+  }, [campaign]);
+
   useEffect(() => {
     fundingOver();
     // react-hooks exhaustive-deps
@@ -55,11 +63,16 @@ const Projectpage = () => {
           return (
             <>
               <div className="section fp-auto-height">
-                <Preview currentProject={campaign} fundingover={fundingover} />
+                <Preview
+                  currentProject={campaign}
+                  fundingover={fundingover}
+                  schedule={schedule}
+                />
               </div>
               <div className="section fp-auto-height">
                 <Campaigndetail
                   currentProject={campaign}
+                  schedule={schedule}
                   fundingover={fundingover}
                 />
                 <Space />

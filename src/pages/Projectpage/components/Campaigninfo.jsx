@@ -20,27 +20,12 @@ import {
 
 import { Link as RouterLink } from 'react-router-dom';
 import { FiMail, FiTwitter, FiFacebook, FiInstagram } from 'react-icons/fi';
-import { GrValidate } from 'react-icons/gr';
-import { useState, useEffect } from 'react';
-import { useApi } from '../../../api';
+// import { GrValidate } from 'react-icons/gr';
+// import { useState, useEffect } from 'react';
+// import { useApi } from '../../../api';
 
-function Campaigninfo({ currentProject, fundingover }) {
+function Campaigninfo({ currentProject, fundingover, schedule }) {
   const color = useColorModeValue('var(--white)', 'var(--black)');
-
-  const [schedule, setSchedule] = useState({ currentMilestone: 0 });
-
-  const { fetchScheduleByCampaignId } = useApi();
-
-  useEffect(() => {
-    const fetchSchedule = async (_id) => {
-      const _schedule = await fetchScheduleByCampaignId(_id);
-      setSchedule(_schedule);
-    };
-
-    if (currentProject.campaignId && currentProject.nbMilestones) {
-      fetchSchedule(currentProject.campaignId);
-    }
-  }, [currentProject]);
 
   return (
     <>
@@ -128,7 +113,7 @@ function Campaigninfo({ currentProject, fundingover }) {
                   </Flex>
                   <Spacer />
                 </Flex>
-                {currentProject.nbMilestones && (
+                {currentProject.nbMilestones && schedule && (
                   <>
                     <Text pb={2} mt={5}>
                       Funds Released
