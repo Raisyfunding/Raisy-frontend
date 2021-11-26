@@ -74,7 +74,14 @@ export const useCampaignsContract = () => {
     return await contract.claimProofOfDonation(campaignId, options);
   };
 
+  const getAmountDonated = async (donor, campaignId, payToken) => {
+    const contract = await getCampaignsContract();
+
+    return await contract.getAmountDonated(donor, campaignId, payToken);
+  };
+
   return {
+    getAmountDonated,
     getCampaignsContract,
     addCampaign,
     addCampaignReleaseSchedule,

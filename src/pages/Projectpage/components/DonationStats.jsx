@@ -1,11 +1,13 @@
 import React from 'react';
 import { Button, Flex, Link, Text } from '@chakra-ui/react';
 import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import useTokens from './../../../hooks/useTokens';
 import { useWeb3React } from '@web3-react/core';
+import { useCampaignsContract } from '../../../contracts';
+import { ethers } from 'ethers';
 
-const DonationStats = () => {
+const DonationStats = ({ campaignId }) => {
   const { tokens: currencies } = useTokens();
 
   const { account } = useWeb3React();
@@ -13,6 +15,44 @@ const DonationStats = () => {
   const [endCampaign, setEndCampaign] = useState(false);
   const [enableWithdrawing, setEnableWithdrawing] = useState(true);
   const [amount, setAmount] = useState(100);
+
+  const [payTokens, setPayTokens] = useState(
+    currencies.map((c) => {
+      return { ...c, amountDonated: 0 };
+    })
+  );
+
+  const { getAmountDonated } = useCampaignsContract();
+
+  const updateAmountDonated = async (curr) => {
+    if (curr.address) {
+      let amountDonated = await getAmountDonated(
+        account,
+        campaignId,
+        curr.address
+      );
+      amountDonated = ethers.utils.formatUnits(amountDonated, curr.decimals);
+      return { ...curr, amountDonated };
+    }
+  };
+
+  const updateAllTokens = async () => {
+    const newCurrencies = await Promise.all(
+      currencies.map(async (_curr) => {
+        const newCurrency = await updateAmountDonated(_curr);
+        return newCurrency;
+      })
+    );
+
+    setPayTokens(newCurrencies);
+  };
+
+  useEffect(() => {
+    if (campaignId) {
+      updateAllTokens();
+    }
+  }, [currencies, campaignId]);
+
   return (
     <div>
       <Flex
@@ -30,10 +70,10 @@ const DonationStats = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {currencies.map((curr) => (
+            {payTokens.map((token) => (
               <Tr>
-                <Td>{curr.symbol}</Td>
-                <Td isNumeric>25.4</Td>
+                <Td>{token.symbol}</Td>
+                <Td isNumeric>{token.amountDonated}</Td>
               </Tr>
             ))}
           </Tbody>

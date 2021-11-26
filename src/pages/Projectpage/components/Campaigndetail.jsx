@@ -82,7 +82,7 @@ function Campaigndetail({ currentProject, fundingover }) {
                   />
                 </TabPanel>
                 <TabPanel>
-                  <DonationStats />
+                  <DonationStats campaignId={currentProject.campaignId} />
                 </TabPanel>
                 <TabPanel>
                   <ClaimPOD />

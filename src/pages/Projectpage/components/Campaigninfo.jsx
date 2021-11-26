@@ -102,7 +102,7 @@ pctReleasePerMilestone: [] */}
                   <Spacer />
                   <Flex direction="column" textAlign="center">
                     <Text fontWeight="bold">{currentProject.nbDonations}</Text>
-                    <Text>Donors</Text>
+                    <Text>Donations</Text>
                   </Flex>
                   <Spacer />
                   <Flex direction="column" textAlign="center">
@@ -178,7 +178,7 @@ pctReleasePerMilestone: [] */}
                 <Spacer />
                 <Flex direction="column" textAlign="center">
                   <Text fontWeight="bold">{currentProject.nbDonations}</Text>
-                  <Text>Donors</Text>
+                  <Text>Donations</Text>
                 </Flex>
                 <Spacer />
                 <Flex direction="column" textAlign="center">
