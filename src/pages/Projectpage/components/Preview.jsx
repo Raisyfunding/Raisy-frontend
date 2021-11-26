@@ -1,5 +1,6 @@
 import { Image } from '@chakra-ui/image'
 import { Flex, Text, Box, Center, Spacer } from '@chakra-ui/layout'
+import { Vstack } from '@chakra-ui/react'
 import { SpacerLarge } from '../../../styles/globalStyles'
 import Campaigninfo from './Campaigninfo'
 import React, { Suspense } from 'react'
@@ -11,6 +12,7 @@ import SuspenseImg from '../../../components/suspense'
 import security from '../../../images/security.png'
 import moneybag from '../../../images/moneybag.png'
 import handshake from '../../../images/handshake.png'
+import { useWeb3React } from '@web3-react/core'
 
 const renderMedia = (image, contentType) => {
   if (contentType === 'video' || image?.includes('youtube')) {
@@ -48,6 +50,7 @@ const renderMedia = (image, contentType) => {
 }
 
 function Preview({ currentProject, fundingover }) {
+  const { account } = useWeb3React()
   return (
     <Flex direction="column" height="100vh">
       <Box marginLeft="10%" marginRight="10%" marginTop="2%">
@@ -68,8 +71,18 @@ function Preview({ currentProject, fundingover }) {
             </Box>
           </Flex>
           <Spacer />
+
           <Box width="400px">
-            <Campaigninfo currentProject={currentProject} fundingover={fundingover}/>
+            <Campaigninfo
+              currentProject={currentProject}
+              fundingover={fundingover}
+            />
+            <SpacerLarge />
+            {
+              <Center>
+                <div>I'm creator</div>
+              </Center>
+            }
           </Box>
         </Flex>
       </Box>

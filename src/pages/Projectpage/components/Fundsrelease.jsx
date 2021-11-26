@@ -1,14 +1,22 @@
 import React from 'react'
-import { Text } from '@chakra-ui/react'
-import { Table, Thead, Tbody, Tr, Th, Td, TableCaption } from '@chakra-ui/react'
+import {
+  Text,
+  Box,
+  Center,
+  HStack,
+  VStack,
+  useColorModeValue,
+} from '@chakra-ui/react'
+import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react'
 import { useWeb3React } from '@web3-react/core'
+import Countdown from 'react-countdown'
 
 const Fundsrelease = ({ currentProject, fundingover }) => {
   const { account } = useWeb3React()
 
   return (
     <div>
-      <Text textAlign={'center'} fontSize={'3xl'}>
+      <Text textAlign={'center'} fontSize={'3xl'} fontWeight="bold">
         Funds release plan
       </Text>
       {console.log(currentProject)}
@@ -16,8 +24,6 @@ const Fundsrelease = ({ currentProject, fundingover }) => {
         <div>
           {console.log('dzeffz')}
           <Table variant="simple">
-            <TableCaption>Funding release for the creator</TableCaption>
-
             <Thead>
               <Tr>
                 <Th>Milestone</Th>
@@ -44,29 +50,8 @@ const Fundsrelease = ({ currentProject, fundingover }) => {
           </Text>
         </div>
       )}
-
-      {account ? (
-        <div>
-          {account === currentProject.creator ? (
-            <div></div>
-          ) : (
-            <div>connected i'm user</div>
-          )}
-        </div>
-      ) : (
-        <div></div>
-      )}
     </div>
   )
-}
-
-{
-  /* <div>
-<Text textAlign="center">
-  There isn't stagger release for this project, 100% of the collected
-  funds have been released !
-</Text>
-</div> */
 }
 
 export default Fundsrelease

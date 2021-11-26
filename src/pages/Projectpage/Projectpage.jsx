@@ -7,6 +7,7 @@ import { useColorModeValue } from '@chakra-ui/color-mode'
 import Campaigndetail from './components/Campaigndetail'
 import { useParams, Link, useHistory } from 'react-router-dom'
 import { useApi } from './../../api/index'
+import Space from './components/space'
 
 const Projectpage = () => {
   const { campaignId } = useParams()
@@ -25,7 +26,7 @@ const Projectpage = () => {
     if (dure > 0) {
       setFundingover(true)
     } else {
-      setFundingover(true)
+      setFundingover(false)
     }
   }
 
@@ -64,11 +65,8 @@ const Projectpage = () => {
                   currentProject={campaign}
                   fundingover={fundingover}
                 />
-                <SpacerMedium />
+                <Space />
                 <Footer />
-                <SpacerMedium />
-                <SpacerMedium />
-                <SpacerMedium />
               </div>
             </>
           )
