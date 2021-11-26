@@ -39,10 +39,17 @@ const Fundsrelease = ({ currentProject, fundingover }) => {
         </div>
       ) : (
         <div>
-          <Text textAlign="center">
-            There isn't staggered release for this project, 100% of the
-            collected funds have been released !
-          </Text>
+          {fundingover ? (
+            <Text textAlign="center">
+              There isn't staggered release for this project, 100% of the
+              collected funds have been released !
+            </Text>
+          ) : (
+            <Text textAlign="center">
+              There isn't staggered release for this project, 100% of the
+              collected funds will be directly released !
+            </Text>
+          )}
         </div>
       )}
     </div>

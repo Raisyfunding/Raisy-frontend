@@ -1,11 +1,12 @@
-import { Flex, Text, Box, Spacer, Center } from '@chakra-ui/layout'
-import { SpacerLarge, SpacerSmall } from '../../../styles/globalStyles'
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
-import VoteSession from './VoteSession'
-import Campaigninfo from './Campaigninfo'
-import React from 'react'
-import Fundsrelease from './Fundsrelease'
-import DonationStats from './DonationStats'
+import { Flex, Text, Box, Spacer, Center } from '@chakra-ui/layout';
+import { SpacerLarge, SpacerSmall } from '../../../styles/globalStyles';
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
+import VoteSession from './VoteSession';
+import Campaigninfo from './Campaigninfo';
+import React from 'react';
+import Fundsrelease from './Fundsrelease';
+import DonationStats from './DonationStats';
+import ClaimPOD from './ClaimPOD';
 
 function Campaigndetail({ currentProject, fundingover }) {
   return (
@@ -20,7 +21,12 @@ function Campaigndetail({ currentProject, fundingover }) {
                   <Tab>Rewards</Tab>
                   <Tab>Creator's details</Tab>
                   <Tab>Funds release</Tab>
-                  {fundingover ? <Tab>Vote</Tab> : <div></div>}
+                  <Tab>Your Stats</Tab>
+                  {fundingover && currentProject.nbMilestones ? (
+                    <Tab>Vote</Tab>
+                  ) : (
+                    <div></div>
+                  )}
 
                   <Tab display={fundingover ? 'flex' : 'none'}>Claim POD</Tab>
                 </TabList>
@@ -64,7 +70,7 @@ function Campaigndetail({ currentProject, fundingover }) {
                   </Flex>
                 </TabPanel>
                 <TabPanel>
-                  <DonationStats />
+                  <Text>Coming soon</Text>
                 </TabPanel>
                 <TabPanel>
                   <p>two!</p>
@@ -74,6 +80,12 @@ function Campaigndetail({ currentProject, fundingover }) {
                     currentProject={currentProject}
                     fundingover={fundingover}
                   />
+                </TabPanel>
+                <TabPanel>
+                  <DonationStats />
+                </TabPanel>
+                <TabPanel>
+                  <ClaimPOD />
                 </TabPanel>
                 <TabPanel>
                   <VoteSession
@@ -97,7 +109,7 @@ function Campaigndetail({ currentProject, fundingover }) {
       </Box>
       <SpacerLarge />
     </Flex>
-  )
+  );
 }
 
-export default Campaigndetail
+export default Campaigndetail;
