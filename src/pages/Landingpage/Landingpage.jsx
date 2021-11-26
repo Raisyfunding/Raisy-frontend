@@ -7,7 +7,7 @@ import WhyRaisy from './components/WhyRaisy'
 import { useApi } from './../../api'
 import { useSelector } from 'react-redux'
 import ReactFullpage from '@fullpage/react-fullpage'
-import FooterPage from './FooterPage'
+import FooterPage from './components/Footer/FooterPage'
 import StakingStats from './components/StakingStats'
 
 function Landingpage() {
@@ -32,7 +32,6 @@ function Landingpage() {
         //fullpage options
         licenseKey={'ED0D5DA5-596F41E0-B51F15B6-293EC91D'}
         scrollingSpeed={1000}
-        scrollOverflow={'true'}
         render={({ state, fullpageApi }) => {
           return (
             <>
@@ -50,7 +49,6 @@ function Landingpage() {
               </div>
               <div className="section fp-auto-height">
                 <FooterPage />
-                {/* <Footer /> */}
               </div>
             </>
           )
