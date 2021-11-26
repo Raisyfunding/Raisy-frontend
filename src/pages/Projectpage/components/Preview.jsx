@@ -136,11 +136,12 @@ function Preview({ currentProject, fundingover }) {
         </Flex>
       </Box>
       <Box
-        bg="#504D4D"
         width="100%"
         height="100px"
-        position="relative"
-        bottom="-58px"
+        position="fixed"
+        top="100vh"
+        marginTop="-167px"
+        bg="#27292b"
       >
         <Flex
           direction="row"

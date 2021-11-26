@@ -30,7 +30,7 @@ function Campaigninfo({ currentProject, fundingover }) {
       {fundingover ? (
         currentProject.amountToRaise - currentProject.amountRaised > 0 ? (
           <Flex direction="column">
-            <Box bg="#504D4D">
+            <Box bg="#27292b" borderRadius="15px">
               <Flex direction="column" height="100%" padding="15px">
                 <Text textAlign="center" fontSize="26px" fontWeight="bold">
                   {' '}
@@ -78,7 +78,7 @@ function Campaigninfo({ currentProject, fundingover }) {
           </Flex>
         ) : (
           <Flex direction="column">
-            <Box bg="#504D4D">
+            <Box bg="#27292b" borderRadius="15px">
               <Flex direction="column" height="100%" padding="15px">
                 <Text textAlign="center" fontSize="26px" fontWeight="bold">
                   {' '}
@@ -152,7 +152,7 @@ pctReleasePerMilestone: [] */}
         )
       ) : (
         <Flex direction="column">
-          <Box bg="#504D4D">
+          <Box bg="#27292b" borderRadius="15px">
             <Flex direction="column" height="100%" padding="15px">
               <Text textAlign={'justify'} fontSize="15px">
                 <span style={{ fontWeight: 'bold', fontSize: '20px' }}>

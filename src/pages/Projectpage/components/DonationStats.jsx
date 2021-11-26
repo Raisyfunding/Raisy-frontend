@@ -86,7 +86,9 @@ const DonationStats = ({ campaignId }) => {
         >
           Get your $RSY rewards !
         </Text>
-        <Button display={!account ? 'flex' : 'none'}>Connect</Button>
+        <Button display={!account ? 'flex' : 'none'} bg="#27292b">
+          Connect
+        </Button>
         <Flex display={account ? 'flex' : 'none'}>
           <Flex
             display={!endCampaign && !enableWithdrawing ? 'flex' : 'none'}

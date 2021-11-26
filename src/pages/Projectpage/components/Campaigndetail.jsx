@@ -7,11 +7,14 @@ import React from 'react';
 import Fundsrelease from './Fundsrelease';
 import DonationStats from './DonationStats';
 import ClaimPOD from './ClaimPOD';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 function Campaigndetail({ currentProject, fundingover }) {
+  const markdown = `Just a link: https://reactjs.com.`;
   return (
     <Flex direction="column" height="200vh">
-      <Box marginLeft="5%" marginRight="5%" marginTop="2%">
+      <Box marginLeft="5%" marginRight="10%" marginTop="2%">
         <Flex direction={{ base: 'column', md: 'row' }}>
           <Flex direction="column" width="900px">
             <Tabs>
@@ -33,47 +36,28 @@ function Campaigndetail({ currentProject, fundingover }) {
               </Center>
               <TabPanels>
                 <TabPanel>
-                  <Flex direction="row">
-                    <Flex direction="column">
-                      <Text
-                        marginTop="30px"
-                        textDecoration="underline"
-                        fontStyle="italic"
-                      >
-                        Story
-                      </Text>
-                      <Text
-                        marginTop="30px"
-                        textDecoration="underline"
-                        fontStyle="italic"
-                      >
-                        Overview
-                      </Text>
-                      <Text
-                        marginTop="30px"
-                        textDecoration="underline"
-                        fontStyle="italic"
-                      >
-                        Features
-                      </Text>
-                    </Flex>
-
-                    <Flex direction="column" paddingLeft="100px" width="700px">
-                      <Box>
-                        <Text fontSize="50px">Story</Text>
-                        <SpacerSmall />
-                        <Text fontSize="15px">
-                          {currentProject.description}
-                        </Text>
-                      </Box>
-                    </Flex>
-                  </Flex>
+                  <Box paddingLeft="100px" width="700px">
+                    <ReactMarkdown
+                      children={currentProject.description}
+                      remarkPlugins={[remarkGfm]}
+                    />
+                  </Box>
                 </TabPanel>
                 <TabPanel>
-                  <Text>Coming soon</Text>
+                  <Box paddingLeft="100px" width="700px">
+                    <ReactMarkdown
+                      children={markdown}
+                      remarkPlugins={[remarkGfm]}
+                    />
+                  </Box>
                 </TabPanel>
                 <TabPanel>
-                  <p>two!</p>
+                  <Box paddingLeft="100px" width="700px">
+                    <ReactMarkdown
+                      children={markdown}
+                      remarkPlugins={[remarkGfm]}
+                    />
+                  </Box>
                 </TabPanel>
                 <TabPanel>
                   <Fundsrelease
