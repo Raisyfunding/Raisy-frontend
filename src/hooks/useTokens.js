@@ -32,14 +32,14 @@ const Tokens = {
       icon: iconWBTC,
     },
   ],
-  [ChainId.MATIC_TESTNET]: [
-    {
-      address: '0x9c3c9283d3e44854697cd22d3faa240cfb032889',
-      name: 'Wrapped Matic',
-      symbol: 'WMATIC',
-      decimals: 18,
-      icon: iconWMATIC,
-    },
+  [ChainId.RINKEBY]: [
+    // {
+    //   address: '0xdf032bc4b9dc2782bb09352007d4c57b75160b15',
+    //   name: 'Wrapped Matic',
+    //   symbol: 'WMATIC',
+    //   decimals: 18,
+    //   icon: iconWMATIC,
+    // },
     {
       address: '0x528e3E530343fCD2f2c50D0858bb67282C8bfdF7',
       name: 'Raisy',
@@ -48,14 +48,14 @@ const Tokens = {
       icon: iconWMATIC,
     },
     {
-      address: '0x3c68ce8504087f89c640d02d133646d98e64ddd9',
+      address: '0xc778417e063141139fce010982780140aa0cd5ab',
       name: 'Wrapped Ether',
       symbol: 'WETH',
       decimals: 18,
       icon: iconWETH,
     },
     {
-      address: '0x0d787a4a1548f673ed375445535a6c7a1ee56180',
+      address: '0x577d296678535e4903d59a4c929b718e1d575e0a',
       name: 'Wrapped Bitcoin',
       symbol: 'WBTC',
       decimals: 8,
@@ -65,7 +65,7 @@ const Tokens = {
 };
 
 export default function useTokens() {
-  const chain = isMainnet ? ChainId.MATIC : ChainId.MATIC_TESTNET;
+  const chain = isMainnet ? ChainId.MATIC : ChainId.RINKEBY;
 
   const tokens = Tokens[chain];
 

@@ -8,7 +8,7 @@ const isMainnet = process.env.REACT_APP_ENV === 'MAINNET'
 export const useApi = () => {
   // eslint-disable-next-line no-unused-vars
   const explorerUrl =
-    EXPLORER_URL[isMainnet ? ChainId.MATIC : ChainId.MATIC_TESTNET]
+    EXPLORER_URL[isMainnet ? ChainId.MATIC : ChainId.RINKEBY]
 
   const apiUrl = isMainnet
     ? 'https://api.raisyfunding.com'

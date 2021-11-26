@@ -8,7 +8,7 @@ import { Contracts } from '../constants/network';
 
 // eslint-disable-next-line no-undef
 const isMainnet = process.env.REACT_APP_ENV === 'MAINNET';
-const CHAIN = isMainnet ? ChainId.MATIC : ChainId.MATIC_TESTNET;
+const CHAIN = isMainnet ? ChainId.MATIC : ChainId.RINKEBY;
 
 export const useCampaignsContract = () => {
   const { getContract } = useContract();
@@ -21,8 +21,9 @@ export const useCampaignsContract = () => {
     const contract = await getCampaignsContract();
     const args = [duration, amount];
 
+    console.log(args);
+
     const options = { from, gasPrice: getHigherGWEI() };
-    console.log(from);
 
     const gasEstimate = await contract.estimateGas[
       'addCampaign(uint256,uint256)'

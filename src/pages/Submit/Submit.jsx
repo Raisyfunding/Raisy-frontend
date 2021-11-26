@@ -277,9 +277,7 @@ function Submit() {
               (date.getTime() - new Date().getTime()) / 1000;
             const durationInBlocks =
               secondsDuration /
-              AVERAGE_BLOCK_TIME[
-                isMainnet ? ChainId.MATIC : ChainId.MATIC_TESTNET
-              ];
+              AVERAGE_BLOCK_TIME[isMainnet ? ChainId.MATIC : ChainId.RINKEBY];
 
             const pctMilestoneArray = pctMilestone.map(
               (pct) => parseInt(pct) * 100
@@ -290,7 +288,7 @@ function Submit() {
 
             if (staggered) {
               tx = await addCampaignReleaseSchedule(
-                100,
+                Math.floor(durationInBlocks),
                 ethers.utils.parseEther(amount),
                 pctMilestoneArray.length,
                 pctMilestoneArray,
@@ -298,7 +296,7 @@ function Submit() {
               );
             } else {
               tx = await addCampaign(
-                100,
+                Math.floor(durationInBlocks),
                 ethers.utils.parseEther(amount),
                 account
               );

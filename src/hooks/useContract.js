@@ -6,7 +6,7 @@ import { RPC_URL } from '../constants/network';
 
 // eslint-disable-next-line no-undef
 const isMainnet = process.env.REACT_APP_ENV === 'MAINNET';
-const CHAIN = isMainnet ? ChainId.MATIC : ChainId.MATIC_TESTNET;
+const CHAIN = isMainnet ? ChainId.MATIC : ChainId.RINKEBY;
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default () => {
@@ -25,7 +25,7 @@ export default () => {
       } else {
         const provider = new ethers.providers.JsonRpcProvider(
           RPC_URL[CHAIN],
-          isMainnet ? 137 : 80001
+          isMainnet ? 137 : 4
         );
 
         const contract = new ethers.Contract(address, abi, provider);

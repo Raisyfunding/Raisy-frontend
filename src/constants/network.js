@@ -9,7 +9,7 @@ export const NETWORK_LABEL = {
   [ChainId.FANTOM]: 'Fantom',
   [ChainId.FANTOM_TESTNET]: 'Fantom Testnet',
   [ChainId.MATIC]: 'Matic',
-  [ChainId.MATIC_TESTNET]: 'Matic Testnet',
+  [ChainId.RINKEBY]: 'Matic Testnet',
   [ChainId.XDAI]: 'xDai',
   [ChainId.BSC]: 'BSC',
   [ChainId.BSC_TESTNET]: 'BSC Testnet',
@@ -32,30 +32,30 @@ export const Contracts = {
     raisyTokenRegistry: '',
     raisyAddressRegistry: '',
   },
-  [ChainId.MATIC_TESTNET]: {
+  [ChainId.RINKEBY]: {
     raisyChef: '0x8833E49554eAC434db6dB0cB734F67b7b35d8862',
-    raisyCampaigns: '0x6821944AE224dC43d21C3B3E367204f7FA7a00de', // Proxy Address
-    raisyNFT: '0x4B4CD6961393353ec7D6e429E0B930DB99D4f7ec',
-    raisyPriceFeed: '0x69EEADEC31B227B3ceE08968A7666B99f2707291',
+    raisyCampaigns: '0xdBa991C797896596Eb44dc470560441cF99aD639', // Proxy Address
+    raisyNFT: '0xEc693DD101039555F4dD1B3772A8660b74Fd396D',
+    raisyPriceFeed: '0xbD390e6e01C25dEDF6010F8d4e8a6b19ac1f79AF',
     raisyToken: '0x528e3E530343fCD2f2c50D0858bb67282C8bfdF7',
-    raisyTokenRegistry: '0xdBa991C797896596Eb44dc470560441cF99aD639',
-    raisyAddressRegistry: '0x15A54ff85FD2fEF34312E1e2ECCb392A99989D4d',
+    raisyTokenRegistry: '0xB6e99416EbBb5E605f489FD5456dB762474A744c',
+    raisyAddressRegistry: '0x36DfA5f115D46C917608fdC15B3e9b8B4f268ACB',
   },
 };
 
 export const EXPLORER_URL = {
   [ChainId.MATIC]: 'https://polygonscan.com/',
-  [ChainId.MATIC_TESTNET]: 'https://mumbai.polygonscan.com/',
+  [ChainId.RINKEBY]: 'https://mumbai.polygonscan.com/',
 };
 
 export const RPC_URL = {
   [ChainId.MATIC]:
     'https://polygon-mainnet.g.alchemy.com/v2/aPcjgj5fHH3dxdhQFiqsm4ROAKa8oTIt',
-  [ChainId.MATIC_TESTNET]:
-    'https://polygon-mumbai.g.alchemy.com/v2/inzj9DkLzLHU_ufVjmpOgjRamnhKGuTL',
+  [ChainId.RINKEBY]:
+    'https://eth-rinkeby.alchemyapi.io/v2/RqYsVJ9S0hzvka5xcIlrw8T1Zvo0q3O1',
 };
 
 export const AVERAGE_BLOCK_TIME = {
   [ChainId.MATIC]: 2,
-  [ChainId.MATIC_TESTNET]: 2,
+  [ChainId.RINKEBY]: 15,
 };
