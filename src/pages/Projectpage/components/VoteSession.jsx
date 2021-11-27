@@ -1,21 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import {
-  Text,
-  Box,
-  Center,
-  HStack,
-  VStack,
-  useToast,
-  Button,
-} from '@chakra-ui/react';
+import React, { useState } from 'react';
+import { Text, Box, Center, useToast, Button } from '@chakra-ui/react';
 import { useWeb3React } from '@web3-react/core';
 import Countdown from 'react-countdown';
-import { toLower } from 'lodash';
 import { formatError } from '../../../utils';
 import { useCampaignsContract } from './../../../contracts';
 import { Flex } from '@chakra-ui/react';
+import VoteStats from './VoteStats';
 
-const VoteSession = ({ currentProject, fundingover }) => {
+const VoteSession = ({ currentProject, voteSession }) => {
   const { account } = useWeb3React();
 
   const [voting, setVoting] = useState(false);
@@ -60,6 +52,7 @@ const VoteSession = ({ currentProject, fundingover }) => {
             <div></div>
           ) : (
             <div>
+              {console.log(voteSession)}
               <Box>
                 <Box height="25px" />
                 <Text fontSize="3xl" textAlign="center" fontWeight="bold">
@@ -79,21 +72,7 @@ const VoteSession = ({ currentProject, fundingover }) => {
                 </Center>
                 <Box height="25px" />
                 <Center>
-                  <HStack>
-                    <Box>
-                      <VStack>
-                        <Text fontSize="3xl">256</Text>
-                        <Text fontSize="2xl">Total Donors</Text>
-                      </VStack>
-                    </Box>
-                    <Box width="50px" />
-                    <Box>
-                      <VStack>
-                        <Text fontSize="3xl">12</Text>
-                        <Text fontSize="2xl">Total votes</Text>
-                      </VStack>
-                    </Box>
-                  </HStack>
+                  <VoteStats voteSession={voteSession} />
                 </Center>
                 <Box height="50px" />
                 <Center>
@@ -105,7 +84,7 @@ const VoteSession = ({ currentProject, fundingover }) => {
                 <Center>
                   <Text textAlign="center" width="50%" marginTop="10px">
                     Only donation proof owners of this campaign will be able to
-                    vote against this funds release request
+                    vote
                   </Text>
                 </Center>
                 <Box height="20px" />
