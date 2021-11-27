@@ -71,7 +71,8 @@ const Projectpage = () => {
       <ReactFullpage
         licenseKey={'ED0D5DA5-596F41E0-B51F15B6-293EC91D'}
         scrollingSpeed={1000} /* Options here */
-        scrollOverflow={'true'}
+        dragAndMove={true}
+        responsiveWidth={992}
         render={({ state, fullpageApi }) => {
           return (
             <>

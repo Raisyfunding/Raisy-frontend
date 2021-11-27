@@ -177,9 +177,6 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
             {/* <Text textTransform="uppercase" textDecoration="underline" fontSize="13px" marginTop="-20px" marginLeft="5px">
                 {currentProject.category}
               </Text> */}
-            <Text fontSize="10px" marginLeft="5px">
-              Help us out! Don't delay give today!
-            </Text>
             <SpacerLarge />
             <Box height="350px">
               {renderMedia(currentProject.coverImageHash, 'image')}
