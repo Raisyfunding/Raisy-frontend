@@ -121,7 +121,7 @@ function Preview({ currentProject, fundingover, schedule }) {
               schedule={schedule}
             />
             <SpacerLarge />
-            {fundingover ? (
+            {fundingover && account ? (
               <div>
                 {currentProject.creator === account.toLowerCase() ? (
                   <div>
