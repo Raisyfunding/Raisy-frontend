@@ -143,7 +143,7 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
         duration: 9000,
         isClosable: true,
       });
-      setEnding(false);
+      setAsking(false);
     } catch (err) {
       toast({
         title: 'Error while asking more funds on-chain',
@@ -152,7 +152,7 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
         duration: 9000,
         isClosable: true,
       });
-      setEnding(false);
+      setAsking(false);
     }
   };
 
@@ -165,6 +165,10 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
       });
     }
   }, [voteSession]);
+
+  useEffect(() => {
+    console.log(schedule);
+  }, [schedule]);
 
   return (
     <Flex direction="column" height="100vh">
@@ -198,49 +202,58 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
                     {currentProject.amountToRaise -
                       currentProject.amountRaised <
                     0 ? (
-                      <div>
-                        {voteSession.inProgress && !isFinished ? (
-                          <div>Vote Stats</div>
-                        ) : (
-                          <div>
-                            {voteSession.inProgress ? (
-                              <div>
-                                <Button
-                                  width={'100%'}
-                                  onClick={handleEndVoteSession}
-                                  disabled={ending}
-                                >
-                                  End Vote Session
-                                </Button>
-                              </div>
+                      <>
+                        {schedule.currentMilestone > 0 ? (
+                          <>
+                            {' '}
+                            {voteSession.inProgress && !isFinished ? (
+                              <div>Vote Stats</div>
                             ) : (
                               <div>
-                                <Button
-                                  width={'100%'}
-                                  onClick={handleAskMoreFunds}
-                                  disabled={asking}
-                                >
-                                  Ask More Funds
-                                </Button>
+                                {voteSession.inProgress ? (
+                                  <div>
+                                    <Button
+                                      width={'100%'}
+                                      onClick={handleEndVoteSession}
+                                      disabled={ending}
+                                    >
+                                      End Vote Session
+                                    </Button>
+                                  </div>
+                                ) : (
+                                  <div>
+                                    <Button
+                                      width={'100%'}
+                                      onClick={handleAskMoreFunds}
+                                      disabled={asking}
+                                    >
+                                      Ask More Funds
+                                    </Button>
+                                  </div>
+                                )}
                               </div>
                             )}
-                          </div>
+                          </>
+                        ) : (
+                          <>
+                            <Text
+                              padding={'20px'}
+                              marginLeft={'auto'}
+                              marginRight={'auto'}
+                            >
+                              You can claim funds now ! Click on the button
+                              below
+                            </Text>
+                            <Button
+                              width={'100%'}
+                              onClick={handleClaimFunds}
+                              disabled={claiming}
+                            >
+                              Claim your funds
+                            </Button>
+                          </>
                         )}
-                        <Text
-                          padding={'20px'}
-                          marginLeft={'auto'}
-                          marginRight={'auto'}
-                        >
-                          You can claim funds now ! Click on the button below
-                        </Text>
-                        <Button
-                          width={'100%'}
-                          onClick={handleClaimFunds}
-                          disabled={claiming}
-                        >
-                          Claim your funds
-                        </Button>
-                      </div>
+                      </>
                     ) : (
                       <div></div>
                     )}

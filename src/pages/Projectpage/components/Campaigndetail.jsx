@@ -25,13 +25,10 @@ function Campaigndetail({ currentProject, fundingover, schedule }) {
                   <Tab>Creator's details</Tab>
                   <Tab>Funds release</Tab>
                   <Tab>Your Stats</Tab>
-                  {fundingover && (
-                    <Tab>Claim POD</Tab>
-                  )}
+                  {fundingover && <Tab>Claim POD</Tab>}
                   {fundingover && currentProject.nbMilestones && (
                     <Tab>Vote</Tab>
                   )}
-
                 </TabList>
               </Center>
               <TabPanels>
@@ -63,6 +60,7 @@ function Campaigndetail({ currentProject, fundingover, schedule }) {
                   <Fundsrelease
                     currentProject={currentProject}
                     fundingover={fundingover}
+                    schedule={schedule}
                   />
                 </TabPanel>
                 <TabPanel>
