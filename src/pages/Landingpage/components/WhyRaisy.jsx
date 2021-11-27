@@ -29,6 +29,8 @@ function WhyRaisy() {
           webkitTextFillColor: 'transparent',
         }}
         fontWeight={'900'}
+        margin={'auto'}
+        width={'95vw'}
       >
         WHY SHOULD I USE RAISY?
       </Text>
@@ -38,6 +40,8 @@ function WhyRaisy() {
         fontWeight={'400'}
         paddingTop={'30px'}
         paddingBottom={'30px'}
+        margin={'auto'}
+        width={'95vw'}
       >
         Join the Raisy experience. Raise funds, help people around the world
         without registration. <br /> Any idea or need can be funded, join us

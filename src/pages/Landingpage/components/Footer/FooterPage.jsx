@@ -22,6 +22,8 @@ const FooterPage = () => {
           webkitTextFillColor: 'transparent',
         }}
         fontWeight={'900'}
+        margin={'auto'}
+        width={'95vw'}
       >
         POWERED BY
       </Text>
@@ -31,6 +33,8 @@ const FooterPage = () => {
         fontWeight={'400'}
         paddingTop={'30px'}
         paddingBottom={'50px'}
+        margin={'auto'}
+        width={'95vw'}
       >
         Raisy takes advantage of industry leaders protocols. Discover them.
       </Text>

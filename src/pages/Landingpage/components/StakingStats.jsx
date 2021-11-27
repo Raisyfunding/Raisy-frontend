@@ -31,6 +31,8 @@ const StakingStats = () => {
           }}
           fontWeight={'900'}
           paddingBottom={'50px'}
+          margin={'auto'}
+          width={'95vw'}
         >
           RAISY STATS
         </Text>
