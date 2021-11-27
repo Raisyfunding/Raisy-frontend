@@ -11,7 +11,7 @@ import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
 import { useWeb3React } from '@web3-react/core';
 import Countdown from 'react-countdown';
 
-const Fundsrelease = ({ currentProject, fundingover }) => {
+const Fundsrelease = ({ currentProject, fundingover, schedule }) => {
   const { account } = useWeb3React();
 
   return (
@@ -31,7 +31,11 @@ const Fundsrelease = ({ currentProject, fundingover }) => {
                 <Tr>
                   <Td>{index}</Td>
                   <Td>{element}%</Td>
-                  <Td>25.4</Td>
+                  <Td>
+                    {schedule.currentMilestone > index
+                      ? 'Released'
+                      : 'Not Released'}
+                  </Td>
                 </Tr>
               </Tbody>
             ))}

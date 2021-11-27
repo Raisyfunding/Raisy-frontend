@@ -20,7 +20,7 @@ const Projectpage = () => {
 
   const [campaign, setCampaign] = useState({});
   const [voteSession, setVoteSession] = useState({});
-  const [schedule, setSchedule] = useState({ currentMilestone: 0 });
+  const [schedule, setSchedule] = useState({});
 
   const [fundingover, setFundingover] = useState(false);
 
@@ -42,17 +42,17 @@ const Projectpage = () => {
   }, [campaignId]);
 
   useEffect(() => {
-    if (campaign.campaignId && campaign.nbMilestones) {
+    if (campaign.campaignId !== undefined && campaign.nbMilestones) {
       fetchScheduleByCampaignId(campaign.campaignId).then((_schedule) =>
-        _schedule && _schedule.data ? setSchedule(_schedule) : null
+        _schedule && _schedule.data ? setSchedule(_schedule.data) : null
       );
     }
   }, [campaign]);
 
   useEffect(() => {
-    if (campaign.campaignId && campaign.nbMilestones) {
+    if (campaign.campaignId !== undefined && campaign.nbMilestones) {
       fetchVoteSessionByCampaignId(campaign.campaignId).then((_voteSession) =>
-        _voteSession && _voteSession.data ? setVoteSession(_voteSession) : null
+        _voteSession && _voteSession.data ? setVoteSession(_voteSession.data) : null
       );
     }
   }, [campaign]);
