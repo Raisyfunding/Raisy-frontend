@@ -8,6 +8,7 @@ const ProjectCard = ({ campaign }) => {
 
   return (
     <Flex
+      margin={'auto'}
       width={'300px'}
       height={'450px'}
       backgroundColor={useColorModeValue(

@@ -13,7 +13,7 @@ import decentralizedblack from '../../../images/decentralized_black.png';
 function WhyRaisy() {
   return (
     <Box
-      height="100vh"
+      height={{ base: '', lg: '100vh' }}
       width={'100vw'}
       backgroundImage={'/images/wavebg.png'}
       backgroundRepeat={'no-repeat'}
@@ -44,14 +44,15 @@ function WhyRaisy() {
         now.
       </Text>
       <Flex
-        flexDirection={'row'}
+        flexDirection={{ base: 'column', md: 'row' }}
         width={'100vw'}
         gridGap={'50px'}
         padding={'50px'}
         justifyContent={'center'}
       >
         <Flex
-          width={'320px'}
+          width={{ base: '250px', sm: '320px' }}
+          margin={{ base: 'auto', lg: 'unset' }}
           height={'330px'}
           _hover={{ opacity: '0.8' }}
           backgroundColor={useColorModeValue(
@@ -89,7 +90,8 @@ function WhyRaisy() {
           </Text>
         </Flex>
         <Flex
-          width={'320px'}
+          margin={{ base: 'auto', lg: 'unset' }}
+          width={{ base: '250px', sm: '320px' }}
           _hover={{ opacity: '0.8' }}
           height={'330px'}
           backgroundColor={useColorModeValue(
@@ -127,7 +129,8 @@ function WhyRaisy() {
           </Text>
         </Flex>
         <Flex
-          width={'320px'}
+          margin={{ base: 'auto', lg: 'unset' }}
+          width={{ base: '250px', sm: '320px' }}
           height={'330px'}
           _hover={{ opacity: '0.8' }}
           backgroundColor={useColorModeValue(
@@ -165,104 +168,6 @@ function WhyRaisy() {
           </Text>
         </Flex>
       </Flex>
-
-      {/* <VStack spacing="5em">
-        <HStack spacing="8em">
-          <Flex direction="column">
-            <Image
-              src={useColorModeValue(decentralizedblack, decentralizedwhite)}
-              margin="auto"
-              width="64px"
-            />
-            <SpacerXSmall />
-            <Text
-              fontSize="1xl"
-              style={{ textAlign: 'center' }}
-              fontWeight="bold"
-            >
-              Decentralized
-            </Text>
-          </Flex>
-          <Flex direction="column" alignItems="center">
-            <Image
-              src={useColorModeValue(togetherblack, togetherwhite)}
-              width="64px"
-            />
-            <SpacerXSmall />
-            <Text
-              fontSize="1xl"
-              style={{ textAlign: 'center' }}
-              fontWeight="bold"
-            >
-              Community-driven
-            </Text>
-          </Flex>
-          <Flex direction="column">
-            <Image
-              src={useColorModeValue(shieldblack, shieldwhite)}
-              width="64px"
-            />
-            <SpacerXSmall />
-            <Text
-              fontSize="1xl"
-              style={{ textAlign: 'center' }}
-              fontWeight="bold"
-            >
-              Secured
-            </Text>
-          </Flex>
-          <Flex direction="column" alignItems="center">
-            <Image
-              src={useColorModeValue(rewardBlack, rewardWhite)}
-              width="64px"
-            />
-            <SpacerXSmall />
-            <Text
-              fontSize="1xl"
-              style={{ textAlign: 'center' }}
-              fontWeight="bold"
-            >
-              Reward-based
-            </Text>
-          </Flex>
-        </HStack>
-        <HStack spacing="8em">
-          <Flex direction="column">
-            <Image
-              src={useColorModeValue(searchblack, searchwhite)}
-              margin="auto"
-              width="160px"
-              alignSelf="center"
-            />
-            <SpacerXSmall />
-            <Text
-              fontSize="2xl"
-              style={{ textAlign: 'center' }}
-              fontWeight="bold"
-              marginTop="10px"
-            >
-              Ready? Explore !
-            </Text>
-          </Flex>
-          <Box width="1px" height="150px" bg="var(--blue)"></Box>
-          <Flex direction="column">
-            <Image
-              src={useColorModeValue(inspirationblack, inspirationwhite)}
-              width="160px"
-              alignSelf="center"
-            />
-            <SpacerXSmall />
-            <Text
-              fontSize="2xl"
-              style={{ textAlign: 'center' }}
-              fontWeight="bold"
-              marginTop="10px"
-            >
-              inspired? Let's go !
-            </Text>
-          </Flex>
-        </HStack>
-      </VStack> */}
     </Box>
   );
 }

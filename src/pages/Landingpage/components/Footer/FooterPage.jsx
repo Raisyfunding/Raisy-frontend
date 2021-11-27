@@ -11,7 +11,7 @@ import alchemywhite from '../../../../images/alchemy-logo-white.png';
 
 const FooterPage = () => {
   return (
-    <Box height="100vh" width={'100vw'}>
+    <Box height={{ base: '', lg: '100vh' }} width={'100vw'}>
       <Text
         fontSize={{ base: '4xl', md: '5xl', lg: '6xl' }}
         style={{
