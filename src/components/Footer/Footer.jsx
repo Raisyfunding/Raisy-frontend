@@ -55,7 +55,7 @@ export default function Footer() {
       bg={useColorModeValue('var(--white)', 'var(--black)')}
       color={useColorModeValue('var(--black)', 'var(--white)')}
       justifyContent={'center'}
-      position={'absolute'}
+      position={{ base: 'unset', lg: 'absolute' }}
       bottom={'50px'}
       width={'100vw'}
     >
@@ -65,7 +65,11 @@ export default function Footer() {
           spacing={{ base: 8, md: 15, lg: 20 }}
           margin="auto"
         >
-          <Stack spacing={6} margin="auto">
+          <Stack
+            spacing={6}
+            margin="auto"
+            display={{ base: 'none', md: 'flex' }}
+          >
             <Box>
               <Image src={logo} width={{ base: '80px', lg: '100px' }} />
             </Box>
@@ -161,6 +165,34 @@ export default function Footer() {
                 aria-label="Subscribe"
                 icon={<BiMailSend />}
               />
+            </Stack>
+          </Stack>
+          <Stack spacing={6} display={{ base: 'flex', md: 'none' }}>
+            <Box>
+              <Image src={logo} width={{ base: '80px', lg: '100px' }} />
+            </Box>
+          </Stack>
+          <Stack
+            direction={'column'}
+            spacing={6}
+            display={{ base: 'flex', md: 'none' }}
+            margin={'auto'}
+          >
+            {' '}
+            <Text fontSize={'sm'}>© 2020 BG Labs. All rights reserved</Text>
+            <Stack direction={'row'} spacing={6}>
+              <SocialButton label={'Twitter'} href={'#'}>
+                <FaTwitter />
+              </SocialButton>
+              <SocialButton label={'YouTube'} href={'#'}>
+                <FaYoutube />
+              </SocialButton>
+              <SocialButton label={'Discord'} href={'#'}>
+                <FaDiscord />
+              </SocialButton>
+              <SocialButton label={'Medium'} href={'#'}>
+                <FaMedium />
+              </SocialButton>
             </Stack>
           </Stack>
         </SimpleGrid>

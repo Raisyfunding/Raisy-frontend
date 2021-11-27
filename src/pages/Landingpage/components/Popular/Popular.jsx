@@ -1,64 +1,65 @@
-import React from 'react'
-import ProjectCard from './ProjectCard'
-import { CarouselProvider, Slider, Slide } from 'pure-react-carousel'
-import 'pure-react-carousel/dist/react-carousel.es.css'
-import { Flex, Text, Box } from '@chakra-ui/react'
-import './styles.css'
+import React from 'react';
+import ProjectCard from './ProjectCard';
+import { CarouselProvider, Slider, Slide } from 'pure-react-carousel';
+import 'pure-react-carousel/dist/react-carousel.es.css';
+import { Flex, Text, Box } from '@chakra-ui/react';
+import './styles.css';
 
-import { SUCCESS_CAMP } from './successCamp'
+import { SUCCESS_CAMP } from './successCamp';
 
 export default class Popular extends React.Component {
   constructor(props) {
-    super(props)
-    this.handleWindowResize = this.handleWindowResize.bind(this)
-    this.setTotalSlides = this.setTotalSlides.bind(this)
+    super(props);
+    this.handleWindowResize = this.handleWindowResize.bind(this);
+    this.setTotalSlides = this.setTotalSlides.bind(this);
     this.state = {
       totalSlides: this.computeTotalSlides(),
-    }
+    };
   }
 
   componentWillUnmount() {
-    window.clearTimeout(this.throttle)
-    window.removeEventListener('resize', this.handleWindowResize, false)
+    window.clearTimeout(this.throttle);
+    window.removeEventListener('resize', this.handleWindowResize, false);
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this.handleWindowResize, false)
+    window.addEventListener('resize', this.handleWindowResize, false);
   }
 
   computeTotalSlides() {
     const width = Math.max(
       document.documentElement.clientWidth,
       window.innerWidth || 0
-    )
+    );
 
-    if (width < 800) {
-      return 1 // show 1 slides
-    } else if (width > 1150) {
-      return 3 // show 1 slides
+    if (width < 935) {
+      return 1; // show 1 slides
+    } else if (width > 1250) {
+      return 3; // show 1 slides
     } else {
-      return 2
+      return 2;
     }
   }
 
   setTotalSlides() {
-    const totalSlides = this.computeTotalSlides()
-    if (this.state.totalSlides !== totalSlides) this.setState({ totalSlides })
+    const totalSlides = this.computeTotalSlides();
+    if (this.state.totalSlides !== totalSlides) this.setState({ totalSlides });
   }
 
   handleWindowResize() {
-    window.clearTimeout(this.throttle)
-    this.throttle = window.setTimeout(this.setTotalSlides, 400)
+    window.clearTimeout(this.throttle);
+    this.throttle = window.setTimeout(this.setTotalSlides, 400);
   }
   render() {
     return (
       <div>
         <Box
-          height={'100vh'}
+          height={{ base: 'unset', lg: '100vh' }}
           width={'100vw'}
           backgroundImage={'/images/test2.png'}
           backgroundRepeat={'no-repeat'}
           backgroundSize={'cover'}
+          paddingBottom={{ base: '120px', sm: '0px' }}
         >
           <Box
             flexDir="column"
@@ -90,19 +91,24 @@ export default class Popular extends React.Component {
             >
               Explore the trending campaigns on Raisy.
             </Text>
-            <Box>
+            <Box margin={'auto'}>
               <CarouselProvider
                 totalSlides={SUCCESS_CAMP.length}
                 visibleSlides={this.state.totalSlides}
                 isIntrinsicHeight={true}
                 isPlaying={true}
                 interval={4000}
+                //dragStep = {this.state.totalSlides}
               >
                 <Flex maxWidth={'95vw'}>
                   <Slider classNameTray="slider-tray">
                     {this.props.popularCampaigns.length > 0 &&
                       this.props.popularCampaigns.map((campaign, n) => (
-                        <Slide index={n}>
+                        <Slide
+                          index={n}
+                          naturalSlideHeight={'450px'}
+                          naturalSlideWidth={'300px'}
+                        >
                           <ProjectCard campaign={campaign} />
                         </Slide>
                       ))}
@@ -113,6 +119,6 @@ export default class Popular extends React.Component {
           </Box>
         </Box>
       </div>
-    )
+    );
   }
 }
