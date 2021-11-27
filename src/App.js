@@ -1,4 +1,4 @@
-import { Navbar, Footer } from './components/index';
+import { Navbar } from './components/index';
 import {
   Landingpage,
   Helppage,

@@ -1,13 +1,5 @@
-import {
-  Button,
-  Flex,
-  Image,
-  Text,
-  Textarea,
-  useColorModeValue,
-} from '@chakra-ui/react';
+import { Box, Flex, Image, Text, useColorModeValue } from '@chakra-ui/react';
 import React from 'react';
-import Marquee from 'react-fast-marquee';
 import decentralizedwhite from '../../../images/decentralized_white.png';
 import decentralizedblack from '../../../images/decentralized_black.png';
 
@@ -15,7 +7,7 @@ const StakingStats = () => {
   const priceRaisy = 10;
   return (
     <div>
-      <Flex
+      <Box
         flexDirection={'column'}
         width={'100vw'}
         height={{ base: '', lg: '100vh' }}
@@ -31,6 +23,8 @@ const StakingStats = () => {
           }}
           fontWeight={'900'}
           paddingBottom={'50px'}
+          margin={'auto'}
+          width={'95vw'}
         >
           RAISY STATS
         </Text>
@@ -260,7 +254,7 @@ const StakingStats = () => {
             </Flex>
           </Flex>
         </Flex>
-      </Flex>
+      </Box>
     </div>
   );
 };

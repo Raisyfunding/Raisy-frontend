@@ -1,4 +1,3 @@
-import { Image } from '@chakra-ui/image';
 import { Button, useColorModeValue } from '@chakra-ui/react';
 import { Flex, Text, Box } from '@chakra-ui/layout';
 

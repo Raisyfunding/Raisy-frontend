@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Screen } from '../../styles/globalStyles';
-import { Flex, useColorModeValue } from '@chakra-ui/react';
+import { useColorModeValue } from '@chakra-ui/react';
 import Landing from './components/Landing';
 import Popular from './components/Popular/Popular';
 import WhyRaisy from './components/WhyRaisy';
 import { useApi } from './../../api';
-import { useSelector } from 'react-redux';
 import ReactFullpage from '@fullpage/react-fullpage';
 import FooterPage from './components/Footer/FooterPage';
 import StakingStats from './components/StakingStats';
-import { RemoveScrollBar } from 'react-remove-scroll-bar';
 
 function Landingpage() {
   const { fetchAllCampaigns } = useApi();

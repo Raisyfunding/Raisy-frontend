@@ -1,4 +1,3 @@
-import { HStack, VStack } from '@chakra-ui/react';
 import { Box, Flex, Text } from '@chakra-ui/layout';
 import { useColorModeValue } from '@chakra-ui/color-mode';
 import { Image } from '@chakra-ui/image';
@@ -29,6 +28,8 @@ function WhyRaisy() {
           webkitTextFillColor: 'transparent',
         }}
         fontWeight={'900'}
+        margin={'auto'}
+        width={'95vw'}
       >
         WHY SHOULD I USE RAISY?
       </Text>
@@ -38,6 +39,8 @@ function WhyRaisy() {
         fontWeight={'400'}
         paddingTop={'30px'}
         paddingBottom={'30px'}
+        margin={'auto'}
+        width={'95vw'}
       >
         Join the Raisy experience. Raise funds, help people around the world
         without registration. <br /> Any idea or need can be funded, join us

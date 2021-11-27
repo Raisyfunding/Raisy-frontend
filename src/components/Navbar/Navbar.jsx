@@ -49,7 +49,6 @@ export default function Navbar() {
   const { account, chainId, deactivate } = useWeb3React();
 
   const blackModeValue = useColorModeValue('var(--black)', 'var(--white)');
-  const whiteModeValue = useColorModeValue('var(--white)', 'var(--black)');
 
   const { getAuthToken, getAccountDetails } = useApi();
 
@@ -175,6 +174,7 @@ export default function Navbar() {
           </Button>
           {account ? (
             <Box
+              display={{ base: 'none', lg: 'flex' }}
               fontSize={{ base: 'sm', md: 'md' }}
               fontWeight={600}
               padding={{ base: '5px', md: '10px' }}
@@ -187,6 +187,7 @@ export default function Navbar() {
             </Box>
           ) : (
             <Button
+              display={{ base: 'none', lg: 'flex' }}
               as={'a'}
               fontSize={{ base: 'sm', md: 'md' }}
               fontWeight={600}
@@ -218,8 +219,6 @@ export default function Navbar() {
 
 const DesktopNav = () => {
   const linkColor = useColorModeValue('var(--black)', 'var(--white)');
-  const linkHoverColor = useColorModeValue('var(--white)', 'var(--black)');
-  const linkHoverBg = useColorModeValue('var(--black)', 'var(--white)');
   const popoverContentBgColor = useColorModeValue(
     'var(--white)',
     'var(--black)'
@@ -313,12 +312,94 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
 };
 
 const MobileNav = () => {
+  const dispatch = useDispatch();
+
+  // eslint-disable-next-line no-unused-vars
+  const [loading, setLoading] = useState(false);
+
+  const { account, chainId, deactivate } = useWeb3React();
+
+  const blackModeValue = useColorModeValue('var(--black)', 'var(--white)');
+
+  const { getAuthToken, getAccountDetails } = useApi();
+
+  const login = async () => {
+    try {
+      setLoading(true);
+      const token = await getAuthToken(account);
+      // const isModerator = await getIsModerator(account);
+      const isModerator = false;
+
+      dispatch(WalletConnectActions.connectWallet(token, isModerator));
+      dispatch(AuthActions.fetchStart());
+      try {
+        const { data } = await getAccountDetails(token);
+        dispatch(AuthActions.fetchSuccess(data));
+      } catch {
+        dispatch(AuthActions.fetchFailed());
+      }
+      setLoading(false);
+    } catch {
+      setLoading(false);
+    }
+  };
+
+  const init = () => {
+    login();
+  };
+
+  useEffect(() => {
+    if (account) {
+      init();
+    } else {
+      handleSignOut();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [account, chainId]);
+
+  const handleConnectWallet = () => {
+    dispatch(ModalActions.showConnectWalletModal());
+  };
+
+  const handleSignOut = () => {
+    deactivate();
+    dispatch(WalletConnectActions.disconnectWallet());
+    dispatch(AuthActions.signOut());
+    // handleMenuClose();
+  };
   return (
     <Stack
       bg={useColorModeValue('var(--white)', 'var(--black)')}
       p={4}
       display={{ md: 'none' }}
     >
+      {account ? (
+        <Box
+          fontWeight={600}
+          _focus={{ outline: 'none !important' }}
+          _hover={{
+            opacity: '0.4',
+          }}
+          marginTop={'0.5em'}
+        >
+          {shortenAddress(account)}
+        </Box>
+      ) : (
+        <Button
+          as={'a'}
+          fontWeight={600}
+          variant={'link'}
+          color={blackModeValue}
+          href={'#'}
+          _focus={{ outline: 'none !important' }}
+          _hover={{
+            opacity: '0.4',
+          }}
+          onClick={handleConnectWallet}
+        >
+          Login
+        </Button>
+      )}
       {NAV_ITEMS.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}

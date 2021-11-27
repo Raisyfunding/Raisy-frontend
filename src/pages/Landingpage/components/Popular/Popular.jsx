@@ -80,6 +80,7 @@ export default class Popular extends React.Component {
                 webkitTextFillColor: 'transparent',
               }}
               fontWeight={'900'}
+              margin={'auto'}
             >
               POPULAR CAMPAIGNS
             </Text>
@@ -88,6 +89,7 @@ export default class Popular extends React.Component {
               style={{ textAlign: 'center' }}
               fontWeight={'400'}
               paddingBottom={'50px'}
+              margin={'auto'}
             >
               Explore the trending campaigns on Raisy.
             </Text>
