@@ -162,6 +162,7 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
         const _isFinished =
           _blockNumber >= voteSession.startBlock + VOTE_SESSION_DURATION;
         setIsFinished(_isFinished);
+        console.log(_blockNumber);
       });
     }
   }, [voteSession]);
@@ -170,8 +171,13 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
     console.log(schedule);
   }, [schedule]);
 
+  useEffect(() => {
+    console.log(voteSession);
+  }, [voteSession]);
+
   return (
     <Flex direction="column" height="100vh">
+      {console.log(voteSession)}
       <Box marginLeft="10%" marginRight="10%" marginTop="2%">
         <Flex direction={{ base: 'column', md: 'row' }}>
           <Flex direction="column" width="700px">
