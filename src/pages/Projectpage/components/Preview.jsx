@@ -158,7 +158,7 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
 
   useEffect(() => {
     if (voteSession.startBlock) {
-      getBlockNumber.then((_blockNumber) => {
+      getBlockNumber().then((_blockNumber) => {
         const _isFinished =
           _blockNumber >= voteSession.startBlock + VOTE_SESSION_DURATION;
         setIsFinished(_isFinished);

@@ -21,16 +21,12 @@ export const useCampaignsContract = () => {
     const contract = await getCampaignsContract();
     const args = [duration, amount];
 
-    console.log(args);
-
     const options = { from, gasPrice: getHigherGWEI() };
 
     const gasEstimate = await contract.estimateGas[
       'addCampaign(uint256,uint256)'
     ](...args, options);
     options.gasLimit = calculateGasMargin(gasEstimate);
-
-    console.log(gasEstimate);
 
     return await contract['addCampaign(uint256,uint256)'](...args, options);
   };

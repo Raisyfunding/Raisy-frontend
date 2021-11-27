@@ -26,9 +26,9 @@ const VoteSession = ({ currentProject, fundingover }) => {
                   <Text fontSize="1xl" textAlign="center" width="80%">
                     {' '}
                     The campaign creator asked for a{' '}
-                    <span style={{ fontWeight: 'bold' }}>20%</span> funds release,
-                    if most of the users vote to interrupt it during the
-                    meantime, the request will be canceled. 3 consecutives
+                    <span style={{ fontWeight: 'bold' }}>20%</span> funds
+                    release, if most of the users vote to interrupt it during
+                    the meantime, the request will be canceled. 3 consecutives
                     failed request will give a refund of all donors.
                   </Text>
                 </Center>
