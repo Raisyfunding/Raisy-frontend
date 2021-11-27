@@ -49,7 +49,6 @@ export default function Navbar() {
   const { account, chainId, deactivate } = useWeb3React();
 
   const blackModeValue = useColorModeValue('var(--black)', 'var(--white)');
-  const whiteModeValue = useColorModeValue('var(--white)', 'var(--black)');
 
   const { getAuthToken, getAccountDetails } = useApi();
 
@@ -220,8 +219,6 @@ export default function Navbar() {
 
 const DesktopNav = () => {
   const linkColor = useColorModeValue('var(--black)', 'var(--white)');
-  const linkHoverColor = useColorModeValue('var(--white)', 'var(--black)');
-  const linkHoverBg = useColorModeValue('var(--black)', 'var(--white)');
   const popoverContentBgColor = useColorModeValue(
     'var(--white)',
     'var(--black)'
@@ -315,19 +312,14 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
 };
 
 const MobileNav = () => {
-  const { isOpen, onToggle } = useDisclosure();
-  const { colorMode, toggleColorMode } = useColorMode();
   const dispatch = useDispatch();
 
   // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(false);
 
-  const { connectWalletModalVisible } = useSelector((state) => state.Modal);
-
   const { account, chainId, deactivate } = useWeb3React();
 
   const blackModeValue = useColorModeValue('var(--black)', 'var(--white)');
-  const whiteModeValue = useColorModeValue('var(--white)', 'var(--black)');
 
   const { getAuthToken, getAccountDetails } = useApi();
 
@@ -403,7 +395,6 @@ const MobileNav = () => {
           _hover={{
             opacity: '0.4',
           }}
-          href={'#'}
           onClick={handleConnectWallet}
         >
           Login

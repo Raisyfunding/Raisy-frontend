@@ -1,4 +1,3 @@
-import { HStack, VStack } from '@chakra-ui/react';
 import { Box, Flex, Text } from '@chakra-ui/layout';
 import { useColorModeValue } from '@chakra-ui/color-mode';
 import { Image } from '@chakra-ui/image';
