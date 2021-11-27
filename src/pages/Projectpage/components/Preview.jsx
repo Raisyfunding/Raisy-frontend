@@ -3,7 +3,7 @@ import { Flex, Text, Box, Center, Spacer } from '@chakra-ui/layout';
 import { Vstack, Button, Link, useToast } from '@chakra-ui/react';
 import { SpacerLarge } from '../../../styles/globalStyles';
 import Campaigninfo from './Campaigninfo';
-import React, { Suspense, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
 import styles from './styles.module.scss';
 import Loader from 'react-loader-spinner';
@@ -15,6 +15,7 @@ import handshake from '../../../images/handshake.png';
 import { useWeb3React } from '@web3-react/core';
 import { useCampaignsContract } from './../../../contracts/raisyCampaigns';
 import { formatError } from '../../../utils';
+import useBlockNumber from '../../../hooks/useBlockNumber';
 
 const renderMedia = (image, contentType) => {
   if (contentType === 'video' || image?.includes('youtube')) {
@@ -53,13 +54,20 @@ const renderMedia = (image, contentType) => {
   }
 };
 
-function Preview({ currentProject, fundingover, schedule }) {
+function Preview({ currentProject, fundingover, schedule, voteSession }) {
   const { account } = useWeb3React();
 
-  const { claimInitialFunds, claimNextFunds } = useCampaignsContract();
+  const { claimInitialFunds, claimNextFunds, askMoreFunds } =
+    useCampaignsContract();
   const toast = useToast();
+  const { getBlockNumber } = useBlockNumber();
 
   const [claiming, setClaiming] = useState(false);
+  const [ending, setEnding] = useState(false);
+  const [asking, setAsking] = useState(false);
+  const [isFinished, setIsFinished] = useState(false);
+
+  const VOTE_SESSION_DURATION = 84200;
 
   const handleClaimFunds = async () => {
     if (claiming) return;
@@ -67,10 +75,7 @@ function Preview({ currentProject, fundingover, schedule }) {
     setClaiming(true);
 
     try {
-      const tx =
-        schedule.currentMilestone === 0
-          ? await claimInitialFunds(currentProject.campaignId, account)
-          : await claimNextFunds(currentProject.campaignId, account);
+      const tx = await claimInitialFunds(currentProject.campaignId, account);
 
       await tx.wait();
 
@@ -92,6 +97,74 @@ function Preview({ currentProject, fundingover, schedule }) {
       setClaiming(false);
     }
   };
+
+  const handleEndVoteSession = async () => {
+    if (ending) return;
+
+    setEnding(true);
+
+    try {
+      const tx = await claimNextFunds(currentProject.campaignId, account);
+
+      await tx.wait();
+
+      toast({
+        title: 'The vote session is now closed 💯',
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+      });
+      setEnding(false);
+    } catch (err) {
+      toast({
+        title: 'Error while ending vote session on-chain',
+        description: formatError(err),
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+      setEnding(false);
+    }
+  };
+
+  const handleAskMoreFunds = async () => {
+    if (asking) return;
+
+    setAsking(true);
+
+    try {
+      const tx = await askMoreFunds(currentProject.campaignId, account);
+
+      await tx.wait();
+
+      toast({
+        title: 'You have successfully requested more funds 💰',
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+      });
+      setEnding(false);
+    } catch (err) {
+      toast({
+        title: 'Error while asking more funds on-chain',
+        description: formatError(err),
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+      setEnding(false);
+    }
+  };
+
+  useEffect(() => {
+    if (voteSession.startBlock) {
+      getBlockNumber.then((_blockNumber) => {
+        const _isFinished =
+          _blockNumber >= voteSession.startBlock + VOTE_SESSION_DURATION;
+        setIsFinished(_isFinished);
+      });
+    }
+  }, [voteSession]);
 
   return (
     <Flex direction="column" height="100vh">
@@ -129,13 +202,39 @@ function Preview({ currentProject, fundingover, schedule }) {
                       currentProject.amountRaised <
                     0 ? (
                       <div>
+                        {voteSession.inProgress && !isFinished ? (
+                          <div>Vote Stats</div>
+                        ) : (
+                          <div>
+                            {voteSession.inProgress ? (
+                              <div>
+                                <Button
+                                  width={'100%'}
+                                  onClick={handleEndVoteSession}
+                                  disabled={ending}
+                                >
+                                  End Vote Session
+                                </Button>
+                              </div>
+                            ) : (
+                              <div>
+                                <Button
+                                  width={'100%'}
+                                  onClick={handleAskMoreFunds}
+                                  disabled={asking}
+                                >
+                                  Ask More Funds
+                                </Button>
+                              </div>
+                            )}
+                          </div>
+                        )}
                         <Text
                           padding={'20px'}
                           marginLeft={'auto'}
                           marginRight={'auto'}
                         >
-                          The campaign has been a success ! Claim your funds now
-                          !
+                          You can claim funds now ! Click on the button below
                         </Text>
                         <Button
                           width={'100%'}
@@ -199,7 +298,7 @@ function Preview({ currentProject, fundingover, schedule }) {
           <Spacer />
           <Box maxWidth="200px">
             <Text fontSize="16px" color="white">
-              Raisy connects Creators with Donars to fund their project
+              Raisy connects Creators with donors to fund their project
             </Text>
             <Center>
               <Image
@@ -214,7 +313,7 @@ function Preview({ currentProject, fundingover, schedule }) {
           <Spacer />
           <Box maxWidth="200px">
             <Text fontSize="16px" color="white">
-              Releases partial fund after inspecting the Progress of the project
+              Releases partial fund after inspecting the progress of the project
             </Text>
             <Center>
               <Image
