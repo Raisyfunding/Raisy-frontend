@@ -151,8 +151,7 @@ export default function Navbar() {
             color={useColorModeValue('var(--black)', 'var(--white)')}
             _focus={{ outline: 'none !important' }}
             _hover={{
-              bg: useColorModeValue('var(--black)', 'var(--white)'),
-              color: useColorModeValue('var(--white)', 'var(--black)'),
+              opacity: '0.4',
             }}
           >
             {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
@@ -169,8 +168,7 @@ export default function Navbar() {
             padding={{ base: '5px', md: '10px' }}
             _focus={{ outline: 'none !important' }}
             _hover={{
-              bg: useColorModeValue('var(--black)', 'var(--white)'),
-              color: useColorModeValue('var(--white)', 'var(--black)'),
+              opacity: '0.4',
             }}
           >
             Start a campaign
@@ -182,8 +180,7 @@ export default function Navbar() {
               padding={{ base: '5px', md: '10px' }}
               _focus={{ outline: 'none !important' }}
               _hover={{
-                bg: blackModeValue,
-                color: whiteModeValue,
+                opacity: '0.4',
               }}
             >
               {shortenAddress(account)}
@@ -199,8 +196,7 @@ export default function Navbar() {
               padding={{ base: '5px', md: '10px' }}
               _focus={{ outline: 'none !important' }}
               _hover={{
-                bg: blackModeValue,
-                color: whiteModeValue,
+                opacity: '0.4',
               }}
               onClick={handleConnectWallet}
             >
@@ -245,9 +241,7 @@ const DesktopNav = () => {
                   color={linkColor}
                   _focus={{ outline: 'none !important' }}
                   _hover={{
-                    textDecoration: 'none',
-                    color: linkHoverColor,
-                    bg: linkHoverBg,
+                    opacity: '0.4',
                   }}
                 >
                   {navItem.label}
@@ -273,7 +267,7 @@ const DesktopNav = () => {
             </Popover>
           </Box>
           {index === 1 ? (
-            <Divider orientation="vertical" borderColor={linkColor} />
+            <Divider orientation="vertical" borderColor={'var(--blue)'} />
           ) : null}
         </>
       ))}
@@ -289,7 +283,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
       display={'block'}
       p={2}
       rounded={'md'}
-      _hover={{ bg: useColorModeValue('var(--red)', 'var(--black)') }}
+      _hover={{ opacity: '0.4' }}
     >
       <Stack direction={'row'} align={'center'}>
         <Box>
@@ -391,7 +385,7 @@ const NAV_ITEMS = [
     href: 'explore',
   },
   {
-    label: 'How it Works',
+    label: 'Get Started',
     href: 'help',
   },
   {

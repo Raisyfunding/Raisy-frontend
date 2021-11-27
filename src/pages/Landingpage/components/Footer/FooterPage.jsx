@@ -1,13 +1,13 @@
-import React from 'react'
-import Footer from '../../../../components/Footer/Footer'
-import { Text, Image, useColorModeValue, Box } from '@chakra-ui/react'
-import Marquee from 'react-fast-marquee'
-import chainlink from '../../../../images/chainlink.png'
-import avalanche from '../../../../images/avalanche.png'
-import chainlinkwhite from '../../../../images/chainlinkwhite.png'
-import avalanchewhite from '../../../../images/avalanchewhite.png'
-import alchemy from '../../../../images/alchemy-logo-black.png'
-import alchemywhite from '../../../../images/alchemy-logo-white.png'
+import React from 'react';
+import Footer from '../../../../components/Footer/Footer';
+import { Text, Image, useColorModeValue, Box } from '@chakra-ui/react';
+import Marquee from 'react-fast-marquee';
+import chainlink from '../../../../images/chainlink.png';
+import avalanche from '../../../../images/avalanche.png';
+import chainlinkwhite from '../../../../images/chainlinkwhite.png';
+import avalanchewhite from '../../../../images/avalanchewhite.png';
+import alchemy from '../../../../images/alchemy-logo-black.png';
+import alchemywhite from '../../../../images/alchemy-logo-white.png';
 
 const FooterPage = () => {
   return (
@@ -23,7 +23,7 @@ const FooterPage = () => {
         }}
         fontWeight={'900'}
       >
-        RAISY USES
+        POWERED BY
       </Text>
       <Text
         fontSize={{ base: '1xl', md: '2xl', lg: '2xl' }}
@@ -32,28 +32,28 @@ const FooterPage = () => {
         paddingTop={'30px'}
         paddingBottom={'50px'}
       >
-        Raisy uses the best protocols out there. Discover them here.
+        Raisy takes advantage of industry leaders protocols. Discover them.
       </Text>
       <Marquee gradientColor={useColorModeValue([255, 255, 255], [0, 0, 0])}>
         <Image
           src={useColorModeValue(chainlink, chainlinkwhite)}
-          height={'200px'}
+          height={'190px'}
           padding={'50px'}
         />
         <Image
           src={useColorModeValue(avalanche, avalanchewhite)}
-          height={'200px'}
+          height={'190px'}
           padding={'50px'}
         />
         <Image
           src={useColorModeValue(alchemy, alchemywhite)}
-          height={'200px'}
+          height={'190px'}
           padding={'50px'}
         />
       </Marquee>
       <Footer />
     </Box>
-  )
-}
+  );
+};
 
-export default FooterPage
+export default FooterPage;

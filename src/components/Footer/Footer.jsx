@@ -10,11 +10,11 @@ import {
   Input,
   IconButton,
   useColorModeValue,
-} from '@chakra-ui/react'
-import { Image } from '@chakra-ui/image'
-import { FaTwitter, FaDiscord, FaYoutube, FaMedium } from 'react-icons/fa'
-import { BiMailSend } from 'react-icons/bi'
-import logo from '../../images/logot.png'
+} from '@chakra-ui/react';
+import { Image } from '@chakra-ui/image';
+import { FaTwitter, FaDiscord, FaYoutube, FaMedium } from 'react-icons/fa';
+import { BiMailSend } from 'react-icons/bi';
+import logo from '../../images/logot.png';
 
 const SocialButton = ({ children, label, href }) => {
   return (
@@ -32,23 +32,22 @@ const SocialButton = ({ children, label, href }) => {
       justifyContent={'center'}
       transition={'background 0.3s ease'}
       _hover={{
-        bg: useColorModeValue('var(--black)', 'var(--white)'),
-        color: useColorModeValue('var(--white)', 'var(--black)'),
+        opacity: '0.4',
       }}
     >
       <VisuallyHidden>{label}</VisuallyHidden>
       {children}
     </chakra.button>
-  )
-}
+  );
+};
 
 const ListHeader = ({ children }) => {
   return (
     <Text fontWeight={'500'} fontSize={'lg'} mb={2}>
       {children}
     </Text>
-  )
-}
+  );
+};
 
 export default function Footer() {
   return (
@@ -60,10 +59,11 @@ export default function Footer() {
       bottom={'50px'}
       width={'100vw'}
     >
-      <Container as={Stack} maxW={'6xl'} py={10}>
+      <Container as={Stack} maxWidth={'none'} py={10} flexDirection={'row'}>
         <SimpleGrid
-          templateColumns={{ sm: '1fr 1fr', md: '2fr 1fr 1fr 2fr' }}
-          spacing={8}
+          templateColumns={{ sm: '1fr 1fr', md: '2fr 1fr 1fr 1fr 2fr' }}
+          spacing={{ base: 8, md: 15, lg: 20 }}
+          margin="auto"
         >
           <Stack spacing={6} margin="auto">
             <Box>
@@ -104,6 +104,21 @@ export default function Footer() {
             </Link>
           </Stack>
           <Stack align={'flex-start'}>
+            <ListHeader>Get Started</ListHeader>
+            <Link href={'#'} _focus={{ outline: 'none !important' }}>
+              Fund Raising
+            </Link>
+            <Link href={'#'} _focus={{ outline: 'none !important' }}>
+              Donations
+            </Link>
+            <Link href={'#'} _focus={{ outline: 'none !important' }}>
+              Token
+            </Link>
+            <Link href={'#'} _focus={{ outline: 'none !important' }}>
+              Proof of Donation
+            </Link>
+          </Stack>
+          <Stack align={'flex-start'}>
             <ListHeader>Support</ListHeader>
             <Link href={'#'} _focus={{ outline: 'none !important' }}>
               Help Center
@@ -121,7 +136,7 @@ export default function Footer() {
               Satus
             </Link>
           </Stack>
-          <Stack align={'flex-start'} margin="auto" marginLeft="0">
+          <Stack margin="auto" marginLeft="0">
             <ListHeader>Stay up to date</ListHeader>
             <Stack direction={'row'}>
               <Input
@@ -141,8 +156,7 @@ export default function Footer() {
                 bg={useColorModeValue('var(--white)', 'var(--black)')}
                 color={useColorModeValue('var(--black)', 'var(--white)')}
                 _hover={{
-                  bg: useColorModeValue('var(--black)', 'var(--white)'),
-                  color: useColorModeValue('var(--white)', 'var(--black)'),
+                  opacity: '0.4',
                 }}
                 aria-label="Subscribe"
                 icon={<BiMailSend />}
@@ -152,5 +166,5 @@ export default function Footer() {
         </SimpleGrid>
       </Container>
     </Box>
-  )
+  );
 }
