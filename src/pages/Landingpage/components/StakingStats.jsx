@@ -209,7 +209,18 @@ const StakingStats = () => {
                     margin={'auto'}
                   />
                 </Flex>
-                <Text fontSize={'5xl'} fontWeight={'900'} margin={'auto'}>
+                <Text
+                  fontSize={'5xl'}
+                  fontWeight={'900'}
+                  margin={'auto'}
+                  style={{
+                    textAlign: 'center',
+                    background:
+                      '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                    webkitBackgroundClip: 'text',
+                    webkitTextFillColor: 'transparent',
+                  }}
+                >
                   3 billion
                 </Text>
                 <Text fontSize={'2xl'} fontWeight={'800'} marginTop={'auto'}>
@@ -285,10 +296,9 @@ const StakingStats = () => {
               )}
               borderRadius={'50px'}
               border={'1px solid'}
-              borderColor={useColorModeValue(
-                'rgba(235, 235, 235, 1)',
-                'rgba(25,25,25,1)'
-              )}
+              style={{
+                borderColor: 'rgba(78, 213, 186, 1)',
+              }}
               padding={'20px'}
               flexDirection={'column'}
             >
