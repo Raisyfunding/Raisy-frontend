@@ -10,7 +10,7 @@ import ClaimPOD from './ClaimPOD';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
-function Campaigndetail({ currentProject, fundingover, schedule }) {
+function Campaigndetail({ currentProject, fundingover, schedule, voteSession }) {
   const markdown = `Just a link: https://reactjs.com.`;
   return (
     <Flex direction="column" height="200vh">
@@ -25,13 +25,10 @@ function Campaigndetail({ currentProject, fundingover, schedule }) {
                   <Tab>Creator's details</Tab>
                   <Tab>Funds release</Tab>
                   <Tab>Your Stats</Tab>
-                  {fundingover && (
-                    <Tab>Claim POD</Tab>
-                  )}
+                  {fundingover && <Tab>Claim POD</Tab>}
                   {fundingover && currentProject.nbMilestones && (
                     <Tab>Vote</Tab>
                   )}
-
                 </TabList>
               </Center>
               <TabPanels>
@@ -76,6 +73,7 @@ function Campaigndetail({ currentProject, fundingover, schedule }) {
                     currentProject={currentProject}
                     fundingover={fundingover}
                     schedule={schedule}
+                    voteSession={voteSession}
                   />
                 </TabPanel>
               </TabPanels>

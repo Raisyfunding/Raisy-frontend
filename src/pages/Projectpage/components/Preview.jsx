@@ -208,13 +208,15 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
                           <div>
                             {voteSession.inProgress ? (
                               <div>
-                                <Button
-                                  width={'100%'}
-                                  onClick={handleEndVoteSession}
-                                  disabled={ending}
-                                >
-                                  End Vote Session
-                                </Button>
+                                <div>
+                                  <Button
+                                    width={'100%'}
+                                    onClick={handleEndVoteSession}
+                                    disabled={ending}
+                                  >
+                                    voting session in progress
+                                  </Button>
+                                </div>
                               </div>
                             ) : (
                               <div>

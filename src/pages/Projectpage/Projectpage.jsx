@@ -88,6 +88,7 @@ const Projectpage = () => {
                   currentProject={campaign}
                   schedule={schedule}
                   fundingover={fundingover}
+                  voteSession={voteSession}
                 />
                 <Space />
                 <Footer />
