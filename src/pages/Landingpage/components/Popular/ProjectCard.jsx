@@ -22,6 +22,7 @@ const ProjectCard = ({ campaign }) => {
       )}
       padding={'20px'}
       flexDirection={'column'}
+      _hover={{ opacity: '0.8' }}
     >
       <Image
         width={'300px'}

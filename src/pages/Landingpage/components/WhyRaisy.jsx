@@ -1,14 +1,14 @@
-import { HStack, VStack } from '@chakra-ui/react'
-import { Box, Flex, Text } from '@chakra-ui/layout'
-import { useColorModeValue } from '@chakra-ui/color-mode'
-import { Image } from '@chakra-ui/image'
-import React from 'react'
-import PODwhite from '../../../images/POD_white.png'
-import PODblack from '../../../images/POD_black.png'
-import communitywhite from '../../../images/community_white.png'
-import communityblack from '../../../images/community_black.png'
-import decentralizedwhite from '../../../images/decentralized_white.png'
-import decentralizedblack from '../../../images/decentralized_black.png'
+import { HStack, VStack } from '@chakra-ui/react';
+import { Box, Flex, Text } from '@chakra-ui/layout';
+import { useColorModeValue } from '@chakra-ui/color-mode';
+import { Image } from '@chakra-ui/image';
+import React from 'react';
+import PODwhite from '../../../images/POD_white.png';
+import PODblack from '../../../images/POD_black.png';
+import communitywhite from '../../../images/community_white.png';
+import communityblack from '../../../images/community_black.png';
+import decentralizedwhite from '../../../images/decentralized_white.png';
+import decentralizedblack from '../../../images/decentralized_black.png';
 
 function WhyRaisy() {
   return (
@@ -53,6 +53,7 @@ function WhyRaisy() {
         <Flex
           width={'320px'}
           height={'330px'}
+          _hover={{ opacity: '0.8' }}
           backgroundColor={useColorModeValue(
             'rgba(255,255,255,1)',
             'rgba(21,21,21,.64)'
@@ -89,6 +90,7 @@ function WhyRaisy() {
         </Flex>
         <Flex
           width={'320px'}
+          _hover={{ opacity: '0.8' }}
           height={'330px'}
           backgroundColor={useColorModeValue(
             'rgba(255,255,255,1)',
@@ -127,6 +129,7 @@ function WhyRaisy() {
         <Flex
           width={'320px'}
           height={'330px'}
+          _hover={{ opacity: '0.8' }}
           backgroundColor={useColorModeValue(
             'rgba(255,255,255,1)',
             'rgba(21,21,21,.64)'
@@ -261,7 +264,7 @@ function WhyRaisy() {
         </HStack>
       </VStack> */}
     </Box>
-  )
+  );
 }
 
-export default WhyRaisy
+export default WhyRaisy;
