@@ -17,8 +17,8 @@ import {
   Stack,
   Link,
   useToast,
+  Box,
 } from '@chakra-ui/react';
-import Footer from '../../components/Footer/Footer.jsx';
 import DatePicker from 'react-datepicker';
 import { useSelector } from 'react-redux';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -55,6 +55,14 @@ function Submit() {
   const { addCampaign, addCampaignReleaseSchedule } = useCampaignsContract();
 
   const currentColor = useColorModeValue('var(--black)', 'var(--white)');
+  const currentBackground = useColorModeValue(
+    'rgba(255,255,255,1)',
+    'rgba(21,21,21,.64)'
+  );
+  const currentBorder = useColorModeValue(
+    'rgba(235, 235, 235, 1)',
+    'rgba(21,21,21,.64)'
+  );
 
   const isMainnet = process.env.REACT_APP_ENV === 'MAINNET';
 
@@ -169,12 +177,34 @@ function Submit() {
 
   const CustomInput = forwardRef(({ value, onClick }, ref) => (
     <Input
+      borderRadius={'50px'}
+      width={{
+        base: '200px',
+        sm: '400px',
+        md: '500px',
+        lg: '500px',
+        xl: '600px',
+      }}
+      backgroundColor={useColorModeValue(
+        'rgba(255,255,255,1)',
+        'rgba(234,234,234,.6)'
+      )}
+      borderColor={useColorModeValue(
+        'rgba(235, 235, 235, 1)',
+        'rgba(230,230,230,1)'
+      )}
+      _focus={{ outline: 'none !important' }}
+      border={'1px solid'}
+      height={'60px'}
+      placeholder="Pick a Date"
+      _placeholder={{ color: 'rgba(150,150,150,1)', fontWeight: '550' }}
+      color="rgba(150,150,150,1)"
+      fontWeight="550"
       textAlign={'center'}
       isRequired={'true'}
-      borderColor={useColorModeValue('var(--black)', 'var(--white)')}
       onClick={onClick}
       ref={ref}
-      readOnly
+      readOnly={'true'}
       value={value}
     />
   ));
@@ -386,298 +416,623 @@ function Submit() {
     <Screen
       style={{
         backgroundColor: useColorModeValue('var(--white)', 'var(--black)'),
+        backgroundImage: '/images/dotwhite.png',
       }}
     >
-      <Text
-        textAlign="center"
-        paddingTop={'20px'}
-        fontSize={{ base: '3xl', lg: '4xl', xl: '5xl' }}
-        paddingBottom={'40px'}
-      >
-        Submit a project
-      </Text>
-      <Flex
-        flexDirection={'column'}
-        maxWidth={'70vw'}
-        paddingLeft={'20px'}
-        paddingBottom={'50px'}
-        margin={'auto'}
+      <Box
+        backgroundImage="/images/test.png"
+        backgroundRepeat={'no-repeat'}
+        backgroundSize={'cover'}
       >
         <Text
-          color={useColorModeValue('var(--black)', 'var(--white)')}
-          marginBottom={'5px'}
-          fontSize={'1.5em'}
+          fontSize={{ base: '5xl', sm: '7xl', md: '7xl', lg: '7xl', xl: '8xl' }}
+          style={{
+            background:
+              '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+            webkitBackgroundClip: 'text',
+            webkitTextFillColor: 'transparent',
+          }}
+          fontWeight={'900'}
+          width={'95vw'}
+          marginLeft={'auto'}
         >
-          Title of your campaign *
+          SUBMIT A CAMPAIGN.
         </Text>
         <Text
-          color={useColorModeValue('var(--black)', 'var(--white)')}
-          marginBottom={'10px'}
-          fontStyle={'italic'}
+          fontSize={{ base: '2xl', md: '3xl', lg: '3xl' }}
+          fontWeight={'400'}
+          paddingTop={'30px'}
+          paddingBottom={'30px'}
+          width={'95vw'}
+          marginLeft={'auto'}
         >
-          Be concise and to the point
+          Start your campaign by filling out this form.
+          <br />
+          It will take you a few minutes.
         </Text>
-        <Input
-          colorScheme={'red'}
-          placeholder="Title of the campaign"
-          isRequired={'true'}
-          isInvalid={titleError}
-          onBlur={validateTitle}
-          maxLength={30}
-          onChange={handleChangeTitle}
-          value={title}
-          borderColor={useColorModeValue('var(--black)', 'var(--white)')}
-          variant={title.length > 0 ? 'filled' : 'outline'}
-          border={title.length > 0 ? 'none' : 'solid 1px'}
-        />
-        <Flex flexDirection={'row'} paddingBottom={'50px'}>
-          <Text color={'red'}>{titleError}</Text>
+        <Flex
+          flexDirection={'column'}
+          width={'95vw'}
+          marginLeft={'auto'}
+          paddingBottom={'50px'}
+        >
+          <Text
+            style={{
+              background:
+                '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+              webkitBackgroundClip: 'text',
+              webkitTextFillColor: 'transparent',
+            }}
+            fontWeight={'900'}
+            marginBottom={'5px'}
+            fontSize={'2em'}
+          >
+            Title of your campaign
+          </Text>
           <Text
             color={useColorModeValue('var(--black)', 'var(--white)')}
-            marginLeft={'auto'}
+            marginBottom={'10px'}
+            fontStyle={'italic'}
+            width={{
+              base: '200px',
+              sm: '400px',
+              md: '500px',
+              lg: '500px',
+              xl: '600px',
+            }}
           >
-            {title.length}/30
+            Be concise and to the point
           </Text>
-        </Flex>
-        <Text
-          color={useColorModeValue('var(--black)', 'var(--white)')}
-          marginBottom={'5px'}
-          fontSize={'1.5em'}
-        >
-          Description of your project *
-        </Text>
-        <Text
-          color={useColorModeValue('var(--black)', 'var(--white)')}
-          marginBottom={'10px'}
-          fontStyle={'italic'}
-          textAlign={'justify'}
-        >
-          Please provide a detailed description of your campaign, so that users
-          can get an idea of the campaign. Be creative, and precise.
-        </Text>
-        <MDEditor value={description} onChange={setDescription} />
-        <Text
-          paddingTop={'50px'}
-          color={useColorModeValue('var(--black)', 'var(--white)')}
-          marginBottom={'5px'}
-          fontSize={'1.5em'}
-        >
-          Image/Video of presentation*
-        </Text>
-        <Text
-          color={useColorModeValue('var(--black)', 'var(--white)')}
-          marginBottom={'10px'}
-          fontStyle={'italic'}
-          textAlign={'justify'}
-        >
-          Please provide an Image or a Video to illustrate your campaign
-        </Text>
-        <div {...getRootProps()}>
-          <input {...getInputProps()} />
-          {isDragActive ? (
-            <p
-              style={{
-                border: 'dashed 2px',
-                borderRadius: '7px',
-                paddingTop: '100px',
-                paddingBottom: '100px',
-                textAlign: 'center',
-              }}
-            >
-              Drop the files here ...
-            </p>
-          ) : (
-            <p
-              style={{
-                border: 'dashed 1px',
-                borderRadius: '7px',
-                paddingTop: '100px',
-                paddingBottom: '100px',
-                textAlign: 'center',
-              }}
-            >
-              Drag and drop some files here, or click to select files
-            </p>
-          )}
-        </div>
-        <aside style={thumbsContainer}>{thumbs}</aside>
-        <Text
-          color={useColorModeValue('var(--black)', 'var(--white)')}
-          marginBottom={'5px'}
-          paddingTop={'50px'}
-          fontSize={'1.5em'}
-        >
-          Amount to raise *
-        </Text>
-        <Text
-          color={useColorModeValue('var(--black)', 'var(--white)')}
-          marginBottom={'10px'}
-          fontStyle={'italic'}
-          textAlign={'justify'}
-        >
-          Please provide the amount you want to raise.
-        </Text>
-        <InputGroup>
-          <InputLeftElement
-            zIndex={'1'}
-            pointerEvents="none"
-            fontSize="1.2em"
-            children="$"
-          />
           <Input
+            borderRadius={'50px'}
+            width={{
+              base: '200px',
+              sm: '400px',
+              md: '500px',
+              lg: '500px',
+              xl: '600px',
+            }}
+            backgroundColor={useColorModeValue(
+              'rgba(255,255,255,1)',
+              'rgba(21,21,21,.64)'
+            )}
+            borderColor={useColorModeValue(
+              'rgba(235, 235, 235, 1)',
+              'rgba(25,25,25,1)'
+            )}
+            border={'1px solid'}
+            height={'60px'}
+            _placeholder={{ color: 'rgba(150,150,150,1)', fontWeight: '550' }}
             colorScheme={'red'}
-            type={'number'}
-            placeholder="Amount to raise"
+            placeholder="Title of the campaign *"
             isRequired={'true'}
-            isInvalid={amountError}
-            onBlur={validateAmount}
-            maxLength={10}
-            onChange={handleChangeAmount}
-            value={amount}
-            borderColor={useColorModeValue('var(--black)', 'var(--white)')}
-            variant={amount.length > 0 ? 'filled' : 'outline'}
-            border={amount.length > 0 ? 'none' : 'solid 1px'}
+            isInvalid={titleError}
+            onBlur={validateTitle}
+            maxLength={30}
+            onChange={handleChangeTitle}
+            value={title}
+            variant={title.length > 0 ? 'filled' : 'outline'}
+            border={title.length > 0 ? 'none' : 'solid 1px'}
           />
-        </InputGroup>
-        <Flex flexDirection={'row'} paddingBottom={'50px'}>
-          <Text color={'red'}>{amountError}</Text>
-        </Flex>
-        <Text
-          color={useColorModeValue('var(--black)', 'var(--white)')}
-          marginBottom={'5px'}
-          fontSize={'1.5em'}
-        >
-          Date of the end of the campaign *
-        </Text>
-        <Text
-          color={useColorModeValue('var(--black)', 'var(--white)')}
-          marginBottom={'10px'}
-          fontStyle={'italic'}
-          textAlign={'justify'}
-        >
-          Please provide the date you want to end the campaign.
-        </Text>
-        <DatePicker
-          selected={date}
-          onChange={(newDate) => setDate(newDate)}
-          showTimeSelect
-          dateFormat="Pp"
-          minDate={new Date()}
-          customInput={<CustomInput />}
-        />
-        <Text
-          paddingTop={'50px'}
-          color={useColorModeValue('var(--black)', 'var(--white)')}
-          marginBottom={'5px'}
-          fontSize={'1.5em'}
-        >
-          Staggered Release *
-        </Text>
-        <Text
-          color={useColorModeValue('var(--black)', 'var(--white)')}
-          marginBottom={'10px'}
-          fontStyle={'italic'}
-          textAlign={'justify'}
-        >
-          Do you want to enable staggered release? For more info click{' '}
-          <Link color={'blue.400'}>here</Link>
-        </Text>
-        <RadioGroup onChange={() => setStaggered(!staggered)} value={staggered}>
-          <Stack direction="row">
-            <Radio
-              borderColor={useColorModeValue('var(--black)', 'var(--white)')}
-              value={true}
-            >
-              Yes
-            </Radio>
-            <Radio
-              value={false}
-              borderColor={useColorModeValue('var(--black)', 'var(--white)')}
-            >
-              No
-            </Radio>
-          </Stack>
-        </RadioGroup>
-        {staggered && (
-          <>
-            <Text marginBottom={'5px'} fontSize={'1.5em'} paddingTop={'50px'}>
-              Number of milestones *
+          <Flex
+            flexDirection={'row'}
+            paddingBottom={'50px'}
+            paddingTop={'5px'}
+            width={{
+              base: '200px',
+              sm: '400px',
+              md: '500px',
+              lg: '500px',
+              xl: '600px',
+            }}
+          >
+            <Text color={'red'}>{titleError}</Text>
+            <Text color="rgba(150,150,150,1)" marginLeft={'auto'}>
+              {title.length}/30
             </Text>
-            <Text
-              marginBottom={'10px'}
-              fontStyle={'italic'}
-              textAlign={'justify'}
-            >
-              Please give the number of milestones of the staggered release.
-            </Text>
-            <HStack
-              paddingTop={'10px'}
-              paddingBottom={'10px'}
-              justifyContent={'center'}
-            >
-              <Button onClick={handleRemoveMilestone}>-</Button>
-              <Input
-                type="number"
-                onChange={(_, _val) => setNbMilestones(_val)}
-                value={pctMilestone.length}
-                display={'flex'}
-                textAlign={'center'}
-                width={'80px'}
-                variant={'filled'}
+          </Flex>
+          <Text
+            style={{
+              background:
+                '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+              webkitBackgroundClip: 'text',
+              webkitTextFillColor: 'transparent',
+            }}
+            fontWeight={'900'}
+            marginBottom={'5px'}
+            fontSize={'2em'}
+          >
+            Description of your project
+          </Text>
+          <Text
+            color={useColorModeValue('var(--black)', 'var(--white)')}
+            marginBottom={'10px'}
+            fontStyle={'italic'}
+            width={{
+              base: '200px',
+              sm: '400px',
+              md: '500px',
+              lg: '500px',
+              xl: '600px',
+            }}
+          >
+            Please provide a detailed description of your campaign, so that
+            users can get an idea of the purpose of your campaign. Be creative,
+            and precise.
+          </Text>
+          <Box filter={useColorModeValue('none', 'invert(1)')}>
+            {currentBorder === 'rgba(235, 235, 235, 1)' ? (
+              <MDEditor
+                style={{
+                  width: '90vw',
+                  backgroundColor: 'rgba(255,255,255,1)',
+                }}
+                value={description}
+                onChange={setDescription}
               />
-              <Button onClick={handleAddMilestone}>+</Button>
-            </HStack>
-            <Text marginBottom={'5px'} fontSize={'1.5em'} paddingTop={'50px'}>
-              Percentage of funds release for each milestone *
-            </Text>
-            <Text
-              marginBottom={'10px'}
-              fontStyle={'italic'}
-              textAlign={'justify'}
-            >
-              Please give the percentage of funds released for each milestone.
-              Sum must be 100%.
-            </Text>
-            <SpacerSmall />
-            {pctMilestone.map((x, idx) => (
-              <>
-                <Text paddingBottom={'10px'}>Milestone {idx + 1}</Text>
-                <Input
-                  readOnly={idx === 0 ? true : false}
-                  type={'number'}
-                  key={idx}
-                  placeholder={`Milestone ${idx + 1}`}
-                  colorScheme={'red'}
-                  isRequired={'true'}
-                  isInvalid={milestoneError}
-                  onBlur={validateMilestone}
-                  max={100}
-                  onChange={(e) => {
-                    const list = [...pctMilestone];
-                    list[idx] = Number(e.target.value);
-                    setPctMilestone(list);
+            ) : (
+              <MDEditor
+                style={{ width: '90vw', backgroundColor: '#f2f2f2' }}
+                value={description}
+                onChange={setDescription}
+              />
+            )}
+          </Box>
+          <Text
+            style={{
+              background:
+                '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+              webkitBackgroundClip: 'text',
+              webkitTextFillColor: 'transparent',
+            }}
+            fontWeight={'900'}
+            marginBottom={'5px'}
+            fontSize={'2em'}
+            paddingTop={'50px'}
+          >
+            Image/Video of presentation
+          </Text>
+          <Text
+            color={useColorModeValue('var(--black)', 'var(--white)')}
+            marginBottom={'10px'}
+            fontStyle={'italic'}
+            width={{
+              base: '200px',
+              sm: '400px',
+              md: '500px',
+              lg: '500px',
+              xl: '600px',
+            }}
+          >
+            Please provide an Image or a Video to illustrate your campaign
+          </Text>
+          <Flex
+            width={{
+              base: '200px',
+              sm: '400px',
+              md: '500px',
+              lg: '500px',
+              xl: '600px',
+            }}
+          >
+            <div {...getRootProps()} style={{ width: 'inherit' }}>
+              <input {...getInputProps()} />
+              {isDragActive ? (
+                currentBorder === 'rgba(235, 235, 235, 1)' ? (
+                  <Box
+                    style={{
+                      fontWeight: '550',
+                      color: 'rgba(150,150,150,1)',
+                      border: 'dashed 1px',
+                      borderColor: 'rgba(235, 235, 235, 1)',
+                      backgroundColor: 'rgba(255,255,255,1)',
+                      borderRadius: '50px',
+                      paddingTop: '100px',
+                      paddingBottom: '100px',
+                      textAlign: 'center',
+                    }}
+                  >
+                    Drag and drop your image here or click to open your folders.
+                  </Box>
+                ) : (
+                  <Box
+                    style={{
+                      fontWeight: '550',
+                      color: 'rgba(150,150,150,1)',
+                      border: 'dashed 1px',
+                      borderColor: 'rgba(25,25,25,1)',
+                      backgroundColor: 'rgba(21,21,21,.64)',
+                      borderRadius: '50px',
+                      paddingTop: '100px',
+                      paddingBottom: '100px',
+                      textAlign: 'center',
+                    }}
+                  >
+                    Drag and drop your image here or click to open your folders.
+                  </Box>
+                )
+              ) : currentBorder === 'rgba(235, 235, 235, 1)' ? (
+                <Box
+                  style={{
+                    fontWeight: '550',
+                    color: 'rgba(150,150,150,1)',
+                    border: 'dashed 1px',
+                    borderColor: 'rgba(235, 235, 235, 1)',
+                    backgroundColor: 'rgba(255,255,255,1)',
+                    borderRadius: '50px',
+                    paddingTop: '100px',
+                    paddingBottom: '100px',
+                    textAlign: 'center',
                   }}
-                  value={x}
-                  variant={x > 0 ? 'filled' : 'outline'}
-                  border={x > 0 ? 'none' : 'solid 1px'}
-                  borderColor={currentColor}
-                ></Input>
-                <SpacerSmall />
-              </>
-            ))}
-            <Text color={'red'}>{milestoneError}</Text>
-          </>
-        )}
+                >
+                  Drag and drop your image here or click to open your folders.
+                </Box>
+              ) : (
+                <Box
+                  style={{
+                    fontWeight: '550',
+                    color: 'rgba(150,150,150,1)',
+                    border: 'dashed 1px',
+                    borderColor: 'rgba(25,25,25,1)',
+                    backgroundColor: 'rgba(21,21,21,.64)',
+                    borderRadius: '50px',
+                    paddingTop: '100px',
+                    paddingBottom: '100px',
+                    textAlign: 'center',
+                  }}
+                >
+                  Drag and drop your image here or click to open your folders.
+                </Box>
+              )}
+            </div>
+            <aside style={thumbsContainer}>{thumbs}</aside>
+          </Flex>
+          <Text
+            style={{
+              background:
+                '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+              webkitBackgroundClip: 'text',
+              webkitTextFillColor: 'transparent',
+            }}
+            fontWeight={'900'}
+            marginBottom={'5px'}
+            fontSize={'2em'}
+            paddingTop={'50px'}
+          >
+            Amount to raise
+          </Text>
+          <Text
+            color={useColorModeValue('var(--black)', 'var(--white)')}
+            marginBottom={'10px'}
+            fontStyle={'italic'}
+            width={{
+              base: '200px',
+              sm: '400px',
+              md: '500px',
+              lg: '500px',
+              xl: '600px',
+            }}
+          >
+            Please provide the amount you want to raise.
+          </Text>
+          <InputGroup>
+            <InputLeftElement
+              zIndex={'1'}
+              pointerEvents="none"
+              fontSize="1.2em"
+              children="$"
+              color="rgba(150,150,150,1)"
+              fontWeight="550"
+              margin="auto"
+              top={'8px'}
+            />
+            <Input
+              borderRadius={'50px'}
+              _placeholder={{ color: 'rgba(150,150,150,1)', fontWeight: '550' }}
+              width={{
+                base: '200px',
+                sm: '400px',
+                md: '500px',
+                lg: '500px',
+                xl: '600px',
+              }}
+              backgroundColor={useColorModeValue(
+                'rgba(255,255,255,1)',
+                'rgba(21,21,21,.64)'
+              )}
+              borderColor={useColorModeValue(
+                'rgba(235, 235, 235, 1)',
+                'rgba(25,25,25,1)'
+              )}
+              height={'60px'}
+              colorScheme={'red'}
+              type={'number'}
+              placeholder="Amount to raise"
+              isRequired={'true'}
+              isInvalid={amountError}
+              onBlur={validateAmount}
+              maxLength={10}
+              onChange={handleChangeAmount}
+              value={amount}
+              variant={amount.length > 0 ? 'filled' : 'outline'}
+              border={amount.length > 0 ? 'none' : 'solid 1px'}
+            />
+          </InputGroup>
+          <Flex flexDirection={'row'} paddingBottom={'50px'}>
+            <Text color={'red'} paddingTop={'5px'}>
+              {amountError}
+            </Text>
+          </Flex>
+          <Text
+            style={{
+              background:
+                '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+              webkitBackgroundClip: 'text',
+              webkitTextFillColor: 'transparent',
+            }}
+            fontWeight={'900'}
+            marginBottom={'5px'}
+            fontSize={'2em'}
+          >
+            Date of the end of the campaign *
+          </Text>
+          <Text
+            color={useColorModeValue('var(--black)', 'var(--white)')}
+            marginBottom={'10px'}
+            fontStyle={'italic'}
+            width={{
+              base: '200px',
+              sm: '400px',
+              md: '500px',
+              lg: '500px',
+              xl: '600px',
+            }}
+          >
+            Please provide the date you want to end the campaign.
+          </Text>
+          <Box filter={useColorModeValue('none', 'invert(1)')}>
+            <DatePicker
+              selected={date}
+              closeOnScroll={true}
+              onChange={(newDate) => setDate(newDate)}
+              showTimeSelect
+              dateFormat="Pp"
+              minDate={new Date()}
+              showPopperArrow={false}
+              customInput={<CustomInput />}
+            />
+          </Box>
+          <Text
+            style={{
+              background:
+                '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+              webkitBackgroundClip: 'text',
+              webkitTextFillColor: 'transparent',
+            }}
+            fontWeight={'900'}
+            marginBottom={'5px'}
+            fontSize={'2em'}
+            paddingTop={'50px'}
+          >
+            Staggered Release *
+          </Text>
+          <Text
+            color={useColorModeValue('var(--black)', 'var(--white)')}
+            marginBottom={'10px'}
+            fontStyle={'italic'}
+            width={{
+              base: '200px',
+              sm: '400px',
+              md: '500px',
+              lg: '500px',
+              xl: '600px',
+            }}
+          >
+            Do you want to enable staggered release? For more info click{' '}
+            <Link color={'var(--blue)'}>here</Link>
+          </Text>
+          <RadioGroup
+            colorScheme="green"
+            onChange={() => setStaggered(!staggered)}
+            value={staggered}
+          >
+            <Stack direction="row">
+              <Radio borderColor={'rgba(150,150,150,1)'} value={true}>
+                Yes
+              </Radio>
+              <Radio value={false} borderColor={'rgba(150,150,150,1)'}>
+                No
+              </Radio>
+            </Stack>
+          </RadioGroup>
+          {staggered && (
+            <>
+              <Text
+                style={{
+                  background:
+                    '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                  webkitBackgroundClip: 'text',
+                  webkitTextFillColor: 'transparent',
+                }}
+                fontWeight={'900'}
+                marginBottom={'5px'}
+                fontSize={'2em'}
+                paddingTop={'50px'}
+              >
+                Number of milestones *
+              </Text>
+              <Text
+                color={currentColor}
+                marginBottom={'10px'}
+                fontStyle={'italic'}
+                width={{
+                  base: '200px',
+                  sm: '400px',
+                  md: '500px',
+                  lg: '500px',
+                  xl: '600px',
+                }}
+              >
+                Please give the number of milestones of the staggered release.
+              </Text>
+              <HStack
+                paddingTop={'10px'}
+                paddingBottom={'10px'}
+                justifyContent={'center'}
+                width={{
+                  base: '200px',
+                  sm: '400px',
+                  md: '500px',
+                  lg: '500px',
+                  xl: '600px',
+                }}
+              >
+                <Button
+                  onClick={handleRemoveMilestone}
+                  height={'60px'}
+                  width={'60px'}
+                  borderRadius={'full'}
+                  backgroundColor={currentBackground}
+                  borderColor={currentBorder}
+                  color="rgba(150,150,150,1)"
+                >
+                  -
+                </Button>
+                <Input
+                  borderRadius={'50px'}
+                  _focus={{ outline: 'none !important' }}
+                  backgroundColor={currentBackground}
+                  borderColor={currentBorder}
+                  border={'1px solid'}
+                  readOnly={true}
+                  height={'60px'}
+                  _placeholder={{
+                    color: 'rgba(150,150,150,1)',
+                    fontWeight: '550',
+                  }}
+                  type="number"
+                  onChange={(_, _val) => setNbMilestones(_val)}
+                  value={pctMilestone.length}
+                  display={'flex'}
+                  textAlign={'center'}
+                  width={'120px'}
+                  variant={'filled'}
+                />
+                <Button
+                  borderRadius={'full'}
+                  backgroundColor={currentBackground}
+                  borderColor={currentBorder}
+                  height={'60px'}
+                  width={'60px'}
+                  color="rgba(150,150,150,1)"
+                  onClick={handleAddMilestone}
+                >
+                  +
+                </Button>
+              </HStack>
+              <Text
+                paddingTop={'50px'}
+                style={{
+                  background:
+                    '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                  webkitBackgroundClip: 'text',
+                  webkitTextFillColor: 'transparent',
+                }}
+                fontWeight={'900'}
+                marginBottom={'5px'}
+                fontSize={'2em'}
+              >
+                Percentage of funds release for each milestone *
+              </Text>
+              <Text
+                color={currentColor}
+                marginBottom={'10px'}
+                fontStyle={'italic'}
+                width={{
+                  base: '200px',
+                  sm: '400px',
+                  md: '500px',
+                  lg: '500px',
+                  xl: '600px',
+                }}
+              >
+                Please give the percentage of funds released for each milestone.
+                Sum must be 100%. Milestone 1 is forced to 20%.
+              </Text>
+              <SpacerSmall />
+              {pctMilestone.map((x, idx) => (
+                <>
+                  <Text paddingBottom={'10px'}>Milestone {idx + 1}</Text>
+                  <Input
+                    borderRadius={'50px'}
+                    width={{
+                      base: '200px',
+                      sm: '400px',
+                      md: '500px',
+                      lg: '500px',
+                      xl: '600px',
+                    }}
+                    backgroundColor={currentBackground}
+                    borderColor={currentBorder}
+                    border={'1px solid'}
+                    height={'60px'}
+                    _placeholder={{
+                      color: 'rgba(150,150,150,1)',
+                      fontWeight: '550',
+                    }}
+                    readOnly={idx === 0 ? true : false}
+                    type={'number'}
+                    key={idx}
+                    placeholder={`Milestone ${idx + 1}`}
+                    colorScheme={'red'}
+                    isRequired={'true'}
+                    isInvalid={milestoneError}
+                    onBlur={validateMilestone}
+                    max={100}
+                    onChange={(e) => {
+                      const list = [...pctMilestone];
+                      list[idx] = Number(e.target.value);
+                      setPctMilestone(list);
+                    }}
+                    value={x}
+                    variant={x > 0 ? 'filled' : 'outline'}
+                    border={x > 0 ? 'none' : 'solid 1px'}
+                  ></Input>
+                  <SpacerSmall />
+                </>
+              ))}
+              <Text color={'red'}>{milestoneError}</Text>
+            </>
+          )}
 
-        <Button
-          marginTop={'50px'}
-          isDisabled={!isValid || adding}
-          onClick={isValid ? handleAddCampaign : null}
-        >
-          Create your campaign
-        </Button>
-      </Flex>
-      <Footer />
+          <Button
+            marginTop={'50px'}
+            marginRight={'auto'}
+            marginLeft={'auto'}
+            isDisabled={!isValid || adding}
+            onClick={isValid ? handleAddCampaign : null}
+            width={{
+              base: '200px',
+              sm: '400px',
+              md: '500px',
+              lg: '500px',
+              xl: '600px',
+            }}
+            borderRadius={'50px'}
+            background={
+              'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))'
+            }
+            _hover={{
+              opacity: 0.8,
+              background:
+                'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+            }}
+            height={'60px'}
+          >
+            Create your campaign
+          </Button>
+        </Flex>
+      </Box>
     </Screen>
   );
 }

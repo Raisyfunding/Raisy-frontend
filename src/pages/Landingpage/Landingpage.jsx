@@ -30,13 +30,13 @@ function Landingpage() {
       <ReactFullpage
         //fullpage options
         licenseKey={'ED0D5DA5-596F41E0-B51F15B6-293EC91D'}
-        scrollingSpeed={1000}
+        scrollingSpeed={1000} /* Options here */
         dragAndMove={true}
         responsiveWidth={992}
         render={({ state, fullpageApi }) => {
           return (
             <>
-              <div className="section fp-auto-height" display={'none'}>
+              <div className="section fp-auto-height">
                 <Landing />
               </div>
               <div className="section fp-auto-height">

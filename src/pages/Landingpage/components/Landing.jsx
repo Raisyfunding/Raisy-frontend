@@ -45,7 +45,9 @@ function Landing() {
         </Text>
         <Button
           width={'200px'}
+          height={'60px'}
           margin={'auto'}
+          borderRadius={'50px'}
           color={'black'}
           background={
             'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))'
