@@ -19,8 +19,6 @@ import {
   useToast,
   Box,
 } from '@chakra-ui/react';
-import { useColorMode } from '@chakra-ui/react';
-import Footer from '../../components/Footer/Footer.jsx';
 import DatePicker from 'react-datepicker';
 import { useSelector } from 'react-redux';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -189,14 +187,16 @@ function Submit() {
       }}
       backgroundColor={useColorModeValue(
         'rgba(255,255,255,1)',
-        'rgba(21,21,21,.64)'
+        'rgba(234,234,234,.6)'
       )}
       borderColor={useColorModeValue(
         'rgba(235, 235, 235, 1)',
-        'rgba(25,25,25,1)'
+        'rgba(230,230,230,1)'
       )}
+      _focus={{ outline: 'none !important' }}
       border={'1px solid'}
       height={'60px'}
+      placeholder="Pick a Date"
       _placeholder={{ color: 'rgba(150,150,150,1)', fontWeight: '550' }}
       color="rgba(150,150,150,1)"
       fontWeight="550"
@@ -790,14 +790,18 @@ function Submit() {
           >
             Please provide the date you want to end the campaign.
           </Text>
-          <DatePicker
-            selected={date}
-            onChange={(newDate) => setDate(newDate)}
-            showTimeSelect
-            dateFormat="Pp"
-            minDate={new Date()}
-            customInput={<CustomInput />}
-          />
+          <Box filter={useColorModeValue('none', 'invert(1)')}>
+            <DatePicker
+              selected={date}
+              closeOnScroll={true}
+              onChange={(newDate) => setDate(newDate)}
+              showTimeSelect
+              dateFormat="Pp"
+              minDate={new Date()}
+              showPopperArrow={false}
+              customInput={<CustomInput />}
+            />
+          </Box>
           <Text
             style={{
               background:
