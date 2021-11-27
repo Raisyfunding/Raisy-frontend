@@ -48,7 +48,7 @@ const DonationStats = ({ campaignId }) => {
   };
 
   useEffect(() => {
-    if (campaignId && account) {
+    if (campaignId !== undefined && account) {
       updateAllTokens();
     }
   }, [currencies, campaignId, account]);

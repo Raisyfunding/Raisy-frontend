@@ -70,7 +70,15 @@ export const useApi = () => {
     return res.data;
   };
 
+  const fetchVoteSessionByCampaignId = async (_campaignId) => {
+    const res = await axios.get(
+      `${apiUrl}/voteSession/lastVoteSession/${_campaignId}`
+    );
+    return res.data;
+  };
+
   return {
+    fetchVoteSessionByCampaignId,
     fetchScheduleByCampaignId,
     apiUrl,
     getNonce,

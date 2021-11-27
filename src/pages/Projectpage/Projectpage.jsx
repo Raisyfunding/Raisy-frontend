@@ -12,9 +12,14 @@ import Space from './components/space';
 const Projectpage = () => {
   const { campaignId } = useParams();
 
-  const { fetchCampaignById, fetchScheduleByCampaignId } = useApi();
+  const {
+    fetchCampaignById,
+    fetchScheduleByCampaignId,
+    fetchVoteSessionByCampaignId,
+  } = useApi();
 
   const [campaign, setCampaign] = useState({});
+  const [voteSession, setVoteSession] = useState({});
   const [schedule, setSchedule] = useState({ currentMilestone: 0 });
 
   const [fundingover, setFundingover] = useState(false);
@@ -45,6 +50,14 @@ const Projectpage = () => {
   }, [campaign]);
 
   useEffect(() => {
+    if (campaign.campaignId && campaign.nbMilestones) {
+      fetchVoteSessionByCampaignId(campaign.campaignId).then((_voteSession) =>
+        _voteSession && _voteSession.data ? setVoteSession(_voteSession) : null
+      );
+    }
+  }, [campaign]);
+
+  useEffect(() => {
     fundingOver();
     // react-hooks exhaustive-deps
   }, [campaign]);
@@ -67,6 +80,7 @@ const Projectpage = () => {
                   currentProject={campaign}
                   fundingover={fundingover}
                   schedule={schedule}
+                  voteSession={voteSession}
                 />
               </div>
               <div className="section fp-auto-height">
