@@ -152,6 +152,7 @@ export default function Navbar() {
             _hover={{
               opacity: '0.4',
             }}
+            margin={'auto'}
           >
             {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
           </Button>
