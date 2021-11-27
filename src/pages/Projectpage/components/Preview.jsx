@@ -67,7 +67,7 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
   const [asking, setAsking] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
 
-  const VOTE_SESSION_DURATION = 84200;
+  const VOTE_SESSION_DURATION = 40;
 
   const handleClaimFunds = async () => {
     if (claiming) return;

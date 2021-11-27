@@ -1,17 +1,62 @@
-import React, { useEffect } from 'react';
-import { Text, Box, Center, HStack, VStack } from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
+import {
+  Text,
+  Box,
+  Center,
+  HStack,
+  VStack,
+  useToast,
+  Button,
+} from '@chakra-ui/react';
 import { useWeb3React } from '@web3-react/core';
 import Countdown from 'react-countdown';
 import { toLower } from 'lodash';
+import { formatError } from '../../../utils';
+import { useCampaignsContract } from './../../../contracts';
+import { Flex } from '@chakra-ui/react';
 
 const VoteSession = ({ currentProject, fundingover }) => {
   const { account } = useWeb3React();
+
+  const [voting, setVoting] = useState(false);
+  const toast = useToast();
+
+  const { vote } = useCampaignsContract();
+
+  const handleVote = async (_vote) => {
+    if (voting) return;
+
+    setVoting(true);
+
+    try {
+      const tx = await vote(currentProject.campaignId, _vote, account);
+
+      await tx.wait();
+
+      toast({
+        title: 'Thank you for your vote 🔥',
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+      });
+      setVoting(false);
+    } catch (err) {
+      toast({
+        title: 'Error during vote on-chain',
+        description: formatError(err),
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+      setVoting(false);
+    }
+  };
 
   return (
     <div>
       {currentProject.nbMilestones ? (
         <div>
-          {toLower(account) === currentProject.creator ? (
+          {false ? (
             <div></div>
           ) : (
             <div>
@@ -52,11 +97,10 @@ const VoteSession = ({ currentProject, fundingover }) => {
                 </Center>
                 <Box height="50px" />
                 <Center>
-                  <Box bg="gray.800" onClick={{}} width="50%">
-                    <Text margin="10px" textAlign="center">
-                      Vote here to cancel the funds release request{' '}
-                    </Text>
-                  </Box>
+                  <Flex width="100%" gridGap={'20px'} justifyContent={'center'}>
+                    <Button onClick={() => handleVote(true)}>VOTE YES</Button>
+                    <Button onClick={() => handleVote(false)}>VOTE NO</Button>
+                  </Flex>
                 </Center>
                 <Center>
                   <Text textAlign="center" width="50%" marginTop="10px">

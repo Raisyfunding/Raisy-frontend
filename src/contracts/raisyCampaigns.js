@@ -100,7 +100,16 @@ export const useCampaignsContract = () => {
     return await contract.askMoreFunds(campaignId, options);
   };
 
+  const vote = async (campaignId, _vote, from) => {
+    const contract = await getCampaignsContract();
+
+    const options = { from, gasPrice: getHigherGWEI() };
+
+    return await contract.vote(campaignId, _vote, options);
+  };
+
   return {
+    vote,
     askMoreFunds,
     claimInitialFunds,
     claimNextFunds,
