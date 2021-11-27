@@ -12,6 +12,7 @@ import './styles/theme.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Submit from './pages/Submit/Submit';
 import Donate from './pages/Donate/Donate';
+import './App.css';
 
 function App() {
   return (
