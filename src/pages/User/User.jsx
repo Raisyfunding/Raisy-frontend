@@ -1,12 +1,13 @@
 import { Image } from '@chakra-ui/image';
-import { Flex, Text, Box, Center, Spacer } from '@chakra-ui/layout';
+import { Text, Center, Spacer } from '@chakra-ui/layout';
 import { SpacerLarge } from '../../styles/globalStyles';
 import React from 'react';
 import { Screen } from '../../styles/globalStyles';
-import { useColorModeValue } from '@chakra-ui/react';
+import { useColorModeValue, Flex, HStack, VStack, Box } from '@chakra-ui/react';
 import cat from '../../images/cryptokitties.jpg';
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
 import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
+import { FiMail, FiTwitter, FiFacebook, FiInstagram } from 'react-icons/fi';
 
 function User() {
   return (
@@ -15,32 +16,65 @@ function User() {
         backgroundColor: useColorModeValue('var(--white)', 'var(--black)'),
       }}
     >
-      <Flex direction="column" marginTop="2%" marginLeft="8%" marginRight="8%">
+      <Box marginTop="2%" marginLeft="10%" marginRight="10%">
+        <Spacer />
         <Flex direction="row">
-          <Spacer />
-          <Flex direction="column" width="400px">
-            <Box width="100%">
-              <Image src={cat} borderRadius="full" />
-            </Box>
-            <Box height="20px" />
+          <Box width="40%">
+            <Image src={cat} borderRadius="full" width="100%" />
             <Center>
               <Box>
-                <Text fontWeight="bold" fontSize="5xl" textAlign="center">
+                <Text fontWeight="bold" fontSize="4xl" textAlign="center">
                   Jerry the Cat
                 </Text>
                 <Text fontSize="1xl" textAlign="center">
                   0x70f5...EB37
                 </Text>
+
+                <Box height="20px" />
+                <HStack direction="row" alignItems="center">
+                  <Spacer />
+                  <FiMail />
+                  <Spacer />
+                  <FiTwitter />
+                  <Spacer />
+                  <FiInstagram />
+                  <Spacer />
+                  <FiFacebook />
+                  <Spacer />
+                </HStack>
+                <Box height="20px" />
+                <Center>
+                  <Flex direction="row" height="10%">
+                    <Flex direction="column">
+                      <Text textAlign="center">Followers</Text>
+                      <Text fontWeight="bold" fontSize="5x1" textAlign="center">
+                        114
+                      </Text>
+                    </Flex>
+                    <Box width="30px" />
+                    <Flex direction="column">
+                      <Text textAlign="center">Following</Text>
+                      <Text fontWeight="bold" fontSize="5x1" textAlign="center">
+                        8
+                      </Text>
+                    </Flex>
+                  </Flex>
+                </Center>
+                <Box height="30px" />
+                <Text>
+                  {' '}
+                  Lorem ipsum dolor sit amet. Et deserunt fugit ut velit
+                  blanditiis est mollitia assumenda. Ut dolorem labore et
+                  repudiandae perferendis rem harum magni id eligendi sequi sed
+                  aliquid explicabo et nulla quibusdam et accusamus excepturi.
+                </Text>
               </Box>
             </Center>
-          </Flex>
+          </Box>
           <Spacer />
-          <Flex direction="column">
-            <Box width="400px">
-              <Text fontWeight="bold" fontSize="3xl" textAlign="center">
-                {' '}
-                User Stats
-              </Text>
+          <Box width="40%">
+            <Box>
+              <SpacerLarge />
               <Table variant="simple">
                 <Thead>
                   <Tr>
@@ -69,27 +103,32 @@ function User() {
                   </Tr>
                 </Tbody>
               </Table>
-              <Box height="55px" />
+              <SpacerLarge />
+              <SpacerLarge />
+              <SpacerLarge />
               <Tabs isFitted variant="enclosed">
                 <TabList mb="1em">
-                  <Tab>POD collection</Tab>
-                  <Tab>Campaign supported</Tab>
-                  <Tab>Collection created</Tab>
+                  <Tab>Activity</Tab>
+                  <Tab>POD Galery</Tab>
+                  <Tab>Collections created</Tab>
                 </TabList>
                 <TabPanels>
                   <TabPanel>
-                    <p>one!</p>
+                    <p>
+                      Donation + lancement de campagne + follwing + commentaires
+                    </p>
                   </TabPanel>
-                  <TabPanel>
-                    <p>two!</p>
-                  </TabPanel>
+                  <TabPanel></TabPanel>
                 </TabPanels>
               </Tabs>
             </Box>
-          </Flex>
+          </Box>
           <Spacer />
         </Flex>
-      </Flex>
+        <Box height="10px" />
+
+        <Box height="80px" />
+      </Box>
     </Screen>
   );
 }
