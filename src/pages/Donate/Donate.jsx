@@ -7,6 +7,7 @@ import {
   Button,
   InputGroup,
   InputRightElement,
+  Center,
   Image,
   Link,
   useToast,
@@ -22,7 +23,10 @@ import useTokens from './../../hooks/useTokens';
 import { useWeb3React } from '@web3-react/core';
 import { useTokenContract } from './../../contracts/token';
 import { formatError } from '../../utils';
-
+import { ArrowLeftIcon } from '@chakra-ui/icons';
+import Loader from 'react-loader-spinner';
+import styles from '../Projectpage/components/styles.module.scss';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 const Donate = () => {
   const { campaignId } = useParams();
 
@@ -187,6 +191,14 @@ const Donate = () => {
         backgroundColor: useColorModeValue('var(--white)', 'var(--black)'),
       }}
     >
+      <Link
+        position="fixed"
+        top="10vh"
+        left="20vh"
+        href={'/campaign/'.concat(campaignId)}
+      >
+        <ArrowLeftIcon />
+      </Link>
       <Text
         textAlign={'center'}
         fontSize={'4xl'}
@@ -291,12 +303,24 @@ const Donate = () => {
           <Flex flexDirection={'row'} paddingBottom={'50px'}>
             <Text color={'red'}>{amountError}</Text>
           </Flex>
-          <Button
-            disabled={amountError || !amount}
-            onClick={handleSendDonation}
-          >
-            Send the donation
-          </Button>
+          {sending ? (
+            <Center>
+              <Loader
+                type="Oval"
+                color="#007BFF"
+                height={32}
+                width={32}
+                className={styles.loader}
+              />
+            </Center>
+          ) : (
+            <Button
+              disabled={amountError || !amount}
+              onClick={handleSendDonation}
+            >
+              Send the donation
+            </Button>
+          )}
         </Flex>
         <Flex
           width={'40vw'}
