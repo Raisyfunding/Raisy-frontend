@@ -476,7 +476,7 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
                           marginLeft={'auto'}
                           marginRight={'auto'}
                           paddingBottom={'20px'}
-                          fontSize={'3xl'}
+                          fontSize={'2xl'}
                           fontWeight={'600'}
                         >
                           The campaign is unsuccessful, or participants voted in
