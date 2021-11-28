@@ -205,22 +205,18 @@ const Donate = () => {
       }}
     >
       <Box width={'100vw'} padding={'20px'}>
-        <Flex
-          borderRadius={'50px'}
-          height={'60px'}
-          width={'60px'}
-          style={{ borderColor: currentBorder }}
-          border={'solid 1px'}
-          backgroundColor={currentBackground}
-        >
-          <Link
-            paddingLeft={'20px'}
-            marginRight={'auto'}
-            href={'/campaign/'.concat(campaignId)}
+        <Link href={'/campaign/'.concat(campaignId)}>
+          <Flex
+            borderRadius={'50px'}
+            height={'60px'}
+            width={'60px'}
+            style={{ borderColor: currentBorder }}
+            border={'solid 1px'}
+            backgroundColor={currentBackground}
           >
-            <ArrowLeftIcon />
-          </Link>
-        </Flex>
+            <ArrowLeftIcon style={{ margin: 'auto' }} />
+          </Flex>
+        </Link>
         <Text
           textAlign={'center'}
           fontSize={'4xl'}
