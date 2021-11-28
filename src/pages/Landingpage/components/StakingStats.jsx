@@ -1,7 +1,5 @@
 import { Box, Flex, Image, Text, useColorModeValue } from '@chakra-ui/react';
 import React from 'react';
-import decentralizedwhite from '../../../images/decentralized_white.png';
-import decentralizedblack from '../../../images/decentralized_black.png';
 import handwhite from '../../../images/handwhite.png';
 import handblack from '../../../images/handblack.png';
 import statswhite from '../../../images/statswhite.png';
