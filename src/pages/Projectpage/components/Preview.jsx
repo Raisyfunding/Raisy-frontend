@@ -28,7 +28,7 @@ import {
 import useTokens from './../../../hooks/useTokens';
 import VoteStats from './VoteStats';
 import { AVERAGE_BLOCK_TIME } from '../../../constants/network';
-import Countdown from 'react-countdown';
+// import Countdown from 'react-countdown';
 
 const renderMedia = (image, contentType) => {
   if (contentType === 'video' || image?.includes('youtube')) {
@@ -95,7 +95,10 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
   const [asking, setAsking] = useState(false);
   const [isFinished, setIsFinished] = useState(true);
 
-  const [voteTimeEndDate, setVoteTimeEndDate] = useState(Date.now());
+  // eslint-disable-next-line no-unused-vars
+  const [voteTimeEndDate, setVoteTimeEndDate] = useState(null);
+
+  const [endBlock, setEndBlock] = useState(0);
 
   const { tokens } = useTokens();
 
@@ -194,11 +197,13 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
         const _endBlock = voteSession.startBlock + VOTE_SESSION_DURATION;
         const _isFinished = _blockNumber >= _endBlock;
         setIsFinished(_isFinished);
+        setEndBlock(_endBlock - _blockNumber);
         if (!_isFinished) {
-          setVoteTimeEndDate(
-            Date.now() -
-              new Date((_endBlock - _blockNumber) * AVERAGE_BLOCK_TIME * 1000)
-          );
+          const _endDate =
+            new Date(
+              (_endBlock - _blockNumber) * AVERAGE_BLOCK_TIME[4] * 1000
+            ) - Date.now();
+          setVoteTimeEndDate(_endDate);
         }
       });
     }
@@ -392,7 +397,26 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
                               <Center>
                                 <Box width="500px">
                                   <VoteStats voteSession={voteSession} />
-                                  <Countdown date={voteTimeEndDate} />
+                                  {/* <Countdown date={voteTimeEndDate} /> */}
+                                  <Text
+                                    fontSize={{
+                                      base: '2xl',
+                                      md: '2xl',
+                                      lg: '3xl',
+                                    }}
+                                    style={{
+                                      textAlign: 'center',
+                                      background:
+                                        '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                                      webkitBackgroundClip: 'text',
+                                      webkitTextFillColor: 'transparent',
+                                    }}
+                                    fontWeight={'900'}
+                                    paddingBottom={'40px'}
+                                    margin={'auto'}
+                                  >
+                                    {endBlock} blocks remaining
+                                  </Text>
                                 </Box>
                               </Center>
                             ) : (
