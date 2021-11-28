@@ -47,10 +47,10 @@ function Campaigndetail({
           />
         </Flex>
         <Flex
-          padding={'15px'}
+          padding={{ base: '20ox', md: '15px' }}
           direction="column"
           borderRadius={'50px'}
-          width="57vw"
+          width={{ base: '91vw', md: '57vw' }}
           height="88vh"
           marginRight="auto"
           marginLeft="auto"
@@ -58,7 +58,11 @@ function Campaigndetail({
           border={'1px solid'}
           borderColor={currentBorder}
         >
-          <Tabs variant="soft-rounded" colorScheme={'grey.500'}>
+          <Tabs
+            variant="soft-rounded"
+            colorScheme={'grey.500'}
+            overflow={'hidden'}
+          >
             <Center>
               <TabList width="100%">
                 <Tab
