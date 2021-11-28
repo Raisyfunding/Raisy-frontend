@@ -86,7 +86,7 @@ const ConnectWalletModal = ({ visible, onClose }) => {
 				<Box>
 					<Text>
 						Please connect to the{" "}
-						{isMainnet ? "Polygon Mainnet" : "Mumbai Testnet"}.
+						{isMainnet ? "Polygon Mainnet" : "Rinkeby Network"}.
 					</Text>
 					<Button onClick={deactivate}>Disconnect</Button>
 				</Box>
