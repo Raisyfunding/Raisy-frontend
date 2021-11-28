@@ -156,6 +156,7 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
       });
       setEnding(false);
     } catch (err) {
+      console.log(err);
       toast({
         title: 'Error while ending vote session on-chain',
         description: formatError(err),
