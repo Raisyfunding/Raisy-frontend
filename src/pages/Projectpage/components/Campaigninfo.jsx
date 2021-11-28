@@ -115,8 +115,14 @@ function Campaigninfo({ currentProject, fundingover, schedule }) {
                 </Flex>
                 {currentProject.nbMilestones && schedule && (
                   <>
-                    <Text pb={2} mt={5}>
-                      Funds Released
+                    <Text pb={2} mt={5} fontWeight="bold">
+                      Funds Released{' '}
+                      {currentProject.pctReleasePerMilestone.reduce(
+                        (acc, cur, idx) =>
+                          idx < schedule.currentMilestone ? acc + cur : acc,
+                        0
+                      )}{' '}
+                      %
                     </Text>
                     <Progress
                       value={currentProject.pctReleasePerMilestone.reduce(
@@ -193,13 +199,19 @@ function Campaigninfo({ currentProject, fundingover, schedule }) {
                   <Text>Donations</Text>
                 </Flex>
                 <Spacer />
-                <Flex direction="column" textAlign="center">
-                  <Text fontWeight="bold">
-                    $
-                    {currentProject.amountToRaise - currentProject.amountRaised}
-                  </Text>
-                  <Text>Required</Text>
-                </Flex>
+                {currentProject.amountToRaise - currentProject.amountRaised >
+                0 ? (
+                  <Flex direction="column" textAlign="center">
+                    <Text fontWeight="bold">
+                      $
+                      {currentProject.amountToRaise -
+                        currentProject.amountRaised}
+                    </Text>
+                    <Text>Required</Text>
+                  </Flex>
+                ) : (
+                  <div></div>
+                )}
                 <Spacer />
                 <Flex direction="column" textAlign="center">
                   <Text fontWeight="bold">

@@ -72,7 +72,9 @@ const VoteSession = ({ currentProject, voteSession }) => {
                 </Center>
                 <Box height="25px" />
                 <Center>
-                  <VoteStats voteSession={voteSession} />
+                  <Box width="60%">
+                    <VoteStats voteSession={voteSession} />
+                  </Box>{' '}
                 </Center>
                 <Box height="50px" />
                 <Center>

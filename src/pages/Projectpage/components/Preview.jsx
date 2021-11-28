@@ -16,6 +16,7 @@ import { useWeb3React } from '@web3-react/core';
 import { useCampaignsContract } from './../../../contracts/raisyCampaigns';
 import { formatError } from '../../../utils';
 import useBlockNumber from '../../../hooks/useBlockNumber';
+import VoteStats from './VoteStats';
 
 const renderMedia = (image, contentType) => {
   if (contentType === 'video' || image?.includes('youtube')) {
@@ -177,7 +178,7 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
 
   return (
     <Flex direction="column" height="100vh">
-      {console.log(voteSession)}
+      {console.log(schedule)}
       <Box marginLeft="10%" marginRight="10%" marginTop="2%">
         <Flex direction={{ base: 'column', md: 'row' }}>
           <Flex direction="column" width="700px">
@@ -212,32 +213,42 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
                         {schedule.currentMilestone > 0 ? (
                           <>
                             {' '}
-                            {voteSession.inProgress && !isFinished ? (
-                              <div>Vote Stats</div>
-                            ) : (
-                              <div>
-                                {voteSession.inProgress ? (
-                                  <div>
-                                    <Button
-                                      width={'100%'}
-                                      onClick={handleEndVoteSession}
-                                      disabled={ending}
-                                    >
-                                      End Vote Session
-                                    </Button>
-                                  </div>
+                            {/* {voteSession.inProgress && !isFinished ? ( */}
+                            {schedule.currentMilestone ===
+                            currentProject.nbnbMilestones ? (
+                              <>
+                                {1 > 0 ? (
+                                  <VoteStats voteSession={voteSession} />
                                 ) : (
                                   <div>
-                                    <Button
-                                      width={'100%'}
-                                      onClick={handleAskMoreFunds}
-                                      disabled={asking}
-                                    >
-                                      Ask More Funds
-                                    </Button>
+                                    {voteSession.inProgress ? (
+                                      <div>
+                                        <Button
+                                          width={'100%'}
+                                          onClick={handleEndVoteSession}
+                                          disabled={ending}
+                                        >
+                                          End Vote Session
+                                        </Button>
+                                      </div>
+                                    ) : (
+                                      <div>
+                                        <Button
+                                          width={'100%'}
+                                          onClick={handleAskMoreFunds}
+                                          disabled={asking}
+                                        >
+                                          Ask More Funds
+                                        </Button>
+                                      </div>
+                                    )}
                                   </div>
                                 )}
-                              </div>
+                              </>
+                            ) : (
+                              <>
+                                <div>yooooo</div>
+                              </>
                             )}
                           </>
                         ) : (

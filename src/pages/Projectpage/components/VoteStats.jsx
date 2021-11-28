@@ -15,14 +15,14 @@ function VoteStats({ voteSession }) {
         <Box>
           <VStack>
             <Text fontSize="3xl">256</Text>
-            <Text fontSize="2xl">Vote ratio</Text>
+            <Text fontSize="2xl">Total Votes</Text>
           </VStack>
         </Box>
         {voteSession ? (
           <Box>
             <VStack>
-              <Text fontSize="3xl">{voteSession.voteRatio}</Text>
-              <Text fontSize="2xl">Vote ratio</Text>
+              <Text fontSize="3xl">12</Text>
+              <Text fontSize="2xl">Vote Ratio</Text>
             </VStack>
           </Box>
         ) : (
