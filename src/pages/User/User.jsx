@@ -98,7 +98,7 @@ function User() {
             </Center>
           </Box>
           <Spacer />
-          <Box width="40%">
+          <Box width="50%">
             <Box>
               <SpacerLarge />
               <Table variant="simple">
@@ -134,65 +134,68 @@ function User() {
               <SpacerLarge />
               <Tabs isFitted variant="enclosed">
                 <TabList mb="1em">
+                  <Tab>Proofs Of Donation</Tab>
                   <Tab>Activity</Tab>
-                  <Tab>POD Galery</Tab>
-                  <Tab>Collections created</Tab>
+                  <Tab>Your Campaigns</Tab>
                 </TabList>
                 <TabPanels>
                   <TabPanel>
-                    <p>
-                      {/* Donation + lancement de campagne + follwing + commentaires */}
-                    </p>
-                  </TabPanel>
-                  <TabPanel>
-                    {proofsOfDonation.map((_pod) => (
-                      <Flex
-                        margin={'auto'}
-                        width={'300px'}
-                        height={'auto'}
-                        backgroundColor={color}
-                        borderRadius={'50px'}
-                        border={'1px solid'}
-                        borderColor={color}
-                        padding={'20px'}
-                        flexDirection={'column'}
-                        _hover={{ opacity: '0.8' }}
-                        onClick={() =>
-                          history.replace(
-                            `/campaign/${parseInt(_pod.campaignId._hex)}`
-                          )
-                        }
-                      >
-                        <Text
-                          paddingTop={'15px'}
-                          textAlign={'justify'}
-                          fontSize="xl"
+                    <Flex>
+                      {proofsOfDonation.map((_pod) => (
+                        <Flex
+                          margin={'auto'}
+                          width={'300px'}
+                          height={'auto'}
+                          backgroundColor={color}
+                          borderRadius={'50px'}
+                          border={'1px solid'}
+                          borderColor={color}
+                          padding={'20px'}
+                          flexDirection={'column'}
+                          _hover={{ opacity: '0.8' }}
+                          onClick={() =>
+                            history.replace(
+                              `/campaign/${parseInt(_pod.campaignId._hex)}`
+                            )
+                          }
                         >
-                          Campaign {parseInt(_pod.campaignId._hex)}
-                        </Text>
-                        {/* <Text paddingTop={"15px"} textAlign={"justify"}>
+                          <Text
+                            paddingTop={'15px'}
+                            textAlign={'justify'}
+                            fontSize="xl"
+                          >
+                            Campaign {parseInt(_pod.campaignId._hex)}
+                          </Text>
+                          {/* <Text paddingTop={"15px"} textAlign={"justify"}>
                         {campaign.description}
                       </Text> */}
-                        <Text paddingTop={'15px'} textAlign={'justify'}>
-                          Donated {ethers.utils.formatEther(_pod.amount)} in{' '}
-                          {
-                            tokens.find(
-                              (token) => _pod.tokenUsed === token.address
-                            ).symbol
-                          }
-                        </Text>
-                        <Text
-                          paddingTop={'15px'}
-                          paddingBottom={'15px'}
-                          textAlign={'justify'}
-                        >
-                          Donated at{' '}
-                          {new Date(
-                            parseInt(_pod.creationTimestamp._hex) * 1000
-                          ).toString()}
-                        </Text>
-                      </Flex>
-                    ))}
+                          <Text paddingTop={'15px'} textAlign={'justify'}>
+                            Donated {ethers.utils.formatEther(_pod.amount)} in{' '}
+                            {
+                              tokens.find(
+                                (token) => _pod.tokenUsed === token.address
+                              ).symbol
+                            }
+                          </Text>
+                          <Text
+                            paddingTop={'15px'}
+                            paddingBottom={'15px'}
+                            textAlign={'justify'}
+                          >
+                            Donated at{' '}
+                            {new Date(
+                              parseInt(_pod.creationTimestamp._hex) * 1000
+                            ).toString()}
+                          </Text>
+                        </Flex>
+                      ))}
+                    </Flex>
+                  </TabPanel>
+                  <TabPanel>
+                    <p>User Activity</p>
+                  </TabPanel>
+                  <TabPanel>
+                    <p>Campaigns created by the user</p>
                   </TabPanel>
                 </TabPanels>
               </Tabs>
