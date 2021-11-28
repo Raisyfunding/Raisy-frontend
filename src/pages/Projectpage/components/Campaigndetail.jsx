@@ -34,6 +34,7 @@ function Campaigndetail({
                   {fundingover && currentProject.nbMilestones && (
                     <Tab>Vote</Tab>
                   )}
+<<<<<<< Updated upstream
                 </TabList>
               </Center>
               <TabPanels>
@@ -66,6 +67,49 @@ function Campaigndetail({
                     currentProject={currentProject}
                     fundingover={fundingover}
                     schedule={schedule}
+=======
+                {fundingover && voteSession && (
+                  <Tab
+                    height={'60px'}
+                    _selected={{ color: 'white', bg: 'var(--blue)' }}
+                  >
+                    Vote
+                  </Tab>
+                )}
+                {fundingover &&
+                  currentProject.amountRaised >=
+                    currentProject.amountToRaise && (
+                    <Tab
+                      height={'60px'}
+                      _selected={{ color: 'white', bg: 'var(--blue)' }}
+                    >
+                      Refund
+                    </Tab>
+                  )}
+              </TabList>
+            </Center>
+            <TabPanels>
+              <TabPanel>
+                <Box>
+                  <Text
+                    fontSize={{ base: '2xl', md: '2xl', lg: '3xl' }}
+                    style={{
+                      textAlign: 'center',
+                      background:
+                        '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                      webkitBackgroundClip: 'text',
+                      webkitTextFillColor: 'transparent',
+                    }}
+                    fontWeight={'900'}
+                    paddingBottom={'40px'}
+                    margin={'auto'}
+                  >
+                    STORY
+                  </Text>
+                  <ReactMarkdown
+                    children={currentProject.description}
+                    remarkPlugins={[remarkGfm]}
+>>>>>>> Stashed changes
                   />
                 </TabPanel>
                 <TabPanel>
@@ -80,6 +124,7 @@ function Campaigndetail({
                     fundingover={fundingover}
                     schedule={schedule}
                   />
+<<<<<<< Updated upstream
                 </TabPanel>
               </TabPanels>
             </Tabs>
@@ -92,6 +137,79 @@ function Campaigndetail({
               fundingover={fundingover}
             />
           </Box>
+=======
+                </Box>
+              </TabPanel>
+              <TabPanel>
+                <Box>
+                  <Text
+                    fontSize={{ base: '2xl', md: '2xl', lg: '3xl' }}
+                    style={{
+                      textAlign: 'center',
+                      background:
+                        '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                      webkitBackgroundClip: 'text',
+                      webkitTextFillColor: 'transparent',
+                    }}
+                    fontWeight={'900'}
+                    paddingBottom={'40px'}
+                    margin={'auto'}
+                  >
+                    CREATOR
+                  </Text>
+                  <ReactMarkdown
+                    children={markdown}
+                    remarkPlugins={[remarkGfm]}
+                  />
+                </Box>
+              </TabPanel>
+              <TabPanel>
+                <Text
+                  fontSize={{ base: '2xl', md: '2xl', lg: '3xl' }}
+                  style={{
+                    textAlign: 'center',
+                    background:
+                      '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                    webkitBackgroundClip: 'text',
+                    webkitTextFillColor: 'transparent',
+                  }}
+                  fontWeight={'900'}
+                  paddingBottom={'40px'}
+                  margin={'auto'}
+                >
+                  FUNDS RELEASE SCHEDULE
+                </Text>
+                <Fundsrelease
+                  currentProject={currentProject}
+                  fundingover={fundingover}
+                  schedule={schedule}
+                />
+              </TabPanel>
+              <TabPanel>
+                <DonationStats campaignId={currentProject.campaignId} />
+              </TabPanel>
+              <TabPanel>
+                <ClaimPOD campaignId={currentProject.campaignId} />
+              </TabPanel>
+              <TabPanel>
+                <VoteSession
+                  currentProject={currentProject}
+                  fundingover={fundingover}
+                  schedule={schedule}
+                  voteSession={voteSession}
+                />
+              </TabPanel>
+              <TabPanel>
+                <VoteSession
+                  currentProject={currentProject}
+                  fundingover={fundingover}
+                  schedule={schedule}
+                  voteSession={voteSession}
+                />
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
+>>>>>>> Stashed changes
         </Flex>
       </Box>
       <SpacerLarge />

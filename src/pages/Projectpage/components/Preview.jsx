@@ -272,7 +272,71 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
                     {currentProject.amountToRaise -
                       currentProject.amountRaised <
                     0 ? (
-                      <div></div>
+                      <>
+                        {voteSession &&
+                        voteSession.numUnsuccessfulVotes === 3 ? (
+                          <>
+                            <Box
+                              display={'flex'}
+                              textAlign={'center'}
+                              justifyContent={'center'}
+                              flexDirection={'column'}
+                            >
+                              <Text
+                                marginLeft={'auto'}
+                                marginRight={'auto'}
+                                paddingBottom={'20px'}
+                                fontSize={'2xl'}
+                                fontWeight={'600'}
+                              >
+                                3 fundsrelease requests failed, get your funds
+                                back now!
+                              </Text>
+                              <Flex gridGap={'15px'} justifyContent={'center'}>
+                                {tokens.map((token) => (
+                                  <Button
+                                    width={'200px'}
+                                    height={'60px'}
+                                    margin={'auto'}
+                                    borderRadius={'50px'}
+                                    color={'black'}
+                                    background={
+                                      'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))'
+                                    }
+                                    _hover={{
+                                      opacity: 0.8,
+                                      background:
+                                        'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                                    }}
+                                    // onClick={async () => {
+                                    //   try {
+                                    //     await withdrawDonation(
+                                    //       currentProject.campaignId,
+                                    //       token.address,
+                                    //       account
+                                    //     );
+                                    //   } catch (err) {
+                                    //     toast({
+                                    //       title:
+                                    //         'Error while withdrawing on-chain',
+                                    //       description: formatError(err),
+                                    //       status: 'error',
+                                    //       duration: 9000,
+                                    //       isClosable: true,
+                                    //     });
+                                    //   }
+                                    // }}
+                                  >
+                                    Withdraw your {token.symbol}
+                                  </Button>
+                                ))}
+                              </Flex>
+                            </Box>
+                          </>
+                        ) : (
+                          <></>
+                        )}
+                      </>
                     ) : (
                       <Flex>
                         {/* display={account ? 'flex' : 'none'} */}
@@ -314,6 +378,7 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
           textAlign="center"
           marginTop="15px"
         >
+<<<<<<< Updated upstream
           <Spacer />
           <Box maxWidth="200px">
             <Text fontSize="16px" color="white">
@@ -363,6 +428,14 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
           </Box>
 
           <Spacer />
+=======
+          <Campaigninfo
+            currentProject={currentProject}
+            fundingover={fundingover}
+            schedule={schedule}
+            voteSession={voteSession}
+          />
+>>>>>>> Stashed changes
         </Flex>
       </Box>
     </Flex>
