@@ -220,6 +220,23 @@ function Campaigndetail({
                   voteSession={voteSession}
                 />
               </TabPanel>
+
+              <TabPanel>
+                <VoteSession
+                  currentProject={currentProject}
+                  fundingover={fundingover}
+                  schedule={schedule}
+                  voteSession={voteSession}
+                />
+              </TabPanel>
+              <TabPanel>
+                <VoteSession
+                  currentProject={currentProject}
+                  fundingover={fundingover}
+                  schedule={schedule}
+                  voteSession={voteSession}
+                />
+              </TabPanel>
             </TabPanels>
           </Tabs>
         </Flex>

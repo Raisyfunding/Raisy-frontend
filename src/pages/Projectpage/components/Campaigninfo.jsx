@@ -6,7 +6,10 @@ import { Link as RouterLink } from 'react-router-dom';
 // import { useState, useEffect } from 'react';
 // import { useApi } from '../../../api';
 
-function Campaigninfo({ currentProject, fundingover, schedule }) {
+
+
+function Campaigninfo({ currentProject, fundingover, schedule, voteSession }) {
+
   // const color = useColorModeValue('var(--white)', 'var(--black)');
   const currentBackground = useColorModeValue(
     'rgba(255,255,255,1)',
@@ -196,6 +199,12 @@ function Campaigninfo({ currentProject, fundingover, schedule }) {
             </Flex>
           </>
         ) : (
+          <Flex direction="column">
+            <Box bg="#27292b" borderRadius="15px">
+              <Flex direction="column" height="100%" padding="15px">
+                <Text textAlign="center" fontSize="26px" fontWeight="bold">
+                  {' '}
+                  Campaign has been funded !
           <>
             {' '}
             <Flex
@@ -363,6 +372,359 @@ function Campaigninfo({ currentProject, fundingover, schedule }) {
                           idx < schedule.currentMilestone ? acc + cur : acc,
                         0
                       )}
+          <>
+            {voteSession && voteSession.numUnsuccessfulVotes === 3 ? (
+              <>
+                {' '}
+                <Flex
+                  _hover={{ opacity: '0.8' }}
+                  width={'-webkit-fill-available'}
+                  backgroundColor={currentBackground}
+                  borderRadius={'50px'}
+                  border={'1px solid'}
+                  borderColor={currentBorder}
+                  padding={'30px'}
+                  flexDirection={'column'}
+                >
+                  <Text
+                    fontSize={'4xl'}
+                    fontWeight={'900'}
+                    style={{
+                      textAlign: 'center',
+                    }}
+                  >
+                    <span
+                      style={{
+                        textAlign: 'right',
+                        background:
+                          '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                        webkitBackgroundClip: 'text',
+                        webkitTextFillColor: 'transparent',
+                      }}
+                    >
+                      Funds released failed.
+                    </span>{' '}
+                    <br />
+                  </Text>
+                  <Text
+                    fontSize={'1xl'}
+                    fontWeight={'900'}
+                    style={{
+                      textAlign: 'center',
+                    }}
+                  >
+                    All donors are being refunds !
+                  </Text>
+                </Flex>
+                <Flex
+                  width={'-webkit-fill-available'}
+                  gridGap={'20px'}
+                  paddingTop={'20px'}
+                  flexDirection={'row'}
+                  marginBottom={'30px'}
+                >
+                  <Flex
+                    _hover={{ opacity: '0.8' }}
+                    width={'-webkit-fill-available'}
+                    background={
+                      'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))'
+                    }
+                    borderRadius={'50px'}
+                    padding={'20px'}
+                    flexDirection={'column'}
+                  >
+                    {' '}
+                    <Text
+                      fontSize={{ base: '5xl', md: '4xl', lg: '5xl' }}
+                      fontWeight={'900'}
+                      style={{
+                        textAlign: 'center',
+                      }}
+                    >
+                      {currentProject.nbDonations}
+                      <br />
+                    </Text>{' '}
+                    <Text
+                      fontSize={'1xl'}
+                      fontWeight={'900'}
+                      style={{
+                        textAlign: 'center',
+                      }}
+                    >
+                      Donations
+                    </Text>
+                  </Flex>
+                  <Flex
+                    _hover={{ opacity: '0.8' }}
+                    width={'-webkit-fill-available'}
+                    backgroundColor={currentBackground}
+                    borderRadius={'50px'}
+                    border={'1px solid'}
+                    borderColor={currentBorder}
+                    padding={'20px'}
+                    flexDirection={'column'}
+                  >
+                    <Text
+                      fontSize={{ base: '5xl', md: '4xl', lg: '5xl' }}
+                      fontWeight={'900'}
+                      style={{
+                        textAlign: 'center',
+                        background:
+                          '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                        webkitBackgroundClip: 'text',
+                        webkitTextFillColor: 'transparent',
+                      }}
+                    >
+                      {currentProject.amountRaised}$
+                      <br />
+                    </Text>{' '}
+                    <Text
+                      fontSize={'1xl'}
+                      fontWeight={'900'}
+                      style={{
+                        textAlign: 'center',
+                      }}
+                    >
+                      Raised
+                    </Text>
+                    <Text
+                      fontSize={'1xl'}
+                      fontWeight={'900'}
+                      style={{
+                        textAlign: 'center',
+                      }}
+                    >
+                      out of {currentProject.amountToRaise}$
+                    </Text>
+                  </Flex>
+                </Flex>
+                <Flex
+                  _hover={{ opacity: '0.8' }}
+                  width={'-webkit-fill-available'}
+                  height={'-webkit-fit-content'}
+                  backgroundColor={currentBackground}
+                  borderRadius={'50px'}
+                  border={'1px solid'}
+                  borderColor={'var(--blue)'}
+                  padding={'20px'}
+                  flexDirection={'column'}
+                  marginBottom={'20px'}
+                >
+                  {' '}
+                  <Text
+                    fontSize={'4xl'}
+                    fontWeight={'900'}
+                    style={{
+                      textAlign: 'center',
+                    }}
+                  >
+                    Funds Released
+                  </Text>
+                  {currentProject.nbMilestones && schedule && (
+                    <>
+                      <CircularProgress
+                        value={currentProject.pctReleasePerMilestone.reduce(
+                          (acc, cur, idx) =>
+                            idx < schedule.currentMilestone ? acc + cur : acc,
+                          0
+                        )}
+                        color="var(--blue)"
+                        thickness="5px"
+                        size={{ base: '150px', md: '100px', lg: '150px' }}
+                        margin={'auto'}
+                        trackColor={currentProgress}
+                      >
+                        {' '}
+                        <CircularProgressLabel margin={'auto'}>
+                          {currentProject.pctReleasePerMilestone.reduce(
+                            (acc, cur, idx) =>
+                              idx < schedule.currentMilestone ? acc + cur : acc,
+                            0
+                          )}
+                          %
+                        </CircularProgressLabel>
+                      </CircularProgress>
+                    </>
+                  )}
+                </Flex>
+              </>
+            ) : (
+              <>
+                {' '}
+                <Flex
+                  _hover={{ opacity: '0.8' }}
+                  width={'-webkit-fill-available'}
+                  backgroundColor={currentBackground}
+                  borderRadius={'50px'}
+                  border={'1px solid'}
+                  borderColor={currentBorder}
+                  padding={'30px'}
+                  flexDirection={'column'}
+                >
+                  <Text
+                    fontSize={'4xl'}
+                    fontWeight={'900'}
+                    style={{
+                      textAlign: 'center',
+                    }}
+                  >
+                    <span
+                      style={{
+                        textAlign: 'right',
+                        background:
+                          '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                        webkitBackgroundClip: 'text',
+                        webkitTextFillColor: 'transparent',
+                      }}
+                    >
+                      Campaign funded.
+                    </span>{' '}
+                    <br />
+                  </Text>
+                  <Text
+                    fontSize={'1xl'}
+                    fontWeight={'900'}
+                    style={{
+                      textAlign: 'center',
+                    }}
+                  >
+                    Congratulations to the participants!
+                  </Text>
+                </Flex>
+                <Flex
+                  width={'-webkit-fill-available'}
+                  gridGap={'20px'}
+                  paddingTop={'20px'}
+                  flexDirection={'row'}
+                  marginBottom={'30px'}
+                >
+                  <Flex
+                    _hover={{ opacity: '0.8' }}
+                    width={'-webkit-fill-available'}
+                    background={
+                      'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))'
+                    }
+                    borderRadius={'50px'}
+                    padding={'20px'}
+                    flexDirection={'column'}
+                  >
+                    {' '}
+                    <Text
+                      fontSize={{ base: '5xl', md: '4xl', lg: '5xl' }}
+                      fontWeight={'900'}
+                      style={{
+                        textAlign: 'center',
+                      }}
+                    >
+                      {currentProject.nbDonations}
+                      <br />
+                    </Text>{' '}
+                    <Text
+                      fontSize={'1xl'}
+                      fontWeight={'900'}
+                      style={{
+                        textAlign: 'center',
+                      }}
+                    >
+                      Donations
+                    </Text>
+                  </Flex>
+                  <Flex
+                    _hover={{ opacity: '0.8' }}
+                    width={'-webkit-fill-available'}
+                    backgroundColor={currentBackground}
+                    borderRadius={'50px'}
+                    border={'1px solid'}
+                    borderColor={currentBorder}
+                    padding={'20px'}
+                    flexDirection={'column'}
+                  >
+                    <Text
+                      fontSize={{ base: '5xl', md: '4xl', lg: '5xl' }}
+                      fontWeight={'900'}
+                      style={{
+                        textAlign: 'center',
+                        background:
+                          '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                        webkitBackgroundClip: 'text',
+                        webkitTextFillColor: 'transparent',
+                      }}
+                    >
+                      {currentProject.amountRaised}$
+                      <br />
+                    </Text>{' '}
+                    <Text
+                      fontSize={'1xl'}
+                      fontWeight={'900'}
+                      style={{
+                        textAlign: 'center',
+                      }}
+                    >
+                      Raised
+                    </Text>
+                    <Text
+                      fontSize={'1xl'}
+                      fontWeight={'900'}
+                      style={{
+                        textAlign: 'center',
+                      }}
+                    >
+                      out of {currentProject.amountToRaise}$
+                    </Text>
+                  </Flex>
+                </Flex>
+                <Flex
+                  _hover={{ opacity: '0.8' }}
+                  width={'-webkit-fill-available'}
+                  height={'-webkit-fit-content'}
+                  backgroundColor={currentBackground}
+                  borderRadius={'50px'}
+                  border={'1px solid'}
+                  borderColor={'var(--blue)'}
+                  padding={'20px'}
+                  flexDirection={'column'}
+                  marginBottom={'20px'}
+                >
+                  {' '}
+                  <Text
+                    fontSize={'4xl'}
+                    fontWeight={'900'}
+                    style={{
+                      textAlign: 'center',
+                    }}
+                  >
+                    Funds Released
+                  </Text>
+                  {currentProject.nbMilestones && schedule && (
+                    <>
+                      <CircularProgress
+                        value={currentProject.pctReleasePerMilestone.reduce(
+                          (acc, cur, idx) =>
+                            idx < schedule.currentMilestone ? acc + cur : acc,
+                          0
+                        )}
+                        color="var(--blue)"
+                        thickness="5px"
+                        size={{ base: '150px', md: '100px', lg: '150px' }}
+                        margin={'auto'}
+                        trackColor={currentProgress}
+                      >
+                        {' '}
+                        <CircularProgressLabel margin={'auto'}>
+                          {currentProject.pctReleasePerMilestone.reduce(
+                            (acc, cur, idx) =>
+                              idx < schedule.currentMilestone ? acc + cur : acc,
+                            0
+                          )}
+                          %
+                        </CircularProgressLabel>
+                      </CircularProgress>
+                    </>
+                  )}
+                </Flex>
+              </>
+            )}
+          </>
                       %
                     </CircularProgressLabel>
                   </CircularProgress>
@@ -592,7 +954,7 @@ function Campaigninfo({ currentProject, fundingover, schedule }) {
         </>
       )}
     </>
-  );
-}
+  )};
+
 
 export default Campaigninfo;
