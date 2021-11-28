@@ -12,6 +12,8 @@ import {
   Link,
   useToast,
   Box,
+  CircularProgressLabel,
+  CircularProgress,
 } from '@chakra-ui/react';
 import { Screen } from '../../styles/globalStyles';
 import { useColorModeValue } from '@chakra-ui/color-mode';
@@ -56,7 +58,7 @@ const Donate = () => {
   }, [campaignId]);
 
   const [currency, setCurrency] = React.useState({});
-  const [amount, setAmount] = React.useState(0);
+  const [amount, setAmount] = React.useState();
   const [amountError, setAmountError] = useState(null);
   const [balance, setBalance] = useState(0);
 
@@ -202,50 +204,59 @@ const Donate = () => {
     <Screen
       style={{
         backgroundColor: useColorModeValue('var(--white)', 'var(--black)'),
+        backgroundImage: '/images/dotwhite.png',
       }}
     >
-      <Box width={'100vw'} padding={'20px'}>
-        <Link href={'/campaign/'.concat(campaignId)}>
-          <Flex
-            borderRadius={'50px'}
-            height={'60px'}
-            width={'60px'}
-            style={{ borderColor: currentBorder }}
-            border={'solid 1px'}
-            backgroundColor={currentBackground}
-          >
-            <ArrowLeftIcon style={{ margin: 'auto' }} />
-          </Flex>
-        </Link>
-        <Text
-          textAlign={'center'}
-          fontSize={'4xl'}
-          paddingBottom={'50px'}
-          paddingTop={'10px'}
-        >
-          Donate
-        </Text>
+      <Box
+        backgroundImage="/images/yoyoyo.png"
+        backgroundRepeat={'no-repeat'}
+        backgroundSize={'cover'}
+        height={{ base: '', md: '100vh' }}
+      >
         <Flex
           flexDirection={{ base: 'column', md: 'row' }}
           width={'100vw'}
-          justifyContent={'center'}
+          justifyContent={{ base: 'left', md: 'center' }}
           gridGap={{ base: '30px', md: '0px' }}
         >
           <Flex
-            width={'40vw'}
+            width={{ base: '-webkit-fit-content', md: '50vw' }}
             flexDirection={'column'}
-            style={{ padding: '30px', margin: 'auto ' }}
-            // borderColor={useColorModeValue('var(--white)', 'var(--black)')}
-            // borderRadius={'7px'}
+            padding={'40px'}
+            margin={'auto'}
           >
-            <Text textAlign={'center'} fontSize={'4xl'} paddingTop={'10px'}>
-              The donation
+            <Text
+              marginLeft={'auto'}
+              marginRight={'auto'}
+              fontSize={{
+                base: '5xl',
+                sm: '7xl',
+                md: '7xl',
+                lg: '7xl',
+                xl: '8xl',
+              }}
+              style={{
+                background:
+                  '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                webkitBackgroundClip: 'text',
+                webkitTextFillColor: 'transparent',
+              }}
+              fontWeight={'900'}
+            >
+              DONATE.
             </Text>
             <Text
-              paddingTop={'50px'}
-              color={useColorModeValue('var(--black)', 'var(--white)')}
+              style={{
+                background:
+                  '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                webkitBackgroundClip: 'text',
+                webkitTextFillColor: 'transparent',
+              }}
+              fontWeight={'900'}
               marginBottom={'5px'}
-              fontSize={'1.5em'}
+              fontSize={'2em'}
+              marginRight={'auto'}
+              marginLeft={'auto'}
             >
               Select a currency
             </Text>
@@ -254,44 +265,115 @@ const Donate = () => {
               marginBottom={'10px'}
               fontStyle={'italic'}
               textAlign={'justify'}
+              marginLeft={'auto'}
+              marginRight={'auto'}
             >
-              A donation using $RSY offers many advantages.
-              <br />
+              A donation using $RSY offers many advantages.{' '}
               <Link color={'var(--blue)'}>Why should I use $RSY?</Link>
             </Text>
             <Select
+              borderRadius={'50px'}
+              width={{
+                base: '200px',
+                sm: '400px',
+                md: '350px',
+                lg: '400px',
+                xl: '600px',
+              }}
+              backgroundColor={useColorModeValue(
+                'rgba(255,255,255,1)',
+                'rgba(21,21,21,.64)'
+              )}
+              borderColor={useColorModeValue(
+                'rgba(235, 235, 235, 1)',
+                'rgba(25,25,25,1)'
+              )}
+              height={'60px'}
+              _placeholder={{ color: 'rgba(150,150,150,1)', fontWeight: '550' }}
               placeholder="Select currency"
-              borderColor={useColorModeValue('var(--black)', 'var(--white)')}
               onChange={handleChangeCurrency}
               value={currency?.address}
+              marginLeft={'auto'}
+              marginRight={'auto'}
             >
               {options.map((opt) => {
                 return <option value={opt?.address}>{opt?.symbol}</option>;
               })}
             </Select>
-            <Flex flexDirection={'row'} gridGap={'auto'}>
-              <Text
-                paddingTop={'50px'}
-                color={useColorModeValue('var(--black)', 'var(--white)')}
-                marginBottom={'5px'}
-                fontSize={'1.5em'}
-              >
-                Amount of the donation
-              </Text>
-
-              <Text
-                paddingBottom={'10px'}
-                paddingTop={'50px'}
-                marginLeft={'auto'}
-                marginTop={'auto'}
-              >
+            <Text
+              paddingTop={'50px'}
+              style={{
+                background:
+                  '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                webkitBackgroundClip: 'text',
+                webkitTextFillColor: 'transparent',
+              }}
+              fontWeight={'900'}
+              marginBottom={'5px'}
+              fontSize={'2em'}
+              marginLeft={'auto'}
+              marginRight={'auto'}
+            >
+              Amount of the donation
+            </Text>
+            <Box
+              width={{
+                base: '200px',
+                sm: '400px',
+                md: '350px',
+                lg: '400px',
+                xl: '600px',
+              }}
+              textAlign={'right'}
+              marginLeft={'auto'}
+              marginRight={'auto'}
+            >
+              <Text paddingBottom={'10px'}>
                 Available:{' '}
-                {ethers.utils.formatUnits(balance, currency?.decimals)}{' '}
-                {currency?.symbol} ({tokenPrice}$)
+                {Math.round(
+                  ethers.utils.formatUnits(balance, currency?.decimals)
+                )}
+                {currency?.symbol} ~
+                {Math.round(
+                  tokenPrice *
+                    ethers.utils.formatUnits(balance, currency?.decimals)
+                )}
+                $
               </Text>
-            </Flex>
-            <InputGroup>
+            </Box>
+            <InputGroup
+              marginLeft={'auto'}
+              marginRight={'auto'}
+              width={{
+                base: '200px',
+                sm: '400px',
+                md: '350px',
+                lg: '400px',
+                xl: '600px',
+              }}
+            >
               <Input
+                borderRadius={'50px'}
+                width={{
+                  base: '200px',
+                  sm: '400px',
+                  md: '500px',
+                  lg: '500px',
+                  xl: '600px',
+                }}
+                backgroundColor={useColorModeValue(
+                  'rgba(255,255,255,1)',
+                  'rgba(21,21,21,.64)'
+                )}
+                borderColor={useColorModeValue(
+                  'rgba(235, 235, 235, 1)',
+                  'rgba(25,25,25,1)'
+                )}
+                height={'60px'}
+                _placeholder={{
+                  color: 'rgba(150,150,150,1)',
+                  fontWeight: '550',
+                }}
                 colorScheme={'red'}
                 type="number"
                 placeholder="Amount"
@@ -301,13 +383,17 @@ const Donate = () => {
                 onBlur={validateAmount}
                 onChange={handleChangeAmount}
                 value={amount}
-                borderColor={useColorModeValue('var(--black)', 'var(--white)')}
                 variant={amount > 0 ? 'filled' : 'outline'}
                 border={amount > 0 ? 'none' : 'solid 1px'}
               />
-              <InputRightElement width="4.5rem">
+              <InputRightElement width="4.5rem" height={'60px'}>
                 <Button
-                  h="1.75rem"
+                  height={'40px'}
+                  borderRadius={'50px'}
+                  backgroundColor={useColorModeValue(
+                    'rgba(235, 235, 235, 1)',
+                    'rgba(21,21,21,.64)'
+                  )}
                   size="sm"
                   onClick={() =>
                     setAmount(
@@ -336,34 +422,86 @@ const Donate = () => {
               <Button
                 disabled={amountError || !amount}
                 onClick={handleSendDonation}
+                width={'200px'}
+                height={'60px'}
+                margin={'auto'}
+                borderRadius={'50px'}
+                color={'black'}
+                background={
+                  'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))'
+                }
+                _hover={{
+                  opacity: 0.8,
+                  background:
+                    'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                }}
               >
                 Send the donation
               </Button>
             )}
           </Flex>
           <Flex
-            width={'40vw'}
+            margin={'auto'}
+            backgroundColor={useColorModeValue(
+              'rgba(255,255,255,1)',
+              'rgba(21,21,21,.64)'
+            )}
+            borderRadius={'50px'}
+            border={'1px solid'}
+            borderColor={useColorModeValue(
+              'rgba(235, 235, 235, 1)',
+              'rgba(25,25,25,1)'
+            )}
+            padding={'30px'}
             flexDirection={'column'}
-            style={{ border: 'solid 1px', padding: '10px', margin: 'auto ' }}
-            borderColor={useColorModeValue('var(--white)', 'var(--black)')}
-            borderRadius={'7px'}
             justifyContent={'center'}
-            gridGap={'20px'}
+            alignItems={'center'}
+            display={'flex'}
           >
             <Text
-              textAlign={'center'}
-              fontSize={'4xl'}
-              paddingBottom={'50px'}
-              paddingTop={'10px'}
+              style={{
+                background:
+                  '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                webkitBackgroundClip: 'text',
+                webkitTextFillColor: 'transparent',
+              }}
+              fontWeight={'900'}
+              marginBottom={'5px'}
+              fontSize={'2em'}
             >
-              The project
+              {campaign.title}
             </Text>
             <Image
-              boxSize="200px"
+              boxSize="300px"
               src={`https://cloudflare-ipfs.com/ipfs/${campaign.coverImageHash}`}
+              paddingBottom={'15px'}
             />
-            <Text>{campaign.title}</Text>
-            <Text>{campaign.description}</Text>
+            <Text fontSize={'1xl'} fontWeight={'800'} paddingBottom={'10px'}>
+              Campaign Progress
+            </Text>
+            <CircularProgress
+              value={
+                campaign.amountRaised / campaign.amountToRaise < 1
+                  ? (campaign.amountRaised / campaign.amountToRaise) * 100
+                  : '100'
+              }
+              color="var(--blue)"
+              thickness="5px"
+              size={'90px'}
+              margin={'auto'}
+              trackColor={useColorModeValue(
+                'rgba(230,230,230,1)',
+                'rgba(25,25,25,1)'
+              )}
+            >
+              {' '}
+              <CircularProgressLabel margin={'auto'}>
+                {campaign.amountRaised / campaign.amountToRaise < 1
+                  ? (campaign.amountRaised / campaign.amountToRaise) * 100
+                  : '100'}
+                %
+              </CircularProgressLabel>
+            </CircularProgress>
           </Flex>
         </Flex>
       </Box>
