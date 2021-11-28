@@ -1,27 +1,21 @@
 import { Image } from '@chakra-ui/image';
 import { Flex, Text, Box, Center, Spacer } from '@chakra-ui/layout';
-import {
-  Vstack,
-  Button,
-  Link,
-  useToast,
-  useColorModeValue,
-} from '@chakra-ui/react';
+import { Vstack, Button, Link, useToast } from '@chakra-ui/react';
 import { SpacerLarge } from '../../../styles/globalStyles';
 import Campaigninfo from './Campaigninfo';
-import Marquee from 'react-fast-marquee';
 import React, { Suspense, useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
 import styles from './styles.module.scss';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import SuspenseImg from '../../../components/suspense';
+import security from '../../../images/security.png';
+import moneybag from '../../../images/moneybag.png';
+import handshake from '../../../images/handshake.png';
 import { useWeb3React } from '@web3-react/core';
 import { useCampaignsContract } from './../../../contracts/raisyCampaigns';
 import { formatError } from '../../../utils';
 import useBlockNumber from '../../../hooks/useBlockNumber';
-import decentralizedwhite from '../../../images/decentralized_white.png';
-import decentralizedblack from '../../../images/decentralized_black.png';
 
 const renderMedia = (image, contentType) => {
   if (contentType === 'video' || image?.includes('youtube')) {
@@ -32,17 +26,11 @@ const renderMedia = (image, contentType) => {
         controls={true}
         width="100%"
         height="100%"
-        style={{ borderRadius: 'inherit' }}
       />
     );
   } else if (contentType === 'embed') {
     return (
-      <iframe
-        title="cover-video"
-        className={styles.content}
-        src={image}
-        style={{ borderRadius: 'inherit' }}
-      />
+      <iframe title="cover-video" className={styles.content} src={image} />
     );
   } else if (contentType === 'image' || contentType === 'gif') {
     return (
@@ -60,7 +48,6 @@ const renderMedia = (image, contentType) => {
         <SuspenseImg
           className={styles.content}
           src={`https://cloudflare-ipfs.com/ipfs/${image}`}
-          style={{ borderRadius: 'inherit' }}
         />
       </Suspense>
     );
@@ -184,138 +171,192 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
   }, [schedule]);
 
   return (
-    <Box
-      direction="row"
-      height="100vh"
-      width={'100vw'}
-      backgroundImage={'/images/wavebg.png'}
-      backgroundRepeat={'no-repeat'}
-      backgroundSize={'cover'}
-    >
-      <Box>
-        <Flex direction="column" alignItems={'center'} paddingBottom={'20px'}>
-          <Text
-            textAlign={'center'}
-            fontSize={{ base: '4xl', md: '5xl', lg: '6xl' }}
-            style={{
-              background:
-                '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
-              webkitBackgroundClip: 'text',
-              webkitTextFillColor: 'transparent',
-            }}
-            fontWeight={'900'}
-            width={'95vw'}
-            marginLeft={'auto'}
-            marginRight={'auto'}
-          >
-            {currentProject.title}
-          </Text>
-          {/* <Text textTransform="uppercase" textDecoration="underline" fontSize="13px" marginTop="-20px" marginLeft="5px">
+    <Flex direction="column" height="100vh">
+      <Box marginLeft="10%" marginRight="10%" marginTop="2%">
+        <Flex direction={{ base: 'column', md: 'row' }}>
+          <Flex direction="column" width="700px">
+            <Text fontWeight="bold" fontSize="80px" marginTop="-20px">
+              {currentProject.title}
+            </Text>
+            {/* <Text textTransform="uppercase" textDecoration="underline" fontSize="13px" marginTop="-20px" marginLeft="5px">
                 {currentProject.category}
               </Text> */}
-          <SpacerLarge />
-          <Box height="350px" style={{ borderRadius: '50px' }}>
-            {renderMedia(currentProject.coverImageHash, 'image')}
-          </Box>
-        </Flex>
-        <Campaigninfo
-          currentProject={currentProject}
-          fundingover={fundingover}
-          schedule={schedule}
-        />
+            <SpacerLarge />
+            <Box height="350px">
+              {renderMedia(currentProject.coverImageHash, 'image')}
+            </Box>
+          </Flex>
+          <Spacer />
 
-        {/* {fundingover && account ? (
-            <div>
-              {currentProject.creator === account.toLowerCase() ? (
-                <div>
-                  {currentProject.amountToRaise - currentProject.amountRaised <
-                  0 ? (
-                    <>
-                      {schedule.currentMilestone > 0 ? (
-                        <>
-                          {' '}
-                          {voteSession.inProgress && !isFinished ? (
-                            <div>Vote Stats</div>
-                          ) : (
-                            <div>
-                              {voteSession.inProgress ? (
-                                <div>
-                                  <Button
-                                    width={'100%'}
-                                    onClick={handleEndVoteSession}
-                                    disabled={ending}
-                                  >
-                                    End Vote Session
-                                  </Button>
-                                </div>
-                              ) : (
-                                <div>
-                                  <Button
-                                    width={'100%'}
-                                    onClick={handleAskMoreFunds}
-                                    disabled={asking}
-                                  >
-                                    Ask More Funds
-                                  </Button>
-                                </div>
-                              )}
-                            </div>
-                          )}
-                        </>
-                      ) : (
-                        <>
+          <Box width="400px">
+            <Campaigninfo
+              currentProject={currentProject}
+              fundingover={fundingover}
+              schedule={schedule}
+            />
+            <SpacerLarge />
+            {fundingover && account ? (
+              <div>
+                {currentProject.creator === account.toLowerCase() ? (
+                  <div>
+                    {currentProject.amountToRaise -
+                      currentProject.amountRaised <
+                    0 ? (
+                      <>
+                        {schedule.currentMilestone > 0 ? (
+                          <>
+                            {' '}
+                            {voteSession.inProgress && !isFinished ? (
+                              <div>Vote Stats</div>
+                            ) : (
+                              <div>
+                                {voteSession.inProgress ? (
+                                  <div>
+                                    <Button
+                                      width={'100%'}
+                                      onClick={handleEndVoteSession}
+                                      disabled={ending}
+                                    >
+                                      End Vote Session
+                                    </Button>
+                                  </div>
+                                ) : (
+                                  <div>
+                                    <Button
+                                      width={'100%'}
+                                      onClick={handleAskMoreFunds}
+                                      disabled={asking}
+                                    >
+                                      Ask More Funds
+                                    </Button>
+                                  </div>
+                                )}
+                              </div>
+                            )}
+                          </>
+                        ) : (
+                          <>
+                            <Text
+                              padding={'20px'}
+                              marginLeft={'auto'}
+                              marginRight={'auto'}
+                            >
+                              You can claim funds now ! Click on the button
+                              below
+                            </Text>
+                            <Button
+                              width={'100%'}
+                              onClick={handleClaimFunds}
+                              disabled={claiming}
+                            >
+                              Claim your funds
+                            </Button>
+                          </>
+                        )}
+                      </>
+                    ) : (
+                      <div></div>
+                    )}
+                  </div>
+                ) : (
+                  <div>
+                    {currentProject.amountToRaise -
+                      currentProject.amountRaised <
+                    0 ? (
+                      <div></div>
+                    ) : (
+                      <Flex>
+                        {/* display={account ? 'flex' : 'none'} */}
+                        <Flex flexDirection={'column'} width={'100%'}>
                           <Text
                             padding={'20px'}
                             marginLeft={'auto'}
                             marginRight={'auto'}
                           >
-                            You can claim funds now ! Click on the button below
+                            The campaign is unsuccessful, or participants voted
+                            in majority for a refund.
                           </Text>
-                          <Button
-                            width={'100%'}
-                            onClick={handleClaimFunds}
-                            disabled={claiming}
-                          >
-                            Claim your funds
-                          </Button>
-                        </>
-                      )}
-                    </>
-                  ) : (
-                    <div></div>
-                  )}
-                </div>
-              ) : (
-                <div>
-                  {currentProject.amountToRaise - currentProject.amountRaised <
-                  0 ? (
-                    <div></div>
-                  ) : (
-                    <Flex>
-                      display={account ? 'flex' : 'none'}
-                      <Flex flexDirection={'column'} width={'100%'}>
-                        <Text
-                          padding={'20px'}
-                          marginLeft={'auto'}
-                          marginRight={'auto'}
-                        >
-                          The campaign is unsuccessful, or participants voted in
-                          majority for a refund.
-                        </Text>
-                        <Button width={'100%'}>Withdraw your donation</Button>
+                          <Button width={'100%'}>Withdraw your donation</Button>
+                        </Flex>
                       </Flex>
-                    </Flex>
-                  )}
-                </div>
-              )}
-            </div>
-          ) : (
-            <Center>
-              <div></div>
-            </Center>
-          )} */}
+                    )}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Center>
+                <div></div>
+              </Center>
+            )}
+          </Box>
+        </Flex>
       </Box>
-    </Box>
+      <Box
+        width="100%"
+        height="100px"
+        position="fixed"
+        top="100vh"
+        marginTop="-167px"
+        bg="#27292b"
+      >
+        <Flex
+          direction="row"
+          alignContent="center"
+          textAlign="center"
+          marginTop="15px"
+        >
+          <Spacer />
+          <Box maxWidth="200px">
+            <Text fontSize="16px" color="white">
+              Raisy connects Creators with donors to fund their project
+            </Text>
+            <Center>
+              <Image
+                src={handshake}
+                alt="project image"
+                style={{ filter: 'grayscale(1)' }}
+                opacity="0.2"
+                marginTop="-45%"
+              />
+            </Center>
+          </Box>
+          <Spacer />
+          <Box maxWidth="200px">
+            <Text fontSize="16px" color="white">
+              Releases partial fund after inspecting the progress of the project
+            </Text>
+            <Center>
+              <Image
+                src={moneybag}
+                alt="project image"
+                style={{ filter: 'grayscale(1)' }}
+                opacity="0.2"
+                marginTop="-40%"
+                width="80px"
+              />
+            </Center>
+          </Box>
+          <Spacer />
+          <Box maxWidth="200px">
+            <Text fontSize="16px" color="white">
+              Refunds the unreleased funds if project turns out to be a scam
+            </Text>
+            <Center>
+              <Image
+                src={security}
+                alt="project image"
+                style={{ filter: 'grayscale(1)' }}
+                opacity="0.2"
+                marginTop="-40%"
+                width="80px"
+              />
+            </Center>
+          </Box>
+
+          <Spacer />
+        </Flex>
+      </Box>
+    </Flex>
   );
 }
 

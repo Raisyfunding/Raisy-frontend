@@ -49,7 +49,7 @@ const StakingStats = () => {
               <Flex
                 _hover={{ opacity: '0.8' }}
                 width={'-webkit-fill-available'}
-                height={'200px'}
+                height={'280px'}
                 backgroundColor={useColorModeValue(
                   'rgba(255,255,255,1)',
                   'rgba(21,21,21,.64)'
@@ -103,6 +103,7 @@ const StakingStats = () => {
               </Flex>
               <Flex
                 _hover={{ opacity: '0.8' }}
+                height={'280px'}
                 width={'-webkit-fill-available'}
                 backgroundColor={useColorModeValue(
                   'rgba(255,255,255,1)',
