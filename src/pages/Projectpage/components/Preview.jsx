@@ -539,7 +539,11 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
                               The vote didn't pass 3 times in a row. Please get
                               your funds back.
                             </Text>
-                            <Flex gridGap={'15px'} justifyContent={'center'}>
+                            <Flex
+                              gridGap={'15px'}
+                              justifyContent={'center'}
+                              flexWrap="wrap"
+                            >
                               {tokens.map((token) => (
                                 <Button
                                   width={'200px'}

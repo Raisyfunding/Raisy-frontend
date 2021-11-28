@@ -6,6 +6,7 @@ import {
   Tab,
   TabPanel,
   useColorModeValue,
+  css,
 } from '@chakra-ui/react';
 import VoteSession from './VoteSession';
 import Campaigninfo from './Campaigninfo';
@@ -63,7 +64,18 @@ function Campaigndetail({
             overflow={'hidden'}
           >
             <Center>
-              <TabList width="100%" paddingTop={'5px'}>
+              <TabList
+                width="100%"
+                paddingTop={'5px'}
+                overflowX="auto"
+                css={css({
+                  scrollbarWidth: 'none',
+                  '::-webkit-scrollbar': { display: 'none' },
+                  '-webkit-overflow-scrolling': 'touch',
+                  boxShadow: 'inset 0 -2px 0 rgba(0, 0, 0, 0.1)',
+                  border: '0 none',
+                })}
+              >
                 <Tab
                   height={'60px'}
                   _selected={{ color: 'white', bg: 'var(--blue)' }}
