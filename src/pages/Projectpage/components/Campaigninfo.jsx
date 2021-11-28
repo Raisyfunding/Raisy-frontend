@@ -56,6 +56,7 @@ function Campaigninfo({ currentProject, fundingover, schedule }) {
                 padding={'20px'}
                 flexDirection={'row'}
                 gridGap={'20px'}
+                marginRight={'30px'}
               >
                 <Flex
                   backgroundColor={currentBackground}
@@ -102,6 +103,7 @@ function Campaigninfo({ currentProject, fundingover, schedule }) {
                 padding={'20px'}
                 flexDirection={'row'}
                 gridGap={'20px'}
+                marginRight={'30px'}
               >
                 <Flex
                   backgroundColor={currentBackground}
@@ -123,7 +125,6 @@ function Campaigninfo({ currentProject, fundingover, schedule }) {
                   marginTop={'auto'}
                   marginBottom={'auto'}
                 >
-                  The fund target <br />{' '}
                   <span
                     style={{
                       textAlign: 'center',
@@ -133,8 +134,10 @@ function Campaigninfo({ currentProject, fundingover, schedule }) {
                       webkitTextFillColor: 'transparent',
                     }}
                   >
-                    was not met
+                    {currentProject.amountRaised}$
                   </span>
+                  raised,
+                  <br /> the target was {currentProject.amountToRaise}$
                 </Text>
               </Flex>
             </Marquee>
