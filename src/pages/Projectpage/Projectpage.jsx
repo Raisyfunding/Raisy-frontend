@@ -2,10 +2,10 @@ import Preview from './components/Preview';
 import { Footer } from '../../components/index';
 import React, { useEffect, useState } from 'react';
 import ReactFullpage from '@fullpage/react-fullpage';
-import { Screen, SpacerMedium } from '../../styles/globalStyles';
+import { Screen } from '../../styles/globalStyles';
 import { useColorModeValue } from '@chakra-ui/color-mode';
 import Campaigndetail from './components/Campaigndetail';
-import { useParams, Link, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useApi } from './../../api/index';
 import Space from './components/space';
 
@@ -38,7 +38,7 @@ const Projectpage = () => {
     fetchCampaignById(campaignId).then((_campaign) => {
       setCampaign(_campaign.data);
     });
-    // react-hooks exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [campaignId]);
 
   useEffect(() => {
@@ -47,6 +47,7 @@ const Projectpage = () => {
         _schedule && _schedule.data ? setSchedule(_schedule.data) : null
       );
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [campaign]);
 
   useEffect(() => {
@@ -57,12 +58,12 @@ const Projectpage = () => {
           : null
       );
     }
-    console.log(voteSession);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [campaign]);
 
   useEffect(() => {
     fundingOver();
-    // react-hooks exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [campaign]);
 
   return (

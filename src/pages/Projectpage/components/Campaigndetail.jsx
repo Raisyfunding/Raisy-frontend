@@ -1,5 +1,4 @@
-import { Flex, Text, Box, Spacer, Center } from '@chakra-ui/layout';
-import { SpacerLarge, SpacerSmall } from '../../../styles/globalStyles';
+import { Flex, Text, Box, Center } from '@chakra-ui/layout';
 import {
   Tabs,
   TabList,

@@ -49,11 +49,26 @@ const VoteSession = ({ currentProject, voteSession }) => {
     <div>
       {currentProject.nbMilestones ? (
         <div>
-          {false ? (
-            <div></div>
+          {!voteSession?.inProgress ? (
+            <div>
+              <Text
+                fontSize={{ base: '2xl', md: '2xl', lg: '3xl' }}
+                style={{
+                  textAlign: 'center',
+                  background:
+                    '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                  webkitBackgroundClip: 'text',
+                  webkitTextFillColor: 'transparent',
+                }}
+                fontWeight={'900'}
+                paddingBottom={'40px'}
+                margin={'auto'}
+              >
+                NO VOTE SESSION LIVE
+              </Text>
+            </div>
           ) : (
             <div>
-              {console.log(voteSession)}
               <Box>
                 <Box height="25px" />
                 <Text fontSize="3xl" textAlign="center" fontWeight="900">
@@ -119,12 +134,9 @@ const VoteSession = ({ currentProject, voteSession }) => {
                     vote
                   </Text>
                 </Center> */}
-                <Box height="20px" />
                 <Center>
                   <Countdown date={Date.now() + 10000000} />
                 </Center>
-
-                <Box height="50px" />
               </Box>
             </div>
           )}

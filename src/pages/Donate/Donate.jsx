@@ -51,6 +51,7 @@ const Donate = () => {
     fetchCampaignById(campaignId).then((_campaign) => {
       setCampaign(_campaign.data);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [campaignId]);
 
   const [currency, setCurrency] = React.useState({});
@@ -111,12 +112,14 @@ const Donate = () => {
     if (account && currency?.address) {
       updateBalance();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [account, currency]);
 
   useEffect(() => {
     if (!currency?.address) return;
 
     getTokenPrice();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currency]);
 
   const handleSendDonation = async () => {

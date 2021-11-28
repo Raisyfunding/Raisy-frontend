@@ -1,14 +1,12 @@
-import { Image } from '@chakra-ui/image';
-import { Flex, Text, Box, Center, Spacer } from '@chakra-ui/layout';
+import { Flex, Text, Box, Center } from '@chakra-ui/layout';
 import {
-  Vstack,
   Button,
   Link,
   useToast,
   HStack,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { SpacerLarge } from '../../../styles/globalStyles';
+// import { SpacerLarge } from '../../../styles/globalStyles';
 import Campaigninfo from './Campaigninfo';
 import React, { Suspense, useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
@@ -28,6 +26,9 @@ import {
   FiHeart,
 } from 'react-icons/fi';
 import useTokens from './../../../hooks/useTokens';
+import VoteStats from './VoteStats';
+import { AVERAGE_BLOCK_TIME } from '../../../constants/network';
+// import Countdown from 'react-countdown';
 
 const renderMedia = (image, contentType) => {
   if (contentType === 'video' || image?.includes('youtube')) {
@@ -92,11 +93,16 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
   const [claiming, setClaiming] = useState(false);
   const [ending, setEnding] = useState(false);
   const [asking, setAsking] = useState(false);
-  const [isFinished, setIsFinished] = useState(false);
+  const [isFinished, setIsFinished] = useState(true);
+
+  // eslint-disable-next-line no-unused-vars
+  const [voteTimeEndDate, setVoteTimeEndDate] = useState(null);
+
+  const [endBlock, setEndBlock] = useState(0);
 
   const { tokens } = useTokens();
 
-  const VOTE_SESSION_DURATION = 84200;
+  const VOTE_SESSION_DURATION = 40;
 
   const handleClaimFunds = async () => {
     if (claiming) return;
@@ -188,16 +194,25 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
   useEffect(() => {
     if (voteSession) {
       getBlockNumber().then((_blockNumber) => {
-        const _isFinished =
-          _blockNumber >= voteSession.startBlock + VOTE_SESSION_DURATION;
+        const _endBlock = voteSession.startBlock + VOTE_SESSION_DURATION;
+        const _isFinished = _blockNumber >= _endBlock;
         setIsFinished(_isFinished);
+        setEndBlock(_endBlock - _blockNumber);
+        if (!_isFinished) {
+          const _endDate =
+            new Date(
+              (_endBlock - _blockNumber) * AVERAGE_BLOCK_TIME[4] * 1000
+            ) - Date.now();
+          setVoteTimeEndDate(_endDate);
+        }
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [voteSession]);
 
-  useEffect(() => {
-    console.log(schedule);
-  }, [schedule]);
+  // useEffect(() => {
+  //   console.log(schedule);
+  // }, [schedule]);
 
   return (
     <Box height={{ base: '', md: '100vh' }} width={'100vw'}>
@@ -378,14 +393,37 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
                         {schedule.currentMilestone > 0 ? (
                           <>
                             {' '}
-                            {voteSession?.inProgress && !isFinished ? (
-                              <div>Vote Stats</div>
+                            {!isFinished ? (
+                              <Center>
+                                <Box width="500px">
+                                  <VoteStats voteSession={voteSession} />
+                                  {/* <Countdown date={voteTimeEndDate} /> */}
+                                  <Text
+                                    fontSize={{
+                                      base: '2xl',
+                                      md: '2xl',
+                                      lg: '3xl',
+                                    }}
+                                    style={{
+                                      textAlign: 'center',
+                                      background:
+                                        '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                                      webkitBackgroundClip: 'text',
+                                      webkitTextFillColor: 'transparent',
+                                    }}
+                                    fontWeight={'900'}
+                                    paddingBottom={'40px'}
+                                    margin={'auto'}
+                                  >
+                                    {endBlock} blocks remaining
+                                  </Text>
+                                </Box>
+                              </Center>
                             ) : (
                               <div>
                                 {voteSession?.inProgress ? (
                                   <div>
                                     <Button
-                                      width={'100%'}
                                       onClick={handleEndVoteSession}
                                       disabled={ending}
                                       width={'200px'}

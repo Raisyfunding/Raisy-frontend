@@ -5,7 +5,7 @@ function VoteStats({ voteSession }) {
   if (!voteSession) return <></>;
 
   return (
-    <div>
+    <>
       <HStack spacing="auto">
         <Box>
           <VStack>
@@ -25,7 +25,7 @@ function VoteStats({ voteSession }) {
           <Text fontSize="2xl">Vote Ratio</Text>
         </VStack>
       </HStack>
-    </div>
+    </>
   );
 }
 

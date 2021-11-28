@@ -1,9 +1,9 @@
 import { ethers } from 'ethers';
 import React from 'react';
-import { Flex, Text, useColorModeValue } from '@chakra-ui/react';
+import { Flex, Text } from '@chakra-ui/react';
 
 const ProofOfDonation = ({ pod }) => {
-  const color = useColorModeValue('rgba(255,255,255,1)', 'rgba(21,21,21,.64)');
+  // const color = useColorModeValue('rgba(255,255,255,1)', 'rgba(21,21,21,.64)');
 
   return (
     <Flex
