@@ -114,9 +114,25 @@ const DonationStats = ({ campaignId }) => {
             <Text textAlign={'center'}>Pending Rewards : {pendingRewards}</Text>
           </>
         )}
-        <Button display={!account ? 'flex' : 'none'} bg="#27292b">
+        <Button
+          display={!account ? 'flex' : 'none'}
+          width={'200px'}
+          height={'60px'}
+          margin={'auto'}
+          borderRadius={'50px'}
+          color={'black'}
+          background={
+            'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))'
+          }
+          _hover={{
+            opacity: 0.8,
+            background:
+              'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+          }}
+        >
           Connect
         </Button>
+
         <Flex display={account ? 'flex' : 'none'}>
           <Flex
             display={!endCampaign && !enableWithdrawing ? 'flex' : 'none'}

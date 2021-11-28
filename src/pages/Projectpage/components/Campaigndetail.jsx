@@ -64,7 +64,7 @@ function Campaigndetail({
             overflow={'hidden'}
           >
             <Center>
-              <TabList width="100%">
+              <TabList width="100%" paddingTop={'5px'}>
                 <Tab
                   height={'60px'}
                   _selected={{ color: 'white', bg: 'var(--blue)' }}
