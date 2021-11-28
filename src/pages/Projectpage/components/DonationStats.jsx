@@ -11,7 +11,7 @@ import { ethers } from 'ethers';
 const DonationStats = ({ campaignId }) => {
   const { tokens: currencies } = useTokens();
 
-  const { account } = useWeb3React();
+  const { account, chainId } = useWeb3React();
   const { getPendingRewards } = useChefContract();
 
   const [endCampaign, setEndCampaign] = useState(false);
@@ -51,8 +51,8 @@ const DonationStats = ({ campaignId }) => {
   };
 
   const udpatePendingRewards = async () => {
+    if (!account || campaignId === undefined) return;
     const _pending = await getPendingRewards(campaignId, account);
-    console.log(_pending);
     setPendingRewards(parseFloat(ethers.utils.formatEther(_pending)));
   };
 
@@ -61,8 +61,15 @@ const DonationStats = ({ campaignId }) => {
       updateAllTokens();
       udpatePendingRewards();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currencies, campaignId, account]);
+
+  useEffect(() => {
+    setInterval(async () => {
+      await udpatePendingRewards();
+    }, 1000);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [chainId]);
 
   return (
     <div>
@@ -103,18 +110,39 @@ const DonationStats = ({ campaignId }) => {
             ))}
           </Tbody>
         </Table>
-        <Text
-          textAlign={'center'}
-          fontSize={'3xl'}
-          paddingBottom={'10px'}
-          paddingTop={'20px'}
-        >
-          Get your $RSY rewards !
-        </Text>
+
         {account && (
-          <>
-            <Text textAlign={'center'}>Pending Rewards : {pendingRewards}</Text>
-          </>
+          <Flex
+            marginTop={'20px'}
+            _hover={{ opacity: '0.8' }}
+            width={'-webkit-fill-available'}
+            background={
+              'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))'
+            }
+            borderRadius={'50px'}
+            padding={'20px'}
+            flexDirection={'column'}
+          >
+            <Text
+              fontSize={{ base: '5xl', md: '4xl', lg: '5xl' }}
+              fontWeight={'900'}
+              style={{
+                textAlign: 'center',
+              }}
+            >
+              {pendingRewards}
+              <br />
+            </Text>{' '}
+            <Text
+              fontSize={'1xl'}
+              fontWeight={'900'}
+              style={{
+                textAlign: 'center',
+              }}
+            >
+              RSY pending rewards
+            </Text>
+          </Flex>
         )}
         <Button
           display={!account ? 'flex' : 'none'}
