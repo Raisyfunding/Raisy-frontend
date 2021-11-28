@@ -16,6 +16,16 @@ import { useWeb3React } from '@web3-react/core';
 import { useCampaignsContract } from './../../../contracts/raisyCampaigns';
 import { formatError } from '../../../utils';
 import useBlockNumber from '../../../hooks/useBlockNumber';
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverBody,
+  PopoverFooter,
+  PopoverArrow,
+  PopoverCloseButton,
+} from '@chakra-ui/react';
 import VoteStats from './VoteStats';
 
 const renderMedia = (image, contentType) => {
@@ -179,8 +189,6 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
 
   return (
     <Flex direction="column" height="100vh">
-      {console.log(schedule)}
-      {console.log(voteSession)}
       <Box marginLeft="10%" marginRight="10%" marginTop="2%">
         <Flex direction={{ base: 'column', md: 'row' }}>
           <Flex direction="column" width="700px">
@@ -195,6 +203,7 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
               {renderMedia(currentProject.coverImageHash, 'image')}
             </Box>
           </Flex>
+
           <Spacer />
 
           <Box width="400px">
@@ -235,13 +244,41 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
                                       </div>
                                     ) : (
                                       <div>
-                                        <Button
-                                          width={'100%'}
-                                          onClick={handleAskMoreFunds}
-                                          disabled={asking}
-                                        >
-                                          Ask More Funds
-                                        </Button>
+                                        <Popover placement="bottom">
+                                          <PopoverTrigger>
+                                            <Button
+                                              width={'100%'}
+                                              // onClick={handleAskMoreFunds}
+                                              // disabled={asking}
+                                            >
+                                              Ask More Funds
+                                            </Button>
+                                          </PopoverTrigger>
+                                          <PopoverContent>
+                                            <PopoverHeader fontWeight="semibold">
+                                              Tell your community how are you
+                                              going to spend this money ?
+                                            </PopoverHeader>
+                                            <PopoverArrow />
+                                            <PopoverCloseButton />
+                                            <PopoverBody>
+                                              <div>
+                                                <div>
+                                                  La daronne à l'abris les
+                                                  frerot
+                                                </div>
+                                                <SpacerLarge />
+                                                <Button
+                                                  width={'100%'}
+                                                  onClick={handleAskMoreFunds}
+                                                  disabled={asking}
+                                                >
+                                                  Initialize a vote session
+                                                </Button>
+                                              </div>
+                                            </PopoverBody>
+                                          </PopoverContent>
+                                        </Popover>
                                       </div>
                                     )}
                                   </div>
@@ -333,6 +370,7 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
             <Text fontSize="16px" color="white">
               Raisy connects Creators with donors to fund their project
             </Text>
+
             <Center>
               <Image
                 src={handshake}
