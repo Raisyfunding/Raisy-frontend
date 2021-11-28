@@ -251,17 +251,28 @@ const Donate = () => {
             >
               Select a currency
             </Text>
-            <Text
-              color={useColorModeValue('var(--black)', 'var(--white)')}
-              marginBottom={'10px'}
-              fontStyle={'italic'}
-              textAlign={'justify'}
-              marginLeft={'auto'}
-              marginRight={'auto'}
+            <Box
+              width={{
+                base: '200px',
+                sm: '400px',
+                md: '350px',
+                lg: '400px',
+                xl: '600px',
+              }}
+              margin={'auto'}
             >
-              A donation using $RSY offers many advantages.{' '}
-              <Link color={'var(--blue)'}>Why should I use $RSY?</Link>
-            </Text>
+              <Text
+                color={useColorModeValue('var(--black)', 'var(--white)')}
+                marginBottom={'10px'}
+                fontStyle={'italic'}
+                textAlign={'center'}
+                marginLeft={'auto'}
+                marginRight={'auto'}
+              >
+                A donation using $RSY offers many advantages.{' '}
+                <Link color={'var(--blue)'}>Why should I use $RSY?</Link>
+              </Text>
+            </Box>
             <Select
               borderRadius={'50px'}
               width={{
@@ -319,7 +330,7 @@ const Donate = () => {
               marginLeft={'auto'}
               marginRight={'auto'}
             >
-              <Text paddingBottom={'10px'}>
+              <Text paddingBottom={'5px'} paddingRight={'15px'}>
                 Available:{' '}
                 {Math.round(
                   (parseFloat(
@@ -327,15 +338,8 @@ const Donate = () => {
                   ) +
                     Number.EPSILON) *
                     1000
-                ) / 1000}
-                {currency?.symbol} ~
-                {Math.round(
-                  (tokenPrice *
-                    ethers.utils.formatUnits(balance, currency?.decimals) +
-                    Number.EPSILON) *
-                    1000
-                ) / 1000}
-                $
+                ) / 1000}{' '}
+                {currency?.symbol}
               </Text>
             </Box>
             <InputGroup
@@ -402,8 +406,29 @@ const Donate = () => {
                 </Button>
               </InputRightElement>
             </InputGroup>
-            <Flex flexDirection={'row'} paddingBottom={'50px'}>
+            <Flex
+              flexDirection={'row'}
+              paddingBottom={'50px'}
+              width={{
+                base: '200px',
+                sm: '400px',
+                md: '350px',
+                lg: '400px',
+                xl: '600px',
+              }}
+              margin={'auto'}
+            >
               <Text color={'red'}>{amountError}</Text>
+              <Text marginLeft={'auto'} paddingRight={'15px'}>
+                ~
+                {Math.round(
+                  (tokenPrice *
+                    ethers.utils.formatUnits(balance, currency?.decimals) +
+                    Number.EPSILON) *
+                    1000
+                ) / 1000}
+                $
+              </Text>
             </Flex>
             {sending ? (
               <Center>
