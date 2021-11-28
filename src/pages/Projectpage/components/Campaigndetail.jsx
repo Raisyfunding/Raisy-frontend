@@ -27,19 +27,21 @@ function Campaigndetail({
             schedule={schedule}
           />
         </Flex>
-        <Flex direction="column" width="900px">
+        <Flex direction="column" width="800px">
           <Tabs>
             <Center>
-              <TabList width="80%">
+              <TabList width="100%">
                 <Tab>Story</Tab>
                 <Tab>Rewards</Tab>
                 <Tab>Creator's details</Tab>
                 <Tab>Funds release</Tab>
                 <Tab>Your Stats</Tab>
-                {fundingover && <Tab>Proof Of Donation</Tab>}
                 {fundingover &&
-                  currentProject.nbMilestones &&
-                  voteSession.id && <Tab>Vote</Tab>}
+                  currentProject.amountRaised >=
+                    currentProject.amountToRaise && (
+                    <Tab>Proof Of Donation</Tab>
+                  )}
+                {fundingover && voteSession && <Tab>Vote</Tab>}
               </TabList>
             </Center>
             <TabPanels>

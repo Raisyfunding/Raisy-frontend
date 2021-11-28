@@ -186,7 +186,7 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
   };
 
   useEffect(() => {
-    if (voteSession.startBlock) {
+    if (voteSession) {
       getBlockNumber().then((_blockNumber) => {
         const _isFinished =
           _blockNumber >= voteSession.startBlock + VOTE_SESSION_DURATION;
@@ -367,11 +367,11 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
                         {schedule.currentMilestone > 0 ? (
                           <>
                             {' '}
-                            {voteSession.inProgress && !isFinished ? (
+                            {voteSession?.inProgress && !isFinished ? (
                               <div>Vote Stats</div>
                             ) : (
                               <div>
-                                {voteSession.inProgress ? (
+                                {voteSession?.inProgress ? (
                                   <div>
                                     <Button
                                       width={'100%'}

@@ -7,20 +7,20 @@ function VoteStats({ voteSession }) {
       <HStack spacing="auto">
         <Box>
           <VStack>
-            <Text fontSize="3xl">900</Text>
-            <Text fontSize="2xl">Donors</Text>
+            <Text fontSize="3xl">{voteSession.nbVotes}</Text>
+            <Text fontSize="2xl">Votes</Text>
           </VStack>
         </Box>
-        <Box>
+        {/* <Box>
           <VStack>
             <Text fontSize="3xl">256</Text>
             <Text fontSize="2xl">Total Votes</Text>
           </VStack>
-        </Box>
+        </Box> */}
 
         <VStack>
-          <Text fontSize="3xl">29</Text>
-          <Text fontSize="2xl">Vote ratio</Text>
+          <Text fontSize="3xl">{voteSession.voteRatio}</Text>
+          <Text fontSize="2xl">Vote Ratio</Text>
         </VStack>
       </HStack>
     </div>
