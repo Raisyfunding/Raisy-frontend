@@ -11,6 +11,7 @@ import {
   Image,
   Link,
   useToast,
+  Box,
 } from '@chakra-ui/react';
 import { Screen } from '../../styles/globalStyles';
 import { useColorModeValue } from '@chakra-ui/color-mode';
@@ -188,168 +189,188 @@ const Donate = () => {
     }
   };
 
+  const currentBackground = useColorModeValue(
+    'rgba(255,255,255,1)',
+    'rgba(21,21,21,.64)'
+  );
+  const currentBorder = useColorModeValue(
+    'rgba(235, 235, 235, 1)',
+    'rgba(25,25,25,1)'
+  );
+
   return (
     <Screen
       style={{
         backgroundColor: useColorModeValue('var(--white)', 'var(--black)'),
       }}
     >
-      <Link
-        position="fixed"
-        top="10vh"
-        left="20vh"
-        href={'/campaign/'.concat(campaignId)}
-      >
-        <ArrowLeftIcon />
-      </Link>
-      <Text
-        textAlign={'center'}
-        fontSize={'4xl'}
-        paddingBottom={'50px'}
-        paddingTop={'10px'}
-      >
-        Donate
-      </Text>
-      <Flex
-        flexDirection={{ base: 'column', md: 'row' }}
-        width={'100vw'}
-        justifyContent={'center'}
-        gridGap={{ base: '30px', md: '0px' }}
-      >
+      <Box width={'100vw'} padding={'20px'}>
         <Flex
-          width={'40vw'}
-          flexDirection={'column'}
-          style={{ padding: '30px', margin: 'auto ' }}
-          // borderColor={useColorModeValue('var(--white)', 'var(--black)')}
-          // borderRadius={'7px'}
+          borderRadius={'50px'}
+          height={'60px'}
+          width={'60px'}
+          style={{ borderColor: currentBorder }}
+          border={'solid 1px'}
+          backgroundColor={currentBackground}
         >
-          <Text textAlign={'center'} fontSize={'4xl'} paddingTop={'10px'}>
-            The donation
-          </Text>
-          <Text
-            paddingTop={'50px'}
-            color={useColorModeValue('var(--black)', 'var(--white)')}
-            marginBottom={'5px'}
-            fontSize={'1.5em'}
+          <Link
+            paddingLeft={'20px'}
+            marginRight={'auto'}
+            href={'/campaign/'.concat(campaignId)}
           >
-            Select a currency
-          </Text>
-          <Text
-            color={useColorModeValue('var(--black)', 'var(--white)')}
-            marginBottom={'10px'}
-            fontStyle={'italic'}
-            textAlign={'justify'}
+            <ArrowLeftIcon />
+          </Link>
+        </Flex>
+        <Text
+          textAlign={'center'}
+          fontSize={'4xl'}
+          paddingBottom={'50px'}
+          paddingTop={'10px'}
+        >
+          Donate
+        </Text>
+        <Flex
+          flexDirection={{ base: 'column', md: 'row' }}
+          width={'100vw'}
+          justifyContent={'center'}
+          gridGap={{ base: '30px', md: '0px' }}
+        >
+          <Flex
+            width={'40vw'}
+            flexDirection={'column'}
+            style={{ padding: '30px', margin: 'auto ' }}
+            // borderColor={useColorModeValue('var(--white)', 'var(--black)')}
+            // borderRadius={'7px'}
           >
-            A donation using $RSY offers many advantages.
-            <br />
-            <Link color={'var(--blue)'}>Why should I use $RSY?</Link>
-          </Text>
-          <Select
-            placeholder="Select currency"
-            borderColor={useColorModeValue('var(--black)', 'var(--white)')}
-            onChange={handleChangeCurrency}
-            value={currency?.address}
-          >
-            {options.map((opt) => {
-              return <option value={opt?.address}>{opt?.symbol}</option>;
-            })}
-          </Select>
-          <Flex flexDirection={'row'} gridGap={'auto'}>
+            <Text textAlign={'center'} fontSize={'4xl'} paddingTop={'10px'}>
+              The donation
+            </Text>
             <Text
               paddingTop={'50px'}
               color={useColorModeValue('var(--black)', 'var(--white)')}
               marginBottom={'5px'}
               fontSize={'1.5em'}
             >
-              Amount of the donation
+              Select a currency
             </Text>
-
             <Text
-              paddingBottom={'10px'}
-              paddingTop={'50px'}
-              marginLeft={'auto'}
-              marginTop={'auto'}
+              color={useColorModeValue('var(--black)', 'var(--white)')}
+              marginBottom={'10px'}
+              fontStyle={'italic'}
+              textAlign={'justify'}
             >
-              Available: {ethers.utils.formatUnits(balance, currency?.decimals)}{' '}
-              {currency?.symbol} ({tokenPrice}$)
+              A donation using $RSY offers many advantages.
+              <br />
+              <Link color={'var(--blue)'}>Why should I use $RSY?</Link>
             </Text>
-          </Flex>
-          <InputGroup>
-            <Input
-              colorScheme={'red'}
-              type="number"
-              placeholder="Amount"
-              isRequired={'true'}
-              isDisabled={!currency}
-              isInvalid={amountError}
-              onBlur={validateAmount}
-              onChange={handleChangeAmount}
-              value={amount}
+            <Select
+              placeholder="Select currency"
               borderColor={useColorModeValue('var(--black)', 'var(--white)')}
-              variant={amount > 0 ? 'filled' : 'outline'}
-              border={amount > 0 ? 'none' : 'solid 1px'}
-            />
-            <InputRightElement width="4.5rem">
-              <Button
-                h="1.75rem"
-                size="sm"
-                onClick={() =>
-                  setAmount(
-                    ethers.utils.formatUnits(balance, currency?.decimals)
-                  )
-                }
-              >
-                Max
-              </Button>
-            </InputRightElement>
-          </InputGroup>
-          <Flex flexDirection={'row'} paddingBottom={'50px'}>
-            <Text color={'red'}>{amountError}</Text>
-          </Flex>
-          {sending ? (
-            <Center>
-              <Loader
-                type="Oval"
-                color="#007BFF"
-                height={32}
-                width={32}
-                className={styles.loader}
-              />
-            </Center>
-          ) : (
-            <Button
-              disabled={amountError || !amount}
-              onClick={handleSendDonation}
+              onChange={handleChangeCurrency}
+              value={currency?.address}
             >
-              Send the donation
-            </Button>
-          )}
-        </Flex>
-        <Flex
-          width={'40vw'}
-          flexDirection={'column'}
-          style={{ border: 'solid 1px', padding: '10px', margin: 'auto ' }}
-          borderColor={useColorModeValue('var(--white)', 'var(--black)')}
-          borderRadius={'7px'}
-          justifyContent={'center'}
-          gridGap={'20px'}
-        >
-          <Text
-            textAlign={'center'}
-            fontSize={'4xl'}
-            paddingBottom={'50px'}
-            paddingTop={'10px'}
+              {options.map((opt) => {
+                return <option value={opt?.address}>{opt?.symbol}</option>;
+              })}
+            </Select>
+            <Flex flexDirection={'row'} gridGap={'auto'}>
+              <Text
+                paddingTop={'50px'}
+                color={useColorModeValue('var(--black)', 'var(--white)')}
+                marginBottom={'5px'}
+                fontSize={'1.5em'}
+              >
+                Amount of the donation
+              </Text>
+
+              <Text
+                paddingBottom={'10px'}
+                paddingTop={'50px'}
+                marginLeft={'auto'}
+                marginTop={'auto'}
+              >
+                Available:{' '}
+                {ethers.utils.formatUnits(balance, currency?.decimals)}{' '}
+                {currency?.symbol} ({tokenPrice}$)
+              </Text>
+            </Flex>
+            <InputGroup>
+              <Input
+                colorScheme={'red'}
+                type="number"
+                placeholder="Amount"
+                isRequired={'true'}
+                isDisabled={!currency}
+                isInvalid={amountError}
+                onBlur={validateAmount}
+                onChange={handleChangeAmount}
+                value={amount}
+                borderColor={useColorModeValue('var(--black)', 'var(--white)')}
+                variant={amount > 0 ? 'filled' : 'outline'}
+                border={amount > 0 ? 'none' : 'solid 1px'}
+              />
+              <InputRightElement width="4.5rem">
+                <Button
+                  h="1.75rem"
+                  size="sm"
+                  onClick={() =>
+                    setAmount(
+                      ethers.utils.formatUnits(balance, currency?.decimals)
+                    )
+                  }
+                >
+                  Max
+                </Button>
+              </InputRightElement>
+            </InputGroup>
+            <Flex flexDirection={'row'} paddingBottom={'50px'}>
+              <Text color={'red'}>{amountError}</Text>
+            </Flex>
+            {sending ? (
+              <Center>
+                <Loader
+                  type="Oval"
+                  color="#007BFF"
+                  height={32}
+                  width={32}
+                  className={styles.loader}
+                />
+              </Center>
+            ) : (
+              <Button
+                disabled={amountError || !amount}
+                onClick={handleSendDonation}
+              >
+                Send the donation
+              </Button>
+            )}
+          </Flex>
+          <Flex
+            width={'40vw'}
+            flexDirection={'column'}
+            style={{ border: 'solid 1px', padding: '10px', margin: 'auto ' }}
+            borderColor={useColorModeValue('var(--white)', 'var(--black)')}
+            borderRadius={'7px'}
+            justifyContent={'center'}
+            gridGap={'20px'}
           >
-            The project
-          </Text>
-          <Image
-            boxSize="200px"
-            src={`https://cloudflare-ipfs.com/ipfs/${campaign.coverImageHash}`}
-          />
-          <Text>{campaign.title}</Text>
-          <Text>{campaign.description}</Text>
+            <Text
+              textAlign={'center'}
+              fontSize={'4xl'}
+              paddingBottom={'50px'}
+              paddingTop={'10px'}
+            >
+              The project
+            </Text>
+            <Image
+              boxSize="200px"
+              src={`https://cloudflare-ipfs.com/ipfs/${campaign.coverImageHash}`}
+            />
+            <Text>{campaign.title}</Text>
+            <Text>{campaign.description}</Text>
+          </Flex>
         </Flex>
-      </Flex>
+      </Box>
     </Screen>
   );
 };

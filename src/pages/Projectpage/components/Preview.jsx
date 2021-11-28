@@ -520,6 +520,8 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
                     ) : (
                       <Box
                         display={'flex'}
+                        width={{ base: '95vw', md: '60vw' }}
+                        paddingLeft={'20px'}
                         textAlign={'center'}
                         justifyContent={'center'}
                         flexDirection={'column'}
@@ -528,7 +530,7 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
                           marginLeft={'auto'}
                           marginRight={'auto'}
                           paddingBottom={'20px'}
-                          fontSize={'2xl'}
+                          fontSize={{ base: '2xl', md: '20px', lg: '1xl' }}
                           fontWeight={'600'}
                         >
                           The campaign is unsuccessful, or participants voted in
@@ -568,7 +570,7 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
                                 }
                               }}
                             >
-                              Withdraw your {token.symbol}
+                              Withdraw {token.symbol}
                             </Button>
                           ))}
                         </Flex>

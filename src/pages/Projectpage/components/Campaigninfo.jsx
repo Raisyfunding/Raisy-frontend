@@ -39,7 +39,7 @@ function Campaigninfo({ currentProject, fundingover, schedule }) {
               borderColor={currentBorder}
               padding={'30px'}
               flexDirection={'column'}
-              height={'200px'}
+              height={{ base: '-webkit-fit-content', lg: '200px' }}
             >
               <Text
                 fontSize={'4xl'}
