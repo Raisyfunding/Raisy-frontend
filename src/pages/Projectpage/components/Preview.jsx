@@ -27,7 +27,7 @@ import {
 } from 'react-icons/fi';
 import useTokens from './../../../hooks/useTokens';
 import VoteStats from './VoteStats';
-import { AVERAGE_BLOCK_TIME } from '../../../constants/network';
+// import { AVERAGE_BLOCK_TIME } from '../../../constants/network';
 // import Countdown from 'react-countdown';
 
 const renderMedia = (image, contentType) => {
@@ -75,7 +75,7 @@ const renderMedia = (image, contentType) => {
 };
 
 function Preview({ currentProject, fundingover, schedule, voteSession }) {
-  const { account } = useWeb3React();
+  const { account, chainId } = useWeb3React();
   const currentBackground = useColorModeValue(
     'rgba(255,255,255,1)',
     'rgba(21,21,21,.64)'
@@ -196,24 +196,27 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
     }
   };
 
+  const updateEndBlock = () => {
+    if (!voteSession) return;
+
+    getBlockNumber().then((_blockNumber) => {
+      const _endBlock = voteSession.startBlock + VOTE_SESSION_DURATION;
+      const _isFinished = _blockNumber >= _endBlock;
+      setIsFinished(_isFinished);
+      setEndBlock(_endBlock - _blockNumber);
+      if (!_isFinished) {
+        const _endDate = (_endBlock - _blockNumber) * 15 * 1000;
+        setVoteTimeEndDate(_endDate);
+      }
+    });
+  };
+
   useEffect(() => {
-    if (voteSession) {
-      getBlockNumber().then((_blockNumber) => {
-        const _endBlock = voteSession.startBlock + VOTE_SESSION_DURATION;
-        const _isFinished = _blockNumber >= _endBlock;
-        setIsFinished(_isFinished);
-        setEndBlock(_endBlock - _blockNumber);
-        if (!_isFinished) {
-          const _endDate =
-            new Date(
-              (_endBlock - _blockNumber) * AVERAGE_BLOCK_TIME[4] * 1000
-            ) - Date.now();
-          setVoteTimeEndDate(_endDate);
-        }
-      });
-    }
+    setInterval(() => {
+      updateEndBlock();
+    }, 1000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [voteSession]);
+  }, [voteSession, chainId]);
 
   // useEffect(() => {
   //   console.log(schedule);

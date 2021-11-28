@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { Text, Box, Center, useToast, Button, Flex } from '@chakra-ui/react';
 import { useWeb3React } from '@web3-react/core';
-import Countdown from 'react-countdown';
 import { formatError } from '../../../utils';
 import { useCampaignsContract } from './../../../contracts';
 import VoteStats from './VoteStats';
 import useBlockNumber from '../../../hooks/useBlockNumber';
-import { AVERAGE_BLOCK_TIME } from '../../../constants/network';
 import { useColorModeValue } from '@chakra-ui/react';
 
 const VoteSession = ({ currentProject, voteSession, schedule }) => {
-  const { account } = useWeb3React();
-  const VOTE_SESSION_DURATION = 40;
+  const { account, chainId } = useWeb3React();
+  const VOTE_SESSION_DURATION = 20;
   const { getBlockNumber } = useBlockNumber();
   const [voting, setVoting] = useState(false);
+  const [votingRefund, setVotingRefund] = useState(false);
   const toast = useToast();
   const [endBlock, setEndBlock] = useState(0);
+  // eslint-disable-next-line no-unused-vars
   const [voteTimeEndDate, setVoteTimeEndDate] = useState(null);
-  const { vote } = useCampaignsContract();
+  const { vote, voteRefund } = useCampaignsContract();
 
   const currentBackground = useColorModeValue(
     'rgba(255,255,255,1)',
@@ -53,27 +53,60 @@ const VoteSession = ({ currentProject, voteSession, schedule }) => {
         duration: 9000,
         isClosable: true,
       });
-      console.log(err);
       setVoting(false);
     }
   };
 
-  useEffect(() => {
-    if (voteSession) {
-      getBlockNumber().then((_blockNumber) => {
-        const _endBlock = voteSession.startBlock + VOTE_SESSION_DURATION;
-        const _isFinished = _blockNumber >= _endBlock;
-        setEndBlock(_endBlock - _blockNumber);
-        if (!_isFinished) {
-          const _endDate =
-            (_endBlock - _blockNumber) * AVERAGE_BLOCK_TIME[4] * 1000;
+  const handleVoteRefund = async () => {
+    if (votingRefund) return;
 
-          setVoteTimeEndDate(_endDate);
-        }
+    setVotingRefund(true);
+
+    try {
+      const tx = await voteRefund(currentProject.campaignId, account);
+
+      await tx.wait();
+
+      toast({
+        title: 'Thank you for reporting this campaign 📢',
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
       });
+      setVotingRefund(false);
+    } catch (err) {
+      toast({
+        title: 'Error during refund vote on-chain',
+        description: formatError(err),
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+      setVotingRefund(false);
     }
+  };
+
+  const updateEndBlock = () => {
+    if (!voteSession) return;
+
+    getBlockNumber().then((_blockNumber) => {
+      const _endBlock = voteSession.startBlock + VOTE_SESSION_DURATION;
+      const _isFinished = _blockNumber >= _endBlock;
+      setEndBlock(_endBlock - _blockNumber);
+      if (!_isFinished) {
+        const _endDate = (_endBlock - _blockNumber) * 15 * 1000;
+
+        setVoteTimeEndDate(_endDate);
+      }
+    });
+  };
+
+  useEffect(() => {
+    setInterval(() => {
+      updateEndBlock();
+    }, 1000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [voteSession]);
+  }, [voteSession, chainId]);
   return (
     <div>
       {currentProject.nbMilestones ? (
@@ -140,6 +173,7 @@ const VoteSession = ({ currentProject, voteSession, schedule }) => {
                             'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
                         }}
                         onClick={() => handleVote(true)}
+                        disabled={endBlock < 0}
                       >
                         VOTE YES
                       </Button>
@@ -157,6 +191,7 @@ const VoteSession = ({ currentProject, voteSession, schedule }) => {
                             'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
                         }}
                         onClick={() => handleVote(false)}
+                        disabled={endBlock < 0}
                       >
                         VOTE NO
                       </Button>
@@ -168,23 +203,28 @@ const VoteSession = ({ currentProject, voteSession, schedule }) => {
                     vote
                   </Text>
                 </Center> */}
-                  <Box height="10px" />
-                  {endBlock > 0 ? (
-                    <Center>
-                      <Text>The vote session ends in : </Text>
-                      <Countdown date={Date.now() + voteTimeEndDate} />
-                    </Center>
-                  ) : (
-                    <> </>
-                  )}
-                  <Box height="10px" />
-                  <Center>
-                    <Text>
-                      {' '}
-                      fundrelease request canceled :{' '}
-                      {voteSession.numUnsuccessfulVotes}{' '}
-                    </Text>
-                  </Center>
+                  <Text
+                    fontSize={{
+                      base: '2xl',
+                      md: '2xl',
+                      lg: '3xl',
+                    }}
+                    style={{
+                      textAlign: 'center',
+                      background:
+                        '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                      webkitBackgroundClip: 'text',
+                      webkitTextFillColor: 'transparent',
+                    }}
+                    fontWeight={'900'}
+                    paddingBottom={'40px'}
+                    margin={'auto'}
+                    marginTop="20px"
+                  >
+                    {endBlock < 0
+                      ? 'Vote session is over'
+                      : `${endBlock} blocks remaining`}
+                  </Text>
                 </Box>
               </div>
             )}
@@ -208,7 +248,8 @@ const VoteSession = ({ currentProject, voteSession, schedule }) => {
                     background:
                       'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
                   }}
-                  // onClick={() => handleVote(false)}
+                  onClick={handleVoteRefund}
+                  disabled={votingRefund}
                 >
                   Vote for global refund
                 </Button>
