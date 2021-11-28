@@ -385,7 +385,7 @@ function Campaigninfo({ currentProject, fundingover, schedule, voteSession }) {
               >
                 Funds Released
               </Text>
-              {currentProject.nbMilestones && schedule && (
+              {currentProject.nbMilestones && schedule ? (
                 <>
                   <CircularProgress
                     value={currentProject.pctReleasePerMilestone.reduce(
@@ -410,6 +410,20 @@ function Campaigninfo({ currentProject, fundingover, schedule, voteSession }) {
                     </CircularProgressLabel>
                   </CircularProgress>
                 </>
+              ) : (
+                <CircularProgress
+                  value={'100'}
+                  color="var(--blue)"
+                  thickness="5px"
+                  size={{ base: '150px', md: '100px', lg: '150px' }}
+                  margin={'auto'}
+                  trackColor={currentProgress}
+                >
+                  {' '}
+                  <CircularProgressLabel margin={'auto'}>
+                    100 %
+                  </CircularProgressLabel>
+                </CircularProgress>
               )}
             </Flex>
           </>
