@@ -1,6 +1,13 @@
 import { Image } from '@chakra-ui/image';
 import { Flex, Text, Box, Center, Spacer } from '@chakra-ui/layout';
-import { Vstack, Button, Link, useToast } from '@chakra-ui/react';
+import {
+  Vstack,
+  Button,
+  Link,
+  useToast,
+  HStack,
+  useColorModeValue,
+} from '@chakra-ui/react';
 import { SpacerLarge } from '../../../styles/globalStyles';
 import Campaigninfo from './Campaigninfo';
 import React, { Suspense, useEffect, useState } from 'react';
@@ -9,9 +16,6 @@ import styles from './styles.module.scss';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import SuspenseImg from '../../../components/suspense';
-import security from '../../../images/security.png';
-import moneybag from '../../../images/moneybag.png';
-import handshake from '../../../images/handshake.png';
 import { useWeb3React } from '@web3-react/core';
 import { useCampaignsContract } from './../../../contracts/raisyCampaigns';
 import { formatError } from '../../../utils';
@@ -23,17 +27,6 @@ import {
   FiInstagram,
   FiHeart,
 } from 'react-icons/fi';
-import{
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverHeader,
-  PopoverBody,
-  PopoverFooter,
-  PopoverArrow,
-  PopoverCloseButton,
-} from '@chakra-ui/react';
-import VoteStats from './VoteStats';
 
 const renderMedia = (image, contentType) => {
   if (contentType === 'video' || image?.includes('youtube')) {
@@ -44,11 +37,17 @@ const renderMedia = (image, contentType) => {
         controls={true}
         width="100%"
         height="100%"
+        style={{ borderRadius: '10px' }}
       />
     );
   } else if (contentType === 'embed') {
     return (
-      <iframe title="cover-video" className={styles.content} src={image} />
+      <iframe
+        title="cover-video"
+        className={styles.content}
+        src={image}
+        style={{ borderRadius: '10px' }}
+      />
     );
   } else if (contentType === 'image' || contentType === 'gif') {
     return (
@@ -65,6 +64,7 @@ const renderMedia = (image, contentType) => {
       >
         <SuspenseImg
           className={styles.content}
+          style={{ borderRadius: '10px' }}
           src={`https://cloudflare-ipfs.com/ipfs/${image}`}
         />
       </Suspense>
@@ -74,6 +74,14 @@ const renderMedia = (image, contentType) => {
 
 function Preview({ currentProject, fundingover, schedule, voteSession }) {
   const { account } = useWeb3React();
+  const currentBackground = useColorModeValue(
+    'rgba(255,255,255,1)',
+    'rgba(21,21,21,.64)'
+  );
+  const currentBorder = useColorModeValue(
+    'rgba(235, 235, 235, 1)',
+    'rgba(25,25,25,1)'
+  );
 
   const { claimInitialFunds, claimNextFunds, askMoreFunds } =
     useCampaignsContract();
@@ -189,20 +197,50 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
   }, [schedule]);
 
   return (
-    <Flex direction="column" height="100vh">
-      <Box marginLeft="10%" marginRight="10%" marginTop="2%">
-        <Flex direction={{ base: 'column', md: 'row' }}>
-          <Flex direction="column" width="700px">
-            <Text fontWeight="bold" fontSize="80px" marginTop="-20px">
-              {currentProject.title}
+    <Box height="100vh" width={'100vw'}>
+      <Flex
+        flexDirection={'row'}
+        height={'-webkit-fill-available'}
+        justifyContent={'center'}
+      >
+        <Flex
+          width={'60vw'}
+          flexDirection={'column'}
+          gridGap={'15px'}
+          paddingTop={'10px'}
+        >
+          <Flex
+            flexDirection={'lign'}
+            marginLeft={'auto'}
+            marginRight={'auto'}
+            gridGap={'30px'}
+          >
+            <Text
+              fontSize={{ base: '4xl', md: '5xl', lg: '6xl' }}
+              style={{
+                textAlign: 'center',
+                background:
+                  '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                webkitBackgroundClip: 'text',
+                webkitTextFillColor: 'transparent',
+              }}
+              fontWeight={'900'}
+            >
+              {currentProject.title}{' '}
             </Text>
-            {/* <Text textTransform="uppercase" textDecoration="underline" fontSize="13px" marginTop="-20px" marginLeft="5px">
-                {currentProject.category}
-              </Text> */}
-            <SpacerLarge />
-            <Box height="350px">
-              {renderMedia(currentProject.coverImageHash, 'image')}
-            </Box>
+            <Button
+              borderRadius={'full'}
+              style={{ borderColor: currentBorder }}
+              backgroundColor={currentBackground}
+              height={'60px'}
+              width={'60px'}
+              margin={'auto'}
+              border={'1px solid'}
+            >
+              <FiHeart
+                style={{ margin: 'auto', color: 'rgba(78, 213, 186, 1)' }}
+              />
+            </Button>
           </Flex>
           <HStack
             direction="row"
@@ -326,20 +364,17 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
                         {schedule.currentMilestone > 0 ? (
                           <>
                             {' '}
-                            {/* {voteSession.inProgress && !isFinished ? ( */}
-                            {schedule.currentMilestone !==
-                            currentProject.nbnbMilestones ? (
-                              <>
-                                {0 > 0 ? (
-                                  <VoteStats voteSession={voteSession} />
-                                ) : (
+                            {voteSession.inProgress && !isFinished ? (
+                              <div>Vote Stats</div>
+                            ) : (
+                              <div>
+                                {voteSession.inProgress ? (
                                   <div>
-                                    {voteSession.inProgress ? (
-                                      <div>
-                                        <Button
-                                          onClick={handleEndVoteSession}
-                                          disabled={ending}
-                                                                                width={'200px'}
+                                    <Button
+                                      width={'100%'}
+                                      onClick={handleEndVoteSession}
+                                      disabled={ending}
+                                      width={'200px'}
                                       height={'60px'}
                                       margin={'auto'}
                                       borderRadius={'50px'}
@@ -352,14 +387,12 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
                                         background:
                                           'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
                                       }}
-                                        >
-                                          End Vote Session
-                                        </Button>
-                                      </div>
-                                    ) : (
-                                      <div>
-                                        <Popover placement="bottom">
-                                          <PopoverTrigger>
+                                    >
+                                      End Vote Session
+                                    </Button>
+                                  </div>
+                                ) : (
+                                  <div>
                                     <Button
                                       onClick={handleAskMoreFunds}
                                       disabled={asking}
@@ -377,60 +410,49 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
                                           'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
                                       }}
                                     >
-  
-                                              Ask More Funds
-                                            </Button>
-                                          </PopoverTrigger>
-                                          <PopoverContent>
-                                            <PopoverHeader fontWeight="semibold">
-                                              Tell your community how are you
-                                              going to spend this money ?
-                                            </PopoverHeader>
-                                            <PopoverArrow />
-                                            <PopoverCloseButton />
-                                            <PopoverBody>
-                                              <div>
-                                                <div>
-                                                  La daronne à l'abris les
-                                                  frerot
-                                                </div>
-                                                <SpacerLarge />
-                                                <Button
-                                                  width={'100%'}
-                                                  onClick={handleAskMoreFunds}
-                                                  disabled={asking}
-                                                >
-                                                  Initialize a vote session
-                                                </Button>
-                                              </div>
-                                            </PopoverBody>
-                                          </PopoverContent>
-                                        </Popover>
-                                      </div>
-                                    )}
+                                      Ask More Funds
+                                    </Button>
                                   </div>
                                 )}
                               </div>
                             )}
                           </>
                         ) : (
-                          <>
+                          <Box
+                            display={'flex'}
+                            textAlign={'center'}
+                            justifyContent={'center'}
+                            flexDirection={'column'}
+                          >
                             <Text
-                              padding={'20px'}
                               marginLeft={'auto'}
                               marginRight={'auto'}
+                              paddingBottom={'20px'}
+                              fontSize={'3xl'}
+                              fontWeight={'600'}
                             >
-                              You can claim funds now ! Click on the button
-                              below
+                              You can claim your funds now !
                             </Text>
                             <Button
-                              width={'100%'}
                               onClick={handleClaimFunds}
                               disabled={claiming}
+                              width={'200px'}
+                              height={'60px'}
+                              margin={'auto'}
+                              borderRadius={'50px'}
+                              color={'black'}
+                              background={
+                                'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))'
+                              }
+                              _hover={{
+                                opacity: 0.8,
+                                background:
+                                  'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                              }}
                             >
                               Claim your funds
                             </Button>
-                          </>
+                          </Box>
                         )}
                       </>
                     ) : (
@@ -488,11 +510,16 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
               </Center>
             )}
           </Box>
+        </Flex>{' '}
+        <Flex direction="column" width={'40vw'} padding={'40px'}>
+          <Campaigninfo
+            currentProject={currentProject}
+            fundingover={fundingover}
+            schedule={schedule}
+          />
         </Flex>
       </Flex>
     </Box>
-
   );
 }
-
 export default Preview;
