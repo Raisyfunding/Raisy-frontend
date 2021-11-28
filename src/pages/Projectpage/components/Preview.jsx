@@ -85,8 +85,13 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
     'rgba(25,25,25,1)'
   );
 
-  const { claimInitialFunds, claimNextFunds, askMoreFunds, withdrawDonation } =
-    useCampaignsContract();
+  const {
+    claimInitialFunds,
+    claimNextFunds,
+    askMoreFunds,
+    withdrawDonation,
+    getFundsBack,
+  } = useCampaignsContract();
   const toast = useToast();
   const { getBlockNumber } = useBlockNumber();
 
@@ -517,62 +522,64 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
                       currentProject.amountRaised <
                     0 ? (
                       <>
-                        <Box
-                          display={'flex'}
-                          textAlign={'center'}
-                          justifyContent={'center'}
-                          flexDirection={'column'}
-                        >
-                          <Text
-                            marginLeft={'auto'}
-                            marginRight={'auto'}
-                            paddingBottom={'20px'}
-                            fontSize={'2xl'}
-                            fontWeight={'600'}
+                        {voteSession?.numUnsuccessfulVotes >= 3 && (
+                          <Box
+                            display={'flex'}
+                            textAlign={'center'}
+                            justifyContent={'center'}
+                            flexDirection={'column'}
                           >
-                            3 fundsrelease requests failed, get your funds back
-                            now!
-                          </Text>
-                          <Flex gridGap={'15px'} justifyContent={'center'}>
-                            {tokens.map((token) => (
-                              <Button
-                                width={'200px'}
-                                height={'60px'}
-                                margin={'auto'}
-                                borderRadius={'50px'}
-                                color={'black'}
-                                background={
-                                  'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))'
-                                }
-                                _hover={{
-                                  opacity: 0.8,
-                                  background:
-                                    'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
-                                }}
-                                // onClick={async () => {
-                                //   try {
-                                //     await withdrawDonation(
-                                //       currentProject.campaignId,
-                                //       token.address,
-                                //       account
-                                //     );
-                                //   } catch (err) {
-                                //     toast({
-                                //       title:
-                                //         'Error while withdrawing on-chain',
-                                //       description: formatError(err),
-                                //       status: 'error',
-                                //       duration: 9000,
-                                //       isClosable: true,
-                                //     });
-                                //   }
-                                // }}
-                              >
-                                Withdraw your {token.symbol}
-                              </Button>
-                            ))}
-                          </Flex>
-                        </Box>
+                            <Text
+                              marginLeft={'auto'}
+                              marginRight={'auto'}
+                              paddingBottom={'20px'}
+                              fontSize={'2xl'}
+                              fontWeight={'600'}
+                            >
+                              The vote didn't pass 3 times in a row. Please get
+                              your funds back.
+                            </Text>
+                            <Flex gridGap={'15px'} justifyContent={'center'}>
+                              {tokens.map((token) => (
+                                <Button
+                                  width={'200px'}
+                                  height={'60px'}
+                                  margin={'auto'}
+                                  borderRadius={'50px'}
+                                  color={'black'}
+                                  background={
+                                    'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))'
+                                  }
+                                  _hover={{
+                                    opacity: 0.8,
+                                    background:
+                                      'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                                  }}
+                                  onClick={async () => {
+                                    try {
+                                      await getFundsBack(
+                                        currentProject.campaignId,
+                                        token.address,
+                                        account
+                                      );
+                                    } catch (err) {
+                                      toast({
+                                        title:
+                                          'Error while withdrawing on-chain',
+                                        description: formatError(err),
+                                        status: 'error',
+                                        duration: 9000,
+                                        isClosable: true,
+                                      });
+                                    }
+                                  }}
+                                >
+                                  Withdraw your {token.symbol}
+                                </Button>
+                              ))}
+                            </Flex>
+                          </Box>
+                        )}
                       </>
                     ) : (
                       <Box
@@ -653,6 +660,7 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
             currentProject={currentProject}
             fundingover={fundingover}
             schedule={schedule}
+            voteSession={voteSession}
           />
         </Flex>
       </Flex>
