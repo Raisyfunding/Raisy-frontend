@@ -56,21 +56,49 @@ const ClaimPOD = ({ campaignId }) => {
         }
       });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [account, campaignId]);
 
   return (
     <>
       {!userPod ? (
         <Flex flexDirection={'column'} alignItems={'center'} margin={'20px'}>
-          <Text textAlign={'center'} fontSize={'3xl'} color={'white'}>
+          <Text
+            fontSize={{ base: '2xl', md: '2xl', lg: '3xl' }}
+            style={{
+              textAlign: 'center',
+              background:
+                '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+              webkitBackgroundClip: 'text',
+              webkitTextFillColor: 'transparent',
+            }}
+            fontWeight={'900'}
+            paddingBottom={'40px'}
+            margin={'auto'}
+          >
             Claim your Proof of Donation
           </Text>
           <Text padding={'30px'} textAlign={'center'}>
             Congratulations! You helped this campaign raise funds! You have
             earned a proof of donation:
           </Text>
-          <Button width={'80%'} onClick={handleClaimPOD} disabled={claiming}>
+          <Button
+            width={'200px'}
+            height={'60px'}
+            margin={'auto'}
+            borderRadius={'50px'}
+            color={'black'}
+            background={
+              'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))'
+            }
+            _hover={{
+              opacity: 0.8,
+              background:
+                'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+            }}
+            onClick={handleClaimPOD}
+            disabled={claiming}
+          >
             Claim Proof Of Donation
           </Button>
         </Flex>

@@ -57,7 +57,7 @@ function Campaigninfo({ currentProject, fundingover, schedule }) {
                     webkitTextFillColor: 'transparent',
                   }}
                 >
-                  This Campain is over
+                  This Campaign is over
                 </span>{' '}
                 <br />
               </Text>
@@ -394,37 +394,30 @@ function Campaigninfo({ currentProject, fundingover, schedule }) {
             >
               Funding progression
             </Text>
-            {currentProject.nbMilestones && schedule && (
-              <>
-                <CircularProgress
-                  value={
-                    currentProject.amountRaised / currentProject.amountToRaise <
-                    1
-                      ? (currentProject.amountRaised /
-                          currentProject.amountToRaise) *
-                        100
-                      : '100'
-                  }
-                  color="var(--blue)"
-                  thickness="5px"
-                  size={'90px'}
-                  margin={'auto'}
-                  trackColor={currentProgress}
-                >
-                  {' '}
-                  <CircularProgressLabel margin={'auto'}>
-                    {currentProject.amountRaised /
-                      currentProject.amountToRaise <
-                    1
-                      ? (currentProject.amountRaised /
-                          currentProject.amountToRaise) *
-                        100
-                      : '100'}
-                    %
-                  </CircularProgressLabel>
-                </CircularProgress>
-              </>
-            )}
+            <CircularProgress
+              value={
+                currentProject.amountRaised / currentProject.amountToRaise < 1
+                  ? (currentProject.amountRaised /
+                      currentProject.amountToRaise) *
+                    100
+                  : '100'
+              }
+              color="var(--blue)"
+              thickness="5px"
+              size={'90px'}
+              margin={'auto'}
+              trackColor={currentProgress}
+            >
+              {' '}
+              <CircularProgressLabel margin={'auto'}>
+                {currentProject.amountRaised / currentProject.amountToRaise < 1
+                  ? (currentProject.amountRaised /
+                      currentProject.amountToRaise) *
+                    100
+                  : '100'}
+                %
+              </CircularProgressLabel>
+            </CircularProgress>
           </Flex>
           <Flex
             width={'-webkit-fill-available'}
