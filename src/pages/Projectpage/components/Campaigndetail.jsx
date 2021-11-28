@@ -10,12 +10,7 @@ import ClaimPOD from './ClaimPOD';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
-function Campaigndetail({
-  currentProject,
-  fundingover,
-  schedule,
-  voteSession,
-}) {
+function Campaigndetail({ currentProject, fundingover, schedule }) {
   const markdown = `Just a link: https://reactjs.com.`;
   return (
     <Flex direction="column" height="200vh">

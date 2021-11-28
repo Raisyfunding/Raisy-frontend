@@ -21,12 +21,16 @@ export const useCampaignsContract = () => {
     const contract = await getCampaignsContract();
     const args = [duration, amount];
 
+    console.log(args);
+
     const options = { from, gasPrice: getHigherGWEI() };
 
     const gasEstimate = await contract.estimateGas[
       'addCampaign(uint256,uint256)'
     ](...args, options);
     options.gasLimit = calculateGasMargin(gasEstimate);
+
+    console.log(gasEstimate);
 
     return await contract['addCampaign(uint256,uint256)'](...args, options);
   };
@@ -100,16 +104,7 @@ export const useCampaignsContract = () => {
     return await contract.askMoreFunds(campaignId, options);
   };
 
-  const vote = async (campaignId, _vote, from) => {
-    const contract = await getCampaignsContract();
-
-    const options = { from, gasPrice: getHigherGWEI() };
-
-    return await contract.vote(campaignId, _vote, options);
-  };
-
   return {
-    vote,
     askMoreFunds,
     claimInitialFunds,
     claimNextFunds,
