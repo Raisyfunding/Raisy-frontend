@@ -88,8 +88,8 @@ function WhyRaisy() {
             />
           </Flex>
           <Text fontSize={'2xl'} fontWeight={'800'} marginTop={'auto'}>
-            Community <br />
-            Driven
+            Staggered <br />
+            Release
           </Text>
         </Flex>
         <Flex

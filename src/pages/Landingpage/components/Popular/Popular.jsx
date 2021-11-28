@@ -97,7 +97,6 @@ export default class Popular extends React.Component {
               isIntrinsicHeight={true}
               isPlaying={true}
               interval={4000}
-              //dragStep = {this.state.totalSlides}
             >
               <Flex maxWidth={'95vw'}>
                 <Slider classNameTray="slider-tray">
