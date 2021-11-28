@@ -6,7 +6,7 @@ import { Link as RouterLink } from 'react-router-dom';
 // import { useState, useEffect } from 'react';
 // import { useApi } from '../../../api';
 
-function Campaigninfo({ currentProject, fundingover, schedule }) {
+function Campaigninfo({ currentProject, fundingover, schedule, voteSession }) {
   // const color = useColorModeValue('var(--white)', 'var(--black)');
   const currentBackground = useColorModeValue(
     'rgba(255,255,255,1)',
@@ -197,47 +197,90 @@ function Campaigninfo({ currentProject, fundingover, schedule }) {
           </>
         ) : (
           <>
-            {' '}
-            <Flex
-              _hover={{ opacity: '0.8' }}
-              width={'-webkit-fill-available'}
-              backgroundColor={currentBackground}
-              borderRadius={'50px'}
-              border={'1px solid'}
-              borderColor={currentBorder}
-              padding={'30px'}
-              flexDirection={'column'}
-            >
-              <Text
-                fontSize={'4xl'}
-                fontWeight={'900'}
-                style={{
-                  textAlign: 'center',
-                }}
+            {voteSession?.numUnsuccessfulVotes >= 3 ? (
+              <Flex
+                _hover={{ opacity: '0.8' }}
+                width={'-webkit-fill-available'}
+                backgroundColor={currentBackground}
+                borderRadius={'50px'}
+                border={'1px solid'}
+                borderColor={currentBorder}
+                padding={'30px'}
+                flexDirection={'column'}
               >
-                <span
+                <Text
+                  fontSize={'4xl'}
+                  fontWeight={'900'}
                   style={{
-                    textAlign: 'right',
-                    background:
-                      '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
-                    webkitBackgroundClip: 'text',
-                    webkitTextFillColor: 'transparent',
+                    textAlign: 'center',
                   }}
                 >
-                  Campaign funded.
-                </span>{' '}
-                <br />
-              </Text>
-              <Text
-                fontSize={'1xl'}
-                fontWeight={'900'}
-                style={{
-                  textAlign: 'center',
-                }}
+                  <span
+                    style={{
+                      textAlign: 'right',
+                      background:
+                        '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                      webkitBackgroundClip: 'text',
+                      webkitTextFillColor: 'transparent',
+                    }}
+                  >
+                    Funds Release failed.
+                  </span>{' '}
+                  <br />
+                </Text>
+                <Text
+                  fontSize={'1xl'}
+                  fontWeight={'900'}
+                  style={{
+                    textAlign: 'center',
+                  }}
+                >
+                  All participants can get their funds back.
+                </Text>
+              </Flex>
+            ) : (
+              <Flex
+                _hover={{ opacity: '0.8' }}
+                width={'-webkit-fill-available'}
+                backgroundColor={currentBackground}
+                borderRadius={'50px'}
+                border={'1px solid'}
+                borderColor={currentBorder}
+                padding={'30px'}
+                flexDirection={'column'}
               >
-                Congratulations to the participants!
-              </Text>
-            </Flex>
+                <Text
+                  fontSize={'4xl'}
+                  fontWeight={'900'}
+                  style={{
+                    textAlign: 'center',
+                  }}
+                >
+                  <span
+                    style={{
+                      textAlign: 'right',
+                      background:
+                        '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                      webkitBackgroundClip: 'text',
+                      webkitTextFillColor: 'transparent',
+                    }}
+                  >
+                    Campaign funded.
+                  </span>{' '}
+                  <br />
+                </Text>
+                <Text
+                  fontSize={'1xl'}
+                  fontWeight={'900'}
+                  style={{
+                    textAlign: 'center',
+                  }}
+                >
+                  Congratulations to the participants!
+                </Text>
+              </Flex>
+            )}
+
             <Flex
               width={'-webkit-fill-available'}
               gridGap={'20px'}

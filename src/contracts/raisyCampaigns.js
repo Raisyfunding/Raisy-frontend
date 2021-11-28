@@ -124,9 +124,18 @@ export const useCampaignsContract = () => {
     return await contract.withdrawFunds(campaignId, payToken, options);
   };
 
+  const getFundsBack = async (campaignId, payToken, from) => {
+    const contract = await getCampaignsContract();
+
+    const options = { from, gasPrice: getHigherGWEI() };
+
+    return await contract.getFundsBack(campaignId, payToken, options);
+  };
+
   return {
     voteRefund,
     withdrawDonation,
+    getFundsBack,
     vote,
     askMoreFunds,
     claimInitialFunds,
