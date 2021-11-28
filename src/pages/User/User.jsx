@@ -3,7 +3,7 @@ import { Text, Center, Spacer } from '@chakra-ui/layout';
 import { SpacerLarge } from '../../styles/globalStyles';
 import React from 'react';
 import { Screen } from '../../styles/globalStyles';
-import { useColorModeValue, Flex, HStack, VStack, Box } from '@chakra-ui/react';
+import { useColorModeValue, Flex, HStack, Box } from '@chakra-ui/react';
 import cat from '../../images/cryptokitties.jpg';
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
 import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';

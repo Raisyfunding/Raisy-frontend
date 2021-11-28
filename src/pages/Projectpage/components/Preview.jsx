@@ -153,6 +153,7 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
         duration: 9000,
         isClosable: true,
       });
+      console.log(err);
       setAsking(false);
     }
   };
@@ -179,6 +180,7 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
   return (
     <Flex direction="column" height="100vh">
       {console.log(schedule)}
+      {console.log(voteSession)}
       <Box marginLeft="10%" marginRight="10%" marginTop="2%">
         <Flex direction={{ base: 'column', md: 'row' }}>
           <Flex direction="column" width="700px">
@@ -217,7 +219,7 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
                             {schedule.currentMilestone !==
                             currentProject.nbnbMilestones ? (
                               <>
-                                {1 > 0 ? (
+                                {0 > 0 ? (
                                   <VoteStats voteSession={voteSession} />
                                 ) : (
                                   <div>

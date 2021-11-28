@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react';
 import { Screen } from '../../styles/globalStyles';
 import { useColorModeValue } from '@chakra-ui/color-mode';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router';
 import { useApi } from '../../api';
 import { ethers } from 'ethers';
