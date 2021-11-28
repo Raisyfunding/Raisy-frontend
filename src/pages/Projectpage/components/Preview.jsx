@@ -214,7 +214,7 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
                           <>
                             {' '}
                             {/* {voteSession.inProgress && !isFinished ? ( */}
-                            {schedule.currentMilestone ===
+                            {schedule.currentMilestone !==
                             currentProject.nbnbMilestones ? (
                               <>
                                 {1 > 0 ? (
@@ -247,7 +247,11 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
                               </>
                             ) : (
                               <>
-                                <div>yooooo</div>
+                                <Center>
+                                  <Text>
+                                    100% of the funds have been released !
+                                  </Text>
+                                </Center>
                               </>
                             )}
                           </>
