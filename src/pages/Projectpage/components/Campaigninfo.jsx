@@ -4,6 +4,7 @@ import {
   SpacerXSmall,
   SpacerSmall,
 } from '../../../styles/globalStyles';
+import { CircularProgress, CircularProgressLabel } from '@chakra-ui/react';
 import {
   Flex,
   Text,
@@ -17,6 +18,7 @@ import {
   HStack,
   Link,
 } from '@chakra-ui/react';
+import decentralizedblack from '../../../images/decentralized_black.png';
 
 import { Link as RouterLink } from 'react-router-dom';
 import { FiMail, FiTwitter, FiFacebook, FiInstagram } from 'react-icons/fi';
@@ -26,246 +28,595 @@ import { FiMail, FiTwitter, FiFacebook, FiInstagram } from 'react-icons/fi';
 
 function Campaigninfo({ currentProject, fundingover, schedule }) {
   const color = useColorModeValue('var(--white)', 'var(--black)');
+  const currentBackground = useColorModeValue(
+    'rgba(255,255,255,1)',
+    'rgba(21,21,21,.64)'
+  );
+  const currentBorder = useColorModeValue(
+    'rgba(235, 235, 235, 1)',
+    'rgba(25,25,25,1)'
+  );
+  const currentIcon = useColorModeValue(
+    'rgba(250,250,250,1)',
+    'rgba(25,25,25,1)'
+  );
+  const currentProgress = useColorModeValue(
+    'rgba(230,230,230,1)',
+    'rgba(25,25,25,1)'
+  );
 
   return (
     <>
       {fundingover ? (
         currentProject.amountToRaise - currentProject.amountRaised > 0 ? (
-          <Flex direction="column">
-            <Box bg="#27292b" borderRadius="15px">
-              <Flex direction="column" height="100%" padding="15px">
-                <Text textAlign="center" fontSize="26px" fontWeight="bold">
-                  {' '}
-                  Campaign's funding didn't reach its goal
+          <>
+            <Flex
+              _hover={{ opacity: '0.8' }}
+              width={'-webkit-fill-available'}
+              backgroundColor={currentBackground}
+              borderRadius={'50px'}
+              border={'1px solid'}
+              borderColor={currentBorder}
+              padding={'30px'}
+              flexDirection={'column'}
+              height={'200px'}
+            >
+              <Text
+                fontSize={'4xl'}
+                fontWeight={'900'}
+                style={{
+                  textAlign: 'center',
+                }}
+              >
+                <span
+                  style={{
+                    textAlign: 'right',
+                    background:
+                      '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                    webkitBackgroundClip: 'text',
+                    webkitTextFillColor: 'transparent',
+                  }}
+                >
+                  This Campain is over
+                </span>{' '}
+                <br />
+              </Text>
+              <Text
+                fontSize={'1xl'}
+                fontWeight={'900'}
+                margin={'auto'}
+                style={{
+                  textAlign: 'center',
+                }}
+              >
+                The fund target was not met.
+              </Text>
+            </Flex>
+            <Flex
+              width={'-webkit-fill-available'}
+              gridGap={'20px'}
+              paddingTop={'20px'}
+              flexDirection={'row'}
+              marginBottom={'30px'}
+            >
+              <Flex
+                _hover={{ opacity: '0.8' }}
+                width={'-webkit-fill-available'}
+                background={
+                  'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))'
+                }
+                borderRadius={'50px'}
+                padding={'20px'}
+                flexDirection={'column'}
+              >
+                {' '}
+                <Text
+                  fontSize={'5xl'}
+                  fontWeight={'900'}
+                  style={{
+                    textAlign: 'center',
+                  }}
+                >
+                  {currentProject.nbDonations}
+                  <br />
+                </Text>{' '}
+                <Text
+                  fontSize={'1xl'}
+                  fontWeight={'900'}
+                  style={{
+                    textAlign: 'center',
+                  }}
+                >
+                  Donations
                 </Text>
-                <SpacerSmall />
-                <Text fontSize="15px" textAlign="center">
-                  <span style={{ fontWeight: 'bold', fontSize: '20px' }}>
-                    {currentProject.amountRaised}${' '}
-                  </span>{' '}
-                  raised, the target was {currentProject.amountToRaise}$
-                </Text>
-
-                <SpacerXSmall />
-
-                <SpacerLarge />
-
-                <Flex direction="row">
-                  <Box bg="#C4C4C4" width="40%">
-                    <Center>
-                      <Flex direction="row" alignItems="center" margin="3px">
-                        <Image src={ArchiveBox} height="30px" />
-                        <Text color="#504D4D">Save</Text>
-                      </Flex>
-                    </Center>
-                  </Box>
-                  <Spacer />
-                  <HStack direction="row" alignItems="center">
-                    <Spacer />
-                    <FiMail />
-                    <Spacer />
-                    <FiTwitter />
-                    <Spacer />
-                    <FiInstagram />
-                    <Spacer />
-                    <FiFacebook />
-                    <Spacer />
-                  </HStack>
-                </Flex>
               </Flex>
-            </Box>
-            <SpacerSmall />
-
-            <Spacer />
-          </Flex>
+              <Flex
+                _hover={{ opacity: '0.8' }}
+                width={'-webkit-fill-available'}
+                backgroundColor={currentBackground}
+                borderRadius={'50px'}
+                border={'1px solid'}
+                borderColor={currentBorder}
+                padding={'20px'}
+                flexDirection={'column'}
+              >
+                <Text
+                  fontSize={'5xl'}
+                  fontWeight={'900'}
+                  style={{
+                    textAlign: 'center',
+                    background:
+                      '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                    webkitBackgroundClip: 'text',
+                    webkitTextFillColor: 'transparent',
+                  }}
+                >
+                  {currentProject.amountRaised}$
+                  <br />
+                </Text>{' '}
+                <Text
+                  fontSize={'1xl'}
+                  fontWeight={'900'}
+                  style={{
+                    textAlign: 'center',
+                  }}
+                >
+                  Raised
+                </Text>
+                <Text
+                  fontSize={'1xl'}
+                  fontWeight={'900'}
+                  style={{
+                    textAlign: 'center',
+                  }}
+                >
+                  out of {currentProject.amountToRaise}$
+                </Text>
+              </Flex>
+            </Flex>
+            <Flex
+              _hover={{ opacity: '0.8' }}
+              width={'-webkit-fill-available'}
+              backgroundColor={currentBackground}
+              borderRadius={'50px'}
+              border={'1px solid'}
+              borderColor={currentBorder}
+              padding={'30px'}
+              flexDirection={'column'}
+            >
+              <Text
+                fontSize={'4xl'}
+                fontWeight={'900'}
+                style={{
+                  textAlign: 'center',
+                }}
+              >
+                <span
+                  style={{
+                    textAlign: 'right',
+                    background:
+                      '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                    webkitBackgroundClip: 'text',
+                    webkitTextFillColor: 'transparent',
+                  }}
+                >
+                  {currentProject.amountToRaise - currentProject.amountRaised}$
+                </span>{' '}
+                <br />
+              </Text>
+              <Text
+                fontSize={'1xl'}
+                fontWeight={'900'}
+                style={{
+                  textAlign: 'center',
+                }}
+              >
+                Were missing.
+              </Text>
+            </Flex>
+          </>
         ) : (
-          <Flex direction="column">
-            <Box bg="#27292b" borderRadius="15px">
-              <Flex direction="column" height="100%" padding="15px">
-                <Text textAlign="center" fontSize="26px" fontWeight="bold">
-                  {' '}
-                  Campaign has been funded !
+          <>
+            {' '}
+            <Flex
+              _hover={{ opacity: '0.8' }}
+              width={'-webkit-fill-available'}
+              backgroundColor={currentBackground}
+              borderRadius={'50px'}
+              border={'1px solid'}
+              borderColor={currentBorder}
+              padding={'30px'}
+              flexDirection={'column'}
+            >
+              <Text
+                fontSize={'4xl'}
+                fontWeight={'900'}
+                style={{
+                  textAlign: 'center',
+                }}
+              >
+                <span
+                  style={{
+                    textAlign: 'right',
+                    background:
+                      '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                    webkitBackgroundClip: 'text',
+                    webkitTextFillColor: 'transparent',
+                  }}
+                >
+                  Campaign funded.
+                </span>{' '}
+                <br />
+              </Text>
+              <Text
+                fontSize={'1xl'}
+                fontWeight={'900'}
+                style={{
+                  textAlign: 'center',
+                }}
+              >
+                Congratulations to the participants!
+              </Text>
+            </Flex>
+            <Flex
+              width={'-webkit-fill-available'}
+              gridGap={'20px'}
+              paddingTop={'20px'}
+              flexDirection={'row'}
+              marginBottom={'30px'}
+            >
+              <Flex
+                _hover={{ opacity: '0.8' }}
+                width={'-webkit-fill-available'}
+                background={
+                  'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))'
+                }
+                borderRadius={'50px'}
+                padding={'20px'}
+                flexDirection={'column'}
+              >
+                {' '}
+                <Text
+                  fontSize={'5xl'}
+                  fontWeight={'900'}
+                  style={{
+                    textAlign: 'center',
+                  }}
+                >
+                  {currentProject.nbDonations}
+                  <br />
+                </Text>{' '}
+                <Text
+                  fontSize={'1xl'}
+                  fontWeight={'900'}
+                  style={{
+                    textAlign: 'center',
+                  }}
+                >
+                  Donations
                 </Text>
-
-                <Text fontSize="15px" textAlign="center">
-                  Congratulations to all participants,{' '}
-                  <span style={{ fontWeight: 'bold', fontSize: '20px' }}>
-                    {currentProject.amountRaised}${' '}
-                  </span>{' '}
-                  have been raised for a target of{' '}
-                  {currentProject.amountToRaise}$
+              </Flex>
+              <Flex
+                _hover={{ opacity: '0.8' }}
+                width={'-webkit-fill-available'}
+                backgroundColor={currentBackground}
+                borderRadius={'50px'}
+                border={'1px solid'}
+                borderColor={currentBorder}
+                padding={'20px'}
+                flexDirection={'column'}
+              >
+                <Text
+                  fontSize={'5xl'}
+                  fontWeight={'900'}
+                  style={{
+                    textAlign: 'center',
+                    background:
+                      '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                    webkitBackgroundClip: 'text',
+                    webkitTextFillColor: 'transparent',
+                  }}
+                >
+                  {currentProject.amountRaised}$
+                  <br />
+                </Text>{' '}
+                <Text
+                  fontSize={'1xl'}
+                  fontWeight={'900'}
+                  style={{
+                    textAlign: 'center',
+                  }}
+                >
+                  Raised
                 </Text>
-
-                <SpacerXSmall />
-
-                <Flex direction="row" fontSize="20px">
-                  <Spacer />
-                  <Flex direction="column" textAlign="center">
-                    <Text fontWeight="bold">{currentProject.nbDonations}</Text>
-                    <Text>Donations</Text>
-                  </Flex>
-                  <Spacer />
-                  <Flex direction="column" textAlign="center">
-                    <Text fontWeight="bold">
-                      ${currentProject.amountRaised}
-                    </Text>
-                    <Text>Raised</Text>
-                  </Flex>
-                  <Spacer />
-                </Flex>
-                {currentProject.nbMilestones && schedule && (
-                  <>
-                    <Text pb={2} mt={5} fontWeight="bold">
-                      Funds Released{' '}
+                <Text
+                  fontSize={'1xl'}
+                  fontWeight={'900'}
+                  style={{
+                    textAlign: 'center',
+                  }}
+                >
+                  out of {currentProject.amountToRaise}$
+                </Text>
+              </Flex>
+            </Flex>
+            <Flex
+              _hover={{ opacity: '0.8' }}
+              width={'-webkit-fill-available'}
+              height={'280px'}
+              backgroundColor={currentBackground}
+              borderRadius={'50px'}
+              border={'1px solid'}
+              borderColor={'var(--blue)'}
+              padding={'20px'}
+              flexDirection={'column'}
+              marginBottom={'20px'}
+            >
+              {' '}
+              <Text
+                fontSize={'4xl'}
+                fontWeight={'900'}
+                style={{
+                  textAlign: 'center',
+                }}
+              >
+                Funds Released
+              </Text>
+              {currentProject.nbMilestones && schedule && (
+                <>
+                  <CircularProgress
+                    value={currentProject.pctReleasePerMilestone.reduce(
+                      (acc, cur, idx) =>
+                        idx < schedule.currentMilestone ? acc + cur : acc,
+                      0
+                    )}
+                    color="var(--blue)"
+                    thickness="5px"
+                    size={'150px'}
+                    margin={'auto'}
+                    trackColor={currentProgress}
+                  >
+                    {' '}
+                    <CircularProgressLabel margin={'auto'}>
                       {currentProject.pctReleasePerMilestone.reduce(
                         (acc, cur, idx) =>
                           idx < schedule.currentMilestone ? acc + cur : acc,
                         0
-                      )}{' '}
-                      %
-                    </Text>
-                    <Progress
-                      value={currentProject.pctReleasePerMilestone.reduce(
-                        (acc, cur, idx) =>
-                          idx < schedule.currentMilestone ? acc + cur : acc,
-                        0
                       )}
-                      borderRadius={'10px'}
-                      height={'4px'}
-                      colorScheme="green"
-                    />
-                  </>
-                )}
-
-                <SpacerLarge />
-
-                <Flex direction="row">
-                  <Box bg="#C4C4C4" width="40%">
-                    <Center>
-                      <Flex direction="row" alignItems="center" margin="3px">
-                        <Image src={ArchiveBox} height="30px" />
-                        <Text color="#504D4D">Save</Text>
-                      </Flex>
-                    </Center>
-                  </Box>
-                  <Spacer />
-                  <HStack direction="row" alignItems="center">
-                    <Spacer />
-                    <FiMail />
-                    <Spacer />
-                    <FiTwitter />
-                    <Spacer />
-                    <FiInstagram />
-                    <Spacer />
-                    <FiFacebook />
-                    <Spacer />
-                  </HStack>
-                </Flex>
-              </Flex>
-            </Box>
-            <SpacerSmall />
-
-            <Spacer />
-          </Flex>
+                      %
+                    </CircularProgressLabel>
+                  </CircularProgress>
+                </>
+              )}
+            </Flex>
+          </>
         )
       ) : (
-        <Flex direction="column">
-          <Box bg="#27292b" borderRadius="15px">
-            <Flex direction="column" height="100%" padding="15px">
-              <Text textAlign={'justify'} fontSize="15px">
-                <span style={{ fontWeight: 'bold', fontSize: '20px' }}>
-                  {currentProject.amountRaised}${' '}
-                </span>{' '}
-                Raised of {currentProject.amountToRaise}$ Goal
-              </Text>
-              <SpacerXSmall />
-              <Progress
-                colorScheme="gray"
-                value={
-                  currentProject.amountRaised / currentProject.amountToRaise < 1
-                    ? (currentProject.amountRaised /
-                        currentProject.amountToRaise) *
-                      100
-                    : '100'
-                }
-                borderRadius={'10px'}
-                height={'4px'}
-              />
-              <SpacerLarge />
-              <Flex direction="row" fontSize="20px">
-                <Spacer />
-                <Flex direction="column" textAlign="center">
-                  <Text fontWeight="bold">{currentProject.nbDonations}</Text>
-                  <Text>Donations</Text>
-                </Flex>
-                <Spacer />
-                {currentProject.amountToRaise - currentProject.amountRaised >
-                0 ? (
-                  <Flex direction="column" textAlign="center">
-                    <Text fontWeight="bold">
-                      $
-                      {currentProject.amountToRaise -
-                        currentProject.amountRaised}
-                    </Text>
-                    <Text>Required</Text>
-                  </Flex>
-                ) : (
-                  <div></div>
-                )}
-                <Spacer />
-                <Flex direction="column" textAlign="center">
-                  <Text fontWeight="bold">
-                    {(
-                      new Date(currentProject.endAt).getDay() -
-                      new Date().getDay()
-                    ).toLocaleString()}
-                  </Text>
-                  <Text>Days left</Text>
-                </Flex>
-                <Spacer />
-              </Flex>
-              <SpacerLarge />
-              <Link
-                as={RouterLink}
-                to={`/campaign/${currentProject.campaignId}/donate`}
+        <>
+          <Flex
+            _hover={{ opacity: '0.8' }}
+            width={'-webkit-fill-available'}
+            height={'180px'}
+            backgroundColor={currentBackground}
+            borderRadius={'50px'}
+            border={'1px solid'}
+            borderColor={'var(--blue)'}
+            padding={'20px'}
+            flexDirection={'column'}
+          >
+            {' '}
+            <Text
+              fontSize={'4xl'}
+              fontWeight={'900'}
+              style={{
+                textAlign: 'center',
+              }}
+            >
+              Funding progression
+            </Text>
+            {currentProject.nbMilestones && schedule && (
+              <>
+                <CircularProgress
+                  value={
+                    currentProject.amountRaised / currentProject.amountToRaise <
+                    1
+                      ? (currentProject.amountRaised /
+                          currentProject.amountToRaise) *
+                        100
+                      : '100'
+                  }
+                  color="var(--blue)"
+                  thickness="5px"
+                  size={'90px'}
+                  margin={'auto'}
+                  trackColor={currentProgress}
+                >
+                  {' '}
+                  <CircularProgressLabel margin={'auto'}>
+                    {currentProject.amountRaised /
+                      currentProject.amountToRaise <
+                    1
+                      ? (currentProject.amountRaised /
+                          currentProject.amountToRaise) *
+                        100
+                      : '100'}
+                    %
+                  </CircularProgressLabel>
+                </CircularProgress>
+              </>
+            )}
+          </Flex>
+          <Flex
+            width={'-webkit-fill-available'}
+            gridGap={'20px'}
+            paddingTop={'20px'}
+            flexDirection={'row'}
+          >
+            <Flex
+              _hover={{ opacity: '0.8' }}
+              width={'-webkit-fill-available'}
+              background={
+                'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))'
+              }
+              borderRadius={'50px'}
+              padding={'20px'}
+              flexDirection={'column'}
+            >
+              {' '}
+              <Text
+                fontSize={'5xl'}
+                fontWeight={'900'}
+                style={{
+                  textAlign: 'center',
+                }}
               >
-                <Button bg={color} width="100%">
-                  Donate
-                </Button>
-              </Link>
-              <SpacerSmall />
-              <Flex direction="row">
-                <Box bg="#C4C4C4" width="40%">
-                  <Center>
-                    <Flex direction="row" alignItems="center" margin="3px">
-                      <Image src={ArchiveBox} height="30px" />
-                      <Text color="#504D4D">Save</Text>
-                    </Flex>
-                  </Center>
-                </Box>
-                <Spacer />
-                <HStack direction="row" alignItems="center">
-                  <Spacer />
-                  <FiMail />
-                  <Spacer />
-                  <FiTwitter />
-                  <Spacer />
-                  <FiInstagram />
-                  <Spacer />
-                  <FiFacebook />
-                  <Spacer />
-                </HStack>
-              </Flex>
+                {currentProject.nbDonations}
+                <br />
+              </Text>{' '}
+              <Text
+                fontSize={'1xl'}
+                fontWeight={'900'}
+                style={{
+                  textAlign: 'center',
+                }}
+              >
+                Donations
+              </Text>
             </Flex>
-          </Box>
-          <SpacerSmall />
-          <Text fontSize="12px" textAlign="justify">
-            This project will only be funded if it reaches its minimum Target by
+            <Flex
+              _hover={{ opacity: '0.8' }}
+              width={'-webkit-fill-available'}
+              backgroundColor={currentBackground}
+              borderRadius={'50px'}
+              border={'1px solid'}
+              borderColor={currentBorder}
+              padding={'20px'}
+              flexDirection={'column'}
+            >
+              <Text
+                fontSize={'5xl'}
+                fontWeight={'900'}
+                style={{
+                  textAlign: 'center',
+                }}
+              >
+                {currentProject.amountRaised}$
+                <br />
+              </Text>{' '}
+              <Text
+                fontSize={'1xl'}
+                fontWeight={'900'}
+                style={{
+                  textAlign: 'center',
+                }}
+              >
+                Raised
+              </Text>
+            </Flex>
+          </Flex>
+          <Flex
+            width={'-webkit-fill-available'}
+            gridGap={'20px'}
+            paddingTop={'20px'}
+            flexDirection={'row'}
+            marginBottom={'30px'}
+          >
+            <Flex
+              _hover={{ opacity: '0.8' }}
+              width={'-webkit-fill-available'}
+              background={currentBackground}
+              border={'1px solid'}
+              borderColor={currentBorder}
+              borderRadius={'50px'}
+              padding={'20px'}
+              flexDirection={'column'}
+            >
+              {' '}
+              <Text
+                fontSize={'5xl'}
+                fontWeight={'900'}
+                style={{
+                  textAlign: 'center',
+                  background:
+                    '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                  webkitBackgroundClip: 'text',
+                  webkitTextFillColor: 'transparent',
+                }}
+              >
+                {(
+                  new Date(currentProject.endAt).getDay() - new Date().getDay()
+                ).toLocaleString()}
+                <br />
+              </Text>{' '}
+              <Text
+                fontSize={'1xl'}
+                fontWeight={'900'}
+                style={{
+                  textAlign: 'center',
+                }}
+              >
+                Days Left
+              </Text>
+            </Flex>
+            <Flex
+              _hover={{ opacity: '0.8' }}
+              width={'-webkit-fill-available'}
+              backgroundColor={currentBackground}
+              borderRadius={'50px'}
+              border={'1px solid'}
+              borderColor={'var(--blue)'}
+              padding={'20px'}
+              flexDirection={'column'}
+            >
+              <Text
+                fontSize={'5xl'}
+                fontWeight={'900'}
+                style={{
+                  textAlign: 'center',
+                }}
+              >
+                {currentProject.amountToRaise}$
+                <br />
+              </Text>{' '}
+              <Text
+                fontSize={'1xl'}
+                fontWeight={'900'}
+                style={{
+                  textAlign: 'center',
+                }}
+              >
+                Goal
+              </Text>
+            </Flex>
+          </Flex>
+          <Link
+            as={RouterLink}
+            to={`/campaign/${currentProject.campaignId}/donate`}
+          >
+            <Button
+              width={'-webkit-fill-available'}
+              height={'60px'}
+              margin={'auto'}
+              borderRadius={'50px'}
+              color={'black'}
+              background={
+                'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))'
+              }
+              _hover={{
+                opacity: 0.8,
+                background:
+                  'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+              }}
+            >
+              Donate
+            </Button>
+          </Link>
+          <Text fontSize="12px" textAlign="center" marginTop={'20px'}>
+            *This project will only be funded if it reaches its minimum Target
+            by
             <br /> {new Date(currentProject.endAt).toString()}.
           </Text>
-
-          <Spacer />
-        </Flex>
+        </>
       )}
     </>
   );
