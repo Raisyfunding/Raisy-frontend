@@ -152,6 +152,7 @@ export default function Navbar() {
             _hover={{
               opacity: '0.4',
             }}
+            margin={'auto'}
           >
             {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
           </Button>
@@ -463,11 +464,11 @@ const MobileNavItem = ({ label, children, href }) => {
 const NAV_ITEMS = [
   {
     label: 'Explore',
-    href: 'explore',
+    href: '/explore',
   },
   {
     label: 'Get Started',
-    href: 'help',
+    href: '/help',
   },
   {
     label: 'Search',

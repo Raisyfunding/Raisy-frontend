@@ -35,6 +35,7 @@ const ClaimPOD = ({ campaignId }) => {
         duration: 9000,
         isClosable: true,
       });
+      console.log(err);
 
       setClaiming(false);
     }
