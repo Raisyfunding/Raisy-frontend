@@ -27,6 +27,17 @@ import {
   FiInstagram,
   FiHeart,
 } from 'react-icons/fi';
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverBody,
+  PopoverFooter,
+  PopoverArrow,
+  PopoverCloseButton,
+} from '@chakra-ui/react';
+import VoteStats from './VoteStats';
+
 
 const renderMedia = (image, contentType) => {
   if (contentType === 'video' || image?.includes('youtube')) {
@@ -93,7 +104,7 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
   const [asking, setAsking] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
 
-  const VOTE_SESSION_DURATION = 84200;
+  const VOTE_SESSION_DURATION = 40;
 
   const handleClaimFunds = async () => {
     if (claiming) return;
@@ -178,16 +189,18 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
         duration: 9000,
         isClosable: true,
       });
+      console.log(err);
       setAsking(false);
     }
   };
 
   useEffect(() => {
     if (voteSession.startBlock) {
-      getBlockNumber.then((_blockNumber) => {
+      getBlockNumber().then((_blockNumber) => {
         const _isFinished =
           _blockNumber >= voteSession.startBlock + VOTE_SESSION_DURATION;
         setIsFinished(_isFinished);
+        console.log(_blockNumber);
       });
     }
   }, [voteSession]);
@@ -195,6 +208,10 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
   useEffect(() => {
     console.log(schedule);
   }, [schedule]);
+
+  useEffect(() => {
+    console.log(voteSession);
+  }, [voteSession]);
 
   return (
     <Box height="100vh" width={'100vw'}>
@@ -354,6 +371,7 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
                 </Button>
               </>
             ) : fundingover ? (
+
               <div>
                 {currentProject.creator === account.toLowerCase() ? (
                   <div>
@@ -393,6 +411,8 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
                                   </div>
                                 ) : (
                                   <div>
+                                  <Popover placement="bottom">
+                                  <PopoverTrigger>
                                     <Button
                                       onClick={handleAskMoreFunds}
                                       disabled={asking}
@@ -412,9 +432,42 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
                                     >
                                       Ask More Funds
                                     </Button>
+                                    </PopoverTrigger>
+                                    <PopoverContent>
+                                            <PopoverHeader fontWeight="semibold">
+                                              Tell your community how are you
+                                              going to spend this money ?
+                                            </PopoverHeader>
+                                            <PopoverArrow />
+                                            <PopoverCloseButton />
+                                            <PopoverBody>
+                                              <div>
+                                                <div>
+                                                  La daronne à l'abris les
+                                                  frerot
+                                                </div>
+                                                <SpacerLarge />
+                                                <Button
+                                                  width={'100%'}
+                                                  onClick={handleAskMoreFunds}
+                                                  disabled={asking}
+                                                >
+                                                  Initialize a vote session
+                                                </Button>
+                                              </div>
+                                            </PopoverBody>
+                                          </PopoverContent>
                                   </div>
                                 )}
-                              </div>
+                              </>
+                            ) : (
+                              <>
+                                <Center>
+                                  <Text>
+                                    100% of the funds have been released !
+                                  </Text>
+                                </Center>
+                              </>
                             )}
                           </>
                         ) : (
@@ -520,6 +573,7 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
         </Flex>
       </Flex>
     </Box>
+
   );
 }
 export default Preview;
