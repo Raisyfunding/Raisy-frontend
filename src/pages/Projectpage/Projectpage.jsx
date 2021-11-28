@@ -52,12 +52,9 @@ const Projectpage = () => {
   useEffect(() => {
     if (campaign.campaignId !== undefined && campaign.nbMilestones) {
       fetchVoteSessionByCampaignId(campaign.campaignId).then((_voteSession) =>
-        _voteSession && _voteSession.data
-          ? setVoteSession(_voteSession.data)
-          : null
+        _voteSession && _voteSession.data ? setVoteSession(_voteSession.data) : null
       );
     }
-    console.log(voteSession);
   }, [campaign]);
 
   useEffect(() => {
@@ -92,7 +89,6 @@ const Projectpage = () => {
                   currentProject={campaign}
                   schedule={schedule}
                   fundingover={fundingover}
-                  voteSession={voteSession}
                 />
                 <Space />
                 <Footer />

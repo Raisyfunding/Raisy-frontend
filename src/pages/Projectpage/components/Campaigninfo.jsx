@@ -379,7 +379,7 @@ function Campaigninfo({ currentProject, fundingover, schedule }) {
                     {' '}
                     <CircularProgressLabel margin={'auto'}>
                       {currentProject.pctReleasePerMilestone.reduce(
-                      (acc, cur, idx) =>
+                        (acc, cur, idx) =>
                           idx < schedule.currentMilestone ? acc + cur : acc,
                         0
                       )}

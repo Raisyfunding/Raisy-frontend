@@ -4,19 +4,17 @@ import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 import useTokens from './../../../hooks/useTokens';
 import { useWeb3React } from '@web3-react/core';
-import { useCampaignsContract, useChefContract } from '../../../contracts';
+import { useCampaignsContract } from '../../../contracts';
 import { ethers } from 'ethers';
 
 const DonationStats = ({ campaignId }) => {
   const { tokens: currencies } = useTokens();
 
   const { account } = useWeb3React();
-  const { getPendingRewards } = useChefContract();
 
   const [endCampaign, setEndCampaign] = useState(false);
   const [enableWithdrawing, setEnableWithdrawing] = useState(true);
   const [amount, setAmount] = useState(100);
-  const [pendingRewards, setPendingRewards] = useState(0);
 
   const [payTokens, setPayTokens] = useState(
     currencies.map((c) => {
@@ -49,16 +47,9 @@ const DonationStats = ({ campaignId }) => {
     setPayTokens(newCurrencies);
   };
 
-  const udpatePendingRewards = async () => {
-    const _pending = await getPendingRewards(campaignId, account);
-    console.log(_pending);
-    setPendingRewards(parseFloat(ethers.utils.formatEther(_pending)));
-  };
-
   useEffect(() => {
     if (campaignId !== undefined && account) {
       updateAllTokens();
-      udpatePendingRewards();
     }
   }, [currencies, campaignId, account]);
 
@@ -95,11 +86,6 @@ const DonationStats = ({ campaignId }) => {
         >
           Get your $RSY rewards !
         </Text>
-        {account && (
-          <>
-            <Text textAlign={'center'}>Pending Rewards : {pendingRewards}</Text>
-          </>
-        )}
         <Button display={!account ? 'flex' : 'none'} bg="#27292b">
           Connect
         </Button>
