@@ -2,6 +2,14 @@ import { Box, Flex, Image, Text, useColorModeValue } from '@chakra-ui/react';
 import React from 'react';
 import decentralizedwhite from '../../../images/decentralized_white.png';
 import decentralizedblack from '../../../images/decentralized_black.png';
+import handwhite from '../../../images/handwhite.png';
+import handblack from '../../../images/handblack.png';
+import statswhite from '../../../images/statswhite.png';
+import statsblack from '../../../images/statsblack.png';
+import moneywhite from '../../../images/moneywhite.png';
+import moneyblack from '../../../images/moneyblack.png';
+import annblack from '../../../images/annblack.png';
+import annwhite from '../../../images/annwhite.png';
 
 const StakingStats = () => {
   const priceRaisy = 10;
@@ -73,10 +81,7 @@ const StakingStats = () => {
                   borderRadius={'full'}
                 >
                   <Image
-                    src={useColorModeValue(
-                      decentralizedblack,
-                      decentralizedwhite
-                    )}
+                    src={useColorModeValue(moneyblack, moneywhite)}
                     width={'50px'}
                     height={'50px'}
                     margin={'auto'}
@@ -128,10 +133,7 @@ const StakingStats = () => {
                   borderRadius={'full'}
                 >
                   <Image
-                    src={useColorModeValue(
-                      decentralizedblack,
-                      decentralizedwhite
-                    )}
+                    src={useColorModeValue(statsblack, statswhite)}
                     width={'50px'}
                     height={'50px'}
                     margin={'auto'}
@@ -176,10 +178,7 @@ const StakingStats = () => {
                 borderRadius={'full'}
               >
                 <Image
-                  src={useColorModeValue(
-                    decentralizedblack,
-                    decentralizedwhite
-                  )}
+                  src={useColorModeValue(handblack, handwhite)}
                   width={'50px'}
                   height={'50px'}
                   margin={'auto'}
@@ -230,10 +229,7 @@ const StakingStats = () => {
                 borderRadius={'full'}
               >
                 <Image
-                  src={useColorModeValue(
-                    decentralizedblack,
-                    decentralizedwhite
-                  )}
+                  src={useColorModeValue(annblack, annwhite)}
                   width={'50px'}
                   height={'50px'}
                   margin={'auto'}
