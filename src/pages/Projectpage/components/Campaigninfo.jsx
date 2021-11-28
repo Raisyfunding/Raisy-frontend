@@ -6,7 +6,13 @@ import { Link as RouterLink } from 'react-router-dom';
 // import { useState, useEffect } from 'react';
 // import { useApi } from '../../../api';
 
-function Campaigninfo({ currentProject, fundingover, schedule, voteSession }) {
+function Campaigninfo({
+  currentProject,
+  fundingover,
+  schedule,
+  voteSession,
+  isCanceled,
+}) {
   // const color = useColorModeValue('var(--white)', 'var(--black)');
   const currentBackground = useColorModeValue(
     'rgba(255,255,255,1)',
@@ -238,6 +244,47 @@ function Campaigninfo({ currentProject, fundingover, schedule, voteSession }) {
                   All participants can get their funds back.
                 </Text>
               </Flex>
+            ) : isCanceled ? (
+              <Flex
+                _hover={{ opacity: '0.8' }}
+                width={'-webkit-fill-available'}
+                backgroundColor={currentBackground}
+                borderRadius={'50px'}
+                border={'1px solid'}
+                borderColor={currentBorder}
+                padding={'30px'}
+                flexDirection={'column'}
+              >
+                <Text
+                  fontSize={'4xl'}
+                  fontWeight={'900'}
+                  style={{
+                    textAlign: 'center',
+                  }}
+                >
+                  <span
+                    style={{
+                      textAlign: 'right',
+                      background:
+                        '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                      webkitBackgroundClip: 'text',
+                      webkitTextFillColor: 'transparent',
+                    }}
+                  >
+                    Campaign Canceled.
+                  </span>{' '}
+                  <br />
+                </Text>
+                <Text
+                  fontSize={'1xl'}
+                  fontWeight={'900'}
+                  style={{
+                    textAlign: 'center',
+                  }}
+                >
+                  Please get your funds back.
+                </Text>
+              </Flex>
             ) : (
               <Flex
                 _hover={{ opacity: '0.8' }}
@@ -455,10 +502,10 @@ function Campaigninfo({ currentProject, fundingover, schedule, voteSession }) {
               value={
                 currentProject.amountRaised / currentProject.amountToRaise < 1
                   ? Math.round(
-                    (currentProject.amountRaised /
-                      currentProject.amountToRaise) *
-                      100
-                  )
+                      (currentProject.amountRaised /
+                        currentProject.amountToRaise) *
+                        100
+                    )
                   : '100'
               }
               color="var(--blue)"

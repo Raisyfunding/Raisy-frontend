@@ -132,7 +132,14 @@ export const useCampaignsContract = () => {
     return await contract.getFundsBack(campaignId, payToken, options);
   };
 
+  const getNbDonors = async (campaignId) => {
+    const contract = await getCampaignsContract();
+
+    return await contract.nbDonors(campaignId);
+  };
+
   return {
+    getNbDonors,
     voteRefund,
     withdrawDonation,
     getFundsBack,

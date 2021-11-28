@@ -10,12 +10,13 @@ import {
 } from '@chakra-ui/react';
 import VoteSession from './VoteSession';
 import Campaigninfo from './Campaigninfo';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Fundsrelease from './Fundsrelease';
 import DonationStats from './DonationStats';
 import ClaimPOD from './ClaimPOD';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { useCampaignsContract } from '../../../contracts';
 
 function Campaigndetail({
   currentProject,
@@ -24,6 +25,10 @@ function Campaigndetail({
   voteSession,
 }) {
   const markdown = `Just a link: https://reactjs.com.`;
+
+  const {getNbDonors} = useCampaignsContract();
+  const [nbDonors, setNbDonors] = useState(0);
+
   const currentBackground = useColorModeValue(
     'rgba(255,255,255,1)',
     'rgba(21,21,21,.64)'
@@ -32,6 +37,19 @@ function Campaigndetail({
     'rgba(235, 235, 235, 1)',
     'rgba(25,25,25,1)'
   );
+
+  const updateNbDonors = () => {
+    getNbDonors(currentProject.campaignId).then((_nbDonors) => {
+      setNbDonors(parseInt(_nbDonors._hex));
+    });
+  };
+  
+  useEffect(() => {
+    if (currentProject.campaignId !== undefined) {
+      updateNbDonors();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentProject]);
   return (
     <Box width={'100vw'} height="100vh">
       <Flex direction={{ base: 'column', md: 'row' }}>
@@ -44,6 +62,8 @@ function Campaigndetail({
             currentProject={currentProject}
             fundingover={fundingover}
             schedule={schedule}
+            voteSession={voteSession}
+            isCanceled={schedule.wantsRefund >= nbDonors * 0.5}
           />
         </Flex>
         <Flex

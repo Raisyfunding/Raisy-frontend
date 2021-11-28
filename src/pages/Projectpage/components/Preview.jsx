@@ -91,6 +91,7 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
     askMoreFunds,
     withdrawDonation,
     getFundsBack,
+    getNbDonors,
   } = useCampaignsContract();
   const toast = useToast();
   const { getBlockNumber } = useBlockNumber();
@@ -104,6 +105,7 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
   const [voteTimeEndDate, setVoteTimeEndDate] = useState(null);
 
   const [endBlock, setEndBlock] = useState(0);
+  const [nbDonors, setNbDonors] = useState(null);
 
   const { tokens } = useTokens();
 
@@ -211,6 +213,19 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
     });
   };
 
+  const updateNbDonors = () => {
+    getNbDonors(currentProject.campaignId).then((_nbDonors) => {
+      setNbDonors(parseInt(_nbDonors._hex));
+    });
+  };
+  
+  useEffect(() => {
+    if (currentProject.campaignId !== undefined) {
+      updateNbDonors();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentProject]);
+
   useEffect(() => {
     setInterval(() => {
       updateEndBlock();
@@ -218,9 +233,6 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [voteSession, chainId]);
 
-  // useEffect(() => {
-  //   console.log(schedule);
-  // }, [schedule]);
 
   return (
     <Box height={{ base: '', md: '100vh' }} width={'100vw'}>
@@ -525,23 +537,14 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
                       currentProject.amountRaised <
                     0 ? (
                       <>
-                        {voteSession?.numUnsuccessfulVotes >= 3 && (
+                        {(voteSession?.numUnsuccessfulVotes >= 3 ||
+                          schedule.wantsRefund >= nbDonors * 0.5) && (
                           <Box
                             display={'flex'}
                             textAlign={'center'}
                             justifyContent={'center'}
                             flexDirection={'column'}
                           >
-                            <Text
-                              marginLeft={'auto'}
-                              marginRight={'auto'}
-                              paddingBottom={'20px'}
-                              fontSize={'2xl'}
-                              fontWeight={'600'}
-                            >
-                              The vote didn't pass 3 times in a row. Please get
-                              your funds back.
-                            </Text>
                             <Flex
                               gridGap={'15px'}
                               justifyContent={'center'}
@@ -668,6 +671,7 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
             fundingover={fundingover}
             schedule={schedule}
             voteSession={voteSession}
+            isCanceled={schedule.wantsRefund >= nbDonors * 0.5}
           />
         </Flex>
       </Flex>
