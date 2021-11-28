@@ -140,7 +140,11 @@ function User() {
                 </TabList>
                 <TabPanels>
                   <TabPanel>
-                    <Flex _hover={{ cursor: 'pointer' }}>
+                    <Flex
+                      _hover={{ cursor: 'pointer' }}
+                      flexWrap={'wrap'}
+                      gridGap="10px"
+                    >
                       {proofsOfDonation.map((_pod) => (
                         <Flex
                           margin={'auto'}
@@ -170,12 +174,13 @@ function User() {
                         {campaign.description}
                       </Text> */}
                           <Text paddingTop={'15px'} textAlign={'justify'}>
-                            Donated {ethers.utils.formatEther(_pod.amount)} in{' '}
+                            Donated {ethers.utils.formatEther(_pod.amount)} $
+                            {/* in{' '}
                             {
                               tokens.find(
                                 (token) => _pod.tokenUsed === token.address
                               ).symbol
-                            }
+                            } */}
                           </Text>
                           <Text
                             paddingTop={'15px'}
