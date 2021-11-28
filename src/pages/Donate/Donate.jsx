@@ -26,10 +26,10 @@ import useTokens from './../../hooks/useTokens';
 import { useWeb3React } from '@web3-react/core';
 import { useTokenContract } from './../../contracts/token';
 import { formatError } from '../../utils';
-import { ArrowLeftIcon } from '@chakra-ui/icons';
 import Loader from 'react-loader-spinner';
 import styles from '../Projectpage/components/styles.module.scss';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+
 const Donate = () => {
   const { campaignId } = useParams();
 
@@ -190,16 +190,6 @@ const Donate = () => {
       setSending(false);
     }
   };
-
-  const currentBackground = useColorModeValue(
-    'rgba(255,255,255,1)',
-    'rgba(21,21,21,.64)'
-  );
-  const currentBorder = useColorModeValue(
-    'rgba(235, 235, 235, 1)',
-    'rgba(25,25,25,1)'
-  );
-
   return (
     <Screen
       style={{
@@ -212,6 +202,7 @@ const Donate = () => {
         backgroundRepeat={'no-repeat'}
         backgroundSize={'cover'}
         height={{ base: '', md: '100vh' }}
+        paddingBottom={{ base: '30px', md: 'unset' }}
       >
         <Flex
           flexDirection={{ base: 'column', md: 'row' }}
