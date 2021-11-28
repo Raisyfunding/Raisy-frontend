@@ -1,11 +1,9 @@
 import React from 'react';
 import ProjectCard from './ProjectCard';
 import { CarouselProvider, Slider, Slide } from 'pure-react-carousel';
-import 'pure-react-carousel/dist/react-carousel.es.css';
 import { Flex, Text, Box } from '@chakra-ui/react';
 import './styles.css';
-
-import { SUCCESS_CAMP } from './successCamp';
+import 'pure-react-carousel/dist/react-carousel.es.css';
 
 export default class Popular extends React.Component {
   constructor(props) {
@@ -35,7 +33,7 @@ export default class Popular extends React.Component {
     if (width < 935) {
       return 1; // show 1 slides
     } else if (width > 1250) {
-      return 3; // show 1 slides
+      return 4; // show 1 slides
     } else {
       return 2;
     }
@@ -93,31 +91,29 @@ export default class Popular extends React.Component {
             >
               Explore the trending campaigns on Raisy.
             </Text>
-            <Box margin={'auto'}>
-              <CarouselProvider
-                totalSlides={SUCCESS_CAMP.length}
-                visibleSlides={this.state.totalSlides}
-                isIntrinsicHeight={true}
-                isPlaying={true}
-                interval={4000}
-                //dragStep = {this.state.totalSlides}
-              >
-                <Flex maxWidth={'95vw'}>
-                  <Slider classNameTray="slider-tray">
-                    {this.props.popularCampaigns.length > 0 &&
-                      this.props.popularCampaigns.map((campaign, n) => (
-                        <Slide
-                          index={n}
-                          naturalSlideHeight={'450px'}
-                          naturalSlideWidth={'300px'}
-                        >
-                          <ProjectCard campaign={campaign} />
-                        </Slide>
-                      ))}
-                  </Slider>
-                </Flex>
-              </CarouselProvider>
-            </Box>
+            <CarouselProvider
+              totalSlides={this.props.popularCampaigns.length}
+              visibleSlides={this.state.totalSlides}
+              isIntrinsicHeight={true}
+              isPlaying={true}
+              interval={4000}
+              //dragStep = {this.state.totalSlides}
+            >
+              <Flex maxWidth={'95vw'}>
+                <Slider classNameTray="slider-tray">
+                  {this.props.popularCampaigns.length > 0 &&
+                    this.props.popularCampaigns.map((campaign, n) => (
+                      <Slide
+                        index={n}
+                        naturalSlideHeight={'450px'}
+                        naturalSlideWidth={'300px'}
+                      >
+                        <ProjectCard campaign={campaign} />
+                      </Slide>
+                    ))}
+                </Slider>
+              </Flex>
+            </CarouselProvider>
           </Box>
         </Box>
       </div>
