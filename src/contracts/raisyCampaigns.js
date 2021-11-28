@@ -108,7 +108,25 @@ export const useCampaignsContract = () => {
     return await contract.vote(campaignId, _vote, options);
   };
 
+  const voteRefund = async (campaignId, from) => {
+    const contract = await getCampaignsContract();
+
+    const options = { from, gasPrice: getHigherGWEI() };
+
+    return await contract.voteRefund(campaignId, options);
+  };
+
+  const withdrawDonation = async (campaignId, payToken, from) => {
+    const contract = await getCampaignsContract();
+
+    const options = { from, gasPrice: getHigherGWEI() };
+
+    return await contract.withdrawFunds(campaignId, payToken, options);
+  };
+
   return {
+    voteRefund,
+    withdrawDonation,
     vote,
     askMoreFunds,
     claimInitialFunds,

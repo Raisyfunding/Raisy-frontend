@@ -1,15 +1,42 @@
 import { Image } from '@chakra-ui/image';
 import { Text, Center, Spacer } from '@chakra-ui/layout';
 import { SpacerLarge } from '../../styles/globalStyles';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Screen } from '../../styles/globalStyles';
-import { useColorModeValue, Flex, HStack, VStack, Box } from '@chakra-ui/react';
+import { useColorModeValue, Flex, HStack, Box } from '@chakra-ui/react';
 import cat from '../../images/cryptokitties.jpg';
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
 import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
 import { FiMail, FiTwitter, FiFacebook, FiInstagram } from 'react-icons/fi';
+import { useWeb3React } from '@web3-react/core';
+import { useNftContract } from '../../contracts';
+// import useTokens from './../../hooks/useTokens';
+import { ethers } from 'ethers';
+import { shortenAddress } from '../../utils';
+import { useHistory } from 'react-router-dom';
 
 function User() {
+  const { account } = useWeb3React();
+
+  const [proofsOfDonation, setProofsOfDonation] = useState([]);
+
+  const { getProofsOfDonation } = useNftContract();
+
+  // const { tokens } = useTokens();
+
+  const history = useHistory();
+
+  const color = useColorModeValue('rgba(255,255,255,1)', 'rgba(21,21,21,.64)');
+
+  useEffect(() => {
+    if (account) {
+      getProofsOfDonation(account).then((_pods) => {
+        setProofsOfDonation(_pods);
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [account]);
+
   return (
     <Screen
       style={{
@@ -27,7 +54,7 @@ function User() {
                   Jerry the Cat
                 </Text>
                 <Text fontSize="1xl" textAlign="center">
-                  0x70f5...EB37
+                  {shortenAddress(account)}
                 </Text>
 
                 <Box height="20px" />
@@ -72,7 +99,7 @@ function User() {
             </Center>
           </Box>
           <Spacer />
-          <Box width="40%">
+          <Box width="50%">
             <Box>
               <SpacerLarge />
               <Table variant="simple">
@@ -108,26 +135,80 @@ function User() {
               <SpacerLarge />
               <Tabs isFitted variant="enclosed">
                 <TabList mb="1em">
+                  <Tab>Proofs Of Donation</Tab>
                   <Tab>Activity</Tab>
-                  <Tab>POD Galery</Tab>
-                  <Tab>Collections created</Tab>
+                  <Tab>Your Campaigns</Tab>
                 </TabList>
                 <TabPanels>
                   <TabPanel>
-                    <p>
-                      Donation + lancement de campagne + follwing + commentaires
-                    </p>
+                    <Flex
+                      _hover={{ cursor: 'pointer' }}
+                      flexWrap={'wrap'}
+                      gridGap="10px"
+                    >
+                      {proofsOfDonation.map((_pod) => (
+                        <Flex
+                          margin={'auto'}
+                          width={'300px'}
+                          height={'auto'}
+                          backgroundColor={color}
+                          borderRadius={'50px'}
+                          border={'1px solid'}
+                          borderColor={color}
+                          padding={'20px'}
+                          flexDirection={'column'}
+                          _hover={{ opacity: '0.8' }}
+                          onClick={() =>
+                            history.replace(
+                              `/campaign/${parseInt(_pod.campaignId._hex)}`
+                            )
+                          }
+                        >
+                          <Text
+                            paddingTop={'15px'}
+                            textAlign={'justify'}
+                            fontSize="xl"
+                          >
+                            Campaign {parseInt(_pod.campaignId._hex)}
+                          </Text>
+                          {/* <Text paddingTop={"15px"} textAlign={"justify"}>
+                        {campaign.description}
+                      </Text> */}
+                          <Text paddingTop={'15px'} textAlign={'justify'}>
+                            Donated {ethers.utils.formatEther(_pod.amount)} $
+                            {/* in{' '}
+                            {
+                              tokens.find(
+                                (token) => _pod.tokenUsed === token.address
+                              ).symbol
+                            } */}
+                          </Text>
+                          <Text
+                            paddingTop={'15px'}
+                            paddingBottom={'15px'}
+                            textAlign={'justify'}
+                          >
+                            Donated at{' '}
+                            {new Date(
+                              parseInt(_pod.creationTimestamp._hex) * 1000
+                            ).toString()}
+                          </Text>
+                        </Flex>
+                      ))}
+                    </Flex>
                   </TabPanel>
-                  <TabPanel></TabPanel>
+                  <TabPanel>
+                    <p>User Activity</p>
+                  </TabPanel>
+                  <TabPanel>
+                    <p>Campaigns created by the user</p>
+                  </TabPanel>
                 </TabPanels>
               </Tabs>
             </Box>
           </Box>
           <Spacer />
         </Flex>
-        <Box height="10px" />
-
-        <Box height="80px" />
       </Box>
     </Screen>
   );

@@ -40,6 +40,7 @@ const VoteSession = ({ currentProject, voteSession }) => {
         duration: 9000,
         isClosable: true,
       });
+      console.log(err);
       setVoting(false);
     }
   };
@@ -48,51 +49,94 @@ const VoteSession = ({ currentProject, voteSession }) => {
     <div>
       {currentProject.nbMilestones ? (
         <div>
-          {false ? (
-            <div></div>
+          {!voteSession?.inProgress ? (
+            <div>
+              <Text
+                fontSize={{ base: '2xl', md: '2xl', lg: '3xl' }}
+                style={{
+                  textAlign: 'center',
+                  background:
+                    '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                  webkitBackgroundClip: 'text',
+                  webkitTextFillColor: 'transparent',
+                }}
+                fontWeight={'900'}
+                paddingBottom={'40px'}
+                margin={'auto'}
+              >
+                NO VOTE SESSION LIVE
+              </Text>
+            </div>
           ) : (
             <div>
-              {console.log(voteSession)}
               <Box>
                 <Box height="25px" />
-                <Text fontSize="3xl" textAlign="center" fontWeight="bold">
+                <Text fontSize="3xl" textAlign="center" fontWeight="900">
                   {' '}
-                  The vote session is live
+                  VOTE SESSION LIVE
                 </Text>
                 <Box height="25px" />
                 <Center>
                   <Text fontSize="1xl" textAlign="center" width="80%">
-                    {' '}
-                    The campaign creator asked for a{' '}
-                    <span style={{ fontWeight: 'bold' }}>20%</span> funds
-                    release, if most of the users vote to interrupt it during
-                    the meantime, the request will be canceled. 3 consecutives
-                    failed request will give a refund of all donors.
+                    The campaign's creator asked for more funds. Vote if you
+                    agree to release more funds for this project. Please note
+                    that you need a Proof Of Donation to vote.
                   </Text>
                 </Center>
                 <Box height="25px" />
                 <Center>
-                  <VoteStats voteSession={voteSession} />
+                  <Box width="60%">
+                    <VoteStats voteSession={voteSession} />
+                  </Box>{' '}
                 </Center>
                 <Box height="50px" />
                 <Center>
                   <Flex width="100%" gridGap={'20px'} justifyContent={'center'}>
-                    <Button onClick={() => handleVote(true)}>VOTE YES</Button>
-                    <Button onClick={() => handleVote(false)}>VOTE NO</Button>
+                    <Button
+                      width={'200px'}
+                      height={'60px'}
+                      borderRadius={'50px'}
+                      color={'black'}
+                      background={
+                        'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))'
+                      }
+                      _hover={{
+                        opacity: 0.8,
+                        background:
+                          'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                      }}
+                      onClick={() => handleVote(true)}
+                    >
+                      VOTE YES
+                    </Button>
+                    <Button
+                      width={'200px'}
+                      height={'60px'}
+                      borderRadius={'50px'}
+                      color={'black'}
+                      background={
+                        'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))'
+                      }
+                      _hover={{
+                        opacity: 0.8,
+                        background:
+                          'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                      }}
+                      onClick={() => handleVote(false)}
+                    >
+                      VOTE NO
+                    </Button>
                   </Flex>
                 </Center>
-                <Center>
+                {/* <Center>
                   <Text textAlign="center" width="50%" marginTop="10px">
                     Only donation proof owners of this campaign will be able to
                     vote
                   </Text>
-                </Center>
-                <Box height="20px" />
+                </Center> */}
                 <Center>
                   <Countdown date={Date.now() + 10000000} />
                 </Center>
-
-                <Box height="50px" />
               </Box>
             </div>
           )}

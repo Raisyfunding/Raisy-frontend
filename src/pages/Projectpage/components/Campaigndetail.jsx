@@ -1,6 +1,12 @@
-import { Flex, Text, Box, Spacer, Center } from '@chakra-ui/layout';
-import { SpacerLarge, SpacerSmall } from '../../../styles/globalStyles';
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
+import { Flex, Text, Box, Center } from '@chakra-ui/layout';
+import {
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+  useColorModeValue,
+} from '@chakra-ui/react';
 import VoteSession from './VoteSession';
 import Campaigninfo from './Campaigninfo';
 import React from 'react';
@@ -17,57 +23,87 @@ function Campaigndetail({
   voteSession,
 }) {
   const markdown = `Just a link: https://reactjs.com.`;
+  const currentBackground = useColorModeValue(
+    'rgba(255,255,255,1)',
+    'rgba(21,21,21,.64)'
+  );
+  const currentBorder = useColorModeValue(
+    'rgba(235, 235, 235, 1)',
+    'rgba(25,25,25,1)'
+  );
   return (
-    <Flex direction="column" height="200vh">
-      <Box marginLeft="5%" marginRight="10%" marginTop="2%">
-        <Flex direction={{ base: 'column', md: 'row' }}>
-          <Flex direction="column" width="900px">
-            <Tabs>
-              <Center>
-                <TabList width="80%">
-                  <Tab>Story</Tab>
-                  <Tab>Rewards</Tab>
-                  <Tab>Creator's details</Tab>
-                  <Tab>Funds release</Tab>
-                  <Tab>Your Stats</Tab>
-                  {fundingover && <Tab>Claim POD</Tab>}
-                  {fundingover && currentProject.nbMilestones && (
-                    <Tab>Vote</Tab>
+    <Box width={'100vw'} height="100vh">
+      <Flex direction={{ base: 'column', md: 'row' }}>
+        <Flex
+          direction="column"
+          width={{ base: '100vw', md: '40vw' }}
+          padding={'40px'}
+        >
+          <Campaigninfo
+            currentProject={currentProject}
+            fundingover={fundingover}
+            schedule={schedule}
+          />
+        </Flex>
+        <Flex
+          padding={{ base: '20ox', md: '15px' }}
+          direction="column"
+          borderRadius={'50px'}
+          width={{ base: '91vw', md: '57vw' }}
+          height="88vh"
+          marginRight="auto"
+          marginLeft="auto"
+          background={currentBackground}
+          border={'1px solid'}
+          borderColor={currentBorder}
+        >
+          <Tabs
+            variant="soft-rounded"
+            colorScheme={'grey.500'}
+            overflow={'hidden'}
+          >
+            <Center>
+              <TabList width="100%" paddingTop={'5px'}>
+                <Tab
+                  height={'60px'}
+                  _selected={{ color: 'white', bg: 'var(--blue)' }}
+                >
+                  Story
+                </Tab>
+                <Tab
+                  height={'60px'}
+                  _selected={{ color: 'white', bg: 'var(--blue)' }}
+                >
+                  Rewards
+                </Tab>
+                <Tab
+                  height={'60px'}
+                  _selected={{ color: 'white', bg: 'var(--blue)' }}
+                >
+                  Creator's details
+                </Tab>
+                <Tab
+                  height={'60px'}
+                  _selected={{ color: 'white', bg: 'var(--blue)' }}
+                >
+                  Funds release
+                </Tab>
+                <Tab
+                  height={'60px'}
+                  _selected={{ color: 'white', bg: 'var(--blue)' }}
+                >
+                  Your Stats
+                </Tab>
+                {fundingover &&
+                  currentProject.amountRaised >=
+                    currentProject.amountToRaise && (
+                    <Tab
+                      height={'60px'}
+                      _selected={{ color: 'white', bg: 'var(--blue)' }}
+                    >
+                      Proof of Donation
+                    </Tab>
                   )}
-<<<<<<< Updated upstream
-                </TabList>
-              </Center>
-              <TabPanels>
-                <TabPanel>
-                  <Box paddingLeft="100px" width="700px">
-                    <ReactMarkdown
-                      children={currentProject.description}
-                      remarkPlugins={[remarkGfm]}
-                    />
-                  </Box>
-                </TabPanel>
-                <TabPanel>
-                  <Box paddingLeft="100px" width="700px">
-                    <ReactMarkdown
-                      children={markdown}
-                      remarkPlugins={[remarkGfm]}
-                    />
-                  </Box>
-                </TabPanel>
-                <TabPanel>
-                  <Box paddingLeft="100px" width="700px">
-                    <ReactMarkdown
-                      children={markdown}
-                      remarkPlugins={[remarkGfm]}
-                    />
-                  </Box>
-                </TabPanel>
-                <TabPanel>
-                  <Fundsrelease
-                    currentProject={currentProject}
-                    fundingover={fundingover}
-                    schedule={schedule}
-=======
                 {fundingover && voteSession && (
                   <Tab
                     height={'60px'}
@@ -76,16 +112,6 @@ function Campaigndetail({
                     Vote
                   </Tab>
                 )}
-                {fundingover &&
-                  currentProject.amountRaised >=
-                    currentProject.amountToRaise && (
-                    <Tab
-                      height={'60px'}
-                      _selected={{ color: 'white', bg: 'var(--blue)' }}
-                    >
-                      Refund
-                    </Tab>
-                  )}
               </TabList>
             </Center>
             <TabPanels>
@@ -109,35 +135,30 @@ function Campaigndetail({
                   <ReactMarkdown
                     children={currentProject.description}
                     remarkPlugins={[remarkGfm]}
->>>>>>> Stashed changes
                   />
-                </TabPanel>
-                <TabPanel>
-                  <DonationStats campaignId={currentProject.campaignId} />
-                </TabPanel>
-                <TabPanel>
-                  <ClaimPOD campaignId={currentProject.campaignId} />
-                </TabPanel>
-                <TabPanel>
-                  <VoteSession
-                    currentProject={currentProject}
-                    fundingover={fundingover}
-                    schedule={schedule}
+                </Box>
+              </TabPanel>
+              <TabPanel>
+                <Box>
+                  <Text
+                    fontSize={{ base: '2xl', md: '2xl', lg: '3xl' }}
+                    style={{
+                      textAlign: 'center',
+                      background:
+                        '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                      webkitBackgroundClip: 'text',
+                      webkitTextFillColor: 'transparent',
+                    }}
+                    fontWeight={'900'}
+                    paddingBottom={'40px'}
+                    margin={'auto'}
+                  >
+                    REWARDS
+                  </Text>
+                  <ReactMarkdown
+                    children={markdown}
+                    remarkPlugins={[remarkGfm]}
                   />
-<<<<<<< Updated upstream
-                </TabPanel>
-              </TabPanels>
-            </Tabs>
-          </Flex>
-          <Spacer />
-
-          <Box width="400px" height="2000px">
-            <Campaigninfo
-              currentProject={currentProject}
-              fundingover={fundingover}
-            />
-          </Box>
-=======
                 </Box>
               </TabPanel>
               <TabPanel>
@@ -199,6 +220,15 @@ function Campaigndetail({
                   voteSession={voteSession}
                 />
               </TabPanel>
+
+              <TabPanel>
+                <VoteSession
+                  currentProject={currentProject}
+                  fundingover={fundingover}
+                  schedule={schedule}
+                  voteSession={voteSession}
+                />
+              </TabPanel>
               <TabPanel>
                 <VoteSession
                   currentProject={currentProject}
@@ -209,11 +239,9 @@ function Campaigndetail({
               </TabPanel>
             </TabPanels>
           </Tabs>
->>>>>>> Stashed changes
         </Flex>
-      </Box>
-      <SpacerLarge />
-    </Flex>
+      </Flex>
+    </Box>
   );
 }
 

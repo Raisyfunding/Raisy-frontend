@@ -1,19 +1,9 @@
 import React from 'react';
-import {
-  Text,
-  Box,
-  Center,
-  HStack,
-  VStack,
-  useColorModeValue,
-} from '@chakra-ui/react';
+import { Text } from '@chakra-ui/react';
 import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
-import { useWeb3React } from '@web3-react/core';
-import Countdown from 'react-countdown';
+// import { useWeb3React } from '@web3-react/core';
 
 const Fundsrelease = ({ currentProject, fundingover, schedule }) => {
-  const { account } = useWeb3React();
-
   return (
     <div>
       {currentProject.nbMilestones ? (

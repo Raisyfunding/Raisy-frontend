@@ -1,6 +1,5 @@
 import { ChainId } from '@sushiswap/sdk';
 
-import { calculateGasMargin, getHigherGWEI } from '../utils';
 import useContract from '../hooks/useContract';
 
 import RaisyChef from '../abi/RaisyChef.json';

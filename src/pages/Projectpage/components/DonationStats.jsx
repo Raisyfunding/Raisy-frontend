@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { Button, Flex, Link, Text } from '@chakra-ui/react';
 import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
@@ -60,6 +61,7 @@ const DonationStats = ({ campaignId }) => {
       updateAllTokens();
       udpatePendingRewards();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currencies, campaignId, account]);
 
   return (
@@ -67,10 +69,24 @@ const DonationStats = ({ campaignId }) => {
       <Flex
         justifyContent={'center'}
         flexDirection={'column'}
-        width={'80%'}
         marginRight={'auto'}
         marginLeft={'auto'}
       >
+        <Text
+          fontSize={{ base: '2xl', md: '2xl', lg: '3xl' }}
+          style={{
+            textAlign: 'center',
+            background:
+              '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+            webkitBackgroundClip: 'text',
+            webkitTextFillColor: 'transparent',
+          }}
+          fontWeight={'900'}
+          paddingBottom={'40px'}
+          margin={'auto'}
+        >
+          STATS
+        </Text>
         <Table variant="simple">
           <Thead>
             <Tr>
@@ -100,9 +116,25 @@ const DonationStats = ({ campaignId }) => {
             <Text textAlign={'center'}>Pending Rewards : {pendingRewards}</Text>
           </>
         )}
-        <Button display={!account ? 'flex' : 'none'} bg="#27292b">
+        <Button
+          display={!account ? 'flex' : 'none'}
+          width={'200px'}
+          height={'60px'}
+          margin={'auto'}
+          borderRadius={'50px'}
+          color={'black'}
+          background={
+            'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))'
+          }
+          _hover={{
+            opacity: 0.8,
+            background:
+              'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+          }}
+        >
           Connect
         </Button>
+
         <Flex display={account ? 'flex' : 'none'}>
           <Flex
             display={!endCampaign && !enableWithdrawing ? 'flex' : 'none'}
