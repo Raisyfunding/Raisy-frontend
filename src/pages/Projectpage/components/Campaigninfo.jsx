@@ -454,9 +454,11 @@ function Campaigninfo({ currentProject, fundingover, schedule, voteSession }) {
               {' '}
               <CircularProgressLabel margin={'auto'}>
                 {currentProject.amountRaised / currentProject.amountToRaise < 1
-                  ? (currentProject.amountRaised /
-                      currentProject.amountToRaise) *
-                    100
+                  ? Math.round(
+                      (currentProject.amountRaised /
+                        currentProject.amountToRaise) *
+                        100
+                    )
                   : '100'}
                 %
               </CircularProgressLabel>
