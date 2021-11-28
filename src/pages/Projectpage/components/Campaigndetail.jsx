@@ -43,6 +43,7 @@ function Campaigndetail({
             currentProject={currentProject}
             fundingover={fundingover}
             schedule={schedule}
+            voteSession={voteSession}
           />
         </Flex>
         <Flex

@@ -653,6 +653,7 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
             currentProject={currentProject}
             fundingover={fundingover}
             schedule={schedule}
+            voteSession={voteSession}
           />
         </Flex>
       </Flex>
