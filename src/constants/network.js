@@ -33,11 +33,11 @@ export const Contracts = {
     raisyAddressRegistry: '',
   },
   [ChainId.RINKEBY]: {
-    raisyChef: '0x87D24D80fe4Fd2CFB196f5457197432fD02762CA',
+    raisyChef: '0x02915065fd21c628f13b3f50899673fd8FB9F49e',
     raisyCampaigns: '0x43FdC0870A493fBAaf01A3f7217317a61A0c7e82', // Proxy Address
     raisyNFT: '0x13c26fF52C2f3F516a42ddDf316860F9e5569E44',
     raisyPriceFeed: '0x64e07b441AAe53e2eF280883672e2Db66fD7F5e9',
-    raisyToken: '0x31Dbc15a31dE8248703861ee4D027Ee3d1Ed6689',
+    raisyToken: '0xE86402F145cD4ed1c413eEc94D518C5aA3e79A79',
     raisyTokenRegistry: '0xD8c2Ce5C26Bd86F81EFB7Cfc64838F2F6d781a3e',
     raisyAddressRegistry: '0xbAbc86dF2Db0B7a42F262839ce6Cf5eA904f0D70',
   },
