@@ -67,10 +67,24 @@ const DonationStats = ({ campaignId }) => {
       <Flex
         justifyContent={'center'}
         flexDirection={'column'}
-        width={'80%'}
         marginRight={'auto'}
         marginLeft={'auto'}
       >
+        <Text
+          fontSize={{ base: '2xl', md: '2xl', lg: '3xl' }}
+          style={{
+            textAlign: 'center',
+            background:
+              '-webkit-linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+            webkitBackgroundClip: 'text',
+            webkitTextFillColor: 'transparent',
+          }}
+          fontWeight={'900'}
+          paddingBottom={'40px'}
+          margin={'auto'}
+        >
+          STATS
+        </Text>
         <Table variant="simple">
           <Thead>
             <Tr>

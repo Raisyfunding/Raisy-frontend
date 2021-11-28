@@ -111,7 +111,7 @@ function Campaigninfo({ currentProject, fundingover, schedule }) {
               >
                 {' '}
                 <Text
-                  fontSize={'5xl'}
+                  fontSize={{ base: '5xl', md: '4xl', lg: '5xl' }}
                   fontWeight={'900'}
                   style={{
                     textAlign: 'center',
@@ -141,7 +141,7 @@ function Campaigninfo({ currentProject, fundingover, schedule }) {
                 flexDirection={'column'}
               >
                 <Text
-                  fontSize={'5xl'}
+                  fontSize={{ base: '5xl', md: '4xl', lg: '5xl' }}
                   fontWeight={'900'}
                   style={{
                     textAlign: 'center',
@@ -277,7 +277,7 @@ function Campaigninfo({ currentProject, fundingover, schedule }) {
               >
                 {' '}
                 <Text
-                  fontSize={'5xl'}
+                  fontSize={{ base: '5xl', md: '4xl', lg: '5xl' }}
                   fontWeight={'900'}
                   style={{
                     textAlign: 'center',
@@ -307,7 +307,7 @@ function Campaigninfo({ currentProject, fundingover, schedule }) {
                 flexDirection={'column'}
               >
                 <Text
-                  fontSize={'5xl'}
+                  fontSize={{ base: '5xl', md: '4xl', lg: '5xl' }}
                   fontWeight={'900'}
                   style={{
                     textAlign: 'center',
@@ -343,7 +343,7 @@ function Campaigninfo({ currentProject, fundingover, schedule }) {
             <Flex
               _hover={{ opacity: '0.8' }}
               width={'-webkit-fill-available'}
-              height={'280px'}
+              height={'-webkit-fit-content'}
               backgroundColor={currentBackground}
               borderRadius={'50px'}
               border={'1px solid'}
@@ -372,7 +372,7 @@ function Campaigninfo({ currentProject, fundingover, schedule }) {
                     )}
                     color="var(--blue)"
                     thickness="5px"
-                    size={'150px'}
+                    size={{ base: '150px', md: '100px', lg: '150px' }}
                     margin={'auto'}
                     trackColor={currentProgress}
                   >
@@ -464,7 +464,7 @@ function Campaigninfo({ currentProject, fundingover, schedule }) {
             >
               {' '}
               <Text
-                fontSize={'5xl'}
+                fontSize={{ base: '5xl', md: '4xl', lg: '5xl' }}
                 fontWeight={'900'}
                 style={{
                   textAlign: 'center',
