@@ -53,7 +53,6 @@ const VoteSession = ({ currentProject, voteSession }) => {
             <div></div>
           ) : (
             <div>
-              {console.log(voteSession)}
               <Box>
                 <Box height="25px" />
                 <Text fontSize="3xl" textAlign="center" fontWeight="900">

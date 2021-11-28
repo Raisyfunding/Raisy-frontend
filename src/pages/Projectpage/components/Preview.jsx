@@ -28,6 +28,7 @@ import {
   FiHeart,
 } from 'react-icons/fi';
 import useTokens from './../../../hooks/useTokens';
+import VoteStats from './VoteStats';
 
 const renderMedia = (image, contentType) => {
   if (contentType === 'video' || image?.includes('youtube')) {
@@ -96,7 +97,7 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
 
   const { tokens } = useTokens();
 
-  const VOTE_SESSION_DURATION = 84200;
+  const VOTE_SESSION_DURATION = 40;
 
   const handleClaimFunds = async () => {
     if (claiming) return;
@@ -367,14 +368,17 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
                         {schedule.currentMilestone > 0 ? (
                           <>
                             {' '}
-                            {voteSession?.inProgress && !isFinished ? (
-                              <div>Vote Stats</div>
+                            {!isFinished ? (
+                              <Center>
+                                <Box width="500px">
+                                  <VoteStats voteSession={voteSession} />
+                                </Box>
+                              </Center>
                             ) : (
                               <div>
                                 {voteSession?.inProgress ? (
                                   <div>
                                     <Button
-                                      width={'100%'}
                                       onClick={handleEndVoteSession}
                                       disabled={ending}
                                       width={'200px'}
