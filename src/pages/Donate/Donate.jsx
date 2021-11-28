@@ -322,13 +322,19 @@ const Donate = () => {
               <Text paddingBottom={'10px'}>
                 Available:{' '}
                 {Math.round(
-                  ethers.utils.formatUnits(balance, currency?.decimals)
-                )}
+                  (parseFloat(
+                    ethers.utils.formatUnits(balance, currency?.decimals)
+                  ) +
+                    Number.EPSILON) *
+                    1000
+                ) / 1000}
                 {currency?.symbol} ~
                 {Math.round(
-                  tokenPrice *
-                    ethers.utils.formatUnits(balance, currency?.decimals)
-                )}
+                  (tokenPrice *
+                    ethers.utils.formatUnits(balance, currency?.decimals) +
+                    Number.EPSILON) *
+                    1000
+                ) / 1000}
                 $
               </Text>
             </Box>

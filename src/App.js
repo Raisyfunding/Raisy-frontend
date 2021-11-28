@@ -1,10 +1,10 @@
 import { Navbar } from './components/index';
 import {
   Landingpage,
-  Helppage,
-  Helpcreator,
-  Helpdonor,
-  Explorepage,
+  // Helppage,
+  // Helpcreator,
+  // Helpdonor,
+  // Explorepage,
   User,
   Projectpage,
 } from './pages/index';
@@ -24,14 +24,14 @@ function App() {
           <Route exact path="/" style={{ overflow: 'hidden' }}>
             <Landingpage />
           </Route>
-          <Route exact path="/help">
+          {/* <Route exact path="/help">
             <Helppage />
-          </Route>
+          </Route> */}
           <Route exact path="/submit">
             <Submit />
           </Route>
 
-          <Route exact path="/donor">
+          {/* <Route exact path="/donor">
             <Helpdonor />
           </Route>
           <Route exact path="/creator">
@@ -39,7 +39,7 @@ function App() {
           </Route>
           <Route exact path="/explore">
             <Explorepage />
-          </Route>
+          </Route> */}
           <Route exact path="/campaign/:campaignId">
             <Projectpage />
           </Route>
