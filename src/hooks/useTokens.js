@@ -41,7 +41,7 @@ const Tokens = {
     //   icon: iconWMATIC,
     // },
     {
-      address: '0xf08f2C8F8453d873fc0f703c574Cf5DF7bc2259B',
+      address: '0xE86402F145cD4ed1c413eEc94D518C5aA3e79A79',
       name: 'Raisy',
       symbol: 'RSY',
       decimals: 18,
