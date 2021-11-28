@@ -2,6 +2,7 @@ import { ethers } from 'ethers';
 
 export * from './raisyCampaigns';
 export * from './raisyChef';
+export * from './raisyNft';
 
 export const getSigner = async () => {
   await window.ethereum.enable();

@@ -11,7 +11,7 @@ const ClaimPOD = ({ campaignId }) => {
   const { account } = useWeb3React();
 
   const handleClaimPOD = async () => {
-    if (claiming || !campaignId) return;
+    if (claiming || campaignId === undefined) return;
 
     setClaiming(true);
 

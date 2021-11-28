@@ -27,6 +27,7 @@ import {
   FiInstagram,
   FiHeart,
 } from 'react-icons/fi';
+import useTokens from './../../../hooks/useTokens';
 
 const renderMedia = (image, contentType) => {
   if (contentType === 'video' || image?.includes('youtube')) {
@@ -83,7 +84,7 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
     'rgba(25,25,25,1)'
   );
 
-  const { claimInitialFunds, claimNextFunds, askMoreFunds } =
+  const { claimInitialFunds, claimNextFunds, askMoreFunds, withdrawDonation } =
     useCampaignsContract();
   const toast = useToast();
   const { getBlockNumber } = useBlockNumber();
@@ -92,6 +93,8 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
   const [ending, setEnding] = useState(false);
   const [asking, setAsking] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
+
+  const { tokens } = useTokens();
 
   const VOTE_SESSION_DURATION = 84200;
 
@@ -482,23 +485,44 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
                           The campaign is unsuccessful, or participants voted in
                           majority for a refund.
                         </Text>
-                        <Button
-                          width={'200px'}
-                          height={'60px'}
-                          margin={'auto'}
-                          borderRadius={'50px'}
-                          color={'black'}
-                          background={
-                            'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))'
-                          }
-                          _hover={{
-                            opacity: 0.8,
-                            background:
-                              'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
-                          }}
-                        >
-                          Withdraw your donation
-                        </Button>
+                        <Flex gridGap={'15px'} justifyContent={'center'}>
+                          {tokens.map((token) => (
+                            <Button
+                              width={'200px'}
+                              height={'60px'}
+                              margin={'auto'}
+                              borderRadius={'50px'}
+                              color={'black'}
+                              background={
+                                'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))'
+                              }
+                              _hover={{
+                                opacity: 0.8,
+                                background:
+                                  'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                              }}
+                              onClick={async () => {
+                                try {
+                                  await withdrawDonation(
+                                    currentProject.campaignId,
+                                    token.address,
+                                    account
+                                  );
+                                } catch (err) {
+                                  toast({
+                                    title: 'Error while withdrawing on-chain',
+                                    description: formatError(err),
+                                    status: 'error',
+                                    duration: 9000,
+                                    isClosable: true,
+                                  });
+                                }
+                              }}
+                            >
+                              Withdraw your {token.symbol}
+                            </Button>
+                          ))}
+                        </Flex>
                       </Box>
                     )}
                   </div>
