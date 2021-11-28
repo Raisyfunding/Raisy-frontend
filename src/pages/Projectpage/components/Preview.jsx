@@ -378,64 +378,12 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
           textAlign="center"
           marginTop="15px"
         >
-<<<<<<< Updated upstream
-          <Spacer />
-          <Box maxWidth="200px">
-            <Text fontSize="16px" color="white">
-              Raisy connects Creators with donors to fund their project
-            </Text>
-            <Center>
-              <Image
-                src={handshake}
-                alt="project image"
-                style={{ filter: 'grayscale(1)' }}
-                opacity="0.2"
-                marginTop="-45%"
-              />
-            </Center>
-          </Box>
-          <Spacer />
-          <Box maxWidth="200px">
-            <Text fontSize="16px" color="white">
-              Releases partial fund after inspecting the progress of the project
-            </Text>
-            <Center>
-              <Image
-                src={moneybag}
-                alt="project image"
-                style={{ filter: 'grayscale(1)' }}
-                opacity="0.2"
-                marginTop="-40%"
-                width="80px"
-              />
-            </Center>
-          </Box>
-          <Spacer />
-          <Box maxWidth="200px">
-            <Text fontSize="16px" color="white">
-              Refunds the unreleased funds if project turns out to be a scam
-            </Text>
-            <Center>
-              <Image
-                src={security}
-                alt="project image"
-                style={{ filter: 'grayscale(1)' }}
-                opacity="0.2"
-                marginTop="-40%"
-                width="80px"
-              />
-            </Center>
-          </Box>
-
-          <Spacer />
-=======
           <Campaigninfo
             currentProject={currentProject}
             fundingover={fundingover}
             schedule={schedule}
             voteSession={voteSession}
           />
->>>>>>> Stashed changes
         </Flex>
       </Box>
     </Flex>

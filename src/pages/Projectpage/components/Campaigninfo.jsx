@@ -4,6 +4,7 @@ import {
   SpacerXSmall,
   SpacerSmall,
 } from '../../../styles/globalStyles';
+import CircularProgress from '@mui/material/CircularProgress';
 import {
   Flex,
   Text,
@@ -24,10 +25,6 @@ import { FiMail, FiTwitter, FiFacebook, FiInstagram } from 'react-icons/fi';
 // import { useState, useEffect } from 'react';
 // import { useApi } from '../../../api';
 
-<<<<<<< Updated upstream
-function Campaigninfo({ currentProject, fundingover, schedule }) {
-  const color = useColorModeValue('var(--white)', 'var(--black)');
-=======
 function Campaigninfo({ currentProject, fundingover, schedule, voteSession }) {
   // const color = useColorModeValue('var(--white)', 'var(--black)');
   const currentBackground = useColorModeValue(
@@ -46,7 +43,6 @@ function Campaigninfo({ currentProject, fundingover, schedule, voteSession }) {
     'rgba(230,230,230,1)',
     'rgba(25,25,25,1)'
   );
->>>>>>> Stashed changes
 
   return (
     <>
@@ -100,90 +96,6 @@ function Campaigninfo({ currentProject, fundingover, schedule, voteSession }) {
             <Spacer />
           </Flex>
         ) : (
-<<<<<<< Updated upstream
-          <Flex direction="column">
-            <Box bg="#27292b" borderRadius="15px">
-              <Flex direction="column" height="100%" padding="15px">
-                <Text textAlign="center" fontSize="26px" fontWeight="bold">
-                  {' '}
-                  Campaign has been funded !
-                </Text>
-
-                <Text fontSize="15px" textAlign="center">
-                  Congratulations to all participants,{' '}
-                  <span style={{ fontWeight: 'bold', fontSize: '20px' }}>
-                    {currentProject.amountRaised}${' '}
-                  </span>{' '}
-                  have been raised for a target of{' '}
-                  {currentProject.amountToRaise}$
-                </Text>
-
-                <SpacerXSmall />
-
-                <Flex direction="row" fontSize="20px">
-                  <Spacer />
-                  <Flex direction="column" textAlign="center">
-                    <Text fontWeight="bold">{currentProject.nbDonations}</Text>
-                    <Text>Donations</Text>
-                  </Flex>
-                  <Spacer />
-                  <Flex direction="column" textAlign="center">
-                    <Text fontWeight="bold">
-                      ${currentProject.amountRaised}
-                    </Text>
-                    <Text>Raised</Text>
-                  </Flex>
-                  <Spacer />
-                </Flex>
-                {currentProject.nbMilestones && schedule && (
-                  <>
-                    <Text pb={2} mt={5}>
-                      Funds Released
-                    </Text>
-                    <Progress
-                      value={currentProject.pctReleasePerMilestone.reduce(
-                        (acc, cur, idx) =>
-                          idx < schedule.currentMilestone ? acc + cur : acc,
-                        0
-                      )}
-                      borderRadius={'10px'}
-                      height={'4px'}
-                      colorScheme="green"
-                    />
-                  </>
-                )}
-
-                <SpacerLarge />
-
-                <Flex direction="row">
-                  <Box bg="#C4C4C4" width="40%">
-                    <Center>
-                      <Flex direction="row" alignItems="center" margin="3px">
-                        <Image src={ArchiveBox} height="30px" />
-                        <Text color="#504D4D">Save</Text>
-                      </Flex>
-                    </Center>
-                  </Box>
-                  <Spacer />
-                  <HStack direction="row" alignItems="center">
-                    <Spacer />
-                    <FiMail />
-                    <Spacer />
-                    <FiTwitter />
-                    <Spacer />
-                    <FiInstagram />
-                    <Spacer />
-                    <FiFacebook />
-                    <Spacer />
-                  </HStack>
-                </Flex>
-              </Flex>
-            </Box>
-            <SpacerSmall />
-
-            <Spacer />
-          </Flex>
-=======
           <>
             {voteSession && voteSession.numUnsuccessfulVotes === 3 ? (
               <>
@@ -537,7 +449,6 @@ function Campaigninfo({ currentProject, fundingover, schedule, voteSession }) {
               </>
             )}
           </>
->>>>>>> Stashed changes
         )
       ) : (
         <Flex direction="column">
