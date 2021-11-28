@@ -33,13 +33,13 @@ export const Contracts = {
     raisyAddressRegistry: '',
   },
   [ChainId.RINKEBY]: {
-    raisyChef: '0x87D24D80fe4Fd2CFB196f5457197432fD02762CA',
-    raisyCampaigns: '0x43FdC0870A493fBAaf01A3f7217317a61A0c7e82', // Proxy Address
-    raisyNFT: '0x13c26fF52C2f3F516a42ddDf316860F9e5569E44',
-    raisyPriceFeed: '0x64e07b441AAe53e2eF280883672e2Db66fD7F5e9',
-    raisyToken: '0x31Dbc15a31dE8248703861ee4D027Ee3d1Ed6689',
-    raisyTokenRegistry: '0xD8c2Ce5C26Bd86F81EFB7Cfc64838F2F6d781a3e',
-    raisyAddressRegistry: '0xbAbc86dF2Db0B7a42F262839ce6Cf5eA904f0D70',
+    raisyChef: '0xE002d97849d974078824Fe69f0Ee8Cd6051aBb59',
+    raisyCampaigns: '0x2adCD48FC888f183b9E0f96061553dc6D6F1745C', // Proxy Address
+    raisyNFT: '0x05DF575FC17D906A3a0990BE751Db0e6519fC13d',
+    raisyPriceFeed: '0xD37A742676B8eD81226efE410EF43af4cbD197DF',
+    raisyToken: '0x2E402fB11B20C835C7f77B5Fe219DfDB5726F17c',
+    raisyTokenRegistry: '0x1b327ba8DA91f3483c488E559fF42eA9aB92b6D6',
+    raisyAddressRegistry: '0x1f3C24cd3C50EF367F931966d73b6E99f5f89A19',
   },
 };
 
