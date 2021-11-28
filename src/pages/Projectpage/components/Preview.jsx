@@ -197,26 +197,36 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
   }, [schedule]);
 
   return (
-    <Box height="100vh" width={'100vw'}>
+    <Box height={{ base: '', md: '100vh' }} width={'100vw'}>
       <Flex
-        flexDirection={'row'}
+        flexDirection={{ base: 'column', md: 'row' }}
         height={'-webkit-fill-available'}
         justifyContent={'center'}
       >
         <Flex
-          width={'60vw'}
+          width={{ base: '100vw', md: '60vw' }}
           flexDirection={'column'}
-          gridGap={'15px'}
+          margin={{ base: 'auto', md: 'unset' }}
+          gridGap={{ base: '10px', md: '15px' }}
           paddingTop={'10px'}
         >
           <Flex
-            flexDirection={'lign'}
+            flexDirection={{ base: 'column', md: 'row' }}
             marginLeft={'auto'}
             marginRight={'auto'}
-            gridGap={'30px'}
+            gridGap={{ base: '20px', md: '30px' }}
+            paddingBottom={{ base: '20px', md: '0' }}
+            paddingLeft={'20px'}
+            paddingRight={'20px'}
           >
             <Text
-              fontSize={{ base: '4xl', md: '5xl', lg: '6xl' }}
+              fontSize={{
+                base: '2xl',
+                sm: '4xl',
+                md: '4xl',
+                lg: '5xl',
+                xl: '6xl',
+              }}
               style={{
                 textAlign: 'center',
                 background:
@@ -232,8 +242,8 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
               borderRadius={'full'}
               style={{ borderColor: currentBorder }}
               backgroundColor={currentBackground}
-              height={'60px'}
-              width={'60px'}
+              height={{ base: '50px', md: '50px', lg: '60px' }}
+              width={{ base: '50px', md: '50px', lg: '60px' }}
               margin={'auto'}
               border={'1px solid'}
             >
@@ -248,12 +258,13 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
             gridGap={'10px'}
             marginRight={'auto'}
             marginLeft={'auto'}
+            paddingBottom={{ base: '20px' }}
           >
             <Link
               style={{
                 borderRadius: '40px',
-                width: '40px',
-                height: '40px',
+                width: '50px',
+                height: '50px',
                 borderColor: currentBorder,
                 border: '1px solid',
                 backgroundColor: currentBackground,
@@ -268,8 +279,8 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
             <Link
               style={{
                 borderRadius: '40px',
-                width: '40px',
-                height: '40px',
+                width: '50px',
+                height: '50px',
                 borderColor: currentBorder,
                 border: '1px solid',
                 backgroundColor: currentBackground,
@@ -285,8 +296,8 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
             <Link
               style={{
                 borderRadius: '40px',
-                width: '40px',
-                height: '40px',
+                width: '50px',
+                height: '50px',
                 borderColor: currentBorder,
                 border: '1px solid',
                 backgroundColor: currentBackground,
@@ -302,8 +313,8 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
             <Link
               style={{
                 borderRadius: '40px',
-                width: '40px',
-                height: '40px',
+                width: '50px',
+                height: '50px',
                 borderColor: currentBorder,
                 border: '1px solid',
                 backgroundColor: currentBackground,
@@ -330,7 +341,7 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
             display={'flex'}
             justifyContent={'center'}
             alignItems={'center'}
-            padding={'30px'}
+            padding={'5px'}
           >
             {!account ? (
               <>
@@ -511,7 +522,12 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
             )}
           </Box>
         </Flex>{' '}
-        <Flex direction="column" width={'40vw'} padding={'40px'}>
+        <Flex
+          direction="column"
+          width={'40vw'}
+          padding={'40px'}
+          display={{ base: 'none', md: 'flex' }}
+        >
           <Campaigninfo
             currentProject={currentProject}
             fundingover={fundingover}
