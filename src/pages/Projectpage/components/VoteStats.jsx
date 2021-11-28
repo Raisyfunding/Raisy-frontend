@@ -2,6 +2,8 @@ import React from 'react';
 import { Text, Box, HStack, VStack } from '@chakra-ui/react';
 
 function VoteStats({ voteSession }) {
+  if (!voteSession) return <></>;
+
   return (
     <div>
       <HStack spacing="auto">
@@ -11,12 +13,12 @@ function VoteStats({ voteSession }) {
             <Text fontSize="2xl">Votes</Text>
           </VStack>
         </Box>
-        {/* <Box>
+        <Box>
           <VStack>
-            <Text fontSize="3xl">256</Text>
-            <Text fontSize="2xl">Total Votes</Text>
+            <Text fontSize="3xl">{voteSession.numUnsuccessfulVotes}</Text>
+            <Text fontSize="2xl">Tries</Text>
           </VStack>
-        </Box> */}
+        </Box>
 
         <VStack>
           <Text fontSize="3xl">{voteSession.voteRatio}</Text>
