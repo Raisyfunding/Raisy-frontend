@@ -46,6 +46,7 @@ function Submit() {
   const [milestoneError, setMilestoneError] = useState(null);
   const [coverImage, setCoverImage] = useState(null);
   const [date, setDate] = useState(new Date());
+  // eslint-disable-next-line no-unused-vars
   const [nbMilestones, setNbMilestones] = useState(2);
   const handleChangeTitle = (event) => setTitle(event.target.value);
   const handleChangeAmount = (event) => setAmount(event.target.value);
@@ -504,7 +505,6 @@ function Submit() {
               'rgba(235, 235, 235, 1)',
               'rgba(25,25,25,1)'
             )}
-            border={'1px solid'}
             height={'60px'}
             _placeholder={{ color: 'rgba(150,150,150,1)', fontWeight: '550' }}
             colorScheme={'red'}
@@ -978,7 +978,6 @@ function Submit() {
                     }}
                     backgroundColor={currentBackground}
                     borderColor={currentBorder}
-                    border={'1px solid'}
                     height={'60px'}
                     _placeholder={{
                       color: 'rgba(150,150,150,1)',

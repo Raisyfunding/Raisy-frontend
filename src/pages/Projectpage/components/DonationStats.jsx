@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { Button, Flex, Link, Text } from '@chakra-ui/react';
 import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
@@ -60,6 +61,7 @@ const DonationStats = ({ campaignId }) => {
       updateAllTokens();
       udpatePendingRewards();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currencies, campaignId, account]);
 
   return (

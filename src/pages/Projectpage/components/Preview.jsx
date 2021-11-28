@@ -1,14 +1,12 @@
-import { Image } from '@chakra-ui/image';
-import { Flex, Text, Box, Center, Spacer } from '@chakra-ui/layout';
+import { Flex, Text, Box, Center } from '@chakra-ui/layout';
 import {
-  Vstack,
   Button,
   Link,
   useToast,
   HStack,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { SpacerLarge } from '../../../styles/globalStyles';
+// import { SpacerLarge } from '../../../styles/globalStyles';
 import Campaigninfo from './Campaigninfo';
 import React, { Suspense, useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
@@ -194,6 +192,7 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
         setIsFinished(_isFinished);
       });
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [voteSession]);
 
   useEffect(() => {

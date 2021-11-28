@@ -10,7 +10,7 @@ import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
 import { FiMail, FiTwitter, FiFacebook, FiInstagram } from 'react-icons/fi';
 import { useWeb3React } from '@web3-react/core';
 import { useNftContract } from '../../contracts';
-import useTokens from './../../hooks/useTokens';
+// import useTokens from './../../hooks/useTokens';
 import { ethers } from 'ethers';
 import { shortenAddress } from '../../utils';
 import { useHistory } from 'react-router-dom';
@@ -22,7 +22,7 @@ function User() {
 
   const { getProofsOfDonation } = useNftContract();
 
-  const { tokens } = useTokens();
+  // const { tokens } = useTokens();
 
   const history = useHistory();
 
@@ -34,6 +34,7 @@ function User() {
         setProofsOfDonation(_pods);
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [account]);
 
   return (

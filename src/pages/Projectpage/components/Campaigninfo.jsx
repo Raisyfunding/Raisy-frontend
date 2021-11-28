@@ -1,33 +1,13 @@
-import ArchiveBox from '../../../images/ArchiveBox.png';
-import {
-  SpacerLarge,
-  SpacerXSmall,
-  SpacerSmall,
-} from '../../../styles/globalStyles';
 import { CircularProgress, CircularProgressLabel } from '@chakra-ui/react';
-import {
-  Flex,
-  Text,
-  Progress,
-  Box,
-  Spacer,
-  Button,
-  useColorModeValue,
-  Image,
-  Center,
-  HStack,
-  Link,
-} from '@chakra-ui/react';
-import decentralizedblack from '../../../images/decentralized_black.png';
+import { Flex, Text, Button, useColorModeValue, Link } from '@chakra-ui/react';
 
 import { Link as RouterLink } from 'react-router-dom';
-import { FiMail, FiTwitter, FiFacebook, FiInstagram } from 'react-icons/fi';
 // import { GrValidate } from 'react-icons/gr';
 // import { useState, useEffect } from 'react';
 // import { useApi } from '../../../api';
 
 function Campaigninfo({ currentProject, fundingover, schedule }) {
-  const color = useColorModeValue('var(--white)', 'var(--black)');
+  // const color = useColorModeValue('var(--white)', 'var(--black)');
   const currentBackground = useColorModeValue(
     'rgba(255,255,255,1)',
     'rgba(21,21,21,.64)'
@@ -36,10 +16,10 @@ function Campaigninfo({ currentProject, fundingover, schedule }) {
     'rgba(235, 235, 235, 1)',
     'rgba(25,25,25,1)'
   );
-  const currentIcon = useColorModeValue(
-    'rgba(250,250,250,1)',
-    'rgba(25,25,25,1)'
-  );
+  // const currentIcon = useColorModeValue(
+  //   'rgba(250,250,250,1)',
+  //   'rgba(25,25,25,1)'
+  // );
   const currentProgress = useColorModeValue(
     'rgba(230,230,230,1)',
     'rgba(25,25,25,1)'
