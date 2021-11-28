@@ -5,7 +5,6 @@ import {
   Helpcreator,
   Helpdonor,
   Explorepage,
-  User,
   Projectpage,
 } from './pages/index';
 import { ChakraProvider } from '@chakra-ui/react';
@@ -45,9 +44,6 @@ function App() {
           </Route>
           <Route exact path="/campaign/:campaignId/donate">
             <Donate />
-          </Route>
-          <Route exact path="/user">
-            <User />
           </Route>
         </Switch>
         {/* <Footer /> */}

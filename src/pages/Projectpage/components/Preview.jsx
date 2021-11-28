@@ -17,6 +17,13 @@ import { useCampaignsContract } from './../../../contracts/raisyCampaigns';
 import { formatError } from '../../../utils';
 import useBlockNumber from '../../../hooks/useBlockNumber';
 import {
+  FiMail,
+  FiTwitter,
+  FiFacebook,
+  FiInstagram,
+  FiHeart,
+} from 'react-icons/fi';
+import{
   Popover,
   PopoverTrigger,
   PopoverContent,
@@ -78,7 +85,7 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
   const [asking, setAsking] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
 
-  const VOTE_SESSION_DURATION = 40;
+  const VOTE_SESSION_DURATION = 84200;
 
   const handleClaimFunds = async () => {
     if (claiming) return;
@@ -163,18 +170,16 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
         duration: 9000,
         isClosable: true,
       });
-      console.log(err);
       setAsking(false);
     }
   };
 
   useEffect(() => {
     if (voteSession.startBlock) {
-      getBlockNumber().then((_blockNumber) => {
+      getBlockNumber.then((_blockNumber) => {
         const _isFinished =
           _blockNumber >= voteSession.startBlock + VOTE_SESSION_DURATION;
         setIsFinished(_isFinished);
-        console.log(_blockNumber);
       });
     }
   }, [voteSession]);
@@ -182,10 +187,6 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
   useEffect(() => {
     console.log(schedule);
   }, [schedule]);
-
-  useEffect(() => {
-    console.log(voteSession);
-  }, [voteSession]);
 
   return (
     <Flex direction="column" height="100vh">
@@ -203,17 +204,118 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
               {renderMedia(currentProject.coverImageHash, 'image')}
             </Box>
           </Flex>
-
-          <Spacer />
-
-          <Box width="400px">
-            <Campaigninfo
-              currentProject={currentProject}
-              fundingover={fundingover}
-              schedule={schedule}
-            />
-            <SpacerLarge />
-            {fundingover && account ? (
+          <HStack
+            direction="row"
+            alignItems="center"
+            gridGap={'10px'}
+            marginRight={'auto'}
+            marginLeft={'auto'}
+          >
+            <Link
+              style={{
+                borderRadius: '40px',
+                width: '40px',
+                height: '40px',
+                borderColor: currentBorder,
+                border: '1px solid',
+                backgroundColor: currentBackground,
+                padding: '5px',
+                justifyContent: 'center',
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              <FiMail />
+            </Link>
+            <Link
+              style={{
+                borderRadius: '40px',
+                width: '40px',
+                height: '40px',
+                borderColor: currentBorder,
+                border: '1px solid',
+                backgroundColor: currentBackground,
+                padding: '5px',
+                justifyContent: 'center',
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              {' '}
+              <FiTwitter />
+            </Link>
+            <Link
+              style={{
+                borderRadius: '40px',
+                width: '40px',
+                height: '40px',
+                borderColor: currentBorder,
+                border: '1px solid',
+                backgroundColor: currentBackground,
+                padding: '5px',
+                justifyContent: 'center',
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              {' '}
+              <FiInstagram />
+            </Link>
+            <Link
+              style={{
+                borderRadius: '40px',
+                width: '40px',
+                height: '40px',
+                borderColor: currentBorder,
+                border: '1px solid',
+                backgroundColor: currentBackground,
+                padding: '5px',
+                justifyContent: 'center',
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              {' '}
+              <FiFacebook />
+            </Link>
+          </HStack>
+          <Box
+            height="350px"
+            marginLeft={'auto'}
+            marginRight={'auto'}
+            paddingLeft={'30px'}
+            paddingRight={'30px'}
+          >
+            {renderMedia(currentProject.coverImageHash, 'image')}
+          </Box>
+          <Box
+            display={'flex'}
+            justifyContent={'center'}
+            alignItems={'center'}
+            padding={'30px'}
+          >
+            {!account ? (
+              <>
+                {' '}
+                <Button
+                  width={'200px'}
+                  height={'60px'}
+                  margin={'auto'}
+                  borderRadius={'50px'}
+                  color={'black'}
+                  background={
+                    'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))'
+                  }
+                  _hover={{
+                    opacity: 0.8,
+                    background:
+                      'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                  }}
+                >
+                  Login
+                </Button>
+              </>
+            ) : fundingover ? (
               <div>
                 {currentProject.creator === account.toLowerCase() ? (
                   <div>
@@ -235,9 +337,21 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
                                     {voteSession.inProgress ? (
                                       <div>
                                         <Button
-                                          width={'100%'}
                                           onClick={handleEndVoteSession}
                                           disabled={ending}
+                                                                                width={'200px'}
+                                      height={'60px'}
+                                      margin={'auto'}
+                                      borderRadius={'50px'}
+                                      color={'black'}
+                                      background={
+                                        'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))'
+                                      }
+                                      _hover={{
+                                        opacity: 0.8,
+                                        background:
+                                          'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                                      }}
                                         >
                                           End Vote Session
                                         </Button>
@@ -246,11 +360,24 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
                                       <div>
                                         <Popover placement="bottom">
                                           <PopoverTrigger>
-                                            <Button
-                                              width={'100%'}
-                                              // onClick={handleAskMoreFunds}
-                                              // disabled={asking}
-                                            >
+                                    <Button
+                                      onClick={handleAskMoreFunds}
+                                      disabled={asking}
+                                      width={'200px'}
+                                      height={'60px'}
+                                      margin={'auto'}
+                                      borderRadius={'50px'}
+                                      color={'black'}
+                                      background={
+                                        'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))'
+                                      }
+                                      _hover={{
+                                        opacity: 0.8,
+                                        background:
+                                          'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                                      }}
+                                    >
+  
                                               Ask More Funds
                                             </Button>
                                           </PopoverTrigger>
@@ -283,15 +410,7 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
                                     )}
                                   </div>
                                 )}
-                              </>
-                            ) : (
-                              <>
-                                <Center>
-                                  <Text>
-                                    100% of the funds have been released !
-                                  </Text>
-                                </Center>
-                              </>
+                              </div>
                             )}
                           </>
                         ) : (
@@ -325,20 +444,40 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
                     0 ? (
                       <div></div>
                     ) : (
-                      <Flex>
-                        {/* display={account ? 'flex' : 'none'} */}
-                        <Flex flexDirection={'column'} width={'100%'}>
-                          <Text
-                            padding={'20px'}
-                            marginLeft={'auto'}
-                            marginRight={'auto'}
-                          >
-                            The campaign is unsuccessful, or participants voted
-                            in majority for a refund.
-                          </Text>
-                          <Button width={'100%'}>Withdraw your donation</Button>
-                        </Flex>
-                      </Flex>
+                      <Box
+                        display={'flex'}
+                        textAlign={'center'}
+                        justifyContent={'center'}
+                        flexDirection={'column'}
+                      >
+                        <Text
+                          marginLeft={'auto'}
+                          marginRight={'auto'}
+                          paddingBottom={'20px'}
+                          fontSize={'2xl'}
+                          fontWeight={'600'}
+                        >
+                          The campaign is unsuccessful, or participants voted in
+                          majority for a refund.
+                        </Text>
+                        <Button
+                          width={'200px'}
+                          height={'60px'}
+                          margin={'auto'}
+                          borderRadius={'50px'}
+                          color={'black'}
+                          background={
+                            'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))'
+                          }
+                          _hover={{
+                            opacity: 0.8,
+                            background:
+                              'linear-gradient(100deg, rgba(78, 213, 186, 1), rgba(191, 222, 199, 1))',
+                          }}
+                        >
+                          Withdraw your donation
+                        </Button>
+                      </Box>
                     )}
                   </div>
                 )}
@@ -350,74 +489,9 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
             )}
           </Box>
         </Flex>
-      </Box>
-      <Box
-        width="100%"
-        height="100px"
-        position="fixed"
-        top="100vh"
-        marginTop="-167px"
-        bg="#27292b"
-      >
-        <Flex
-          direction="row"
-          alignContent="center"
-          textAlign="center"
-          marginTop="15px"
-        >
-          <Spacer />
-          <Box maxWidth="200px">
-            <Text fontSize="16px" color="white">
-              Raisy connects Creators with donors to fund their project
-            </Text>
+      </Flex>
+    </Box>
 
-            <Center>
-              <Image
-                src={handshake}
-                alt="project image"
-                style={{ filter: 'grayscale(1)' }}
-                opacity="0.2"
-                marginTop="-45%"
-              />
-            </Center>
-          </Box>
-          <Spacer />
-          <Box maxWidth="200px">
-            <Text fontSize="16px" color="white">
-              Releases partial fund after inspecting the progress of the project
-            </Text>
-            <Center>
-              <Image
-                src={moneybag}
-                alt="project image"
-                style={{ filter: 'grayscale(1)' }}
-                opacity="0.2"
-                marginTop="-40%"
-                width="80px"
-              />
-            </Center>
-          </Box>
-          <Spacer />
-          <Box maxWidth="200px">
-            <Text fontSize="16px" color="white">
-              Refunds the unreleased funds if project turns out to be a scam
-            </Text>
-            <Center>
-              <Image
-                src={security}
-                alt="project image"
-                style={{ filter: 'grayscale(1)' }}
-                opacity="0.2"
-                marginTop="-40%"
-                width="80px"
-              />
-            </Center>
-          </Box>
-
-          <Spacer />
-        </Flex>
-      </Box>
-    </Flex>
   );
 }
 
