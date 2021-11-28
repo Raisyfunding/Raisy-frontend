@@ -81,11 +81,11 @@ const Donate = () => {
   const getTokenPrice = () => {
     if (tokenPriceInterval) clearInterval(tokenPriceInterval);
     const func = async () => {
-      const tk = currency || ethers.constants.AddressZero;
+      const tk = currency.address || ethers.constants.AddressZero;
       try {
         const campaignsContract = await getCampaignsContract();
         const price = await campaignsContract.getPrice(tk);
-        setTokenPrice(parseFloat(ethers.utils.formatUnits(price, 18)));
+        setTokenPrice(parseFloat(ethers.utils.formatUnits(price[0], 18)));
       } catch {
         setTokenPrice(null);
       }
@@ -268,7 +268,7 @@ const Donate = () => {
               marginTop={'auto'}
             >
               Available: {ethers.utils.formatUnits(balance, currency?.decimals)}{' '}
-              {currency?.symbol} ({tokenPrice})
+              {currency?.symbol} ({tokenPrice}$)
             </Text>
           </Flex>
           <InputGroup>

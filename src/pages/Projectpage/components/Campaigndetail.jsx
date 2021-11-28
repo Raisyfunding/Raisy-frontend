@@ -60,7 +60,7 @@ function Campaigndetail({
         >
           <Tabs variant="soft-rounded" colorScheme={'grey.500'}>
             <Center>
-              <TabList width="80%" margin={'auto'}>
+              <TabList width="100%">
                 <Tab
                   height={'60px'}
                   _selected={{ color: 'white', bg: 'var(--blue)' }}
@@ -91,8 +91,24 @@ function Campaigndetail({
                 >
                   Your Stats
                 </Tab>
-                {fundingover && <Tab>Claim POD</Tab>}
-                {fundingover && currentProject.nbMilestones && <Tab>Vote</Tab>}
+                {fundingover &&
+                  currentProject.amountRaised >=
+                    currentProject.amountToRaise && (
+                    <Tab
+                      height={'60px'}
+                      _selected={{ color: 'white', bg: 'var(--blue)' }}
+                    >
+                      Proof of Donation
+                    </Tab>
+                  )}
+                {fundingover && voteSession && (
+                  <Tab
+                    height={'60px'}
+                    _selected={{ color: 'white', bg: 'var(--blue)' }}
+                  >
+                    Vote
+                  </Tab>
+                )}
               </TabList>
             </Center>
             <TabPanels>
@@ -198,6 +214,7 @@ function Campaigndetail({
                   currentProject={currentProject}
                   fundingover={fundingover}
                   schedule={schedule}
+                  voteSession={voteSession}
                 />
               </TabPanel>
             </TabPanels>

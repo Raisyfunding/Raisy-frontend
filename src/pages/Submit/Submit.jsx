@@ -32,6 +32,7 @@ import { useCampaignsContract } from './../../contracts/raisyCampaigns';
 import { AVERAGE_BLOCK_TIME } from './../../constants/network';
 import { ChainId } from '@sushiswap/sdk';
 import { formatError } from '../../utils';
+import { useHistory } from 'react-router-dom';
 
 function Submit() {
   const [title, setTitle] = React.useState('');
@@ -53,6 +54,7 @@ function Submit() {
   const { account } = useWeb3React();
   const { authToken } = useSelector((state) => state.ConnectWallet);
   const { addCampaign, addCampaignReleaseSchedule } = useCampaignsContract();
+  const history = useHistory();
 
   const currentColor = useColorModeValue('var(--black)', 'var(--white)');
   const currentBackground = useColorModeValue(
@@ -386,6 +388,8 @@ function Submit() {
             });
 
             setAdding(false);
+
+            history.replace(`/campaign/${Number(_id)}`);
           } catch (error) {
             toast({
               title: 'Error during campaign creation',

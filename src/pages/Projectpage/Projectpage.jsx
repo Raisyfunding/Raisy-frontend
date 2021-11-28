@@ -19,7 +19,7 @@ const Projectpage = () => {
   } = useApi();
 
   const [campaign, setCampaign] = useState({});
-  const [voteSession, setVoteSession] = useState({});
+  const [voteSession, setVoteSession] = useState(null);
   const [schedule, setSchedule] = useState({});
 
   const [fundingover, setFundingover] = useState(false);
