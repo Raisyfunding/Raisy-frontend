@@ -107,7 +107,7 @@ function Preview({ currentProject, fundingover, schedule, voteSession }) {
 
   const { tokens } = useTokens();
 
-  const VOTE_SESSION_DURATION = 40;
+  const VOTE_SESSION_DURATION = 20;
 
   const handleClaimFunds = async () => {
     if (claiming) return;
