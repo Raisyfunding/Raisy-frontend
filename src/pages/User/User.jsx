@@ -140,7 +140,7 @@ function User() {
                 </TabList>
                 <TabPanels>
                   <TabPanel>
-                    <Flex>
+                    <Flex _hover={{ cursor: 'pointer' }}>
                       {proofsOfDonation.map((_pod) => (
                         <Flex
                           margin={'auto'}
