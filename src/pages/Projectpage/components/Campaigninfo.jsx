@@ -454,9 +454,11 @@ function Campaigninfo({ currentProject, fundingover, schedule, voteSession }) {
             <CircularProgress
               value={
                 currentProject.amountRaised / currentProject.amountToRaise < 1
-                  ? (currentProject.amountRaised /
+                  ? Math.round(
+                    (currentProject.amountRaised /
                       currentProject.amountToRaise) *
-                    100
+                      100
+                  )
                   : '100'
               }
               color="var(--blue)"
