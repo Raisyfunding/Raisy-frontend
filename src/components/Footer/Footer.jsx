@@ -12,9 +12,10 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { Image } from '@chakra-ui/image';
-import { FaTwitter, FaDiscord, FaYoutube, FaMedium } from 'react-icons/fa';
+import { FaTwitter, FaTelegram, FaYoutube, FaMedium } from 'react-icons/fa';
 import { BiMailSend } from 'react-icons/bi';
 import logo from '../../images/logot.png';
+import { Skeleton } from '@chakra-ui/react';
 
 const SocialButton = ({ children, label, href }) => {
   return (
@@ -75,56 +76,89 @@ export default function Footer() {
             </Box>
             <Text fontSize={'sm'}>© 2020 BG Labs. All rights reserved</Text>
             <Stack direction={'row'} spacing={6}>
-              <SocialButton label={'Twitter'} href={'#'}>
+              <SocialButton
+                label={'Twitter'}
+                href={'https://twitter.com/Raisyfunding'}
+                target="_blank"
+              >
                 <FaTwitter />
               </SocialButton>
-              <SocialButton label={'YouTube'} href={'#'}>
+              <SocialButton
+                label={'YouTube'}
+                href={
+                  'https://www.youtube.com/channel/UCZECAvPYyqVova82dKksfaA'
+                }
+                target="_blank"
+              >
                 <FaYoutube />
               </SocialButton>
-              <SocialButton label={'Discord'} href={'#'}>
-                <FaDiscord />
+              <SocialButton
+                label={'Telegram'}
+                href={'https://t.me/raisygroup'}
+                target="_blank"
+              >
+                <FaTelegram />
               </SocialButton>
-              <SocialButton label={'Medium'} href={'#'}>
+              <SocialButton
+                label={'Medium'}
+                href={'https://raisy.medium.com/'}
+                target={'_blank'}
+              >
                 <FaMedium />
               </SocialButton>
             </Stack>
           </Stack>
           <Stack align={'flex-start'}>
             <ListHeader>Protocol</ListHeader>
-            <Link href={'#'} _focus={{ outline: 'none !important' }}>
-              About us
-            </Link>
-            <Link href={'#'} _focus={{ outline: 'none !important' }}>
+            <Link
+              href={'https://raisy.medium.com/'}
+              _focus={{ outline: 'none !important' }}
+            >
               Blog
             </Link>
-            <Link href={'#'} _focus={{ outline: 'none !important' }}>
+            <Link
+              href={'https://t.me/BGLabs'}
+              _focus={{ outline: 'none !important' }}
+            >
               Contact us
             </Link>
-            <Link href={'#'} _focus={{ outline: 'none !important' }}>
-              Pricing
-            </Link>
-            <Link href={'#'} _focus={{ outline: 'none !important' }}>
+            <Link
+              href={'https://github.com/Raisyfunding/whitepaper'}
+              _focus={{ outline: 'none !important' }}
+            >
               Whitepaper
             </Link>
           </Stack>
           <Stack align={'flex-start'}>
             <ListHeader>Get Started</ListHeader>
-            <Link href={'#'} _focus={{ outline: 'none !important' }}>
-              Fund Raising
+            <Link
+              href={
+                'https://raisy-funding.gitbook.io/raisy-doc/guides/creating-your-first-campaign'
+              }
+              _focus={{ outline: 'none !important' }}
+            >
+              Create a Campaign
             </Link>
-            <Link href={'#'} _focus={{ outline: 'none !important' }}>
-              Donations
+            <Link
+              href={
+                'https://raisy-funding.gitbook.io/raisy-doc/guides/sending-your-first-donation'
+              }
+              _focus={{ outline: 'none !important' }}
+            >
+              Make a Donation
             </Link>
-            <Link href={'#'} _focus={{ outline: 'none !important' }}>
-              Token
-            </Link>
-            <Link href={'#'} _focus={{ outline: 'none !important' }}>
-              Proof of Donation
+            <Link
+              href={
+                'https://raisy-funding.gitbook.io/raisy-doc/guides/claim-your-proof-of-donation'
+              }
+              _focus={{ outline: 'none !important' }}
+            >
+              Claim your POD
             </Link>
           </Stack>
-          <Stack align={'flex-start'}>
+          <Stack align={'flex-start'} gridGap={'5px'}>
             <ListHeader>Support</ListHeader>
-            <Link href={'#'} _focus={{ outline: 'none !important' }}>
+            {/* <Link href={'#'} _focus={{ outline: 'none !important' }}>
               Help Center
             </Link>
             <Link href={'#'} _focus={{ outline: 'none !important' }}>
@@ -135,10 +169,11 @@ export default function Footer() {
             </Link>
             <Link href={'#'} _focus={{ outline: 'none !important' }}>
               Privacy Policy
-            </Link>
-            <Link href={'#'} _focus={{ outline: 'none !important' }}>
-              Satus
-            </Link>
+            </Link> */}
+            <Skeleton height="12px" width={'100px'} />
+            <Skeleton height="12px" width={'100px'} />
+            <Skeleton height="12px" width={'100px'} />
+            <Skeleton height="12px" width={'100px'} />
           </Stack>
           <Stack margin="auto" marginLeft="0">
             <ListHeader>Stay up to date</ListHeader>
@@ -181,16 +216,28 @@ export default function Footer() {
             {' '}
             <Text fontSize={'sm'}>© 2020 BG Labs. All rights reserved</Text>
             <Stack direction={'row'} spacing={6}>
-              <SocialButton label={'Twitter'} href={'#'}>
+              <SocialButton
+                label={'Twitter'}
+                href={'https://twitter.com/Raisyfunding'}
+              >
                 <FaTwitter />
               </SocialButton>
-              <SocialButton label={'YouTube'} href={'#'}>
+              <SocialButton
+                label={'YouTube'}
+                href={
+                  'https://www.youtube.com/channel/UCZECAvPYyqVova82dKksfaA'
+                }
+              >
                 <FaYoutube />
               </SocialButton>
-              <SocialButton label={'Discord'} href={'#'}>
-                <FaDiscord />
+              <SocialButton label={'Telegram'} href={'https://t.me/raisygroup'}>
+                <FaTelegram />
               </SocialButton>
-              <SocialButton label={'Medium'} href={'#'}>
+              <SocialButton
+                label={'Medium'}
+                href={'https://raisy.medium.com/'}
+                target="_blank"
+              >
                 <FaMedium />
               </SocialButton>
             </Stack>
