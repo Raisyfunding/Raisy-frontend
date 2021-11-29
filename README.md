@@ -1,6 +1,8 @@
-# Getting Started with Create React App
+# 💻 Raisy Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Logo](https://testnet.raisy.io/logo.png)
+
+This project contains the main features of the Raisy application.
 
 ## Available Scripts
 
