@@ -40,7 +40,7 @@ function Landing() {
           margin={'auto'}
           width={'95vw'}
         >
-          Raisy is the first decentralized crowdfunding platform <br />
+          Raisy is the first decentralized crowdfunding platform. <br />
           Raise and donate funds with no registration.
         </Text>
         <Button

@@ -36,7 +36,7 @@ const FooterPage = () => {
         margin={'auto'}
         width={'95vw'}
       >
-        Raisy takes advantage of industry leaders protocols. Discover them.
+        Raisy takes advantage of industry leading protocols. Discover them.
       </Text>
       <Marquee gradientColor={useColorModeValue([255, 255, 255], [0, 0, 0])}>
         <Image
